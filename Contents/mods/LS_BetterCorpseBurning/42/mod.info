@@ -1,0 +1,9 @@
+name=Lascivious Scripts - Better Corpse Burning
+id=LS_BetterCorpseBurning
+icon=icon.png
+poster=poster.png
+description=Permite queimar pilhas de cadaveres usando apenas uma fonte de fogo, com gasolina opcional e propagacao configuravel. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.
+modversion=1.11.1
+versionMin=42.0

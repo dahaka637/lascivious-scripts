@@ -1,0 +1,7 @@
+ItemName_EN = {
+    ["Base.Silencer"] = "Silencer",
+    ["Base.MetalPipeSilencer"] = "Metal Pipe Silencer",
+    ["Base.TorchSilencer"] = "Hand Torch Silencer",
+    ["Base.WaterBottleSilencer"] = "Water Bottle Silencer",
+    ["Base.PotatoSilencer"] = "Potato Suppressor",
+}

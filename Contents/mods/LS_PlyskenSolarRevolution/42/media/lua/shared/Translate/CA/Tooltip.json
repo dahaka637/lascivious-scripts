@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Emmagatzema l'energia que capten els panells solars i alimenta l'edifici.<br>S'ha de col·locar en una habitació tancada i connectar-la als panells.<br>Requereix uns coneixements bàsics d'electricitat. No necessita combustible.",
+    "Tooltip_PSR_NoPanels": "Sense panell",
+    "Tooltip_PSR_PanelFar": "Aquest panell està massa lluny"
+}

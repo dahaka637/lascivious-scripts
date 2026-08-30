@@ -1,0 +1,39 @@
+schema: 1
+module_key: durable-tools-weapons
+name: Durable Tools and Weapons (Hardened)
+bundled_mod_id: LS_DurableToolsWeapons
+status: enabled
+
+upstream:
+  workshop_id: "3387217267"
+  original_mod_id: "DTWhard"
+  version: "unknown"
+  imported_at: "2026-08-25"
+  source_path: "vendor/durable-tools-weapons/upstream"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: ["DTWsoft", "DTW"]
+
+integration:
+  ptbr: not_applicable
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/durable-tools-weapons/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  overrides_vanilla_items: true
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

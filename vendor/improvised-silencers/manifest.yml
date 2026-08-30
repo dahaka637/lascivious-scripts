@@ -1,0 +1,38 @@
+schema: 1
+module_key: improvised-silencers
+name: Improvised Silencers
+bundled_mod_id: LS_ImprovisedSilencers
+status: enabled
+
+upstream:
+  workshop_id: "3779164273"
+  original_mod_id: "ImprovisedSilencers"
+  version: "unknown"
+  imported_at: "2026-08-26"
+  source_path: "vendor/improvised-silencers/upstream/common"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/improvised-silencers/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: true

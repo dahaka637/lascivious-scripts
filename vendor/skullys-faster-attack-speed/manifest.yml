@@ -1,0 +1,38 @@
+schema: 1
+module_key: skullys-faster-attack-speed
+name: Skully's Faster Attack Speed
+bundled_mod_id: LS_SkullysFasterAttackSpeed
+status: enabled
+
+upstream:
+  workshop_id: "3702483515"
+  original_mod_id: "SkullysFasterAttackSpeed"
+  version: "unknown"
+  imported_at: "2026-08-25"
+  source_path: "vendor/skullys-faster-attack-speed/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: not_applicable
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/skullys-faster-attack-speed/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: true
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

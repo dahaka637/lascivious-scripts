@@ -1,0 +1,161 @@
+VERSION = 1,
+
+option CyesPushDoors.ZombieDamageMultiplier
+{
+    type = double,
+    min = 0.00,
+    max = 2.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_ZombieDamageMultiplier,
+}
+
+option CyesPushDoors.ZombiesAffectedMultiplier
+{
+    type = double,
+    min = 0.25,
+    max = 2.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_ZombiesAffectedMultiplier,
+}
+
+option CyesPushDoors.ZombieKnockdownChance
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 35,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_ZombieKnockdownChance,
+}
+
+option CyesPushDoors.DoorWearMultiplier
+{
+    type = double,
+    min = 0.0,
+    max = 3.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_DoorWearMultiplier,
+}
+
+option CyesPushDoors.GarageDoorWearMultiplier
+{
+    type = double,
+    min = 0.25,
+    max = 3.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_GarageDoorWearMultiplier,
+}
+
+option CyesPushDoors.GarageFailureChanceMultiplier
+{
+    type = double,
+    min = 0.0,
+    max = 3.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_GarageFailureChanceMultiplier,
+}
+
+option CyesPushDoors.ArmStrainGainMultiplier
+{
+    type = double,
+    min = 0.0,
+    max = 3.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_ArmStrainGainMultiplier,
+}
+
+option CyesPushDoors.ArmStrainUsageLimitMultiplier
+{
+    type = double,
+    min = 0.25,
+    max = 5.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_ArmStrainUsageLimitMultiplier,
+}
+
+option CyesPushDoors.GarageArmStrainMultiplier
+{
+    type = double,
+    min = 0.25,
+    max = 3.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_GarageArmStrainMultiplier,
+}
+
+option CyesPushDoors.ArmStrainPenaltyMultiplier
+{
+    type = double,
+    min = 0.0,
+    max = 2.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_ArmStrainPenaltyMultiplier,
+}
+
+option CyesPushDoors.ArmStrainRecoveryMultiplier
+{
+    type = double,
+    min = 0.25,
+    max = 3.0,
+    default = 1.0,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_ArmStrainRecoveryMultiplier,
+}
+
+option CyesPushDoors.DamagePlayers
+{
+    type = boolean,
+    default = true,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_DamagePlayers,
+}
+
+option CyesPushDoors.KnockDownPlayers
+{
+    type = boolean,
+    default = true,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_KnockDownPlayers,
+}
+
+option CyesPushDoors.PlayerKnockdownChance
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 25,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_PlayerKnockdownChance,
+}
+
+option CyesPushDoors.AffectCrawlers
+{
+    type = boolean,
+    default = true,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_AffectCrawlers,
+}
+
+option CyesPushDoors.HideIndividualOptions
+{
+    type = boolean,
+    default = false,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_HideIndividualOptions,
+}
+
+option CyesPushDoors.GlobalImpactFeedback
+{
+    type = boolean,
+    default = true,
+    page = CyesPushDoors,
+    translation = CyesPushDoors_GlobalImpactFeedback,
+}

@@ -1,0 +1,127 @@
+schema: 1
+module_key: lascivious-traits
+name: Lascivious Traits
+bundled_mod_id: LS_Traits
+status: enabled   # I Regret Nothing + Evolving Traits World (65 traits) are live; PT-BR 100% complete
+
+# Not a single-upstream integration: this container holds original trait implementations
+# inspired by ideas/mechanics seen across several third-party trait mods, not a port of any one
+# of them. Each trait that draws on a specific source gets its own entry below and its own
+# upstream/<trait-key>/ snapshot folder (reference only, for our own diffing/attribution
+# clarity) once it is actually added. See INTEGRATION.md for the running per-trait list.
+#
+# The one exception so far is an actual bundled dependency (not a trait): Moodle Framework.
+upstream:
+  - key: moodle-framework
+    workshop_id: "3396446795"
+    original_mod_id: "MoodleFramework"
+    version: "2.7"
+    imported_at: "2026-08-30"
+    source_path: "vendor/lascivious-traits/upstream/moodle-framework/42"
+    note: "bundled directly inside LS_Traits, not a separate Mod ID; only the 42.20-targeted code
+      variant was taken (upstream ships 4 different variants across version folders)"
+  - key: killcount
+    workshop_id: "2553809727"
+    original_mod_id: "KillCount"
+    version: "1.37"
+    imported_at: "2026-08-30"
+    source_path: "vendor/lascivious-traits/upstream/killcount/42"
+    note: "bundled directly inside LS_Traits, not a separate Mod ID; common/ base merged with the 5
+      files that genuinely differ in 42.15/ (highest applicable version folder). Server trusts the
+      client's self-reported kill counts with no value validation (only identity-bound, see
+      INTEGRATION.md) - fine for cosmetic use, must not be treated as a security boundary if a
+      future trait grants a real effect based on this data"
+  - key: ucwf
+    workshop_id: "3682045254"
+    original_mod_id: "UnifiedCarryWeightFramework"
+    version: "2.1.0"
+    imported_at: "2026-08-30"
+    source_path: "vendor/lascivious-traits/upstream/ucwf/42"
+    note: "bundled directly inside LS_Traits, not a separate Mod ID; 3 dead author scratch/example
+      files (all guarded by `if true then return end`) deliberately excluded from the bundled copy
+      but kept in the vendor snapshot as usage reference. Inherently server/SP-authoritative by
+      design (the shared file no-ops entirely on MP clients); zero collision with existing bundled
+      modules today, but registered a real future interaction with LS_AegisPanel's carry-weight
+      admin pin for when the first weight-affecting trait is written - see INTEGRATION.md"
+  - key: regret-nothing
+    workshop_id: "3676431328"
+    original_mod_id: "IRegretNothingTrait"
+    version: "1.2.0"
+    imported_at: "2026-08-30"
+    source_path: "vendor/lascivious-traits/upstream/regret-nothing/42"
+    note: "the first actual trait bundled into LS_Traits, not another framework dependency.
+      Resource location kept as upstream's own RegretNothing:RegretNothing (not renamed into
+      lascivioustraits:*, which is reserved for traits authored from scratch for this
+      container - see INTEGRATION.md). One local change beyond file placement: the RN_safe
+      disable-after-first-error helper the upstream author already used in RN_OnPlayerUpdate
+      was extended to RN_OnZombieDead / RN_EveryTenMinutes (previously bare pcall, same
+      spam risk on repeated events) and RN_OnWeaponHitCharacter / RN_OnEquipPrimary
+      (previously no protection at all) - see LOCAL_CHANGES.md LS-004. Wrote EN and PT-BR
+      translation content by hand into the submod's single canonical UI.json/Moodles.json
+      per language (upstream shipped neither language natively, JSON only) - see LS-005 for
+      why per-dependency-scoped filenames (UI_RegretNothing.json etc.) don't work and had to
+      be merged into the one file per category PZ's loader actually reads per mod"
+  - key: evolving-traits-world
+    workshop_id: "2914075159"
+    original_mod_id: "EvolvingTraitsWorld"
+    version: "13.0.0"
+    imported_at: "2026-08-30"
+    source_path: "vendor/lascivious-traits/upstream/etw"
+    note: "by far the largest piece bundled into this container: 65 new traits (ETW:* namespace,
+      kept as upstream ships it, same reasoning as regret-nothing) plus a system that makes
+      dozens of vanilla traits dynamically earnable during play. Upstream's own require= already
+      matched the three framework dependencies already bundled here (Moodle Framework, KillCount,
+      UCWF) - confirms why those were added first. Optional soft dependency
+      MarkDynamicTraitsFramework (MDTF) NOT bundled - confirmed against the upstream Steam page
+      description that it only decorates trait names with a \"(D)\" suffix in the
+      character-creation UI, the actual earn/lose logic is 100% internal to ETW and works without
+      it. The companion 'Trait Sandbox' mod (admin UI for trait point costs, needs a further new
+      dependency, StarlitLibrary) was deliberately left out for now, project owner's explicit
+      call - kept as a reference-only snapshot at
+      vendor/lascivious-traits/upstream/etw-trait-sandbox, not bundled.
+      Real collision found and fixed in a THIRD-PARTY module already in this pack (not ETW's own
+      code): LS_BetterEngineRepair's ISRepairEngine:complete override did a full reassignment
+      with no call-through, which would have silently discarded ETW's safe wrap of the same
+      method depending on load order - see LOCAL_CHANGES.md LS-006 and
+      docs/COLLISION_REGISTRY.md. PT-BR translation completed in full in LS-007 (all 432 missing
+      Sandbox keys and 149 missing UI keys hand-translated, zero gaps) - see LOCAL_CHANGES.md and
+      TRANSLATION_PTBR.md. A second instance of the LS-005 orphaned-filename bug was found and
+      fixed along the way: UCWF's own EN Sandbox options (`Sandbox_UCWF_EN.txt`) were sitting in a
+      non-canonical filename and had likely never been read by the game since LS-003, in English
+      too, not just PT-BR - merged into the canonical Sandbox_EN.txt/Sandbox.json."
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: true   # character trait resource-location strings are save-persisted per
+                          # character the moment anyone selects one; see INTEGRATION.md
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: complete   # 100% coverage across UI (227/227), Sandbox (540/540), Moodles (50/50) keys,
+                    # native .txt AND JSON for every family (LS-007, 2026-08-30). English is also
+                    # 100% - a second orphaned-filename bug (UCWF's EN Sandbox options) was found
+                    # and fixed in the same pass.
+  reviewed: true
+  local_changes: true
+  local_revision: 7   # LS-008 (2026-08-30) was a cross-trait harmony checkup between I Regret
+                       # Nothing and ETW - investigated whether ETW's own dynamic systems (Smoker
+                       # addiction decay, Bravery/Fear-of-Locations) should be blocked from
+                       # touching traits I Regret Nothing forces/excludes, decided no: letting the
+                       # character follow ETW's normal rules after the initial grant is more
+                       # harmonious than locking those traits against it. No code changed.
+  notes: "vendor/lascivious-traits/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true   # I Regret Nothing + ETW both wrap several vanilla TimedAction/UI methods,
+                          # all capture-before + call-through - see docs/COLLISION_REGISTRY.md
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

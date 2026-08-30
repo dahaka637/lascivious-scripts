@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Czas Palenia na Zwłoki",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Czas w minutach gry potrzebny do spalenia zwłok. Domyślnie: 110 (wartość z podstawowej wersji gry).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Usuń Podstawowe Spalanie Zwłok",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Usuwa podstawową opcję 'Spal Zwłoki', która wymaga benzyny.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Promień Rozprzzeniania Ognia",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Gdy zwłoki się palą, pobliskie zwłoki w tym promieniu również zajmują się ogniem. 0 = wyłączone.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Wymagaj Benzyny",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Po włączeniu spalanie zwłok wymaga również kanistra z benzyną oprócz źródła ognia.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Benzyna na Zwłoki",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Ile benzyny (w litrach) zużywa się na spalenie jednych zwłok. Domyślnie: 0,1 L (10-litrowy kanister spali ~100 zwłok).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Pozwól na Palenie w Pomieszczeniach",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Po wyłączeniu zwłoki wewnątrz budynków nie mogą być spalane tą modyfikacją. Zapobiega przypadkowym pożarom niszczącym drewniane konstrukcje. Domyślnie: włączone.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Użycia Ognia na Zwłoki",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Ile razy źródło ognia jest używane przy spalaniu zwłok. Wyższe wartości szybciej zużywają zapalniczki i zapałki. 0 = nieograniczone (źródło ognia nigdy się nie zużywa). Domyślnie: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Zgaś Ogień po Skończeniu",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Po włączeniu ogień automatycznie gaśnie krótko po tym, jak wszystkie zwłoki w łańcuchu się zapalą. Chroni drewniane konstrukcje przed tlejącym ogniem. Domyślnie: wyłączone.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Brak Popiołu",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Po włączeniu spalone zwłoki nie zostawiają popiołu. Domyślnie: wyłączone.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Prędkość rozprzestrzeniania się ognia",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Jak szybko ogień rozprzestrzenia się pomiędzy trupami. Niższy = szybszy. Domyślnie: 150 klatek (~5s na kafelek). Zalecane: 150 dla trybu singleplayer, 50-80 dla kooperacji/wieloosobowego."
+}

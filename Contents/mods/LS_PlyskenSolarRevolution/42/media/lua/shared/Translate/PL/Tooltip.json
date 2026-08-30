@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Magazynuje energię z paneli słonecznych i zasila budynek.<br>Musi stać w zamkniętym pomieszczeniu i być podłączona do paneli.<br>Wymaga podstawowej wiedzy elektrycznej. Nie potrzebuje paliwa.",
+    "Tooltip_PSR_NoPanels": "Brak panelu slonecznego",
+    "Tooltip_PSR_PanelFar": "Ten panel sloneczny jest za daleko"
+}

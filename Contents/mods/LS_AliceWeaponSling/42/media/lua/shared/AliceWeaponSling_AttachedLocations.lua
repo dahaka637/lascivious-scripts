@@ -1,0 +1,20 @@
+local group = AttachedLocations.getGroup("Human")
+
+group:getOrCreateLocation("AliceSlingRifle"):setAttachmentName("alice_sling_rifle")
+group:getOrCreateLocation("AliceSlingRifle2"):setAttachmentName("alice_sling_rifle2")
+group:getOrCreateLocation("AliceSlingRifle3"):setAttachmentName("alice_sling_rifle3")
+group:getOrCreateLocation("AliceSlingRifle Back"):setAttachmentName("alice_sling_rifleback")
+group:getOrCreateLocation("AliceSlingRifleBag"):setAttachmentName("alice_sling_riflebag")
+
+group:getOrCreateLocation("AliceSlingWeapon"):setAttachmentName("alice_sling_weapon")
+group:getOrCreateLocation("AliceSlingWeapon2"):setAttachmentName("alice_sling_weapon2")
+group:getOrCreateLocation("AliceSlingWeapon3"):setAttachmentName("alice_sling_weapon3")
+group:getOrCreateLocation("AliceSlingWeapon Back"):setAttachmentName("alice_sling_weaponback")
+group:getOrCreateLocation("AliceSlingWeaponBag"):setAttachmentName("alice_sling_weaponbag")
+group:getOrCreateLocation("AliceSlingBladeBag"):setAttachmentName("alice_sling_bladebag")
+
+group:getOrCreateLocation("AliceSlingShovel"):setAttachmentName("alice_sling_shovel")
+group:getOrCreateLocation("AliceSlingShovel2"):setAttachmentName("alice_sling_shovel2")
+group:getOrCreateLocation("AliceSlingShovel3"):setAttachmentName("alice_sling_shovel3")
+group:getOrCreateLocation("AliceSlingShovel Back"):setAttachmentName("alice_sling_shovelback")
+group:getOrCreateLocation("AliceSlingShovelBag"):setAttachmentName("alice_sling_shovelbag")

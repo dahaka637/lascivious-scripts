@@ -1,0 +1,7 @@
+{
+    "IGUI_SubirEscaleras_Inseguro": "Da oben gibt es nichts zum Festhalten.",
+    "IGUI_SubirEscaleras_Pierna": "Mit dem Bein klettere ich nicht. Da muss eine Schiene dran.",
+    "IGUI_SubirEscaleras_Agotado": "Ich habe keine Kraft mehr zum Klettern.",
+    "IGUI_SubirEscaleras_SinNivel": "Uber der Leiter ist keine Ebene geladen.",
+    "IGUI_SubirEscaleras_SinSalida": "Diese Leiter fuhrt nirgendwo hin, wo ich aussteigen konnte. Sie muss hoher sein, oder es muss ein Boden auf der Ebene daruber liegen, uber der Leiter oder direkt daneben."
+}

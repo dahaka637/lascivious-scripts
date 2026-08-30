@@ -1,0 +1,10 @@
+name=Lascivious Scripts - Push Vehicle
+id=LS_PushVehicle
+poster=poster.png
+icon=icon.png
+versionMin=42.20
+modversion=1.0.0
+description=Permite empurrar veículos parados com as mãos, para frente/trás ou virá-los pelas laterais. <LINE>
+description=A força do empurrão depende da Força do personagem e do peso do veículo. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

@@ -1,0 +1,19 @@
+{
+    "Make_DIY_Battery": "ประดิษฐ์แบตเตอรี่เก็บประจุไฟ",
+    "WireCarBattery": "ต่อสายไฟแบตเตอรี่รถ",
+    "UnWireCarBattery": "ถอดสายไฟแบตเตอรี่รถ",
+    "Make_Solar_Roof_Tile": "สร้างแผงโซลาร์เซลล์แบบวางราบ",
+    "Make_Wall-Mounted_Solar_Panel": "สร้างแผงโซลาร์เซลล์แบบติดผนัง",
+    "Make_Floor-Mounted_Solar_Panel": "สร้างแผงโซลาร์เซลล์แบบตั้งพื้น",
+    "Reverse_Solar_Panel": "แยกแผงโซลาร์เซลล์กลับไปเป็นชิ้นส่วน",
+    "Create_Battery_Bank": "สร้างฐานเก็บประจุไฟ",
+    "Create_Solar_Failsafe": "สร้างสวิตช์กันไฟตกสำหรับโซลาร์เซลล์",
+    "Make_Solar_Panel": "สร้างชิ้นส่วนแผงโซลาร์เซลล์",
+    "Make_Inverter": "สร้างอินเวอร์เตอร์",
+    "Make_Improvised_Battery": "ทำแบตเตอรี่ชั่วคราว",
+    "Recondition_Battery": "ฟื้นฟูแบตเตอรี่",
+    "Dismantle_Solar_Failsafe": "ถอดระบบสำรองพลังงานแสงอาทิตย์",
+    "Dismantle_Battery_Bank": "ถอดประกอบแบตเตอรี่แบงก์",
+    "Reverse_Solar_Roof_Tile": "แยกชิ้นส่วนแผงโซลาร์เซลล์แบน",
+    "Make_Solar_Panel_Realistic": "Make Solar Panel (Realistic)"
+}

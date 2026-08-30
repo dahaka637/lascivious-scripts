@@ -1,0 +1,5 @@
+{
+  "Sandbox_TotalWeightRebalance": "Rebalanceamento do Peso Total",
+  "Sandbox_TotalWeightRebalance_CustomWeights": "Pesos personalizados de itens",
+  "Sandbox_TotalWeightRebalance_CustomWeights_tooltip": "Formato: Base.NomeDoItem:0.25; <LINE>Separe várias entradas com ponto e vírgula. <LINE>Exemplo: Base.Plank:1.0; Base.Log:3.0"
+}

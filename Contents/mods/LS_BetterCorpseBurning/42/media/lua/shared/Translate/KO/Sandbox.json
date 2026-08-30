@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "시신당 소각 시간",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "시신 하나를 소각하는 데 걸리는 게임 내 시간(분). 기본값: 110 (바닐라 값).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "바닐라 시신 소각 제거",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "휘발유가 필요한 바닐라 '시신 태우기' 옵션을 제거합니다.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "불 확산 반경",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "시신이 탈 때 이 반경 내의 주변 시신도 불이 붙습니다. 0 = 비활성화.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "휘발유 필요",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "활성화하면 발화원 외에 휘발유통도 필요합니다.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "시신당 휘발유",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "시신 하나를 태울 때 소모되는 휘발유 양(리터). 기본값: 0.1L (10L 통으로 약 100구 소각 가능).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "실내 소각 허용",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "비활성화하면 이 모드로 건물 내부의 시신을 태울 수 없습니다. 나무 구조물에 불이 옮겨붙는 사고를 방지합니다. 기본값: 켜기.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "시신당 발화 횟수",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "시신 하나를 태울 때 발화원을 사용하는 횟수. 값이 높으면 라이터와 성냥이 더 빨리 소모됩니다. 0 = 무제한 (발화원이 소모되지 않습니다). 기본값: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "완료 후 소화",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "활성화하면 연쇄의 모든 시신에 불이 붙은 직후 불이 자동으로 꺼집니다. 남은 불꽃으로부터 나무 구조물을 보호합니다. 기본값: 끄기.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "재 없음",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "활성화하면 소각된 시신이 재를 남기지 않습니다. 기본값: 끄기.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "화재 확산 속도",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "시체 사이에서 불이 퍼지는 속도. 낮을수록 빠름. 기본값: 150프레임 (~5초/타일). 권장: 싱글플레이 150, 협동/멀티플레이 50-80."
+}

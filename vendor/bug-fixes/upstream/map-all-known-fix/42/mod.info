@@ -1,0 +1,6 @@
+name=Map All Known Fix (B42 MP)
+id=MapAllKnownFix
+author=Dusk
+versionMin=42.0.0
+poster=poster.png
+description=修复 Build 42.20.3 联机中沙盒选项 Map.MapAllKnown（游戏开始时显示全地图）不生效的问题。服务器开启该选项后，装有本 mod 的客户端大地图与小地图全图可见。纯客户端 mod，可随时装卸；单机不受影响（单机该选项工作正常）。\n\nFixes the Build 42.20.3 bug where the sandbox option Map.MapAllKnown is ignored in multiplayer. When the server enables it, clients with this mod see the full world map and mini map. Client-side only, safe to add or remove at any time. Single player is unaffected.

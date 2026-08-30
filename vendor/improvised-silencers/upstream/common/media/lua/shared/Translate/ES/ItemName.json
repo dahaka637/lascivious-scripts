@@ -1,0 +1,7 @@
+{
+    "Base.Silencer": "Silenciador",
+    "Base.MetalPipeSilencer": "Silenciador de tubo metálico",
+    "Base.TorchSilencer": "Silenciador de linterna",
+    "Base.WaterBottleSilencer": "Silenciador de botella de agua",
+    "Base.PotatoSilencer": "Silenciador de patata"
+}

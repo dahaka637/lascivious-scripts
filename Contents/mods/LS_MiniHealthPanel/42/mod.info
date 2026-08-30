@@ -1,0 +1,11 @@
+name=Lascivious Scripts - Mini Health Panel
+id=LS_MiniHealthPanel
+poster=miniHealth.png
+icon=miniHealth_mini.png
+versionMin=42.13
+modversion=1.6.1.42
+tags=Interface
+description=Painel de ferimentos minimalista, com menu de tratamento próprio, sem precisar abrir o painel de saúde completo. <LINE>
+description=Some quando não há nenhum ferimento pendente de tratamento. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

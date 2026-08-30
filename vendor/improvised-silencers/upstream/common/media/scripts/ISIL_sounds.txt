@@ -1,0 +1,79 @@
+module Base
+{
+    sound ISILProfessionalPistol
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_Professional_Pistol.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILMetalPipePistol
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_MetalPipe_Pistol.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILHandTorchPistol
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_HandTorch_Pistol.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILWaterBottlePistol
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_WaterBottle_Pistol.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILProfessionalRifle
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_Professional_Rifle.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILMetalPipeRifle
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_MetalPipe_Rifle.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILHandTorchRifle
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_HandTorch_Rifle.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILWaterBottleRifle
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_WaterBottle_Rifle.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILProfessionalShotgun
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_Professional_Shotgun.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILMetalPipeShotgun
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_MetalPipe_Shotgun.ogg, distanceMax = 10, volume = 0.6, }
+    }
+
+    sound ISILPotatoShot
+    {
+        category = Item,
+        maxInstancesPerEmitter = 4,
+        clip { file = media/sound/ISIL_Potato_Shot.wav, distanceMax = 10, volume = 0.6, }
+    }
+}

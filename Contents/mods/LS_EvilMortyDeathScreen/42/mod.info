@@ -1,0 +1,11 @@
+name=Lascivious Scripts - Evil Morty Death Screen
+id=LS_EvilMortyDeathScreen
+poster=poster.png
+icon=icon.png
+description=Substitui a tela de morte por um pull-back cinematografico com fade para preto e tema customizado. <LINE>
+description=<LINE>
+description=Versao integrada com correcao local para evitar glitch/buzzing de audio ao morrer queimado. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.
+modversion=1.0.1
+versionMin=42.13

@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Stocke l'énergie captée par vos panneaux solaires et alimente le bâtiment.<br>Doit être placée dans une pièce fermée, puis reliée à vos panneaux.<br>Demande des notions d'électricité. Aucun carburant nécessaire.",
+    "Tooltip_PSR_NoPanels": "Pas de panneau",
+    "Tooltip_PSR_PanelFar": "Ce panneau est trop loin"
+}

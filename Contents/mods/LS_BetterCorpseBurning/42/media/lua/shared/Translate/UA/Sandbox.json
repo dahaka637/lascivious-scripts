@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Час Спалювання Трупа",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Час у ігрових хвилинах для спалювання одного трупа. За замовчуванням: 110 (ванільне значення).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Прибрати Ванільне Спалювання Трупа",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Прибирає ванільну опцію «Спалити труп», що потребує бензин.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Радіус Поширення Вогню",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Коли труп горить, найближчі трупи в цьому радіусі також загоряються. 0 = вимкнено.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Вимагати Бензин",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Якщо увімкнено, для спалювання трупів окрім джерела вогню потрібна каністра з бензином.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Бензину на Труп",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Скільки бензину (у літрах) витрачається на один спалений труп. За замовчуванням: 0,1 л (10-літрової каністри вистачить на ~100 трупів).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Дозволити Спалювання в Приміщеннях",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Якщо вимкнено, трупи всередині будівель не можна спалювати за допомогою цього мода. Запобігає випадковим пожежам, що пошкоджують дерев'яні конструкції. За замовчуванням: увімкнено.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Використань Вогню на Труп",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Скільки разів використовується джерело вогню при спалюванні одного трупа. Високі значення швидше витрачають запальнички та сірники. 0 = без обмежень (джерело вогню ніколи не витрачається). За замовчуванням: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Гасити Вогонь по Завершенні",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Якщо увімкнено, вогонь автоматично гасне невдовзі після того, як усі трупи в ланцюгу загоряться. Захищає дерев'яні конструкції від залишкового полум'я. За замовчуванням: вимкнено.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Без Попелу",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Якщо увімкнено, спалені трупи не залишають після себе купки попелу. За замовчуванням: вимкнено.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Швидкість поширення вогню",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Наскільки швидко вогонь поширюється між трупами. Менше = швидше. За замовчуванням: 150 кадрів (~5с на плитку). Рекомендовано: 150 для одиночної гри, 50-80 для кооперативу/мережевої гри."
+}

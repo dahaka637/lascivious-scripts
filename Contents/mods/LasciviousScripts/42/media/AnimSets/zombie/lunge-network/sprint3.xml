@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animNode>
+	<m_Name>sprint3</m_Name>
+	<m_BlendTime>0.35</m_BlendTime>
+	<m_AnimName>Zombie_Sprint06</m_AnimName>
+	<m_SpeedScale>LasciviousZombieDecayLungeScale</m_SpeedScale>
+	<m_Conditions>
+		<m_Name>zombieWalkType</m_Name>
+		<m_Type>STRING</m_Type>
+		<m_Value>sprint3</m_Value>
+	</m_Conditions>
+	<m_Conditions x_name="cc41ddf3-fe55-45e7-8eb9-ff20115712ee">
+		<m_Name>intrees</m_Name>
+		<m_Type>BOOL</m_Type>
+		<m_Value>false</m_Value>
+	</m_Conditions>
+	<m_Events>
+		<m_EventName>Footstep</m_EventName>
+		<m_TimePc>0.15</m_TimePc>
+		<m_ParameterValue>sprint</m_ParameterValue>
+	</m_Events>
+	<m_Events>
+		<m_EventName>Footstep</m_EventName>
+		<m_TimePc>0.6</m_TimePc>
+		<m_ParameterValue>sprint</m_ParameterValue>
+	</m_Events>
+</animNode>

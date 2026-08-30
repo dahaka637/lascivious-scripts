@@ -1,0 +1,776 @@
+VERSION = 1,
+
+option WZUI.GroupTitle_Lone_MovementAll
+{
+    type = boolean, default = false,
+    page = WZLoneZombie, translation = WZGroupTitle_MovementAll,
+}
+
+option WZLoneZombie.MoveCooldown
+{
+    type = integer, min = 3000, max = 2147483647, default = 3000,
+    page = WZLoneZombie, translation = WanderingZombies_MoveCooldown,
+}
+option WZLoneZombie.MoveCooldownRandom
+{
+    type = integer, min = 0, max = 2147483647, default = 13000,
+    page = WZLoneZombie, translation = WanderingZombies_MoveCooldownRandom,
+}
+option WZLoneZombie.MaxTravel
+{
+    type = integer, min = 7, max = 100, default = 50,
+    page = WZLoneZombie, translation = WanderingZombies_MaxTravel,
+}
+
+option WZUI.GroupTitle_Lone_MovementWander
+{
+    type = boolean, default = false,
+    page = WZLoneZombie, translation = WZGroupTitle_MovementWander,
+}
+
+option WZLoneZombie.WanderChanceDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_ChanceDropdown,
+}
+option WZLoneZombie.WanderChanceMin
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZLoneZombie, translation = WanderingZombies_WanderChanceMin,
+}
+option WZLoneZombie.WanderChanceMax
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZLoneZombie, translation = WanderingZombies_ChanceMax,
+}
+
+option WZLoneZombie.WanderDestructive
+{
+    type = enum, numValues = 4, default = 2,
+    page = WZLoneZombie, translation = WanderingZombies_Destructive,
+}
+
+option WZLoneZombie.WanderStartHourDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_StartHourDropdown,
+}
+option WZLoneZombie.WanderStartHourMin
+{
+    type = integer, min = 0, max = 23, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_WanderStartHourMin,
+}
+option WZLoneZombie.WanderStartHourMax
+{
+    type = integer, min = 0, max = 23, default = 23,
+    page = WZLoneZombie, translation = WanderingZombies_StartHourMax,
+}
+
+option WZLoneZombie.WanderTotalHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursDropdown,
+}
+option WZLoneZombie.WanderTotalHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 24,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursMin,
+}
+option WZLoneZombie.WanderTotalHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursMax,
+}
+
+option WZLoneZombie.WanderCooldownHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursDropdown,
+}
+option WZLoneZombie.WanderCooldownHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursMin,
+
+}
+option WZLoneZombie.WanderCooldownHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 168,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursMax,
+}
+
+option WZUI.GroupTitle_Lone_MovementHoming
+{
+    type = boolean, default = false,
+    page = WZLoneZombie, translation = WZGroupTitle_MovementHoming,
+}
+
+option WZLoneZombie.HomingChanceDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_ChanceDropdown,
+}
+option WZLoneZombie.HomingChanceMin
+{
+    type = integer, min = 0, max = 100, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_HomingChanceMin,
+}
+option WZLoneZombie.HomingChanceMax
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZLoneZombie, translation = WanderingZombies_ChanceMax,
+}
+
+option WZLoneZombie.HomingDestructive
+{
+    type = enum, numValues = 4, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_Destructive,
+}
+
+option WZLoneZombie.HomingStartHourDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_StartHourDropdown,
+}
+option WZLoneZombie.HomingStartHourMin
+{
+    type = integer, min = 0, max = 23, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_HomingStartHourMin,
+}
+option WZLoneZombie.HomingStartHourMax
+{
+    type = integer, min = 0, max = 23, default = 23,
+    page = WZLoneZombie, translation = WanderingZombies_StartHourMax,
+}
+
+option WZLoneZombie.HomingTotalHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursDropdown,
+}
+option WZLoneZombie.HomingTotalHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 24,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursMin,
+}
+option WZLoneZombie.HomingTotalHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursMax,
+}
+
+option WZLoneZombie.HomingCooldownHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursDropdown,
+}
+option WZLoneZombie.HomingCooldownHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursMin,
+}
+option WZLoneZombie.HomingCooldownHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 168,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursMax,
+}
+
+option WZLoneZombie.HomingRadiusDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_RadiusDropdown,
+}
+option WZLoneZombie.HomingRadiusMin
+{
+    type = integer, min = 0, max = 90, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_HomingRadiusMin,
+}
+option WZLoneZombie.HomingRadiusMax
+{
+    type = integer, min = 0, max = 90, default = 90,
+    page = WZLoneZombie, translation = WanderingZombies_RadiusMax,
+}
+option WZLoneZombie.HomingRadiusInterrupt
+{
+    type = enum, numValues = 3, default = 2,
+    page = WZLoneZombie, translation = WanderingZombies_HomingRadiusInterrupt,
+}
+
+option WZUI.GroupTitle_Lone_MovementFlee
+{
+    type = boolean, default = false,
+    page = WZLoneZombie, translation = WZGroupTitle_MovementFlee,
+}
+
+option WZLoneZombie.FleeChanceDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_ChanceDropdown,
+}
+option WZLoneZombie.FleeChanceMin
+{
+    type = integer, min = 0, max = 100, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_FleeChanceMin,
+}
+option WZLoneZombie.FleeChanceMax
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZLoneZombie, translation = WanderingZombies_ChanceMax,
+}
+
+option WZLoneZombie.FleeDestructive
+{
+    type = enum, numValues = 4, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_Destructive,
+}
+
+option WZLoneZombie.FleeStartHourDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_StartHourDropdown,
+}
+option WZLoneZombie.FleeStartHourMin
+{
+    type = integer, min = 0, max = 23, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_FleeStartHourMin,
+}
+option WZLoneZombie.FleeStartHourMax
+{
+    type = integer, min = 0, max = 23, default = 23,
+    page = WZLoneZombie, translation = WanderingZombies_StartHourMax,
+}
+
+option WZLoneZombie.FleeTotalHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursDropdown,
+}
+option WZLoneZombie.FleeTotalHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 24,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursMin,
+}
+option WZLoneZombie.FleeTotalHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_TotalHoursMax,
+}
+
+option WZLoneZombie.FleeCooldownHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursDropdown,
+}
+option WZLoneZombie.FleeCooldownHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursMin,
+}
+option WZLoneZombie.FleeCooldownHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 168,
+    page = WZLoneZombie, translation = WanderingZombies_CooldownHoursMax,
+}
+
+option WZLoneZombie.FleeRadiusDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZLoneZombie, translation = WanderingZombies_RadiusDropdown,
+}
+option WZLoneZombie.FleeRadiusMin
+{
+    type = integer, min = 0, max = 90, default = 90,
+    page = WZLoneZombie, translation = WanderingZombies_FleeRadiusMin,
+}
+option WZLoneZombie.FleeRadiusMax
+{
+    type = integer, min = 0, max = 90, default = 0,
+    page = WZLoneZombie, translation = WanderingZombies_RadiusMax,
+}
+option WZLoneZombie.FleeRadiusInterrupt
+{
+    type = enum, numValues = 3, default = 2,
+    page = WZLoneZombie, translation = WanderingZombies_FleeRadiusInterrupt,
+}
+
+option WZUI.WZGroupTitle_Horde_Core
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZGroupTitle_Core,
+}
+
+option WZHordeZombie.Hordes
+{
+    type = boolean, default = true,
+    page = WZHordeZombie, translation = WZHordeZombie_Hordes,
+}
+option WZHordeZombie.WorldAgeHours
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WZHordeZombie_WorldAgeHours,
+}
+option WZHordeZombie.HordeSize
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WZHordeZombie_HordeSize,
+}
+option WZHordeZombie.HordeLimit
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WZHordeZombie_HordeLimit,
+}
+option WZHordeZombie.CreateJoinMergeDistance
+{
+    type = integer, min = 5, max = 50, default = 15,
+    page = WZHordeZombie, translation = WZHordeZombie_CreateJoinMergeDistance,
+}
+option WZHordeZombie.LeaveDistance
+{
+    type = integer, min = 5, max = 50, default = 6,
+    page = WZHordeZombie, translation = WZHordeZombie_LeaveDistance,
+}
+
+
+option WZUI.GroupTitle_Horde_Merging
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZGroupTitle_Merging,
+}
+
+option WZHordeZombie.HordesMerge
+{
+    type = boolean, default = true,
+    page = WZHordeZombie, translation = WZHordeZombie_HordesMerge,
+}
+option WZHordeZombie.MergeCooldown
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WZHordeZombie_MergeCooldown,
+}
+
+option WZUI.GroupTitle_Horde_Speed
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZGroupTitle_Speed,
+}
+
+option WZHordeZombie.GroupBySpeed
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZHordeZombie_GroupBySpeed,
+}
+option WZHordeZombie.AllowSprinters
+{
+    type = boolean, default = true,
+    page = WZHordeZombie, translation = WZHordeZombie_AllowSprinters,
+}
+option WZHordeZombie.AllowFastShamblers
+{
+    type = boolean, default = true,
+    page = WZHordeZombie, translation = WZHordeZombie_AllowFastShamblers,
+}
+option WZHordeZombie.AllowShamblers
+{
+    type = boolean, default = true,
+    page = WZHordeZombie, translation = WZHordeZombie_AllowShamblers,
+}
+option WZHordeZombie.AllowCrawlers
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZHordeZombie_AllowCrawlers,
+}
+
+option WZUI.GroupTitle_Horde_MovementAll
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZGroupTitle_MovementAll,
+}
+
+option WZHordeZombie.MoveCooldown
+{
+    type = integer, min = 3000, max = 2147483647, default = 3000,
+    page = WZHordeZombie, translation = WanderingZombies_MoveCooldown,
+}
+option WZHordeZombie.MoveCooldownRandom
+{
+    type = integer, min = 0, max = 2147483647, default = 13000,
+    page = WZHordeZombie, translation = WanderingZombies_MoveCooldownRandom,
+}
+option WZHordeZombie.MoveCooldownHordeSize
+{
+    type = integer, min = 0, max = 2147483647, default = 100,
+    page = WZHordeZombie, translation = WZHordeZombie_MoveCooldownHordeSize,
+}
+option WZHordeZombie.MaxTravel
+{
+    type = integer, min = 7, max = 2147483647, default = 50,
+    page = WZHordeZombie, translation = WanderingZombies_MaxTravel,
+}
+
+option WZUI.GroupTitle_Horde_MovementWander
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZGroupTitle_MovementWander,
+}
+
+option WZHordeZombie.WanderChanceDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_ChanceDropdown,
+}
+option WZHordeZombie.WanderChanceMin
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZHordeZombie, translation = WanderingZombies_WanderChanceMin,
+}
+option WZHordeZombie.WanderChanceMax
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZHordeZombie, translation = WanderingZombies_ChanceMax,
+}
+
+option WZHordeZombie.WanderDestructive
+{
+    type = enum, numValues = 3, default = 2,
+    page = WZHordeZombie, translation = WanderingZombies_Destructive,
+}
+
+option WZHordeZombie.WanderStartHourDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_StartHourDropdown,
+}
+option WZHordeZombie.WanderStartHourMin
+{
+    type = integer, min = 0, max = 23, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_WanderStartHourMin,
+}
+option WZHordeZombie.WanderStartHourMax
+{
+    type = integer, min = 0, max = 23, default = 23,
+    page = WZHordeZombie, translation = WanderingZombies_StartHourMax,
+}
+
+option WZHordeZombie.WanderTotalHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursDropdown,
+}
+option WZHordeZombie.WanderTotalHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 24,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursMin,
+}
+option WZHordeZombie.WanderTotalHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursMax,
+}
+
+option WZHordeZombie.WanderCooldownHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursDropdown,
+}
+option WZHordeZombie.WanderCooldownHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursMin,
+
+}
+option WZHordeZombie.WanderCooldownHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 168,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursMax,
+}
+
+option WZUI.GroupTitle_Horde_MovementHoming
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZGroupTitle_MovementHoming,
+}
+
+option WZHordeZombie.HomingChanceDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_ChanceDropdown,
+}
+option WZHordeZombie.HomingChanceMin
+{
+    type = integer, min = 0, max = 100, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_HomingChanceMin,
+}
+option WZHordeZombie.HomingChanceMax
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZHordeZombie, translation = WanderingZombies_ChanceMax,
+}
+
+option WZHordeZombie.HomingDestructive
+{
+    type = enum, numValues = 3, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_Destructive,
+}
+
+option WZHordeZombie.HomingStartHourDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_StartHourDropdown,
+}
+option WZHordeZombie.HomingStartHourMin
+{
+    type = integer, min = 0, max = 23, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_HomingStartHourMin,
+}
+option WZHordeZombie.HomingStartHourMax
+{
+    type = integer, min = 0, max = 23, default = 23,
+    page = WZHordeZombie, translation = WanderingZombies_StartHourMax,
+}
+
+option WZHordeZombie.HomingTotalHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursDropdown,
+}
+option WZHordeZombie.HomingTotalHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 24,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursMin,
+}
+option WZHordeZombie.HomingTotalHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursMax,
+}
+
+option WZHordeZombie.HomingCooldownHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursDropdown,
+}
+option WZHordeZombie.HomingCooldownHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursMin,
+}
+option WZHordeZombie.HomingCooldownHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 168,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursMax,
+}
+
+option WZHordeZombie.HomingRadiusDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_RadiusDropdown,
+}
+option WZHordeZombie.HomingRadiusMin
+{
+    type = integer, min = 0, max = 90, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_HomingRadiusMin,
+}
+option WZHordeZombie.HomingRadiusMax
+{
+    type = integer, min = 0, max = 90, default = 90,
+    page = WZHordeZombie, translation = WanderingZombies_RadiusMax,
+}
+option WZHordeZombie.HomingRadiusInterrupt
+{
+    type = enum, numValues = 3, default = 2,
+    page = WZHordeZombie, translation = WanderingZombies_HomingRadiusInterrupt,
+}
+
+option WZUI.GroupTitle_Horde_MovementFlee
+{
+    type = boolean, default = false,
+    page = WZHordeZombie, translation = WZGroupTitle_MovementFlee,
+}
+
+option WZHordeZombie.FleeChanceDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_ChanceDropdown,
+}
+option WZHordeZombie.FleeChanceMin
+{
+    type = integer, min = 0, max = 100, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_FleeChanceMin,
+}
+option WZHordeZombie.FleeChanceMax
+{
+    type = integer, min = 0, max = 100, default = 100,
+    page = WZHordeZombie, translation = WanderingZombies_ChanceMax,
+}
+
+option WZHordeZombie.FleeDestructive
+{
+    type = enum, numValues = 3, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_Destructive,
+}
+
+option WZHordeZombie.FleeStartHourDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_StartHourDropdown,
+}
+option WZHordeZombie.FleeStartHourMin
+{
+    type = integer, min = 0, max = 23, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_FleeStartHourMin,
+}
+option WZHordeZombie.FleeStartHourMax
+{
+    type = integer, min = 0, max = 23, default = 23,
+    page = WZHordeZombie, translation = WanderingZombies_StartHourMax,
+}
+
+option WZHordeZombie.FleeTotalHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursDropdown,
+}
+option WZHordeZombie.FleeTotalHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 24,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursMin,
+}
+option WZHordeZombie.FleeTotalHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_TotalHoursMax,
+}
+
+option WZHordeZombie.FleeCooldownHoursDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursDropdown,
+}
+option WZHordeZombie.FleeCooldownHoursMin
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursMin,
+}
+option WZHordeZombie.FleeCooldownHoursMax
+{
+    type = integer, min = 0, max = 2147483647, default = 168,
+    page = WZHordeZombie, translation = WanderingZombies_CooldownHoursMax,
+}
+
+option WZHordeZombie.FleeRadiusDropdown
+{
+    type = enum, numValues = 2, default = 1,
+    page = WZHordeZombie, translation = WanderingZombies_RadiusDropdown,
+}
+option WZHordeZombie.FleeRadiusMin
+{
+    type = integer, min = 0, max = 90, default = 90,
+    page = WZHordeZombie, translation = WanderingZombies_FleeRadiusMin,
+}
+option WZHordeZombie.FleeRadiusMax
+{
+    type = integer, min = 0, max = 90, default = 0,
+    page = WZHordeZombie, translation = WanderingZombies_RadiusMax,
+}
+option WZHordeZombie.FleeRadiusInterrupt
+{
+    type = enum, numValues = 3, default = 2,
+    page = WZHordeZombie, translation = WanderingZombies_FleeRadiusInterrupt,
+}
+
+option WZShared.MoveCooldownInitial
+{
+    type = boolean, default = true,
+    page = WZShared, translation = WZShared_MoveCooldownInitial,
+}
+option WZShared.OutOfCellPaths
+{
+    type = boolean, default = true,
+    page = WZShared, translation = WZShared_OutOfCellPaths,
+}
+option WZShared.OutOfCellThreshold
+{
+    type = integer, min = 0, max = 10000, default = 150,
+    page = WZShared, translation = WZShared_OutOfCellThreshold,
+}
+option WZShared.WanderForwards
+{
+    type = boolean, default = false,
+    page = WZShared, translation = WZShared_WanderForwards,
+}
+option WZShared.RoomExploreLimit
+{
+    type = integer, min = 0, max = 10, default = 3,
+    page = WZShared, translation = WZShared_RoomExploreLimit,
+}
+option WZShared.ForcedExploreChance
+{
+    type = integer, min = 0, max = 100, default = 15,
+    page = WZShared, translation = WZShared_ForcedExploreChance,
+}
+option WZShared.DumbZombiesExplore
+{
+    type = boolean, default = true,
+    page = WZShared, translation = WZShared_DumbZombiesExplore,
+}
+option WZShared.ExploreDestructive
+{
+    type = boolean, default = true,
+    page = WZShared, translation = WZShared_ExploreDestructive,
+}
+option WZShared.ForcePathfind
+{
+    type = enum, numValues = 3, default = 2,
+    page = WZShared, translation = WZShared_ForcePathfind,
+}
+option WZShared.ChebyshevDistance
+{
+    type = boolean, default = false,
+    page = WZShared, translation = WZShared_ChebyshevDistance,
+}
+option WZShared.HoursSurvived
+{
+    type = integer, min = 0, max = 2147483647, default = 0,
+    page = WZShared, translation = WZShared_HoursSurvived,
+}
+
+option WZDirector.PullEnabled
+{
+    type = boolean, default = true,
+    page = WZDirector, translation = WZDirector_PullEnabled,
+}
+option WZDirector.PullUnseenTime
+{
+    type = integer, min = 1, max = 120, default = 25,
+    page = WZDirector, translation = WZDirector_PullUnseenTime,
+}
+option WZDirector.PullMinRadius
+{
+    type = integer, min = 0, max = 40, default = 25,
+    page = WZDirector, translation = WZDirector_PullMinRadius,
+}
+option WZDirector.PullMaxRadius
+{
+    type = integer, min = 50, max = 90, default = 50,
+    page = WZDirector, translation = WZDirector_PullMaxRadius,
+}
+option WZDirector.MigrateEnabled
+{
+    type = boolean, default = false,
+    page = WZDirector, translation = WZDirector_MigrateEnabled,
+}
+option WZDirector.MigrateDistance
+{
+    type = integer, min = 200, max = 1000, default = 300,
+    page = WZDirector, translation = WZDirector_MigrateDistance,
+}
+option WZDirector.MigrateZombieThreshold
+{
+    type = integer, min = 0, max = 1000, default = 60,
+    page = WZDirector, translation = WZDirector_MigrateZombieThreshold,
+}
+option WZDirector.MigrateCooldown
+{
+    type = integer, min = 60, max = 1440, default = 120,
+    page = WZDirector, translation = WZDirector_MigrateCooldown,
+}

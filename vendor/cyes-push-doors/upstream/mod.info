@@ -1,0 +1,8 @@
+name=Cye's Push Doors!
+id=CyesPushDoors
+poster=poster.png
+icon=icon.png
+description=Open and close doors with force to damage, stagger, or knock down zombies and players. Impacts scale with Strength, Fitness, door type, durability, and arm strain, with support for crawlers, double doors, garage doors, SP/MP, Sandbox controls, and optional impact feedback.
+author=Cye's
+modversion=1.0.2
+versionMin=42.20

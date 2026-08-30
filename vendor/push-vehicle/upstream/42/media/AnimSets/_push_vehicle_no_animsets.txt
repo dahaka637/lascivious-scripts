@@ -1,0 +1,1 @@
+Placeholder file: keeps this AnimSets directory in Steam Workshop packages.

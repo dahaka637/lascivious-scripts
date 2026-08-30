@@ -1,0 +1,38 @@
+schema: 1
+module_key: better-corpse-burning
+name: Better Corpse Burning
+bundled_mod_id: LS_BetterCorpseBurning
+status: enabled
+
+upstream:
+  workshop_id: "3790089095"
+  original_mod_id: "BetterCorpseBurning"
+  version: "1.11"
+  imported_at: "2026-08-30"
+  source_path: "vendor/better-corpse-burning/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: complete
+  reviewed: true
+  local_changes: true
+  local_revision: 1
+  notes: "vendor/better-corpse-burning/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: true

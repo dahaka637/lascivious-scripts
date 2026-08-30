@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Égési Idő Holttestenként",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Idő játékpercekben egy holttest elégéséhez. Alapértelmezés: 110 (alapjáték érték).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Alapjáték Holttest Égetés Eltávolítása",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Eltávolítja a benzint igénylő alapjátékos 'Holttest Megégetése' opciót.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Tűz Terjedési Sugara",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Amikor egy holttest ég, a környező holttestek ezen a sugáron belül szintén lángra kapnak. 0 = kikapcsolva.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Benzin Szükséges",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Ha bekapcsolva, a holttestek elégetéséhez tűzforrás mellett benzineskanna is szükséges.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Benzin Holttestenként",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Mennyi benzin (literben) fogy el elégetett holttestenként. Alapértelmezés: 0,1 L (egy 10 literes kannával kb. 100 holttest égethető el).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Beltéri Égetés Engedélyezése",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Ha kikapcsolva, az épületekben lévő holttestek nem égethetők el ezzel a móddal. Megelőzi a fatájak véletlen meggyújtását. Alapértelmezés: bekapcsolva.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Tűzhasználat Holttestenként",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Hányszor használódik el a tűzforrás egy elégetett holttestenként. Magasabb értékek gyorsabban fogyasztják az öngyújtókat és a gyufákat. 0 = korlátlan (a tűzforrás soha nem fogy el). Alapértelmezés: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Tűz Eloltása a Végén",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Ha bekapcsolva, a tűz röviddel azután automatikusan kialszik, hogy a lánc összes holtteste lángba borult. Megvédi a fatájakat a parázsló lángoktól. Alapértelmezés: kikapcsolva.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Nincs Hamu",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Ha bekapcsolva, az elégetett holttestek nem hagynak hátra hamukupacet. Alapértelmezés: kikapcsolva.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Tűz terjedési sebesség",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Milyen gyorsan terjed a tűz a tetemek között. Alacsonyabb = gyorsabb. Alapértelmezett: 150 képkocka (~5s csempénként). Ajánlott: 150 egyjátékosban, 50-80 kooperatívban/többjátékosban."
+}

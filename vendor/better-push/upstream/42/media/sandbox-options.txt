@@ -1,0 +1,81 @@
+VERSION = 1,
+
+option BetterPush.MinStrengthLevel
+{
+    type = integer,
+    default = 5,
+    min = 0,
+    max = 10,
+    page = BetterPush,
+    translation = BetterPushMinStrengthLevel,
+}
+
+option BetterPush.MaxStrengthLevel
+{
+    type = integer,
+    default = 10,
+    min = 0,
+    max = 10,
+    page = BetterPush,
+    translation = BetterPushMaxStrengthLevel,
+}
+
+option BetterPush.MinChance
+{
+    type = integer,
+    default = 5,
+    min = 0,
+    max = 100,
+    page = BetterPush,
+    translation = BetterPushMinChance,
+}
+
+option BetterPush.MaxChance
+{
+    type = integer,
+    default = 30,
+    min = 0,
+    max = 100,
+    page = BetterPush,
+    translation = BetterPushMaxChance,
+}
+
+option BetterPush.BetterPushMinZombies
+{
+    type = integer,
+    default = 1,
+    min = 1,
+    max = 20,
+    page = BetterPush,
+    translation = BetterPushMinZombies,
+}
+
+option BetterPush.BetterPushMaxZombies
+{
+    type = integer,
+    default = 4,
+    min = 1,
+    max = 20,
+    page = BetterPush,
+    translation = BetterPushMaxZombies,
+}
+
+option BetterPush.BetterPushLineDistance
+{
+    type = double,
+    default = 0.8,
+    min = 0.6,
+    max = 5.0,
+    page = BetterPush,
+    translation = BetterPushLineDistance,
+}
+
+option BetterPush.BetterPushLineWidth
+{
+    type = double,
+    default = 0.8,
+    min = 0.6,
+    max = 5.0,
+    page = BetterPush,
+    translation = BetterPushLineWidth,
+}

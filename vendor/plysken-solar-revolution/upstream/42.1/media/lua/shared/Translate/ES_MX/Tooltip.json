@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Almacena la energía que captan tus paneles solares y alimenta el edificio.<br>Debe colocarse en una habitación cerrada y conectarse a los paneles.<br>Requiere conocimientos de electricidad. No necesita combustible.",
+    "Tooltip_PSR_NoPanels": "Sin panel",
+    "Tooltip_PSR_PanelFar": "Este panel está demasiado lejos"
+}

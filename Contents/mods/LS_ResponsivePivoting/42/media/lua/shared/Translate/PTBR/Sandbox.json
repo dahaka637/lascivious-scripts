@@ -1,0 +1,52 @@
+{
+    "Sandbox_PivotMod": "Velocidade de Giro Instantâneo do Personagem",
+
+    "Sandbox_PivotMod_Enabled": "Ativar giros mais rápidos",
+    "Sandbox_PivotMod_Enabled_tooltip": "Chave geral do mod. Quando desativada, os giros permanecem totalmente no padrão do jogo.",
+
+    "Sandbox_PivotMod_PivotSpeed": "Velocidade de giro ao mirar",
+    "Sandbox_PivotMod_PivotSpeed_tooltip": "Usada somente quando 'Usar giros baseados em Agilidade' estiver desativado.<br>Define a velocidade com que o personagem se vira na direção da mira em postura de combate.<br>A escala vai do padrão do jogo até instantâneo; 'Instantâneo' é o giro mais rápido possível sem perder a suavidade. As opções intermediárias permitem escolher um giro mais leve e gradual.",
+    "Sandbox_PivotMod_PivotSpeed_option1": "Padrão do jogo",
+    "Sandbox_PivotMod_PivotSpeed_option2": "Um pouco mais rápido",
+    "Sandbox_PivotMod_PivotSpeed_option3": "Mais rápido",
+    "Sandbox_PivotMod_PivotSpeed_option4": "Muito rápido",
+    "Sandbox_PivotMod_PivotSpeed_option5": "Instantâneo",
+
+    "Sandbox_PivotMod_MovementTurnSpeed": "Velocidade de giro ao caminhar (WASD)",
+    "Sandbox_PivotMod_MovementTurnSpeed_tooltip": "Usada somente quando 'Usar giros baseados em Agilidade' estiver desativado.<br>Define a velocidade com que o personagem se vira ao caminhar sem mirar. Corridas e arrancadas sempre usam a velocidade padrão, pois o jogo não permite que mods a alterem.<br>A escala vai do padrão do jogo até instantâneo; as opções intermediárias permitem escolher um giro mais leve.",
+    "Sandbox_PivotMod_MovementTurnSpeed_option1": "Padrão do jogo",
+    "Sandbox_PivotMod_MovementTurnSpeed_option2": "Um pouco mais rápido",
+    "Sandbox_PivotMod_MovementTurnSpeed_option3": "Mais rápido",
+    "Sandbox_PivotMod_MovementTurnSpeed_option4": "Muito rápido",
+    "Sandbox_PivotMod_MovementTurnSpeed_option5": "Instantâneo",
+
+    "Sandbox_PivotMod_NimbleSystem": "Usar giros baseados em Agilidade",
+    "Sandbox_PivotMod_NimbleSystem_tooltip": "Alterna todo o mod entre dois sistemas.<br>Desativada: usa as velocidades fixas definidas acima, separadas entre mira e caminhada.<br>Ativada: a velocidade de giro passa a variar conforme a perícia Agilidade e os multiplicadores abaixo, em todos os tipos de giro.",
+
+    "Sandbox_PivotMod_NimbleLvlMultiplier": "Modo Agilidade: multiplicador geral de giro",
+    "Sandbox_PivotMod_NimbleLvlMultiplier_tooltip": "Somente para giros baseados em Agilidade. Multiplicador final aplicado sobre a velocidade calculada. 1 = nenhuma alteração adicional.",
+
+    "Sandbox_PivotMod_DefaultMultiplier": "Modo Agilidade: giro-base",
+    "Sandbox_PivotMod_DefaultMultiplier_tooltip": "Somente para giros baseados em Agilidade. Multiplicador inicial antes de somar o ganho pela perícia Agilidade. 1 = velocidade padrão do jogo.",
+
+    "Sandbox_PivotMod_DynamicModifiers": "Modificadores dinâmicos de giro (chave geral)",
+    "Sandbox_PivotMod_DynamicModifiers_tooltip": "Chave geral dos modificadores situacionais abaixo. Quando desativada, eles não alteram nada e o giro se comporta exatamente como definido acima. Quando ativada, cada modificador habilitado ajusta a velocidade de giro ao caminhar ou mirar conforme a condição atual do personagem. Funciona tanto com velocidades fixas quanto com o sistema baseado em Agilidade. O giro nunca é totalmente bloqueado nem ultrapassa o limite de suavidade.",
+
+    "Sandbox_PivotMod_DynEncumbrance": "Dinâmico: carga excessiva desacelera o giro",
+    "Sandbox_PivotMod_DynEncumbrance_tooltip": "Exige a chave geral. Quanto maior o peso carregado em relação ao máximo, mais lento é o giro; com carga total, ele fica aproximadamente pela metade. Combina naturalmente com Força.",
+
+    "Sandbox_PivotMod_DynInjury": "Dinâmico: ferimentos nas pernas e pés desaceleram o giro",
+    "Sandbox_PivotMod_DynInjury_tooltip": "Exige a chave geral. Ferimentos nas pernas, pés ou virilha desaceleram o giro; a parte mais afetada prevalece, e uma fratura nessas regiões reduz muito mais a velocidade.",
+
+    "Sandbox_PivotMod_DynFatigue": "Dinâmico: fadiga desacelera o giro",
+    "Sandbox_PivotMod_DynFatigue_tooltip": "Exige a chave geral. Cansaço ou falta de fôlego, por baixa resistência, deixam o giro lento; descansado e com vigor, o personagem se vira com rapidez.",
+
+    "Sandbox_PivotMod_DynDrunkenness": "Dinâmico: embriaguez desacelera o giro",
+    "Sandbox_PivotMod_DynDrunkenness_tooltip": "Exige a chave geral. Quanto mais embriagado, mais lento e desajeitado é o giro.",
+
+    "Sandbox_PivotMod_DynPanic": "Dinâmico: pânico acelera o giro",
+    "Sandbox_PivotMod_DynPanic_tooltip": "Exige a chave geral. O pânico faz o personagem se virar mais rápido: até cerca de +50%% de velocidade com pânico máximo, ainda limitado para preservar a suavidade.",
+
+    "Sandbox_PivotMod_DynSneak": "Dinâmico: giros cuidadosos ao se esgueirar",
+    "Sandbox_PivotMod_DynSneak_tooltip": "Exige a chave geral. Ao se esgueirar, o personagem gira de modo mais lento e cuidadoso, a cerca de 70%% da velocidade."
+}

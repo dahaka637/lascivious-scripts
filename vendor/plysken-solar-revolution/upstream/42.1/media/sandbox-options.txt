@@ -1,0 +1,70 @@
+VERSION = 1,
+option PSR.ChargeFreq {
+	page = PSR, translation = PSR_ChargeFreq, valueTranslation = PSR_ChargeFreq,
+	type = enum, numValues = 2, default = 1,
+}
+
+option PSR.solarPanelEfficiency {
+	page = PSR, translation = PSR_solarPanelEfficiency,
+	type = integer, min = 1, max = 100, default = 25,
+}
+option PSR.batteryDegradeChance {
+	page = PSR, translation = PSR_batteryDegradeChance,
+	type = integer, min = 0, max = 1000, default = 100,
+}
+option PSR.consumptionMultiplier {
+	page = PSR, translation = PSR_consumptionMultiplier,
+	type = integer, min = 1, max = 1000, default = 100,
+}
+option PSR.DIYBatteryMultiplier {
+	page = PSR, translation = PSR_DIYBatteryMultiplier,
+	type = integer, min = 1, max = 10000, default = 100,
+}
+option PSR.BatteryBankSpawn {
+	page = PSR, translation = PSR_BatteryBankSpawn,
+	type = enum, numValues = 4, default = 3,
+}
+option PSR.LRMSolarPanels {
+	page = PSR, translation = PSR_LRMSolarPanels, valueTranslation = PSR_LRMSolarPanels,
+	type = double, min = 0, max = 100, default = 1,
+}
+option PSR.LRMBatteries {
+	page = PSR, translation = PSR_LRMBatteries, valueTranslation = PSR_LRMBatteries,
+	type = double, min = 0, max = 100, default = 1,
+}
+option PSR.LRMMisc {
+	page = PSR, translation = PSR_LRMMisc, valueTranslation = PSR_LRMMisc,
+	type = double, min = 0, max = 100, default = 1,
+}
+option PSR.ConnectPanelMin {
+	page = PSR, translation = PSR_ConnectPanelMin,
+	type = integer, min = 1, max = 1440, default = 30,
+}
+option PSR.BackupConnectRange {
+	page = PSR, translation = PSR_BackupConnectRange,
+	type = integer, min = 0, max = 50, default = 0,
+}
+option PSR.PanelConnectRange {
+	page = PSR, translation = PSR_PanelConnectRange,
+	type = integer, min = 20, max = 40, default = 20,
+}
+option PSR.PanelConnectFloors {
+	page = PSR, translation = PSR_PanelConnectFloors,
+	type = integer, min = 3, max = 8, default = 3,
+}
+option PSR.BackupConnectFloors {
+	page = PSR, translation = PSR_BackupConnectFloors,
+	type = integer, min = 1, max = 8, default = 1,
+}
+option PSR.SolarCrateSpawn {
+	page = PSR, translation = PSR_SolarCrateSpawn,
+	type = enum, numValues = 4, default = 3,
+}
+option PSR.HardenedPanelRecipe {
+	page = PSR, translation = PSR_HardenedPanelRecipe,
+	type = boolean, default = false,
+}
+option PSR.AllowVanillaConnect {
+	page = PSR, translation = PSR_AllowVanillaConnect,
+	type = boolean, default = false,
+}

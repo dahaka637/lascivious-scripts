@@ -1,0 +1,10 @@
+{
+    "PSR.PSRMag1": "新进展：来自太阳的能源",
+    "PSR.SolarPanel": "太阳能电池板（部分）",
+    "PSR.PSRInverter": "逆变器",
+    "PSR.DeepCycleBattery": "200Ah深循环电池",
+    "PSR.SuperBattery": "400Ah深循环电池",
+    "PSR.WiredCarBattery": "有线汽车电池",
+    "PSR.DIYBattery": "DIY深循环电池",
+    "PSR.ImprovisedBattery": "临时电池"
+}

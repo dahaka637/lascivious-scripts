@@ -1,0 +1,4 @@
+name=Push Vehicle
+id=PushVehicle
+poster=poster.png
+description=Push stationary vehicles forward or backward by hand, or turn them from the sides. Push power is affected by Strength and vehicle weight. Includes stamina cost, vanilla shove animation, configurable hotkey, controller support, and multiplayer support.

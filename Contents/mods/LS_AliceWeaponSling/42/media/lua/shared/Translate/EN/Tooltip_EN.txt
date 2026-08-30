@@ -1,0 +1,3 @@
+Tooltip_EN = {
+    Tooltip_Sling = "Reduces the carried weight of the weapon it's mounted on.",
+}

@@ -1,0 +1,8 @@
+name=Lascivious Scripts - Wandering Zombies
+id=LS_WanderingZombies
+poster=poster.png
+icon=icon.png
+versionMin=42.20.0
+description=Cria movimentação orgânica, exploração e hordas dinâmicas sem direcionar zumbis artificialmente ao jogador. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

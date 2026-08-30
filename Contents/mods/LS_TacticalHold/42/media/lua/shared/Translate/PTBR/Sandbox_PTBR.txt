@@ -1,0 +1,7 @@
+Sandbox_PTBR = {
+    Sandbox_TacHold = "Empunhadura T\195\161tica",
+    Sandbox_TacHold_AimingRequirement = "N\195\173vel m\195\173nimo de Mira para armas longas",
+    Sandbox_TacHold_AimingRequirement_tooltip = "N\195\173vel de Mira necess\195\161rio para ativar as anima\195\167\195\181es de armas longas.",
+    Sandbox_TacHold_PistolAimingRequirement = "N\195\173vel m\195\173nimo de Mira para pistolas",
+    Sandbox_TacHold_PistolAimingRequirement_tooltip = "N\195\173vel de Mira necess\195\161rio para ativar as anima\195\167\195\181es de pistolas.",
+}

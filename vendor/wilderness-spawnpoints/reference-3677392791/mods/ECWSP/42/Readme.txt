@@ -1,0 +1,1 @@
+Hello! Just a simple mod to start out in the forest near Echo Creek! Have fun!

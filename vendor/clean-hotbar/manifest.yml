@@ -1,0 +1,38 @@
+schema: 1
+module_key: clean-hotbar
+name: Clean HotBar
+bundled_mod_id: LS_CleanHotBar
+status: enabled
+
+upstream:
+  workshop_id: "3461263912"
+  original_mod_id: "CleanHotBar"
+  version: "1.12.3"
+  imported_at: "2026-08-26"
+  source_path: "vendor/clean-hotbar/upstream"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/clean-hotbar/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

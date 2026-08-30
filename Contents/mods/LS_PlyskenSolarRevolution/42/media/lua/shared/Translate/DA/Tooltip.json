@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Lagrer strømmen fra dine solpaneler og forsyner bygningen.<br>Skal placeres i et lukket rum og forbindes til panelerne.<br>Kræver lidt kendskab til el. Intet brændstof nødvendigt.",
+    "Tooltip_PSR_NoPanels": "Intet panel",
+    "Tooltip_PSR_PanelFar": "Dette panel er for langt"
+}

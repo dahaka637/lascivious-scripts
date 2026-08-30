@@ -1,0 +1,11 @@
+Tooltip_EN = {
+    Tooltip_BQoL_PryDoor = "Force the door with a crowbar. Success depends on your Strength.",
+    Tooltip_BQoL_PryWindow = "Force the window with a crowbar. A failed attempt may break the glass.",
+    Tooltip_BQoL_PryReinforced = "This door is reinforced. You need Strength %1 to attempt it.",
+    Tooltip_BQoL_WashRequirements = "Soap: %1 / %2    Water: %3 / %4",
+    Tooltip_BQoL_TourniquetArm = "Ties off the wound with a belt. Cuts bleeding sharply but hurts.",
+    Tooltip_BQoL_TourniquetLeg = "Ties off the wound with a belt. Cuts bleeding sharply but hurts, and slows you down until removed.",
+    Tooltip_BQoL_RemoveTourniquet = "Unties the limb and gives the belt back. The wound will bleed again if it has not healed.",
+    Tooltip_BQoL_RemoveTourniquetLegacy = "Unties the limb. This one was tied before the belt was being tracked, so there is nothing to give back.",
+    Tooltip_BQoL_TourniquetItem = "The belt tied around this leg. Taking it off unties the limb: the wound bleeds again and the belt comes back.",
+}

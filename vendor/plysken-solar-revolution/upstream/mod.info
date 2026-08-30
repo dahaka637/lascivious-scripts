@@ -1,0 +1,11 @@
+id=PSR
+name=Plysken Solar Revolution
+poster=poster.png
+description=Plysken Solar Revolution - Recoltez l'energie solaire pour alimenter votre base : panneaux solaires, banque de batteries, onduleur, groupe electrogene de secours. Fork de ImmersiveSolarArrays, mis a jour pour Project Zomboid v42+.
+pack=solarmod_tileset
+tiledef=solarmodtiledefs 575
+incompatible=ISA_41,ISA,ISA_42
+versionMin=42.0
+modversion=1.76
+url=
+author=Plysken (fork), RadX5, Poltergeist (originaux)

@@ -1,0 +1,65 @@
+module LasciviousShop
+{
+    sound LasciviousShop_Open
+    {
+        category = UI,
+        clip
+        {
+            file = media/sound/LasciviousShop_Open.ogg,
+        }
+    }
+
+    sound LasciviousShop_Close
+    {
+        category = UI,
+        clip
+        {
+            file = media/sound/LasciviousShop_Close.ogg,
+        }
+    }
+
+    sound LasciviousShop_Click
+    {
+        category = UI,
+        clip
+        {
+            file = media/sound/LasciviousShop_Click.ogg,
+        }
+    }
+
+    sound LasciviousShop_CartAdd
+    {
+        category = UI,
+        clip
+        {
+            file = media/sound/LasciviousShop_CartAdd.ogg,
+        }
+    }
+
+    sound LasciviousShop_CartRemove
+    {
+        category = UI,
+        clip
+        {
+            file = media/sound/LasciviousShop_CartRemove.ogg,
+        }
+    }
+
+    sound LasciviousShop_PurchaseSuccess
+    {
+        category = UI,
+        clip
+        {
+            file = media/sound/LasciviousShop_PurchaseSuccess.ogg,
+        }
+    }
+
+    sound LasciviousShop_Error
+    {
+        category = UI,
+        clip
+        {
+            file = media/sound/LasciviousShop_Error.ogg,
+        }
+    }
+}

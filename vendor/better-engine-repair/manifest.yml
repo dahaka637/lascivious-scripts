@@ -1,0 +1,38 @@
+schema: 1
+module_key: better-engine-repair
+name: Better Engine Repair
+bundled_mod_id: LS_BetterEngineRepair
+status: enabled
+
+upstream:
+  workshop_id: "3780298250"
+  original_mod_id: "BetterEngineRepairB42"
+  version: "unknown"
+  imported_at: "2026-08-25"
+  source_path: "vendor/better-engine-repair/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/better-engine-repair/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

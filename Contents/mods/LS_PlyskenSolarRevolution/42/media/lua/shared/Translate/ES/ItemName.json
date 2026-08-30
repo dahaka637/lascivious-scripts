@@ -1,0 +1,10 @@
+{
+    "PSR.PSRMag1": "Nuevos Avances: Energía del sol",
+    "PSR.SolarPanel": "Panel solar (pieza)",
+    "PSR.PSRInverter": "Inversor",
+    "PSR.DeepCycleBattery": "Batería de 200Ah de ciclo profundo",
+    "PSR.SuperBattery": "Batería de 400Ah de ciclo profundo",
+    "PSR.WiredCarBattery": "Batería de coche con cable",
+    "PSR.DIYBattery": "Batería  de ciclo profundo fabricada",
+    "PSR.ImprovisedBattery": "Batería improvisada"
+}

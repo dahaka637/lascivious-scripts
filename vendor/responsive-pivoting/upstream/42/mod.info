@@ -1,0 +1,9 @@
+name=PivotMod
+id=PivotMod
+modversion=3.0
+poster=poster.png
+icon=poster.png
+description=Pivot Faster
+author=turnip
+category=Misc
+versionMin=42.0.0

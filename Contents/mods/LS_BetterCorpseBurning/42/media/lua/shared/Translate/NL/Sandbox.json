@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Verbrandingstijd per Lijk",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Tijd in spelminuten om één lijk te verbranden. Standaard: 110 (vanillawaarde).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Verwijder Vanilla Lijkverbranding",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Verwijdert de vanilla-optie 'Verbrand lijk' die benzine vereist.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Vuurverspreidingsradius",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Wanneer een lijk brandt, vatten naburige lijken binnen deze straal ook vlam. 0 = uitgeschakeld.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Benzine Vereist",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Indien ingeschakeld, vereist het verbranden van lijken ook een jerrycan benzine naast een vuurbron.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Benzine per Lijk",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Hoeveel benzine (in liters) er per verbrand lijk wordt verbruikt. Standaard: 0,1L (een jerrycan van 10L verbrandt ~100 lijken).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Binnenshuis Verbranden Toestaan",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Indien uitgeschakeld, kunnen lijken in gebouwen niet worden verbrand met deze mod. Voorkomt dat houten constructies per ongeluk in brand vliegen. Standaard: ingeschakeld.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Vuurgebruik per Lijk",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Hoevaak de vuurbron wordt gebruikt per verbrand lijk. Hogere waarden verbruiken aanstekers en lucifers sneller. 0 = onbeperkt (de vuurbron gaat nooit op). Standaard: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Vuur Doven Als Klaar",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Indien ingeschakeld dooft het vuur automatisch kort nadat alle lijken in de ketting vlam hebben gevat. Beschermt houten constructies tegen achterblijvend vuur. Standaard: uitgeschakeld.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Geen As",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Indien ingeschakeld laten verbrande lijken geen ashopen achter. Standaard: uitgeschakeld.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Snelheid van vuurverspreiding",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Hoe snel vuur zich verspreidt tussen lijken. Lager = sneller. Standaard: 150 frames (~5s per tegel). Aanbevolen: 150 voor singleplayer, 50-80 voor co-op/multiplayer."
+}

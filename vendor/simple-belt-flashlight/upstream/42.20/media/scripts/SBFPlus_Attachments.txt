@@ -1,0 +1,232 @@
+module Base
+{
+    model FemaleBody
+    {
+        mesh = Skinned/FemaleBody,
+
+        attachment SBFPlus_VanillaSmallRight
+        {
+            offset = 0.0500 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_VanillaSmallLeft
+        {
+            offset = 0.0500 0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AngledRight
+        {
+            offset = 0.0000 -0.0990 -0.0150,
+            rotate = 0.0000 -175.0000 90.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AngledLeft
+        {
+            offset = 0.0000 0.0990 -0.0150,
+            rotate = 0.0000 -185.0000 90.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AZMilitaryRight
+        {
+            offset = 0.0000 -0.0990 -0.0150,
+            rotate = 90.0000 180.0000 85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AZMilitaryLeft
+        {
+            offset = 0.0000 0.0990 -0.0150,
+            rotate = 90.0000 180.0000 85.0000,
+            bone = Bip01_Pelvis,
+        }
+
+        attachment SBFPlus_BF_Torch1Right
+        {
+            offset = 0.0680 -0.1300 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch1Left
+        {
+            offset = 0.0680 0.1300 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch2Right
+        {
+            offset = 0.0680 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch2Left
+        {
+            offset = 0.0680 0.0990 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch3Right
+        {
+            offset = 0.0680 -0.1300 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch3Left
+        {
+            offset = 0.0680 0.1300 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch5Right
+        {
+            offset = 0.0680 -0.1300 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch5Left
+        {
+            offset = 0.0680 0.1300 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_EgenerexLiteRight
+        {
+            offset = 0.0680 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_EgenerexLiteLeft
+        {
+            offset = 0.0680 0.0990 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_SpiffoLiteRight
+        {
+            offset = 0.0500 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_SpiffoLiteLeft
+        {
+            offset = 0.0500 0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+    }
+
+    model MaleBody
+    {
+        mesh = Skinned/MaleBody,
+
+        attachment SBFPlus_VanillaSmallRight
+        {
+            offset = 0.0500 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_VanillaSmallLeft
+        {
+            offset = 0.0500 0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AngledRight
+        {
+            offset = 0.0680 -0.0990 -0.0150,
+            rotate = 0.0000 -180.0000 90.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AngledLeft
+        {
+            offset = 0.0680 0.0990 -0.0150,
+            rotate = 0.0000 -180.0000 90.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AZMilitaryRight
+        {
+            offset = 0.0000 -0.0990 -0.0150,
+            rotate = 90.0000 180.0000 85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_AZMilitaryLeft
+        {
+            offset = 0.0000 0.0990 -0.0150,
+            rotate = 90.0000 180.0000 85.0000,
+            bone = Bip01_Pelvis,
+        }
+
+        attachment SBFPlus_BF_Torch1Right
+        {
+            offset = 0.0680 -0.1300 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch1Left
+        {
+            offset = 0.0680 0.1300 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch2Right
+        {
+            offset = 0.0680 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch2Left
+        {
+            offset = 0.0680 0.0990 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch3Right
+        {
+            offset = 0.0680 -0.1300 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch3Left
+        {
+            offset = 0.0680 0.1300 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch5Right
+        {
+            offset = 0.0680 -0.1300 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_Torch5Left
+        {
+            offset = 0.0680 0.1300 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_EgenerexLiteRight
+        {
+            offset = 0.0680 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_EgenerexLiteLeft
+        {
+            offset = 0.0680 0.0990 -0.0150,
+            rotate = -180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_SpiffoLiteRight
+        {
+            offset = 0.0500 -0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -95.0000,
+            bone = Bip01_Pelvis,
+        }
+        attachment SBFPlus_BF_SpiffoLiteLeft
+        {
+            offset = 0.0500 0.0990 -0.0150,
+            rotate = 180.0000 90.0000 -85.0000,
+            bone = Bip01_Pelvis,
+        }
+    }
+}

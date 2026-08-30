@@ -1,0 +1,8 @@
+id=LMWildSpawnRandom
+name=[LM] Wilderness Locations - Random Spawn (B42)
+poster=poster.png
+icon=icon.png
+description=Multiple spawn locations for wilderness survival. Can be filtered by difficulty and content from the sandbox options menu.
+versionMin=42.0
+author=Jessimouche
+incompatible=\LMWildSpawnMaps

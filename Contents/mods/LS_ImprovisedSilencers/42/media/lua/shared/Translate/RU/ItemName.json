@@ -1,0 +1,7 @@
+{
+    "Base.Silencer": "Глушитель",
+    "Base.MetalPipeSilencer": "Глушитель из металлической трубы",
+    "Base.TorchSilencer": "Глушитель из фонарика",
+    "Base.WaterBottleSilencer": "Глушитель из бутылки",
+    "Base.PotatoSilencer": "Картофельный глушитель"
+}

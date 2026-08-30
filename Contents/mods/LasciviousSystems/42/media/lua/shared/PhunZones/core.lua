@@ -1,0 +1,693 @@
+local allLocations = require("PhunZones/data")
+
+PhunZones = {
+    name = 'PhunZones',
+    events = {
+        OnPhunZoneReady = "PhunZonesOnPhunZoneReady",
+        OnPhysicalZoneChanged = "PhunZonesOnPhysicalZoneChanged",
+        OnEffectiveZoneChanged = "PhunZonesOnEffectiveZoneChanged",
+        OnPhunZonesObjectLocationChanged = "PhunZonesOnPhunZonesObjectLocationChanged",
+        OnPhunZoneWidgetClicked = "PhunZonesOnPhunZoneWidgetClicked",
+        OnZonesUpdated = "PhunZonesOnZonesUpdated",
+        OnZombieRemoved = "PhunZonesOnZombieRemoved",
+        OnDataBuilt = "PhunZonesOnDataBuilt"
+    },
+    const = {
+        modifiedLuaFile = "PhunZones.txt",
+        modifiedModData = "PhunZones",
+
+        playerData = "PhunZonesPlayers"
+    },
+    ui = {},
+    data = {},
+    commands = {
+        playerSetup = "PhunZonesPlayerSetup",
+        zoneUpdated = "PhunZonesZoneUpdated",
+        replaceZones = "PhunZonesReplaceZones",
+        replaceZonesResult = "PhunZonesReplaceZonesResult",
+        modifyZone = "PhunZonesModifyZone",
+        playerTeleport = "PhunZonesPlayerTeleport",
+        teleportVehicle = "PhunZonesTeleportVehicle",
+        deleteZone = "PhunZonesDeleteZone",
+        updateEffectiveZone = "PhunZonesUpdateEffectiveZone",
+        evictZeds = "PhunZonesEvictZeds",
+        removeZeds = "PhunZonesRemoveZeds"
+    },
+    tools = require("PhunZones/tools"),
+    groups = {
+        combat = {
+            label = "Combat",
+            order = 3
+        },
+        functionality = {
+            label = "Functionality",
+            order = 2
+        },
+        general = {
+            label = "General",
+            order = 1
+        },
+        mods = {
+            label = "Mods",
+            order = 4
+        },
+        other = {
+            label = "Other",
+            order = 10
+        }
+    },
+    fields = {
+        region = {
+            label = "IGUI_PhunZones_Region",
+            type = "string",
+            tooltip = "IGUI_PhunZones_Region_tooltip",
+            group = "general"
+        },
+        zone = {
+            label = "IGUI_PhunZones_Zone",
+            type = "string",
+            tooltip = "IGUI_PhunZones_Zone_tooltip",
+            group = "general"
+        },
+        title = {
+            label = "IGUI_PhunZones_Title",
+            type = "string",
+            tooltip = "IGUI_PhunZones_Title_Tooltip",
+            group = "general",
+            order = 1
+        },
+        subtitle = {
+            label = "IGUI_PhunZones_Subtitle",
+            type = "string",
+            tooltip = "IGUI_PhunZones_Subtitle_tooltip",
+            group = "general",
+            order = 2
+        },
+        difficulty = {
+            label = "IGUI_PhunZones_Difficulty",
+            type = "int",
+            tooltip = "IGUI_PhunZones_Difficulty_tooltip",
+            group = "combat",
+            order = 1
+        },
+        modsRequired = {
+            label = "IGUI_PhunZones_ModsRequired",
+            type = "string",
+            tooltip = "IGUI_PhunZones_ModsRequired_tooltip",
+            group = "mods",
+            -- Ensure every semicolon-separated mod name starts with "\".
+            -- PZ text-entry widgets strip leading backslashes, so we re-add
+            -- them automatically so the user doesn't need to type them.
+            normalize = function(v)
+                if type(v) ~= "string" then
+                    return v
+                end
+                local result = {}
+                for rawEntry in (v .. ";"):gmatch("([^;]*);") do
+                    local entry = rawEntry:match("^%s*(.-)%s*$")
+                    if entry ~= "" then
+                        if entry:sub(1, 1) ~= "\\" then
+                            entry = "\\" .. entry
+                        end
+                        table.insert(result, entry)
+                    end
+                end
+                local joined = table.concat(result, ";")
+                return joined ~= "" and joined or nil
+            end
+        },
+        zeds = {
+            label = "IGUI_PhunZones_Zeds",
+            type = "combo",
+            tooltip = "IGUI_PhunZones_Zeds_tooltip",
+            group = "combat",
+            getOptions = function()
+                return {{
+                    label = getText("IGUI_PhunZones_ZedAction_None"),
+                    value = "none"
+                }, {
+                    label = getText("IGUI_PhunZones_ZedAction_Move"),
+                    value = "move"
+                }, {
+                    label = getText("IGUI_PhunZones_ZedAction_Remove"),
+                    value = "remove"
+                }}
+            end
+        },
+        bandits = {
+            label = "IGUI_PhunZones_Bandits",
+            type = "combo",
+            tooltip = "IGUI_PhunZones_Bandits_tooltip",
+            group = "combat",
+            getOptions = function()
+                return {{
+                    label = getText("IGUI_PhunZones_ZedAction_None"),
+                    value = "none"
+                }, {
+                    label = getText("IGUI_PhunZones_ZedAction_Move"),
+                    value = "move"
+                }, {
+                    label = getText("IGUI_PhunZones_ZedAction_Remove"),
+                    value = "remove"
+                }}
+            end
+        },
+        noannounce = {
+            label = "IGUI_PhunZones_NoWelcome",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoWelcome_tooltip",
+            group = "general"
+        },
+        nosafehouse = {
+            label = "IGUI_PhunZones_NoSafeHouse",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoSafehouse_tooltip",
+            group = "functionality"
+        },
+        nobuilding = {
+            label = "IGUI_PhunZones_NoBuilding",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoBuilding_tooltip",
+            group = "functionality"
+        },
+        noplacing = {
+            label = "IGUI_PhunZones_NoPlacing",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoPlacing_tooltip",
+            group = "functionality"
+        },
+        nopickup = {
+            label = "IGUI_PhunZones_NoPickup",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoPickup_tooltip",
+            group = "functionality"
+        },
+        noscrap = {
+            label = "IGUI_PhunZones_NoScrap",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoScrap_tooltip",
+            group = "functionality"
+        },
+        nodestruction = {
+            label = "IGUI_PhunZones_NoDestruction",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoDestruction_tooltip",
+            group = "functionality"
+        },
+        nofire = {
+            label = "IGUI_PhunZones_NoFire",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoFire_tooltip",
+            group = "functionality"
+        },
+        noplayers = {
+            label = "IGUI_PhunZones_NoPlayers",
+            type = "boolean",
+            tooltip = "IGUI_PhunZones_NoPlayers_tooltip",
+            group = "functionality"
+        },
+        order = {
+            label = "IGUI_PhunZones_Order",
+            type = "int",
+            tooltip = "IGUI_PhunZones_Order_tooltip"
+        }
+    }
+}
+
+local Core = PhunZones
+Core.isLocal = Core.tools.isLocal
+
+-- 2026-08-22: the whole PhunZones sandbox page was removed (explicit
+-- request, "só usamos ele de base mesmo, não há necessidade de ter config
+-- no sandbox") -- SandboxVars.PhunZones no longer exists at all, so
+-- Core.settings would silently fall back to an empty table and Widget
+-- (previously true by default) would read as nil/false. Fill in the old
+-- sandbox defaults here instead so behaviour is unchanged.
+local function loadSettings()
+    local settings = (SandboxVars and SandboxVars[Core.name]) or {}
+    if settings.Widget == nil then settings.Widget = true end
+    if settings.Debug == nil then settings.Debug = false end
+    return settings
+end
+Core.settings = loadSettings()
+
+-- ---------------------------------------------------------------------------
+-- Event registration
+-- NOTE: The server-side triggerEvent implementation is a Java binding with a
+-- fixed arity of 3 arguments (eventName, arg1, arg2). Do not call triggerEvent
+-- with more than 3 arguments or it will throw at runtime on the server.
+-- Any additional data should be bundled into arg1 or arg2 as nested fields.
+-- ---------------------------------------------------------------------------
+for _, event in pairs(Core.events or {}) do
+    if not Events[event] then
+        LuaEventManager.AddEvent(event)
+    end
+end
+
+function Core.debugLn(str)
+    if Core.settings.Debug then
+        print("[" .. Core.name .. "] " .. tostring(str))
+    end
+end
+
+function Core.debug(...)
+    if Core.settings.Debug then
+        Core.tools.debug(Core.name, ...)
+    end
+end
+
+-- ---------------------------------------------------------------------------
+-- Cached module-level locals
+-- ---------------------------------------------------------------------------
+
+-- ---------------------------------------------------------------------------
+-- Settings
+-- ---------------------------------------------------------------------------
+
+function Core.getOption(name, default)
+    local options = getSandboxOptions()
+    if not options then
+        return default
+    end
+    local n = Core.name .. "." .. name
+    local opt = options:getOptionByName(n)
+    local val = opt and opt:getValue()
+    if val == nil then
+        return default
+    end
+    return val
+end
+
+function Core.refreshSettings()
+    Core.settings = loadSettings()
+end
+
+-- ---------------------------------------------------------------------------
+-- Initialisation
+-- ---------------------------------------------------------------------------
+
+function Core:ini()
+    if self.inied then
+        return
+    end
+    self.inied = true
+
+    self:updateZoneData()
+
+    triggerEvent(self.events.OnPhunZoneReady)
+end
+
+-- ---------------------------------------------------------------------------
+-- Location lookup
+-- ---------------------------------------------------------------------------
+
+local function finiteNumber(value)
+    local n = tonumber(value)
+    if not n or n ~= n or n == math.huge or n == -math.huge then return nil end
+    return n
+end
+
+function Core.getLocation(x, y)
+    if not Core.inied then
+        Core:ini()
+    end
+
+    local xx, yy = x, y
+    if y == nil and x and x.getX and x.getY then
+        -- Assume IsoObject or similar with getX/getY
+        local ok, ox, oy = pcall(function() return x:getX(), x:getY() end)
+        if not ok then return Core.data and Core.data.lookup and Core.data.lookup._default or nil end
+        xx, yy = ox, oy
+    end
+    xx, yy = finiteNumber(xx), finiteNumber(yy)
+    if not xx or not yy then return Core.data and Core.data.lookup and Core.data.lookup._default or nil end
+
+    if Core.data and Core.data.cells and Core.data.lookup then
+        local ckey = math.floor(xx / 300) .. "_" .. math.floor(yy / 300)
+        local test = Core.data.cells[ckey] or {}
+        for _, v in ipairs(test) do
+            -- v[1]=zone, v[2]=x1, v[3]=y1, v[4]=x2, v[5]=y2
+            if xx >= v[2] and xx <= v[4] and yy >= v[3] and yy <= v[5] then
+                return Core.data.lookup[v[1]]
+            end
+        end
+    end
+
+    return Core.data and Core.data.lookup and Core.data.lookup._default or nil
+end
+
+-- Returns an array of all resolved zone tables whose rects intersect (rx1,ry1)-(rx2,ry2).
+-- Each zone appears at most once even if multiple rects overlap the query rect.
+function Core.getIntersectingZones(rx1, ry1, rx2, ry2)
+    if not Core.inied then
+        Core:ini()
+    end
+    rx1, ry1, rx2, ry2 = finiteNumber(rx1), finiteNumber(ry1), finiteNumber(rx2), finiteNumber(ry2)
+    if not rx1 or not ry1 or not rx2 or not ry2 or not (Core.data and Core.data.cells and Core.data.lookup) then
+        return {}
+    end
+    if rx1 > rx2 then rx1, rx2 = rx2, rx1 end
+    if ry1 > ry2 then ry1, ry2 = ry2, ry1 end
+
+    local seen, result = {}, {}
+    local cx1 = math.floor(rx1 / 300)
+    local cy1 = math.floor(ry1 / 300)
+    local cx2 = math.floor(rx2 / 300)
+    local cy2 = math.floor(ry2 / 300)
+    local chunkCount = (cx2 - cx1 + 1) * (cy2 - cy1 + 1)
+    if chunkCount ~= chunkCount or chunkCount == math.huge or chunkCount > 100000 then return {} end
+
+    for cx = cx1, cx2 do
+        for cy = cy1, cy2 do
+            local entries = Core.data.cells[cx .. "_" .. cy]
+            if entries then
+                for _, v in ipairs(entries) do
+                    -- v[1]=key v[2]=x1 v[3]=y1 v[4]=x2 v[5]=y2
+                    -- standard AABB intersection: neither rect is fully to one side of the other
+                    if not seen[v[1]] and v[4] >= rx1 and v[2] <= rx2 and v[5] >= ry1 and v[3] <= ry2 then
+                        seen[v[1]] = true
+                        local zone = Core.data.lookup[v[1]]
+                        if zone then table.insert(result, zone) end
+                    end
+                end
+            end
+        end
+    end
+    return result
+end
+
+-- Returns true if any zone in the array matches the property condition.
+-- value omitted/nil → truthy check (good for boolean props like noplayers)
+-- value provided     → equality check (good for combo props like zeds/bandits)
+function Core.anyZoneHas(zones, prop, value)
+    if type(zones) ~= "table" or prop == nil then return false end
+    for _, zone in ipairs(zones) do
+        local v = type(zone) == "table" and zone[prop] or nil
+        if value == nil then
+            if v then
+                return true
+            end
+        else
+            if v == value then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+function Core.hasProp(x1, y1, x2, y2, prop, value)
+    local zones = Core.getIntersectingZones(x1, y1, x2, y2)
+    return Core.anyZoneHas(zones, prop, value)
+end
+
+-- ---------------------------------------------------------------------------
+-- Zombie / object zone tracking
+-- ---------------------------------------------------------------------------
+
+function Core.updateObjectZoneData(obj, triggerChangeEvent)
+    local modData = obj:getModData()
+    if not modData.PhunZones then
+        modData.PhunZones = {}
+    end
+
+    local existing = modData.PhunZones
+    local newZone = Core.getLocation(obj) or {}
+    local newId = Core.getZId(obj)
+
+    modData.PhunZones = {
+        zone = newZone.key,
+        id = newId,
+        checked = getTimestamp()
+    }
+
+    if triggerChangeEvent and (newId ~= existing.id or newZone.key ~= existing.zone) then
+        triggerEvent(Core.events.OnPhunZonesObjectLocationChanged, obj, newZone)
+    end
+
+    return newZone
+end
+
+-- ---------------------------------------------------------------------------
+-- Zone access enforcement — client-side only, returns false if player ejected
+-- ---------------------------------------------------------------------------
+
+-- Returns a position just outside the zone rect containing (x, y).
+-- Fast path: looks up the containing rect directly and jumps to its nearest
+-- edge in O(1). Falls back to a spiral search only when overlapping rects
+-- of the same zone cover that edge tile.
+function Core.findNearestSafePosition(x, y, z, restrictedZoneKey)
+    x, y, z = finiteNumber(x), finiteNumber(y), finiteNumber(z)
+    if not x or not y or not z or restrictedZoneKey == nil then return nil end
+    -- Find the specific rect for this zone that contains (x, y)
+    local ckey = math.floor(x / 300) .. "_" .. math.floor(y / 300)
+    local rects = Core.data and Core.data.cells and Core.data.cells[ckey] or {}
+    local x1, y1, x2, y2
+    for _, v in ipairs(rects) do
+        if v[1] == restrictedZoneKey and x >= v[2] and x <= v[4] and y >= v[3] and y <= v[5] then
+            x1, y1, x2, y2 = v[2], v[3], v[4], v[5]
+            break
+        end
+    end
+
+    if x1 then
+        -- Distance (in tiles) to clear each edge
+        local dLeft = x - x1 + 1
+        local dRight = x2 - x + 1
+        local dTop = y - y1 + 1
+        local dBot = y2 - y + 1
+        local tx, ty
+        local best = math.min(dLeft, dRight, dTop, dBot)
+        if best == dLeft then
+            tx, ty = x1 - 1, y
+        elseif best == dRight then
+            tx, ty = x2 + 1, y
+        elseif best == dTop then
+            tx, ty = x, y1 - 1
+        else
+            tx, ty = x, y2 + 1
+        end
+        -- Single check: verify the edge tile isn't inside an overlapping rect
+        local check = Core.getLocation(tx, ty)
+        if not check or check.key ~= restrictedZoneKey then
+            return tx, ty, z
+        end
+        -- Overlapping rect covers that edge — fall through to spiral
+    end
+
+    -- Fallback spiral for degenerate/heavily-overlapping cases
+    for radius = 1, 50 do
+        for dx = -radius, radius do
+            for dy = -radius, radius do
+                if math.abs(dx) == radius or math.abs(dy) == radius then
+                    local zone = Core.getLocation(x + dx, y + dy)
+                    if not zone or zone.key ~= restrictedZoneKey then
+                        return x + dx, y + dy, z
+                    end
+                end
+            end
+        end
+    end
+    return nil
+end
+
+-- lastAt is stored.at { zone, x, y, z } from the previous accepted tick —
+-- used as the teleport-back target when access is denied.
+-- If lastAt is itself inside the restricted zone (e.g. login after a
+-- restriction was added), a spiral search finds the nearest safe tile instead.
+function Core.enforceZoneAccess(obj, effectiveZone, lastAt)
+    if not obj or type(effectiveZone) ~= "table" or effectiveZone.noplayers ~= true then
+        return true
+    end
+
+    local tx, ty, tz
+    local lastZone = lastAt and lastAt.x and Core.getLocation(lastAt.x, lastAt.y)
+    if lastZone and lastZone.key ~= effectiveZone.key then
+        tx, ty, tz = lastAt.x, lastAt.y, lastAt.z
+    else
+        tx, ty, tz = Core.findNearestSafePosition(obj:getX(), obj:getY(), obj:getZ(), effectiveZone.key)
+    end
+
+    if not tx then
+        return true -- zone fills entire search area; let player stay
+    end
+
+    local vehicle = obj.getVehicle and obj:getVehicle() or nil
+    if vehicle then
+        Core.teleportVehicleToCoords(obj, vehicle, tx, ty, tz)
+    else
+        Core.portPlayer(obj, tx, ty, tz)
+    end
+
+    if (isClient() or Core.isLocal) and instanceof(obj, "IsoPlayer") then
+        obj:setHaloNote(getText("IGUI_PhunZones_SayNoPlayers"), 255, 0, 0, 300)
+    end
+
+    return false
+end
+
+-- ---------------------------------------------------------------------------
+-- Player zone tracking
+-- ---------------------------------------------------------------------------
+
+function Core.updatePlayerZoneData(obj, triggerChangeEvent, force)
+    local modData = obj:getModData()
+    if not modData.PhunZones or not modData.PhunZones.at then
+        modData.PhunZones = {
+            zone = nil,
+            at = {}
+        }
+    end
+
+    local stored = modData.PhunZones
+    local vehicle = obj.getVehicle and obj:getVehicle() or nil
+
+    local function currentPos()
+        return vehicle and {
+            x = vehicle:getX(),
+            y = vehicle:getY(),
+            z = vehicle:getZ()
+        } or {
+            x = obj:getX(),
+            y = obj:getY(),
+            z = obj:getZ()
+        }
+    end
+
+    local newPhysical = Core.getLocation(obj) or {}
+    local physicalChanged = newPhysical.key ~= stored.at.zone
+
+    if not force and not physicalChanged then
+        -- No zone change — keep coords fresh
+        local pos = currentPos()
+        stored.at.x, stored.at.y, stored.at.z = pos.x, pos.y, pos.z
+        return stored
+    end
+
+    -- Enforce on the incoming physical zone
+    if not Core.enforceZoneAccess(obj, newPhysical, stored.at) then
+        return stored
+    end
+
+    -- Accepted — record previous effective zone, update at, default display zone to physical
+    local oldZone = stored.zone
+    local pos = currentPos()
+    stored.at = {
+        zone = newPhysical.key,
+        x = pos.x,
+        y = pos.y,
+        z = pos.z
+    }
+    stored.zone = newPhysical.key
+
+    if triggerChangeEvent then
+        triggerEvent(Core.events.OnPhysicalZoneChanged, obj, stored)
+        -- ^ handlers (e.g. RV mod) may mutate stored.zone in-place
+
+        if force == true or stored.zone ~= oldZone then
+            triggerEvent(Core.events.OnEffectiveZoneChanged, obj, stored)
+        end
+    end
+
+    return stored
+end
+
+-- Returns the live zone properties table for obj's display zone.
+-- Falls back to getLocation if moddata is not yet initialised.
+function Core.getPhysicalZone(obj)
+    local md = obj and obj.getModData and obj:getModData()
+    local stored = md and md.PhunZones
+    if stored and stored.at and stored.at.zone then
+        return Core.data and Core.data.lookup and Core.data.lookup[stored.at.zone] or {}
+    end
+    return obj and obj.getX and Core.getLocation(obj:getX(), obj:getY()) or {}
+end
+
+-- ---------------------------------------------------------------------------
+-- Effective zone helpers
+-- ---------------------------------------------------------------------------
+
+-- Returns the live zone properties table for obj's display zone.
+-- Falls back to getLocation if moddata is not yet initialised.
+function Core.getEffectiveZone(obj)
+    local md = obj and obj.getModData and obj:getModData()
+    local stored = md and md.PhunZones
+    if stored and stored.zone then
+        return Core.data and Core.data.lookup and Core.data.lookup[stored.zone] or {}
+    end
+    return obj and obj.getX and Core.getLocation(obj:getX(), obj:getY()) or {}
+end
+
+-- External push: set obj's display zone and fire OnEffectiveZoneChanged.
+-- Called by mods (e.g. RV system) when the display zone changes independently
+-- of physical movement (e.g. vehicle drives into a new zone while player is offmap).
+function Core.setEffectiveZone(obj, zoneKey)
+    local md = obj and obj.getModData and obj:getModData()
+    if not md then
+        return
+    end
+    if not md.PhunZones or not md.PhunZones.at then
+        md.PhunZones = {
+            zone = nil,
+            at = {}
+        }
+    end
+    local stored = md.PhunZones
+    if stored.zone == zoneKey then
+        return
+    end
+    stored.zone = zoneKey
+    triggerEvent(Core.events.OnEffectiveZoneChanged, obj, stored)
+end
+
+-- ---------------------------------------------------------------------------
+-- Public dispatcher — maintains backward-compatible entry point
+-- ---------------------------------------------------------------------------
+
+function Core.updateModData(obj, triggerChangeEvent, force)
+    if not obj or not obj.getModData then
+        return
+    end
+
+    if not instanceof(obj, "IsoPlayer") then
+        return Core.updateObjectZoneData(obj, triggerChangeEvent)
+    else
+        return Core.updatePlayerZoneData(obj, triggerChangeEvent, force)
+    end
+end
+
+-- ---------------------------------------------------------------------------
+-- Player teleport
+-- ---------------------------------------------------------------------------
+
+function Core.portPlayer(player, x, y, z)
+    x, y, z = finiteNumber(x), finiteNumber(y), finiteNumber(z)
+    if not player or not x or not y or not z then return false end
+    player:setX(x)
+    player:setY(y)
+    player:setZ(z)
+    return true
+end
+
+-- ---------------------------------------------------------------------------
+-- Zombie ID helper
+-- ---------------------------------------------------------------------------
+-- I suppose getOnlineID is no longer a thing in B42.17
+local testForOnlineId = getCore():getGameVersion():getMajor() == 42 and getCore():getGameVersion():getMinor() < 17 and
+                            (isClient() or isServer() or isCoopHost())
+
+function Core.getZId(zed)
+    if zed then
+        if instanceof(zed, "IsoZombie") then
+            if zed:isZombie() then
+
+                if testForOnlineId then
+                    return tostring(zed:getOnlineID())
+                else
+                    return tostring(zed:getID())
+                end
+
+            end
+        end
+    end
+end

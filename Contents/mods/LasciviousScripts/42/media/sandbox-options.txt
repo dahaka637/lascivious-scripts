@@ -1,0 +1,71 @@
+VERSION = 1,
+
+
+option LasciviousScriptsZombieDecay.Enabled
+{
+    type = boolean,
+    default = true,
+    page = LasciviousScriptsZombieDecay,
+    translation = LasciviousScriptsZombieDecay_Enabled,
+}
+
+option LasciviousScriptsZombieDecay.TimelineScalePercent
+{
+    type = integer,
+    min = 25,
+    max = 400,
+    default = 100,
+    page = LasciviousScriptsZombieDecay,
+    translation = LasciviousScriptsZombieDecay_TimelineScalePercent,
+}
+
+option LasciviousScriptsZombieDecay.MinimumRunnerSpeedPercent
+{
+    type = integer,
+    min = 25,
+    max = 100,
+    default = 50,
+    page = LasciviousScriptsZombieDecay,
+    translation = LasciviousScriptsZombieDecay_MinimumRunnerSpeedPercent,
+}
+
+option LasciviousScriptsZombieDecay.FinalShamblerCollapseEnabled
+{
+    type = boolean,
+    default = true,
+    page = LasciviousScriptsZombieDecay,
+    translation = LasciviousScriptsZombieDecay_FinalShamblerCollapseEnabled,
+}
+
+option LasciviousScriptsZombieDecay.DebugLogging
+{
+    type = boolean,
+    default = false,
+    page = LasciviousScriptsZombieDecay,
+    translation = LasciviousScriptsZombieDecay_DebugLogging,
+}
+
+
+option LasciviousScriptsTimeVote.Enabled
+{
+    type = boolean,
+    default = true,
+    page = LasciviousScriptsTimeVote,
+    translation = LasciviousScriptsTimeVote_Enabled,
+}
+
+option LasciviousScriptsTimeVote.SoloOnly
+{
+    type = boolean,
+    default = false,
+    page = LasciviousScriptsTimeVote,
+    translation = LasciviousScriptsTimeVote_SoloOnly,
+}
+
+option LasciviousScriptsTimeVote.DebugLogging
+{
+    type = boolean,
+    default = false,
+    page = LasciviousScriptsTimeVote,
+    translation = LasciviousScriptsTimeVote_DebugLogging,
+}

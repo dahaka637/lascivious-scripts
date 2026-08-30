@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Güneş panellerinin topladığı enerjiyi depolar ve binayı besler.<br>Kapalı bir odaya yerleştirilmeli ve panellere bağlanmalıdır.<br>Biraz elektrik bilgisi gerektirir. Yakıt gerekmez.",
+    "Tooltip_PSR_NoPanels": "Panel Yok",
+    "Tooltip_PSR_PanelFar": "Bu panel çok uzak"
+}

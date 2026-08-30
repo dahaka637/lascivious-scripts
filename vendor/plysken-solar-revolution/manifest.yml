@@ -1,0 +1,38 @@
+schema: 1
+module_key: plysken-solar-revolution
+name: Plysken Solar Revolution
+bundled_mod_id: LS_PlyskenSolarRevolution
+status: enabled
+
+upstream:
+  workshop_id: "3725311427"
+  original_mod_id: "PSR"
+  version: "1.76"
+  imported_at: "2026-08-26"
+  source_path: "vendor/plysken-solar-revolution/upstream"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: true
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/plysken-solar-revolution/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: true
+  network_protocol: true

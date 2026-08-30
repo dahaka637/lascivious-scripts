@@ -1,0 +1,9 @@
+name=Lascivious Scripts - OSRS Experience Bar
+id=LS_OSRSExperienceBar
+poster=poster.png
+icon=icon.png
+versionMin=42.0
+modversion=2.0.3
+description=Adiciona uma barra de experiência com drops de XP flutuantes, no estilo do Oldschool Runescape. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

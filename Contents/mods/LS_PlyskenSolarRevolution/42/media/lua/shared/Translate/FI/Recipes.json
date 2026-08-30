@@ -1,0 +1,19 @@
+{
+    "Make_DIY_Battery": "Tee DIY-akku",
+    "WireCarBattery": "Langallinen auton akku",
+    "UnWireCarBattery": "Irrotettava auton akku",
+    "Make_Solar_Roof_Tile": "Tee litteä aurinkopaneeli",
+    "Make_Wall-Mounted_Solar_Panel": "Valmista seinään kiinnitettävä aurinkopaneeli",
+    "Make_Floor-Mounted_Solar_Panel": "Tee lattialle asennettava aurinkopaneeli",
+    "Reverse_Solar_Panel": "Jaa aurinkopaneeli osiin",
+    "Create_Battery_Bank": "Luo akkupankki",
+    "Create_Solar_Failsafe": "Luo Solar Failsafe",
+    "Make_Solar_Panel": "Tee aurinkopaneeli (osa)",
+    "Make_Inverter": "Tee invertteri",
+    "Make_Improvised_Battery": "Tee improvisoitu patteri",
+    "Recondition_Battery": "Kunnostuta akku",
+    "Dismantle_Solar_Failsafe": "Pura aurinkovarmuusjärjestelmä",
+    "Dismantle_Battery_Bank": "Dismantle Battery Bank",
+    "Reverse_Solar_Roof_Tile": "Reverse Solar Roof Tile",
+    "Make_Solar_Panel_Realistic": "Make Solar Panel (Realistic)"
+}

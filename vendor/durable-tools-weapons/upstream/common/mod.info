@@ -1,0 +1,11 @@
+name=Durable Tools and Weapons - Hardened
+poster=poster.png
+id=DTWhard
+incompatible=\DTWsoft,\DTW
+versionMin=42.0.0
+icon=icon.png
+author=fucked
+description=This mod is meant to reajust the durabilities of tools and weapons
+description= <LINE>
+description= <LINE>
+description=	+75% from normal DTW

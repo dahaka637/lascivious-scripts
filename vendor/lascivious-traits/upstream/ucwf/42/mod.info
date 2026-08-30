@@ -1,0 +1,9 @@
+name=Unified Carry Weight Framework
+poster=poster.png
+url=https://steamcommunity.com/sharedfiles/filedetails/?id=3682045254
+id=UnifiedCarryWeightFramework
+versionMin=42.19
+modversion=2.1.0
+icon=icon.png
+description=Unified Carry Weight Framework that allows multiple different mods affect carry weight without conflicts.
+authors=MusicManiac

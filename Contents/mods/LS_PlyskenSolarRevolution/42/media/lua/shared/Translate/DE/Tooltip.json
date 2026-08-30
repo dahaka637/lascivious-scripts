@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Speichert die Energie deiner Solarpaneele und versorgt damit das Gebäude.<br>Muss in einem geschlossenen Raum aufgestellt und mit den Paneelen verbunden werden.<br>Erfordert Grundkenntnisse in Elektrik. Kein Treibstoff nötig.",
+    "Tooltip_PSR_NoPanels": "Kein Panel",
+    "Tooltip_PSR_PanelFar": "Dieses Panel ist zu weit"
+}

@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Tárolja a napelemek által termelt áramot, és ellátja az épületet.<br>Zárt helyiségbe kell helyezni, majd a napelemekhez csatlakoztatni.<br>Némi elektromossági ismeretet igényel. Nem kell üzemanyag.",
+    "Tooltip_PSR_NoPanels": "Nincs panel",
+    "Tooltip_PSR_PanelFar": "Ez a panel túl messze van"
+}

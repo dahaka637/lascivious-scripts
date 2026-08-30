@@ -1,0 +1,10 @@
+{
+    "PSR.PSRMag1": "새로운 발전: 태양으로부터의 에너지",
+    "PSR.SolarPanel": "태양광 패널(일부)",
+    "PSR.PSRInverter": "인버터",
+    "PSR.DeepCycleBattery": "200Ah 딥 사이클 배터리",
+    "PSR.SuperBattery": "400Ah 딥 사이클 배터리",
+    "PSR.WiredCarBattery": "유선자동차 배터리",
+    "PSR.DIYBattery": "DIY 딥 사이클 배터리",
+    "PSR.ImprovisedBattery": "임시 배터리"
+}

@@ -1,0 +1,105 @@
+module Base
+{
+    craftRecipe CraftSilencer
+    {
+        timedAction = Welding,
+        time = 500,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        SkillRequired = MetalWelding:6,
+        xpAward = MetalWelding:50,
+        AllowBatchCraft = false,
+        inputs
+        {
+            item 1 [Base.MetalPipe],
+            item 6 [Base.SmallSheetMetal],
+            item 5 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 tags[base:metalsaw] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.Silencer,
+        }
+    }
+
+    craftRecipe CraftMetalPipeSilencer
+    {
+        timedAction = SawSmallItemMetal,
+        time = 500,
+        Tags = AnySurfaceCraft,
+        category = Metalworking,
+        SkillRequired = MetalWelding:1,
+        xpAward = MetalWelding:10,
+        AllowBatchCraft = false,
+        inputs
+        {
+            item 1 [Base.MetalPipe],
+            item 1 [Base.Sheet],
+            item 1 [Base.DuctTape],
+            item 1 tags[base:screwdriver] mode:keep,
+            item 1 tags[base:metalsaw] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.MetalPipeSilencer,
+        }
+    }
+
+    craftRecipe CraftHandTorchSilencer
+    {
+        timedAction = Making,
+        time = 500,
+        Tags = InHandCraft,
+        category = Miscellaneous,
+        AllowBatchCraft = false,
+        inputs
+        {
+            item 1 [Base.HandTorch] mode:destroy flags[IsEmpty;ItemCount],
+            item 1 [Base.Sheet],
+            item 1 [Base.DuctTape],
+            item 1 tags[base:screwdriver] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.TorchSilencer,
+        }
+    }
+
+    craftRecipe CraftWaterBottleSilencer
+    {
+        timedAction = Making,
+        time = 500,
+        Tags = InHandCraft,
+        category = Miscellaneous,
+        AllowBatchCraft = false,
+        inputs
+        {
+            item 1 [Base.WaterBottle;Base.PopBottle;Base.PopBottleRare] mode:destroy flags[IsEmpty;ItemCount],
+            item 1 [Base.Sheet],
+            item 1 [Base.DuctTape],
+        }
+        outputs
+        {
+            item 1 Base.WaterBottleSilencer,
+        }
+    }
+
+    craftRecipe CraftPotatoSilencer
+    {
+        timedAction = Making,
+        time = 30,
+        Tags = InHandCraft,
+        category = Miscellaneous,
+        AllowBatchCraft = false,
+        inputs
+        {
+            item 1 [Base.Potato] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.PotatoSilencer,
+        }
+    }
+}

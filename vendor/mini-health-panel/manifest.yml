@@ -1,0 +1,38 @@
+schema: 1
+module_key: mini-health-panel
+name: Mini Health Panel
+bundled_mod_id: LS_MiniHealthPanel
+status: enabled
+
+upstream:
+  workshop_id: "2866258937"
+  original_mod_id: "MiniHealthPanel"
+  version: "1.6.1.42"
+  imported_at: "2026-08-26"
+  source_path: "vendor/mini-health-panel/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: not_applicable
+  reviewed: true
+  local_changes: true
+  local_revision: 1
+  notes: "vendor/mini-health-panel/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

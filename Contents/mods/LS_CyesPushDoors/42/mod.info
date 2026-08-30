@@ -1,0 +1,10 @@
+name=Lascivious Scripts - Push Doors
+id=LS_CyesPushDoors
+poster=poster.png
+icon=icon.png
+versionMin=42.20
+modversion=1.0.2
+description=Abra e feche portas com força para causar dano, atordoar ou derrubar zumbis e outros jogadores. <LINE>
+description=Os impactos escalam com Força, Aptidão Física, tipo de porta, durabilidade e fadiga dos braços; suporta rastejantes, portas duplas, portões de garagem, SP/MP e opções de Sandbox. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

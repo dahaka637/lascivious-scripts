@@ -1,0 +1,167 @@
+VERSION = 1,
+
+option AegisEvents.SiegeWaves
+{
+	type = integer, min = 1, max = 10, default = 3,
+	page = AegisEvents, translation = AegisSiegeWaves,
+}
+option AegisEvents.SiegeCount
+{
+	type = integer, min = 5, max = 200, default = 40,
+	page = AegisEvents, translation = AegisSiegeCount,
+}
+option AegisEvents.SiegeDistance
+{
+	type = integer, min = 20, max = 150, default = 60,
+	page = AegisEvents, translation = AegisSiegeDistance,
+}
+option AegisEvents.SiegeGap
+{
+	type = integer, min = 0, max = 50, default = 12,
+	page = AegisEvents, translation = AegisSiegeGap,
+}
+option AegisEvents.SiegeRadius
+{
+	type = integer, min = 4, max = 30, default = 10,
+	page = AegisEvents, translation = AegisSiegeRadius,
+}
+option AegisEvents.SiegeLureMinutes
+{
+	type = integer, min = 1, max = 30, default = 5,
+	page = AegisEvents, translation = AegisSiegeLureMinutes,
+}
+option AegisEvents.SiegeSprinters
+{
+	type = boolean, default = false,
+	page = AegisEvents, translation = AegisSiegeSprinters,
+}
+option AegisEvents.SiegeCrawlers
+{
+	type = boolean, default = false,
+	page = AegisEvents, translation = AegisSiegeCrawlers,
+}
+option AegisEvents.SiegeGunshot
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisSiegeGunshot,
+}
+option AegisEvents.StormHours
+{
+	type = integer, min = 1, max = 96, default = 8,
+	page = AegisEvents, translation = AegisStormHours,
+}
+option AegisEvents.StormThunder
+{
+	type = integer, min = 0, max = 20, default = 6,
+	page = AegisEvents, translation = AegisStormThunder,
+}
+option AegisEvents.StormThunderGap
+{
+	type = double, min = 0.5, max = 10.0, default = 1.2,
+	page = AegisEvents, translation = AegisStormThunderGap,
+}
+option AegisEvents.HeliCount
+{
+	type = integer, min = 0, max = 200, default = 15,
+	page = AegisEvents, translation = AegisHeliCount,
+}
+option AegisEvents.HeliDistance
+{
+	type = integer, min = 20, max = 150, default = 80,
+	page = AegisEvents, translation = AegisHeliDistance,
+}
+option AegisEvents.HeliRadius
+{
+	type = integer, min = 4, max = 30, default = 8,
+	page = AegisEvents, translation = AegisHeliRadius,
+}
+option AegisEvents.AirdropCount
+{
+	type = integer, min = 1, max = 100, default = 20,
+	page = AegisEvents, translation = AegisAirdropCount,
+}
+option AegisEvents.AirdropRadius
+{
+	type = integer, min = 2, max = 30, default = 10,
+	page = AegisEvents, translation = AegisAirdropRadius,
+}
+option AegisEvents.AirdropHeight
+{
+	type = integer, min = 1, max = 8, default = 5,
+	page = AegisEvents, translation = AegisAirdropHeight,
+}
+option AegisEvents.FirestormHours
+{
+	type = integer, min = 1, max = 48, default = 6,
+	page = AegisEvents, translation = AegisFirestormHours,
+}
+option AegisEvents.FirestormThunder
+{
+	type = integer, min = 0, max = 20, default = 4,
+	page = AegisEvents, translation = AegisFirestormThunder,
+}
+option AegisEvents.FirestormWaves
+{
+	type = integer, min = 1, max = 6, default = 3,
+	page = AegisEvents, translation = AegisFirestormWaves,
+}
+option AegisEvents.FirestormCount
+{
+	type = integer, min = 1, max = 100, default = 15,
+	page = AegisEvents, translation = AegisFirestormCount,
+}
+option AegisEvents.FirestormDistance
+{
+	type = integer, min = 20, max = 150, default = 50,
+	page = AegisEvents, translation = AegisFirestormDistance,
+}
+option AegisEvents.AmbushRain
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisAmbushRain,
+}
+option AegisEvents.AmbushCount
+{
+	type = integer, min = 1, max = 100, default = 25,
+	page = AegisEvents, translation = AegisAmbushCount,
+}
+option AegisEvents.AmbushRadius
+{
+	type = integer, min = 2, max = 20, default = 6,
+	page = AegisEvents, translation = AegisAmbushRadius,
+}
+option AegisEvents.PlayerPanel
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisPlayerPanel,
+}
+option AegisEvents.PlayerClaims
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisPlayerClaims,
+}
+option AegisEvents.PlayerKits
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisPlayerKits,
+}
+option AegisEvents.PlayerVehicles
+{
+	type = integer, min = 0, max = 20, default = 5,
+	page = AegisEvents, translation = AegisPlayerVehicles,
+}
+option AegisEvents.PlayerHealthInfection
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisPlayerHealthInfection,
+}
+option AegisEvents.PlayerStatsForAdmins
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisPlayerStatsForAdmins,
+}
+option AegisEvents.PlayerAutoAdminPowers
+{
+	type = boolean, default = true,
+	page = AegisEvents, translation = AegisPlayerAutoAdminPowers,
+}

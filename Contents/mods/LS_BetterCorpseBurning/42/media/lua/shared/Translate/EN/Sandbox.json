@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Burn Time Per Corpse",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Timed-action duration to burn one corpse. Higher values take longer. Default: 110 (vanilla value).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Remove Vanilla Burn Corpse",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Remove the vanilla 'Burn Corpse' option that requires petrol.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Fire Spread Radius",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "When a corpse burns, nearby corpses within this radius also catch fire. 0 = disabled.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Require Petrol",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "When enabled, burning corpses also requires a petrol can (gasoline) in addition to a fire source.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Petrol per Corpse",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "How much petrol (in litres) is consumed per corpse burned. Default: 0.1L (a 10L can burns ~100 corpses).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Allow Indoor Burning",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "When disabled, corpses inside buildings cannot be burned with this mod. Prevents accidental fires damaging wooden structures. Default: enabled.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Fire Uses per Corpse",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "How many times the fire source is used per corpse burned. Higher values drain lighters and matches faster. 0 = unlimited (the fire source never drains). Default: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Extinguish Fire When Done",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "When enabled, the fire automatically goes out shortly after all corpses in the chain have caught fire. Protects wooden structures from lingering flames. Default: disabled.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "No Ash Remains",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "When enabled, burned corpses leave no ash pile behind. Default: disabled.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Fire Spread Speed",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "How fast fire spreads between corpses. Lower = faster. Default: 150 frames (~5s per tile). Recommended: 150 for singleplayer, 50-80 for co-op/multiplayer."
+}

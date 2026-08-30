@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "ソーラーパネルが集めた電力を蓄え、建物に供給します。<br>密閉された部屋に設置し、パネルに接続してください。<br>電気の基礎知識が必要です。燃料は不要です。",
+    "Tooltip_PSR_NoPanels": "パネルなし",
+    "Tooltip_PSR_PanelFar": "このパネルは遠すぎます"
+}

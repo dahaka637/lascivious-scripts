@@ -1,0 +1,15 @@
+module RegretNothing
+{
+    character_trait_definition RegretNothing:RegretNothing
+    {
+        CharacterTrait = RegretNothing:RegretNothing,
+        UIName = UI_trait_regretnothing,
+        UIDescription = UI_trait_regretnothing_desc,
+        Cost = +12,
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        XPBoosts = Blunt=2;SmallBlunt=2,
+        GrantedTraits = base:desensitized,
+        MutuallyExclusiveTraits = base:agoraphobic;base:claustrophobic;base:cowardly;base:pacifist;base:hemophobic;base:brave;base:adrenalinejunkie,
+    }
+}

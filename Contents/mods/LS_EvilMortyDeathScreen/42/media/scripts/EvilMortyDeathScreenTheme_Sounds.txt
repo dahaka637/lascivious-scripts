@@ -1,0 +1,13 @@
+module Base
+{
+    sound EvilMortyDeathTheme
+    {
+        category = UI,
+        loop = false,
+        is3D = false,
+        clip
+        {
+            file = media/sound/EvilMortyDeathScreenTheme/EvilMortyTheme.ogg,
+        }
+    }
+}

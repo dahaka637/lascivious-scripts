@@ -1,0 +1,8 @@
+title=media/lua/shared/Translate/EN/LS_WS_Cabin_Workshop/title.txt
+lots=Muldraugh, KY
+description=media/lua/shared/Translate/EN/LS_WS_Cabin_Workshop/description.txt
+fixed2x=true
+zoomX=8063
+zoomY=7627
+zoomS=16
+only_for_game_mode=Sandbox

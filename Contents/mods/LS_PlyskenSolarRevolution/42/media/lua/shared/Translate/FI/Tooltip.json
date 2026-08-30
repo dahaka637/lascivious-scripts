@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Varastoi aurinkopaneelien keräämän sähkön ja syöttää sen rakennukseen.<br>On sijoitettava suljettuun huoneeseen ja kytkettävä paneeleihin.<br>Vaatii hieman sähköalan tuntemusta. Ei tarvitse polttoainetta.",
+    "Tooltip_PSR_NoPanels": "Ei paneelia",
+    "Tooltip_PSR_PanelFar": "Tämä paneeli on liian kaukana"
+}

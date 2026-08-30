@@ -1,0 +1,19 @@
+{
+    "Make_DIY_Battery": "製作 自製電池",
+    "WireCarBattery": "接線 車用電池",
+    "UnWireCarBattery": "拆線 車用電池",
+    "Make_Solar_Roof_Tile": "製作 平板式太陽能板",
+    "Make_Wall-Mounted_Solar_Panel": "製作 掛壁式太陽能板",
+    "Make_Floor-Mounted_Solar_Panel": "製作 落地式太陽能板",
+    "Reverse_Solar_Panel": "將太陽能板拆分成部件",
+    "Create_Battery_Bank": "製造 蓄電池庫",
+    "Create_Solar_Failsafe": "製造 太陽能故障保險器",
+    "Make_Solar_Panel": "製作太陽能電池板（部分）",
+    "Make_Inverter": "製作逆變器",
+    "Make_Improvised_Battery": "製作臨時電池",
+    "Recondition_Battery": "修復電池",
+    "Dismantle_Solar_Failsafe": "拆卸太陽能備用裝置",
+    "Dismantle_Battery_Bank": "拆卸蓄電池庫",
+    "Reverse_Solar_Roof_Tile": "拆分平板式太陽能板",
+    "Make_Solar_Panel_Realistic": "Make Solar Panel (Realistic)"
+}

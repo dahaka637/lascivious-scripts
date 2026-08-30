@@ -1,0 +1,5 @@
+{
+    "ContextMenu_SubirEscaleras_Up": "Забраться по лестнице",
+    "ContextMenu_SubirEscaleras_Down": "Спуститься по лестнице",
+    "ContextMenu_SubirEscaleras_Dump": "[Лестницы] Вывести информацию в консоль"
+}

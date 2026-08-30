@@ -1,0 +1,7 @@
+IG_UI_EN = {
+    IGUI_SubirEscaleras_Inseguro = "There's nothing to hold on to up there.",
+    IGUI_SubirEscaleras_Pierna = "Not with my leg like this. It needs a splint.",
+    IGUI_SubirEscaleras_Agotado = "I don't have the strength to climb.",
+    IGUI_SubirEscaleras_SinNivel = "There is no loaded level above the ladder.",
+    IGUI_SubirEscaleras_SinSalida = "This ladder doesn't reach anywhere I could step off. It needs to be taller, or there has to be a floor on the level above, over the ladder or right next to it.",
+}

@@ -1,0 +1,38 @@
+schema: 1
+module_key: faster-hood-opening
+name: Faster Hood Opening
+bundled_mod_id: LS_FasterHoodOpening
+status: enabled
+
+upstream:
+  workshop_id: "2584112711"
+  original_mod_id: "FasterHoodOpening"
+  version: "unknown"
+  imported_at: "2026-08-25"
+  source_path: "vendor/faster-hood-opening/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: not_applicable
+  reviewed: true
+  local_changes: true
+  local_revision: 1
+  notes: "vendor/faster-hood-opening/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: true
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

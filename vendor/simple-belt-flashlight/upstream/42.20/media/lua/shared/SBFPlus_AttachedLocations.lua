@@ -1,0 +1,30 @@
+local group = AttachedLocations.getGroup("Human")
+
+local function add(location, attachment)
+    group:getOrCreateLocation(location):setAttachmentName(attachment)
+end
+
+add("SBFPlus_VanillaSmallLeft", "SBFPlus_VanillaSmallLeft")
+add("SBFPlus_VanillaSmallRight", "SBFPlus_VanillaSmallRight")
+add("SBFPlus_AngledLeft", "SBFPlus_AngledLeft")
+add("SBFPlus_AngledRight", "SBFPlus_AngledRight")
+add("SBFPlus_AngledWebbingLeft", "webbing_left_walkie")
+add("SBFPlus_AngledWebbingRight", "webbing_right_walkie")
+add("SBFPlus_AZMilitaryLeft", "SBFPlus_AZMilitaryLeft")
+add("SBFPlus_AZMilitaryRight", "SBFPlus_AZMilitaryRight")
+add("SBFPlus_BFNativeLeft", "belt_left")
+add("SBFPlus_BFNativeRight", "belt_right")
+
+add("SBFPlus_BF_Torch1Left", "SBFPlus_BF_Torch1Left")
+add("SBFPlus_BF_Torch1Right", "SBFPlus_BF_Torch1Right")
+add("SBFPlus_BF_Torch2Left", "SBFPlus_BF_Torch2Left")
+add("SBFPlus_BF_Torch2Right", "SBFPlus_BF_Torch2Right")
+add("SBFPlus_BF_Torch3Left", "SBFPlus_BF_Torch3Left")
+add("SBFPlus_BF_Torch3Right", "SBFPlus_BF_Torch3Right")
+add("SBFPlus_BF_Torch5Left", "SBFPlus_BF_Torch5Left")
+add("SBFPlus_BF_Torch5Right", "SBFPlus_BF_Torch5Right")
+add("SBFPlus_BF_EgenerexLiteLeft", "SBFPlus_BF_EgenerexLiteLeft")
+add("SBFPlus_BF_EgenerexLiteRight", "SBFPlus_BF_EgenerexLiteRight")
+add("SBFPlus_BF_SpiffoLiteLeft", "SBFPlus_BF_SpiffoLiteLeft")
+add("SBFPlus_BF_SpiffoLiteRight", "SBFPlus_BF_SpiffoLiteRight")
+

@@ -1,0 +1,38 @@
+schema: 1
+module_key: proximity-inventory
+name: Proximity Inventory
+bundled_mod_id: LS_ProximityInventory
+status: enabled
+
+upstream:
+  workshop_id: "2847184718"
+  original_mod_id: "ProximityInventory"
+  version: "unknown"
+  imported_at: "2026-08-25"
+  source_path: "vendor/proximity-inventory/upstream/common"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: not_applicable
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/proximity-inventory/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

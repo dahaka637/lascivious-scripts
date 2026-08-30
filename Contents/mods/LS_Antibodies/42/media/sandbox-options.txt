@@ -1,0 +1,403 @@
+VERSION = 1,
+
+option lgd_antibodies_194_general_base_growth
+{
+	type = double, min = 0.0, max = 300.0, default = 180.0,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_baseAntibodyGrowth,
+}
+
+option lgd_antibodies_194_general_recovery_effect
+{
+	type = double, min = -300.0, max = 300.0, default = 0.0,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_knoxInfectionsSurvivedEffect,
+}
+
+option lgd_antibodies_194_general_recovery_threshold
+{
+	type = double, min = 0.0, max = 300.0, default = 100.0,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_knoxInfectionsSurvivedThreshold,
+}
+
+option lgd_antibodies_194_general_mutation_effect
+{
+	type = double, min = -300.0, max = 300.0, default = 0.0,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_knoxMutationEffect,
+}
+
+option lgd_antibodies_194_general_mutation_threshold
+{
+	type = double, min = 0.0, max = 300.0, default = 100.0,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_knoxMutationThreshold,
+}
+
+option lgd_antibodies_194_general_mutation_start
+{
+	type = enum, numValues = 2, default = 2,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_knoxMutationStart,
+}
+
+option lgd_antibodies_194_general_hygiene_panel_enabled
+{
+	type = boolean, default = true,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_hygienePanelEnabled,
+}
+
+option lgd_antibodies_194_general_diagnose_enabled
+{
+	type = boolean, default = true,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_diagnoseEnabled,
+}
+
+option lgd_antibodies_194_general_diagnose_skill_needed
+{
+	type = integer, min = 0, max = 10, default = 2,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_diagnoseSkillNeeded,
+}
+
+option lgd_antibodies_194_general_doctor_skill_treatment_mod
+{
+	type = double, min = 0, max = 10, default = 1,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_doctorSkillTreatmentMod,
+}
+
+option lgd_antibodies_194_general_ipc_debug
+{
+	type = boolean, default = false,
+	page = lgd_antibodies_general, translation = lgd_antibodies_general_debug,
+}
+
+option lgd_antibodies_194_condition_fitness
+{
+	type = double, min = -100.0, max = 100.0, default = 5.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_fitness,
+}
+
+option lgd_antibodies_194_condition_strength
+{
+	type = double, min = -100.0, max = 100.0, default = 5.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_strength,
+}
+
+option lgd_antibodies_194_condition_fatigue
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_fatigue,
+}
+
+option lgd_antibodies_194_condition_endurance
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_endurance,
+}
+
+option lgd_antibodies_194_condition_weight
+{
+	type = double, min = -100.0, max = 100.0, default = -20.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_weight,
+}
+
+option lgd_antibodies_194_condition_thirst
+{
+	type = double, min = -100.0, max = 100.0, default = -20.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_thirst,
+}
+
+option lgd_antibodies_194_condition_sickness
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_sickness,
+}
+
+option lgd_antibodies_194_condition_food_sickness
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_foodSickness,
+}
+
+option lgd_antibodies_194_condition_temperature
+{
+	type = double, min = -100.0, max = 100.0, default = 20.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_temperature,
+}
+
+option lgd_antibodies_194_condition_intoxication
+{
+	type = double, min = -100.0, max = 100.0, default = 10.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_intoxication,
+}
+
+option lgd_antibodies_194_condition_hunger
+{
+	type = double, min = -100.0, max = 100.0, default = -20.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_hunger,
+}
+
+option lgd_antibodies_194_condition_pain
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_pain,
+}
+
+option lgd_antibodies_194_condition_stress
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_stress,
+}
+
+option lgd_antibodies_194_condition_unhappiness
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_unhappiness,
+}
+
+option lgd_antibodies_194_condition_boredom
+{
+	type = double, min = -100.0, max = 100.0, default = -1.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_boredom,
+}
+
+option lgd_antibodies_194_condition_panic
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_panic,
+}
+
+option lgd_antibodies_194_condition_sanity
+{
+	type = double, min = -100.0, max = 100.0, default = 0.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_sanity,
+}
+
+option lgd_antibodies_194_condition_anger
+{
+	type = double, min = -100.0, max = 100.0, default = 0.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_anger,
+}
+
+option lgd_antibodies_194_condition_fear
+{
+	type = double, min = -100.0, max = 100.0, default = 0.0,
+	page = lgd_antibodies_condition, translation = lgd_antibodies_condition_fear,
+}
+
+option lgd_antibodies_194_treatment_bandaged
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_bandaged,
+}
+
+option lgd_antibodies_194_treatment_clean_bandage
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_cleanBandage,
+}
+
+option lgd_antibodies_194_treatment_sterilized_bandage
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_sterilizedBandage,
+}
+
+option lgd_antibodies_194_treatment_sterilized_wound
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_sterilizedWound,
+}
+
+option lgd_antibodies_194_treatment_garlic
+{
+	type = double, min = 0.0, max = 10.0, default = 1.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_garlic,
+}
+
+option lgd_antibodies_194_treatment_plantain
+{
+	type = double, min = 0.0, max = 10.0, default = 0.5,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_plantain,
+}
+
+option lgd_antibodies_194_treatment_comfrey
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_comfrey,
+}
+
+option lgd_antibodies_194_wound_deep_wounded
+{
+	type = double, min = -10.0, max = 0.0, default = -4.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_deepWounded,
+}
+
+option lgd_antibodies_194_wound_bleeding
+{
+	type = double, min = -10.0, max = 0.0, default = -4.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_bleeding,
+}
+
+option lgd_antibodies_194_wound_bitten
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_bitten,
+}
+
+option lgd_antibodies_194_wound_cut
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_cut,
+}
+
+option lgd_antibodies_194_wound_scratched
+{
+	type = double, min = -10.0, max = 0.0, default = -1.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_scratched,
+}
+
+option lgd_antibodies_194_wound_burnt
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_burnt,
+}
+
+option lgd_antibodies_194_wound_need_burn_wash
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_needBurnWash,
+}
+
+option lgd_antibodies_194_wound_stiched
+{
+	type = double, min = -10.0, max = 0.0, default = -1.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_stiched,
+}
+
+option lgd_antibodies_194_wound_have_bullet
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_haveBullet,
+}
+
+option lgd_antibodies_194_wound_have_glass
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = lgd_antibodies_wounds, translation = lgd_antibodies_wounds_haveGlass,
+}
+
+option lgd_antibodies_194_infection_regular
+{
+	type = double, min = -10.0, max = 0.0, default = -1.0,
+	page = lgd_antibodies_infections, translation = lgd_antibodies_infections_regular,
+}
+
+option lgd_antibodies_194_infection_knox_scratch
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = lgd_antibodies_infections, translation = lgd_antibodies_infections_virusScratch,
+}
+
+option lgd_antibodies_194_infection_knox_cut
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = lgd_antibodies_infections, translation = lgd_antibodies_infections_virusCut,
+}
+
+option lgd_antibodies_194_infection_knox_bite
+{
+	type = double, min = -10.0, max = 0.0, default = -4.0,
+	page = lgd_antibodies_infections, translation = lgd_antibodies_infections_virusBite,
+}
+
+option lgd_antibodies_194_hygiene_blood_effect
+{
+	type = double, min = -100.0, max = 0.0, default = -20.0,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_bloodEffect,
+}
+
+option lgd_antibodies_194_hygiene_dirt_effect
+{
+	type = double, min = -100.0, max = 0.0, default = -10.0,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_dirtEffect,
+}
+
+option lgd_antibodies_194_hygiene_treatment_mod_bandaged
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_bandaged,
+}
+
+option lgd_antibodies_194_hygiene_treatment_mod_clean_bandage
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_cleanBandage,
+}
+
+option lgd_antibodies_194_hygiene_treatment_mod_sterilized_bandage
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_sterilizedBandage,
+}
+
+option lgd_antibodies_194_hygiene_treatment_mod_sterilized_wound
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_sterilizedWound,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_deep_wounded
+{
+	type = double, min = -10.0, max = 0.0, default = -0.80,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_deepWounded,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_bleeding
+{
+	type = double, min = -10.0, max = 0.0, default = -0.60,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_bleeding,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_bitten
+{
+	type = double, min = -10.0, max = 0.0, default = -0.40,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_bitten,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_cut
+{
+	type = double, min = -10.0, max = 0.0, default = -0.20,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_cut,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_scratched
+{
+	type = double, min = -10.0, max = 0.0, default = -0.10,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_scratched,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_burnt
+{
+	type = double, min = -10.0, max = 0.0, default = -0.40,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_burnt,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_need_burn_wash
+{
+	type = double, min = -10.0, max = 0.0, default = -0.60,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_needBurnWash,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_stiched
+{
+	type = double, min = -10.0, max = 0.0, default = -0.10,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_stiched,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_have_bullet
+{
+	type = double, min = -10.0, max = 0.0, default = -0.60,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_haveBullet,
+}
+
+option lgd_antibodies_194_hygiene_wound_mod_have_glass
+{
+	type = double, min = -10.0, max = 0.0, default = -0.40,
+	page = lgd_antibodies_hygiene, translation = lgd_antibodies_hygiene_haveGlass,
+}

@@ -1,0 +1,58 @@
+module Base
+{
+    model MetalPipeSilencerVFE
+    {
+        mesh = weapons/firearm/MetalPipeSilencer,
+        texture = weapons/firearm/MetalBarMetalPipe,
+        scale = 0.01,
+        cullFace = Back,
+    }
+
+    model MetalPipeSilencerRifleVFE
+    {
+        mesh = weapons/firearm/MetalPipeSilencerRifle,
+        texture = weapons/firearm/MetalBarMetalPipe,
+        scale = 0.01,
+        cullFace = Back,
+    }
+
+    model TorchSilencerVFE
+    {
+        mesh = weapons/firearm/TorchSilencer,
+        texture = weapons/firearm/HandTorch,
+        scale = 0.01,
+        cullFace = Back,
+    }
+
+    model TorchSilencerRifleVFE
+    {
+        mesh = weapons/firearm/TorchSilencer,
+        texture = weapons/firearm/HandTorch,
+        scale = 0.01,
+        cullFace = Back,
+    }
+
+    model WaterBottleSilencerVFE
+    {
+        mesh = weapons/firearm/WaterBottleSilencer,
+        texture = weapons/firearm/WaterBottleSilencer,
+        scale = 0.01,
+        cullFace = Back,
+    }
+
+    model WaterBottleSilencerRifleVFE
+    {
+        mesh = weapons/firearm/WaterBottleSilencer,
+        texture = weapons/firearm/WaterBottleSilencer,
+        scale = 0.01,
+        cullFace = Back,
+    }
+
+    model ISILSilencerRifleVFE
+    {
+        mesh = weapons/firearm/SilencerRifle,
+        texture = weapons/firearm/Silencer,
+        scale = 0.01,
+        cullFace = Back,
+    }
+}

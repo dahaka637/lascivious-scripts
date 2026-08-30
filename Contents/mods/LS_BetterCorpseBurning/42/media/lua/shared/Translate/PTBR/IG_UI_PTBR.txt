@@ -1,0 +1,3 @@
+IG_UI_PTBR = {
+    IGUI_BCB_QuickBurnCorpse = "Queimar cad\195\161ver",
+}

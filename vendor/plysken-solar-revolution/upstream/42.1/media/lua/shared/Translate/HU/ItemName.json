@@ -1,0 +1,10 @@
+{
+    "PSR.PSRMag1": "Új fejlesztések: Energia a Napból",
+    "PSR.SolarPanel": "Napelem (rész)",
+    "PSR.PSRInverter": "Inverter",
+    "PSR.DeepCycleBattery": "200Ah mélyciklusú akkumulátor",
+    "PSR.SuperBattery": "400Ah mélyciklusú akkumulátor",
+    "PSR.WiredCarBattery": "Vezetékes autó akkumulátor",
+    "PSR.DIYBattery": "DIY Deep Cycle akkumulátor",
+    "PSR.ImprovisedBattery": "Rögtönzött elem"
+}

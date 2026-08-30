@@ -1,0 +1,61 @@
+/*
+ * Burris Quality of Life - items.
+ *
+ * These two are plumbing for the tourniquet feature, not craftable or
+ * lootable directly. They exist purely to carry a RunSpeedModifier while worn
+ * -- that is the only Lua-reachable lever that actually slows the player down
+ * (getRunSpeedModifier/getWalkSpeedModifier are getter-only from Lua; there is
+ * no direct "set the player's speed" call). BQoL_ApplyTourniquet instances one
+ * of these and equips it in the thigh slot when a leg wound is tied off.
+ *
+ * These used to carry `hidden = true`, which kept them out of the inventory
+ * pane entirely (ISInventoryPane.lua:2086 filters on isHidden) so that the
+ * health panel's "Remove Tourniquet" would be the single removal path -- the
+ * only one that also clears the recorded state and hands the belt back.
+ *
+ * That backfired. When the health panel could not offer removal, and for a
+ * healed limb it could not, the item was unreachable: an invisible permanent
+ * 40% speed penalty with nothing anywhere to explain or undo it. The Only Cure
+ * gets this right by doing the opposite -- its tourniquets are ordinary
+ * clothing, so the normal UI can always take one off -- and that is the model
+ * followed here. Unequipping one is now a real removal: BQoL_Tourniquet listens
+ * for OnClothingUpdated and runs the same untie the health panel does, so the
+ * bleeding comes back, the pain lifts and the belt is returned. There is no
+ * free penalty-strip to protect against any more.
+ *
+ * No ClothingItem= is set, so they carry no 3D model and render invisibly on
+ * the character; there is no sprite to make one visible with. Icon = Belt so
+ * the item still reads sensibly anywhere an icon is drawn from the script.
+ *
+ * RunSpeedModifier = 0.6 is deliberately harsher than any real armour in this
+ * slot -- the vanilla thigh-armour pair (ThighBone_L/R, same file) only use
+ * 0.9. A tourniquet is meant to be a real tradeoff, not incidental armour
+ * weight, so 40% is the intended severity rather than an oversight.
+ */
+
+module Base
+{
+    item BQoL_TourniquetLeftLeg
+    {
+        DisplayCategory = Accessory,
+        DisplayName = Tourniquet,
+        ItemType = base:clothing,
+        Weight = 0.1,
+        Icon = Belt,
+        BodyLocation = base:thigh_left,
+        RunSpeedModifier = 0.6,
+        Tooltip = Tooltip_BQoL_TourniquetItem,
+    }
+
+    item BQoL_TourniquetRightLeg
+    {
+        DisplayCategory = Accessory,
+        DisplayName = Tourniquet,
+        ItemType = base:clothing,
+        Weight = 0.1,
+        Icon = Belt,
+        BodyLocation = base:thigh_right,
+        RunSpeedModifier = 0.6,
+        Tooltip = Tooltip_BQoL_TourniquetItem,
+    }
+}

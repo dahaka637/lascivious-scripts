@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Timp de Ardere pe Cadavru",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Timpul în minute de joc pentru arderea unui cadavru. Implicit: 110 (valoare vanilla).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Elimină Arderea Cadavrului Vanilla",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Elimină opțiunea vanilla 'Ardere Cadavru' care necesită benzină.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Rază de Răspândire a Focului",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Când arde un cadavru, cadavrele apropiate din această rază iau foc și ele. 0 = dezactivat.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Necesită Benzină",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Când este activat, arderea cadavrelor necesită și o canistră cu benzină pe lângă sursa de foc.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Benzină pe Cadavru",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Câtă benzină (în litri) se consumă per cadavru ars. Implicit: 0,1 L (un canistru de 10 L arde ~100 de cadavre).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Permite Arderea în Interior",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Când este dezactivat, cadavrele din interiorul clădirilor nu pot fi arse cu acest mod. Previne incendiile accidentale care afectează structurile de lemn. Implicit: activat.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Utilizări de Foc pe Cadavru",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "De câte ori este folosită sursa de foc la arderea unui cadavru. Valorile mari consumă mai repede brichetele și chibriturile. 0 = nelimitat (sursa de foc nu se consumă niciodată). Implicit: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Stinge Focul la Final",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Când este activat, focul se stinge automat la scurt timp după ce toate cadavrele din lanț au luat foc. Protejează structurile de lemn de flăcările rămase. Implicit: dezactivat.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Fără Cenușă",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Când este activat, cadavrele arse nu lasă în urmă grămezi de cenușă. Implicit: dezactivat.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Viteza de propagare a focului",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Cât de repede se răspândește focul între cadavre. Mai mic = mai rapid. Implicit: 150 cadre (~5s pe țiglă). Recomandat: 150 pentru singleplayer, 50-80 pentru co-op/multiplayer."
+}

@@ -1,0 +1,52 @@
+{
+    "Sandbox_PivotMod": "Instant Character Pivot Speed",
+
+    "Sandbox_PivotMod_Enabled": "Enable faster turning",
+    "Sandbox_PivotMod_Enabled_tooltip": "Master switch for the whole mod. When OFF, turning is left completely vanilla.",
+
+    "Sandbox_PivotMod_PivotSpeed": "Aiming pivot speed",
+    "Sandbox_PivotMod_PivotSpeed_tooltip": "Only used when 'Use Nimble-based turning' is OFF.<br>How fast the character turns to the aim direction while in the combat stance.<br>The scale runs from Vanilla up to Instant; 'Instant' is as fast as the turn can go while staying smooth. The in-between steps let you pick a gentler, more gradual turn.",
+    "Sandbox_PivotMod_PivotSpeed_option1": "Vanilla",
+    "Sandbox_PivotMod_PivotSpeed_option2": "Slightly Faster",
+    "Sandbox_PivotMod_PivotSpeed_option3": "Faster",
+    "Sandbox_PivotMod_PivotSpeed_option4": "Very Fast",
+    "Sandbox_PivotMod_PivotSpeed_option5": "Instant",
+
+    "Sandbox_PivotMod_MovementTurnSpeed": "Walking turn speed (WASD)",
+    "Sandbox_PivotMod_MovementTurnSpeed_tooltip": "Only used when 'Use Nimble-based turning' is OFF.<br>How fast the character turns while walking (not aiming). Jogging and sprinting always turn at vanilla speed - the engine doesn't let mods change those.<br>The scale runs from Vanilla up to Instant; the in-between steps let you pick a gentler turn.",
+    "Sandbox_PivotMod_MovementTurnSpeed_option1": "Vanilla",
+    "Sandbox_PivotMod_MovementTurnSpeed_option2": "Slightly Faster",
+    "Sandbox_PivotMod_MovementTurnSpeed_option3": "Faster",
+    "Sandbox_PivotMod_MovementTurnSpeed_option4": "Very Fast",
+    "Sandbox_PivotMod_MovementTurnSpeed_option5": "Instant",
+
+    "Sandbox_PivotMod_NimbleSystem": "Use Nimble-based turning instead",
+    "Sandbox_PivotMod_NimbleSystem_tooltip": "Switches the entire mod between two systems.<br>OFF: the fixed turn speeds set above - separate values for aiming and walking.<br>ON: turn speed instead scales with the Nimble skill and the multipliers below, applied to ALL turning.",
+
+    "Sandbox_PivotMod_NimbleLvlMultiplier": "Nimble mode: overall turn-speed multiplier",
+    "Sandbox_PivotMod_NimbleLvlMultiplier_tooltip": "Nimble-based turning only. A final multiplier applied on top of the computed turn speed. 1 = no extra change.",
+
+    "Sandbox_PivotMod_DefaultMultiplier": "Nimble mode: base turn speed",
+    "Sandbox_PivotMod_DefaultMultiplier_tooltip": "Nimble-based turning only. Starting turn-speed multiplier before the Nimble skill scaling is added. 1 = vanilla turn speed.",
+
+    "Sandbox_PivotMod_DynamicModifiers": "Dynamic turn modifiers (master switch)",
+    "Sandbox_PivotMod_DynamicModifiers_tooltip": "Master switch for the situational modifiers below. When OFF, none of them do anything and turning behaves exactly as set above. When ON, each modifier you enable adjusts your walking/aiming turn speed based on your character's current condition. Works with both the fixed-speed and Nimble-based systems. Turning is never fully locked, and never pushed past the smooth cap.",
+
+    "Sandbox_PivotMod_DynEncumbrance": "Dynamic: encumbrance slows turning",
+    "Sandbox_PivotMod_DynEncumbrance_tooltip": "Requires the master switch. The heavier your carried weight relative to your max, the slower you turn - a full load turns at roughly half speed. Pairs naturally with Strength.",
+
+    "Sandbox_PivotMod_DynInjury": "Dynamic: leg/foot injuries slow turning",
+    "Sandbox_PivotMod_DynInjury_tooltip": "Requires the master switch. Wounds to the legs, feet or groin slow your turn; the worst affected part dominates, and a fracture there slows it much more.",
+
+    "Sandbox_PivotMod_DynFatigue": "Dynamic: fatigue slows turning",
+    "Sandbox_PivotMod_DynFatigue_tooltip": "Requires the master switch. Being tired, or out of breath (low endurance), makes turning sluggish; well-rested and fresh turns are snappy.",
+
+    "Sandbox_PivotMod_DynDrunkenness": "Dynamic: drunkenness slows turning",
+    "Sandbox_PivotMod_DynDrunkenness_tooltip": "Requires the master switch. The more intoxicated you are, the slower and clumsier your turn.",
+
+    "Sandbox_PivotMod_DynPanic": "Dynamic: panic speeds up turning",
+    "Sandbox_PivotMod_DynPanic_tooltip": "Requires the master switch. Panic makes you whip around faster - up to about +50%% turn speed at full panic (still capped to stay smooth).",
+
+    "Sandbox_PivotMod_DynSneak": "Dynamic: deliberate turns while sneaking",
+    "Sandbox_PivotMod_DynSneak_tooltip": "Requires the master switch. While sneaking you turn more slowly and deliberately (about 70%% speed)."
+}

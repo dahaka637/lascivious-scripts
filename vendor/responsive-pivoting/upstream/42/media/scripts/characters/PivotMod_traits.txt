@@ -1,0 +1,33 @@
+module PivotMod
+{
+    /* Faster turner. Ported from the B41 NATS / On Your Toes mods to the B42
+       script-defined trait system. The trait TYPES are registered in
+       media/registries.lua; these blocks add their UI/cost/XP definitions.
+       Baseline +1 / -1 Nimble. The traits only overhaul pivoting when the mod's
+       "Restrict to trait holders only" / "Use Nimble-based turning" sandbox
+       options are on; otherwise turning is global and the trait is just a Nimble
+       add-on. */
+    character_trait_definition pivotmod:onyourtoes
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = pivotmod:onyourtoes,
+        Cost = 4,
+        UIName = UI_trait_OnYourToes,
+        UIDescription = UI_trait_OnYourToesdesc,
+        XPBoosts = Nimble=1,
+        MutuallyExclusiveTraits = pivotmod:podshofe,
+    }
+
+    character_trait_definition pivotmod:podshofe
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = pivotmod:podshofe,
+        Cost = -3,
+        UIName = UI_trait_PodShofe,
+        UIDescription = UI_trait_PodShofedesc,
+        XPBoosts = Nimble=-1,
+        MutuallyExclusiveTraits = pivotmod:onyourtoes,
+    }
+}

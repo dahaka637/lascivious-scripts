@@ -1,0 +1,712 @@
+module ETW
+{
+    character_trait_definition ETW:ActionHero
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:ActionHero,
+        Cost = 8,
+        UIName = UI_trait_ActionHero,
+        UIDescription = UI_trait_ActionHeroDesc,
+    }
+
+    character_trait_definition ETW:AntiGunActivist
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:AntiGunActivist,
+        Cost = -6,
+        UIName = UI_trait_AntiGunActivist,
+        UIDescription = UI_trait_AntiGunActivistDesc,
+        MutuallyExclusiveTraits = ETW:GunEnthusiast;ETW:ProwessGuns;ETW:Terminator,
+    }
+
+    character_trait_definition ETW:Anemic
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Anemic,
+        Cost = -4,
+        UIName = UI_trait_Anemic,
+        UIDescription = UI_trait_AnemicDesc,
+    }
+
+    character_trait_definition ETW:Ascetic
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Ascetic,
+        Cost = -6,
+        UIName = UI_trait_Ascetic,
+        UIDescription = UI_trait_AsceticDesc,
+        MutuallyExclusiveTraits = ETW:Gourmand,
+    }
+
+    character_trait_definition ETW:BadTeeth
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:BadTeeth,
+        Cost = -3,
+        UIName = UI_trait_BadTeeth,
+        UIDescription = UI_trait_BadTeethDesc,
+        MutuallyExclusiveTraits = ETW:PainTolerance,
+    }
+
+    character_trait_definition ETW:Blissful
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Blissful,
+        Cost = 3,
+        UIName = UI_trait_Blissful,
+        UIDescription = UI_trait_BlissfulDesc,
+        MutuallyExclusiveTraits = base:smoker;ETW:Depressive;ETW:SelfDestructive,
+    }
+
+    character_trait_definition ETW:Butterfingers
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Butterfingers,
+        Cost = -12,
+        UIName = UI_trait_Butterfingers,
+        UIDescription = UI_trait_ButterfingersDesc,
+    }
+
+    character_trait_definition ETW:Depressive
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Depressive,
+        Cost = -4,
+        UIName = UI_trait_Depressive,
+        UIDescription = UI_trait_DepressiveDesc,
+        MutuallyExclusiveTraits = ETW:Blissful,
+    }
+
+    character_trait_definition ETW:Hardy
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Hardy,
+        Cost = 6,
+        UIName = UI_trait_Hardy,
+        UIDescription = UI_trait_HardyDesc,
+    }
+
+    character_trait_definition ETW:Gourmand
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Gourmand,
+        Cost = 4,
+        UIName = UI_trait_Gourmand,
+        UIDescription = UI_trait_GourmandDesc,
+        XPBoosts = Cooking=1,
+        MutuallyExclusiveTraits = ETW:Ascetic,
+    }
+
+    character_trait_definition ETW:Gordonite
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Gordonite,
+        Cost = 6,
+        UIName = UI_trait_Gordonite,
+        UIDescription = UI_trait_GordoniteDesc,
+        XPBoosts = Blunt=1,
+    }
+
+    character_trait_definition ETW:Bouncer
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Bouncer,
+        Cost = 5,
+        UIName = UI_trait_Bouncer,
+        UIDescription = UI_trait_BouncerDesc,
+        XPBoosts = Strength=1;SmallBlunt=1,
+    }
+
+    character_trait_definition ETW:Indefatigable
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Indefatigable,
+        Cost = 10,
+        UIName = UI_trait_Indefatigable,
+        UIDescription = UI_trait_IndefatigableDesc,
+    }
+
+    character_trait_definition ETW:SuperImmune
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:SuperImmune,
+        Cost = 10,
+        UIName = UI_trait_SuperImmune,
+        UIDescription = UI_trait_SuperImmuneDesc,
+        MutuallyExclusiveTraits = base:pronetoillness;base:resilient;ETW:Immunocompromised,
+    }
+
+    character_trait_definition ETW:Terminator
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Terminator,
+        Cost = 14,
+        UIName = UI_trait_Terminator,
+        UIDescription = UI_trait_TerminatorDesc,
+        XPBoosts = Aiming=3;Reloading=2;Nimble=1,
+        MutuallyExclusiveTraits = ETW:AntiGunActivist,
+    }
+
+    character_trait_definition ETW:IdealWeight
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:IdealWeight,
+        Cost = 4,
+        UIName = UI_trait_IdealWeight,
+        UIDescription = UI_trait_IdealWeightDesc,
+        MutuallyExclusiveTraits = base:emaciated;base:obese;base:overweight;base:underweight;base:very underweight;base:weightgain;base:weightloss,
+    }
+
+    character_trait_definition ETW:LeadFoot
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:LeadFoot,
+        Cost = 2,
+        UIName = UI_trait_LeadFoot,
+        UIDescription = UI_trait_LeadFootDesc,
+    }
+
+    character_trait_definition ETW:Mundane
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Mundane,
+        Cost = -9,
+        UIName = UI_trait_Mundane,
+        UIDescription = UI_trait_MundaneDesc,
+    }
+
+    character_trait_definition ETW:NaturalEater
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:NaturalEater,
+        Cost = 4,
+        UIName = UI_trait_NaturalEater,
+        UIDescription = UI_trait_NaturalEaterDesc,
+        XPBoosts = Cooking=1;PlantScavenging=1,
+    }
+
+    character_trait_definition ETW:NoodleLegs
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:NoodleLegs,
+        Cost = -6,
+        UIName = UI_trait_NoodleLegs,
+        UIDescription = UI_trait_NoodleLegsDesc,
+    }
+
+    character_trait_definition ETW:Olympian
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Olympian,
+        Cost = 5,
+        UIName = UI_trait_Olympian,
+        UIDescription = UI_trait_OlympianDesc,
+        XPBoosts = Sprinting=1;Fitness=1,
+        MutuallyExclusiveTraits = base:jogger;base:unfit,
+    }
+
+    character_trait_definition ETW:PackMouse
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:PackMouse,
+        Cost = -7,
+        UIName = UI_trait_PackMouse,
+        UIDescription = UI_trait_PackMouseDesc,
+        MutuallyExclusiveTraits = ETW:Hoarder;ETW:PackMule,
+    }
+
+    character_trait_definition ETW:PackMule
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:PackMule,
+        Cost = 7,
+        UIName = UI_trait_PackMule,
+        UIDescription = UI_trait_PackMuleDesc,
+        MutuallyExclusiveTraits = ETW:PackMouse,
+    }
+
+    character_trait_definition ETW:QuickRest
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:QuickRest,
+        Cost = 3,
+        UIName = UI_trait_QuickRest,
+        UIDescription = UI_trait_QuickRestDesc,
+    }
+
+    character_trait_definition ETW:Quiet
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Quiet,
+        Cost = 2,
+        UIName = UI_trait_Quiet,
+        UIDescription = UI_trait_QuietDesc,
+        XPBoosts = Sneak=1;Lightfoot=1,
+        MutuallyExclusiveTraits = base:clumsy,
+    }
+
+    character_trait_definition ETW:Scrapper
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Scrapper,
+        Cost = 3,
+        UIName = UI_trait_Scrapper,
+        UIDescription = UI_trait_ScrapperDesc,
+        XPBoosts = MetalWelding=1;Maintenance=1;Blacksmith=1,
+    }
+
+    character_trait_definition ETW:ProwessBlade
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:ProwessBlade,
+        Cost = 7,
+        UIName = UI_trait_ProwessBlade,
+        UIDescription = UI_trait_ProwessBladeDesc,
+        XPBoosts = SmallBlade=1;LongBlade=1;Axe=1,
+        MutuallyExclusiveTraits = ETW:ProwessBlunt;ETW:ProwessGuns;ETW:ProwessSpear,
+    }
+
+    character_trait_definition ETW:PracticedSwordsman
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:PracticedSwordsman,
+        Cost = 6,
+        UIName = UI_trait_PracticedSwordsman,
+        UIDescription = UI_trait_PracticedSwordsmanDesc,
+        XPBoosts = LongBlade=1;SmallBlade=1,
+    }
+
+    character_trait_definition ETW:Thuggish
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Thuggish,
+        Cost = 5,
+        UIName = UI_trait_Thuggish,
+        UIDescription = UI_trait_ThuggishDesc,
+        XPBoosts = SmallBlunt=1;Blunt=1,
+    }
+
+    character_trait_definition ETW:Unwavering
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Unwavering,
+        Cost = 6,
+        UIName = UI_trait_Unwavering,
+        UIDescription = UI_trait_UnwaveringDesc,
+    }
+
+    character_trait_definition ETW:ProwessBlunt
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:ProwessBlunt,
+        Cost = 7,
+        UIName = UI_trait_ProwessBlunt,
+        UIDescription = UI_trait_ProwessBluntDesc,
+        XPBoosts = SmallBlunt=1;Blunt=1,
+        MutuallyExclusiveTraits = ETW:ProwessBlade;ETW:ProwessGuns;ETW:ProwessSpear,
+    }
+
+    character_trait_definition ETW:ProwessGuns
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:ProwessGuns,
+        Cost = 7,
+        UIName = UI_trait_ProwessGuns,
+        UIDescription = UI_trait_ProwessGunsDesc,
+        XPBoosts = Aiming=1;Reloading=1,
+        MutuallyExclusiveTraits = ETW:AntiGunActivist;ETW:ProwessBlade;ETW:ProwessBlunt;ETW:ProwessSpear,
+    }
+
+    character_trait_definition ETW:ProwessSpear
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:ProwessSpear,
+        Cost = 7,
+        UIName = UI_trait_ProwessSpear,
+        UIDescription = UI_trait_ProwessSpearDesc,
+        XPBoosts = Spear=2,
+        MutuallyExclusiveTraits = ETW:ProwessBlade;ETW:ProwessBlunt;ETW:ProwessGuns,
+    }
+
+    character_trait_definition ETW:WellFitted
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:WellFitted,
+        Cost = 4,
+        UIName = UI_trait_WellFitted,
+        UIDescription = UI_trait_WellFittedDesc,
+    }
+
+    character_trait_definition ETW:ThickBlooded
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:ThickBlooded,
+        Cost = 4,
+        UIName = UI_trait_ThickBlooded,
+        UIDescription = UI_trait_ThickBloodedDesc,
+        MutuallyExclusiveTraits = ETW:Anemic,
+    }
+
+    character_trait_definition ETW:SunSensitivity
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:SunSensitivity,
+        Cost = -5,
+        UIName = UI_trait_SunSensitivity,
+        UIDescription = UI_trait_SunSensitivityDesc,
+        MutuallyExclusiveTraits = ETW:PainTolerance,
+    }
+
+    character_trait_definition ETW:TavernBrawler
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:TavernBrawler,
+        Cost = 3,
+        UIName = UI_trait_TavernBrawler,
+        UIDescription = UI_trait_TavernBrawlerDesc,
+    }
+
+    character_trait_definition ETW:AVClub
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:AVClub,
+        Cost = 4,
+        UIName = UI_trait_AVClub,
+        UIDescription = UI_trait_AVClubDesc,
+        XPBoosts = Electricity=1,
+        GrantedRecipes = MakeRemoteControllerV1;MakeRemoteControllerV2;MakeRemoteControllerV3;MakeRemoteTrigger;MakeTimer;CraftMakeshiftHAMRadio;CraftMakeshiftRadio;CraftMakeshiftWalkieTalkie;MakeNoiseMaker,
+    }
+
+    character_trait_definition ETW:AxeThrower
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:AxeThrower,
+        Cost = 4,
+        UIName = UI_trait_AxeThrower,
+        UIDescription = UI_trait_AxeThrowerDesc,
+        XPBoosts = Axe=1,
+    }
+
+    character_trait_definition ETW:Bloodlust
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Bloodlust,
+        Cost = 4,
+        UIName = UI_trait_Bloodlust,
+        UIDescription = UI_trait_BloodlustDesc,
+    }
+    
+    character_trait_definition ETW:BodyWorkEnthusiast
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:BodyWorkEnthusiast,
+        Cost = 6,
+        UIName = UI_trait_BodyWorkEnthusiast,
+        UIDescription = UI_trait_BodyWorkEnthusiastDesc,
+        XPBoosts = Mechanics=1;MetalWelding=1,
+        GrantedRecipes = MakeMetalSheet;MakeSmallMetalSheet;CutSmallMetalSheet;Split_Steel_Sheet_Into_Small_Sheets;Cut_Steel_Sheet_Into_Small_Sheets,
+    }
+
+    character_trait_definition ETW:FastEater
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:FastEater,
+        Cost = 1,
+        UIName = UI_trait_FastEater,
+        UIDescription = UI_trait_FastEaterDesc,
+        MutuallyExclusiveTraits = ETW:SlowEater,
+    }
+
+    character_trait_definition ETW:FurnitureAssembler
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:FurnitureAssembler,
+        Cost = 4,
+        UIName = UI_trait_FurnitureAssembler,
+        UIDescription = UI_trait_FurnitureAssemblerDesc,
+        XPBoosts = Woodwork=1,
+    }
+
+    character_trait_definition ETW:GunEnthusiast
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:GunEnthusiast,
+        Cost = 6,
+        UIName = UI_trait_GunEnthusiast,
+        UIDescription = UI_trait_GunEnthusiastDesc,
+        XPBoosts = Aiming=1;Reloading=1,
+    }
+
+    character_trait_definition ETW:GymRat
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:GymRat,
+        Cost = 8,
+        UIName = UI_trait_GymRat,
+        UIDescription = UI_trait_GymRatDesc,
+        XPBoosts = Fitness=1;Strength=1,
+        MutuallyExclusiveTraits = base:unfit;base:emaciated;base:very underweight;base:underweight;base:out of shape;base:weak;base:feeble;base:obese,
+    }
+
+    character_trait_definition ETW:Hoarder
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Hoarder,
+        Cost = 4,
+        UIName = UI_trait_Hoarder,
+        UIDescription = UI_trait_HoarderDesc,
+    }
+
+    character_trait_definition ETW:HomeCook
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:HomeCook,
+        Cost = 2,
+        UIName = UI_trait_HomeCook,
+        UIDescription = UI_trait_HomeCookDesc,
+        XPBoosts = Cooking=1,
+    }
+
+    character_trait_definition ETW:Homichlophobia
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Homichlophobia,
+        Cost = -1,
+        UIName = UI_trait_Homichlophobia,
+        UIDescription = UI_trait_HomichlophobiaDesc,
+        MutuallyExclusiveTraits = ETW:Homichlophile,
+    }
+
+    character_trait_definition ETW:Homichlophile
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Homichlophile,
+        Cost = 1,
+        UIName = UI_trait_Homichlophile,
+        UIDescription = UI_trait_HomichlophileDesc,
+        MutuallyExclusiveTraits = ETW:Homichlophobia,
+    }
+
+    character_trait_definition ETW:BladeEnthusiast
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:BladeEnthusiast,
+        Cost = 4,
+        UIName = UI_trait_BladeEnthusiast,
+        UIDescription = UI_trait_BladeEnthusiastDesc,
+        XPBoosts = LongBlade=1,
+    }
+
+    character_trait_definition ETW:KnifeFighter
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:KnifeFighter,
+        Cost = 3,
+        UIName = UI_trait_KnifeFighter,
+        UIDescription = UI_trait_KnifeFighterDesc,
+        XPBoosts = SmallBlade=1,
+    }
+
+    character_trait_definition ETW:LightStep
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:LightStep,
+        Cost = 3,
+        UIName = UI_trait_LightStep,
+        UIDescription = UI_trait_LightStepDesc,
+        XPBoosts = Lightfoot=1,
+    }
+
+    character_trait_definition ETW:LowProfile
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:LowProfile,
+        Cost = 3,
+        UIName = UI_trait_LowProfile,
+        UIDescription = UI_trait_LowProfileDesc,
+        XPBoosts = Sneak=1,
+    }
+
+    character_trait_definition ETW:Pluviophile
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Pluviophile,
+        Cost = 2,
+        UIName = UI_trait_Pluviophile,
+        UIDescription = UI_trait_PluviophileDesc,
+        MutuallyExclusiveTraits = ETW:Pluviophobia,
+    }
+
+    character_trait_definition ETW:Pluviophobia
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Pluviophobia,
+        Cost = -2,
+        UIName = UI_trait_Pluviophobia,
+        UIDescription = UI_trait_PluviophobiaDesc,
+        MutuallyExclusiveTraits = ETW:Pluviophile,
+    }
+
+    character_trait_definition ETW:PainTolerance
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:PainTolerance,
+        Cost = 2,
+        UIName = UI_trait_PainTolerance,
+        UIDescription = UI_trait_PainToleranceDesc,
+        MutuallyExclusiveTraits = ETW:BadTeeth;ETW:SunSensitivity,
+    }
+
+    character_trait_definition ETW:Paranoia
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Paranoia,
+        Cost = -5,
+        UIName = UI_trait_Paranoia,
+        UIDescription = UI_trait_ParanoiaDesc,
+    }
+
+    character_trait_definition ETW:PetTherapy
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:PetTherapy,
+        Cost = 3,
+        UIName = UI_trait_PetTherapy,
+        UIDescription = UI_trait_PetTherapyDesc,
+        XPBoosts = Husbandry=1,
+    }
+
+    character_trait_definition ETW:PolearmFighter
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:PolearmFighter,
+        Cost = 3,
+        UIName = UI_trait_PolearmFighter,
+        UIDescription = UI_trait_PolearmFighterDesc,
+        XPBoosts = Spear=1,
+    }
+
+    character_trait_definition ETW:RestorationExpert
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:RestorationExpert,
+        Cost = 8,
+        UIName = UI_trait_RestorationExpert,
+        UIDescription = UI_trait_RestorationExpertDesc,
+        XPBoosts = Maintenance=1,
+    }
+
+    character_trait_definition ETW:SelfDestructive
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:SelfDestructive,
+        Cost = -4,
+        UIName = UI_trait_SelfDestructive,
+        UIDescription = UI_trait_SelfDestructiveDesc,
+        MutuallyExclusiveTraits = ETW:Blissful,
+    }
+
+    character_trait_definition ETW:Immunocompromised
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:Immunocompromised,
+        Cost = -10,
+        UIName = UI_trait_Immunocompromised,
+        UIDescription = UI_trait_ImmunocompromisedDesc,
+        MutuallyExclusiveTraits = base:resilient;ETW:SuperImmune,
+    }
+
+    character_trait_definition ETW:MadeOfGlass
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:MadeOfGlass,
+        Cost = -10,
+        UIName = UI_trait_MadeOfGlass,
+        UIDescription = UI_trait_MadeOfGlassDesc,
+    }
+
+    character_trait_definition ETW:SlowEater
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:SlowEater,
+        Cost = -1,
+        UIName = UI_trait_SlowEater,
+        UIDescription = UI_trait_SlowEaterDesc,
+        MutuallyExclusiveTraits = ETW:FastEater,
+    }
+
+    character_trait_definition ETW:StickFighter
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = ETW:StickFighter,
+        Cost = 3,
+        UIName = UI_trait_StickFighter,
+        UIDescription = UI_trait_StickFighterDesc,
+        XPBoosts = SmallBlunt=1,
+    }
+}

@@ -1,0 +1,84 @@
+VERSION = 1,
+
+option BetterCorpseBurning.TimePerCorpse = {
+	type = integer,
+	default = 110,
+	min = 10,
+	max = 600,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_TimePerCorpse,
+}
+
+
+
+option BetterCorpseBurning.RemoveVanillaBurn = {
+	type = boolean,
+	default = true,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_RemoveVanillaBurn,
+}
+
+option BetterCorpseBurning.FireSpreadRadius = {
+	type = integer,
+	default = 4,
+	min = 0,
+	max = 5,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_FireSpreadRadius,
+}
+
+
+option BetterCorpseBurning.NeedPetrol = {
+	type = boolean,
+	default = false,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_NeedPetrol,
+}
+
+option BetterCorpseBurning.PetrolPerBurn = {
+	type = double,
+	default = 0.1,
+	min = 0.01,
+	max = 1.0,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_PetrolPerBurn,
+}
+
+option BetterCorpseBurning.AllowIndoorBurn = {
+	type = boolean,
+	default = true,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_AllowIndoorBurn,
+}
+
+option BetterCorpseBurning.FireUsesPerCorpse = {
+	type = integer,
+	default = 1,
+	min = 0,
+	max = 20,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_FireUsesPerCorpse,
+}
+
+option BetterCorpseBurning.AutoExtinguishWhenDone = {
+	type = boolean,
+	default = false,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_AutoExtinguishWhenDone,
+}
+
+option BetterCorpseBurning.NoAshRemains = {
+	type = boolean,
+	default = false,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_NoAshRemains,
+}
+
+option BetterCorpseBurning.FireSpreadSpeed = {
+	type = integer,
+	default = 150,
+	min = 30,
+	max = 500,
+	page = BetterCorpseBurning,
+	translation = BetterCorpseBurning_FireSpreadSpeed,
+}

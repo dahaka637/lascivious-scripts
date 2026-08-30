@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "儲存太陽能板收集的電力並為建築供電。<br>必須放置在封閉的房間內，並與太陽能板連接。<br>需要一些電工知識。無需燃料。",
+    "Tooltip_PSR_NoPanels": "無太陽能板",
+    "Tooltip_PSR_PanelFar": "這個面板太遠了"
+}

@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Oras ng Pagsunog bawat Bangkay",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Oras sa loob ng laro (minuto) para sunugin ang isang bangkay. Default: 110 (vanilla value).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Alisin ang Vanilla Pagsunog ng Bangkay",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Inaalis ang vanilla na opsyon na 'Sunugin ang Bangkay' na nangangailangan ng gasolina.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Radius ng Kalat ng Apoy",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Kapag nasusunog ang isang bangkay, nadadamay din ang mga kalapit na bangkay sa loob ng radius na ito. 0 = naka-off.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Kailangan ng Gasolina",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Kapag naka-on, kailangan din ng galon ng gasolina bukod sa pinagmulan ng apoy para magsunog ng bangkay.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Gasolina bawat Bangkay",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Magkano ang gasolina (sa litro) na nagagamit bawat masusunog na bangkay. Default: 0.1L (ang 10L na galon ay nakasusunog ng ~100 bangkay).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Payagan ang Pagsunog sa Loob",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Kapag naka-off, hindi masusunog ng mod na ito ang mga bangkay sa loob ng gusali. Pinipigilan ang aksidenteng sunog na makasira sa mga guho ng kahoy. Default: naka-on.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Mga Gamit ng Apoy bawat Bangkay",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Ilang beses gagamitin ang pinagmulan ng apoy bawat masusunog na bangkay. Mas mataas na value ay mas mabilis maubos ang lighter at posporo. 0 = walang limit (hindi nauubos ang pinagmulan ng apoy). Default: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Patayin ang Apoy Pagkatapos",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Kapag naka-on, awtomatikong mamamatay ang apoy pagkaraang masunog lahat ng bangkay sa chain. Pinoprotektahan ang mga guho ng kahoy sa natirang apoy. Default: naka-off.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Walang Abo",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Kapag naka-on, hindi nag-iwan ng abo ang mga nasunog na bangkay. Default: naka-off.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Bilis ng Pagkalat ng Apoy",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Kung gaano kabilis kumalat ang apoy sa pagitan ng mga bangkay. Mas mababa = mas mabilis. Default: 150 frame (~5s bawat tile). Inirerekomenda: 150 para sa singleplayer, 50-80 para sa co-op/multiplayer."
+}

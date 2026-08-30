@@ -1,0 +1,10 @@
+{
+    "Tooltip_Silencer": "将枪械噪音半径降低80%%，但会略微降低射程。",
+    "Tooltip_MetalPipeSilencer": "将枪械噪音半径降低60%%，但会略微降低射程。",
+    "Tooltip_TorchSilencer": "将枪械噪音半径降低40%%，但会降低射程。",
+    "Tooltip_WaterBottleSilencer": "将枪械噪音半径降低20%%，但会降低射程。",
+    "Tooltip_PotatoSilencer": "将枪械噪音半径降低10%%，但会降低射程。射击一次后即损坏消失。",
+    "Tooltip_SuppressorCondition": "消音器状态：",
+    "Tooltip_ISIL_NoiseReduction": "噪音降低：",
+    "Tooltip_ISIL_DynamicSuppressor": "降低枪械的噪音半径和音量，但会降低武器射程。"
+}

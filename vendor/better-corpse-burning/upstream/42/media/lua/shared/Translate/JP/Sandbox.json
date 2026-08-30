@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "死体ごとの焼却時間",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "死体を一体焼却するのにかかるゲーム内時間（分）。デフォルト：110（バニラ値）。",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "バニラの焼却を削除",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "ガソリンを必要とするバニラの「死体を燃やす」オプションを削除します。",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "火災拡大半径",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "死体が燃えているとき、この半径内の近くの死体にも延焼します。0 = 無効。",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "ガソリンを必要とする",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "有効にすると、着火源に加えてガソリン携行缶が必要になります。",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "死体ごとのガソリン消費量",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "死体を一体焼却するごとに消費するガソリン量（リットル）。デフォルト：0.1L（10L缶で約100体焼却可能）。",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "屋内での焼却を許可",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "無効にすると、このMODでは建物内の死体を焼却できません。木造建築への誤った延焼を防ぎます。デフォルト：有効。",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "死体ごとの着火回数",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "死体を一体焼却するごとに着火源を使用する回数。値が大きいほどライターやマッチの消費が早くなります。0 = 無制限（着火源は消耗しません）。デフォルト：1。",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "完了後に消火",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "有効にすると、連鎖内のすべての死体が燃え始めた直後に火が自動的に消えます。残り火から木造建築を守ります。デフォルト：無効。",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "燃え殻を残さない",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "有効にすると、焼却された死体は灰を残しません。デフォルト：無効。",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "火災の広がり速度",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "尸体の間で火が広がる速度。低い = 速い。デフォルト：150フレーム（約5秒/タイル）。推奨：シングルプレイ150、協力/マルチプレイ50-80。"
+}

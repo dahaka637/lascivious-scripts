@@ -1,0 +1,5 @@
+name=Improvised Silencers (Build 42.20 Compatibility)
+poster=poster.png
+id=ImprovisedSilencers
+description=Build 42.20 update and expanded version of Maxwell218's Improvised Silencers. Adds reworked suppressor handling, ten new weapon sounds, optional Extended Realism settings with suppressor durability, and Guns of Marz and Vanilla Firearms Expansion compatibility.
+versionMin=42.20.0

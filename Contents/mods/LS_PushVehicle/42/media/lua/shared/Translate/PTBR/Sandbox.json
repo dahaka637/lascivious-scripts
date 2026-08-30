@@ -1,0 +1,5 @@
+{
+  "Sandbox_PushVehicle": "Empurrar Veículos",
+  "Sandbox_PushVehicle_AllowSidePushing": "Permitir empurrões laterais",
+  "Sandbox_PushVehicle_AllowSidePushing_tooltip": "Permite virar veículos ao empurrar próximo da parte dianteira ou traseira de qualquer lateral. Desative para restringir o mod a empurrões pela frente e pela traseira."
+}

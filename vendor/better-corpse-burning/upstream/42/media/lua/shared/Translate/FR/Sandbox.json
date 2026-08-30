@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Temps de Combustion par Cadavre",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Temps en minutes de jeu pour brûler un cadavre. Par défaut : 110 (valeur vanilla).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Supprimer l'Option Vanilla Brûler le Cadavre",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Supprime l'option vanilla « Brûler le cadavre » qui nécessite de l'essence.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Rayon de Propagation du Feu",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Lorsqu'un cadavre brûle, les cadavres proches dans ce rayon prennent feu également. 0 = désactivé.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Exiger de l'Essence",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Si activé, brûler des cadavres nécessite également un jerrican d'essence en plus d'une source de feu.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Essence par Cadavre",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Quantité d'essence (en litres) consommée par cadavre brûlé. Par défaut : 0,1 L (un jerrican de 10 L brûle ~100 cadavres).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Autoriser le Feu en Intérieur",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Si désactivé, les cadavres à l'intérieur des bâtiments ne peuvent pas être brûlés avec ce mod. Évite les incendies accidentels qui endommagent les structures en bois. Par défaut : activé.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Utilisations du Feu par Cadavre",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Nombre de fois où la source de feu est utilisée par cadavre brûlé. Les valeurs élevées épuisent plus vite les briquets et les allumettes. 0 = illimité (la source de feu ne s'épuise jamais). Par défaut : 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Éteindre le Feu à la Fin",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Si activé, le feu s'éteint automatiquement peu après que tous les cadavres de la chaîne ont pris feu. Protège les structures en bois des flammes résiduelles. Par défaut : désactivé.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Pas de Cendres",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Si activé, les cadavres brûlés ne laissent pas de tas de cendres derrière eux. Par défaut : désactivé.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Vitesse de propagation du feu",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Vitesse à laquelle le feu se propage entre les cadavres. Plus bas = plus rapide. Par défaut : 150 images (~5s par carreau). Recommandé : 150 en solo, 50-80 en co-op/multijoueur."
+}

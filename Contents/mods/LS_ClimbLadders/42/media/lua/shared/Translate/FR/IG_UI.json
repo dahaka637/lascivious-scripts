@@ -1,0 +1,7 @@
+{
+    "IGUI_SubirEscaleras_Inseguro": "Il n'y a rien pour s'accrocher la-haut.",
+    "IGUI_SubirEscaleras_Pierna": "Pas avec ma jambe dans cet etat. Il lui faut une attelle.",
+    "IGUI_SubirEscaleras_Agotado": "Je n'ai plus la force de monter.",
+    "IGUI_SubirEscaleras_SinNivel": "Aucun niveau n'est charge au-dessus de l'echelle.",
+    "IGUI_SubirEscaleras_SinSalida": "Cette echelle ne mene nulle part ou je puisse poser le pied. Il faut la rallonger, ou construire un sol au niveau du dessus, au-dessus de l'echelle ou juste a cote."
+}

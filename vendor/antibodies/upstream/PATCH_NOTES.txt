@@ -1,0 +1,22 @@
+Antibodies B42.20 Community - compatibility fix 0.2.3
+
+Target: Project Zomboid 42.20.3
+
+Changes:
+- Corrected Build 42 percent placeholders that displayed a stray "$s" suffix.
+- Disabled legacy translation files so they cannot override the JSON translations.
+- Added Build 42.20 JSON translations for the UI and sandbox settings.
+- Restored translated labels so the diagnosis window no longer displays long raw keys.
+- Corrected five shared timed-action require paths in client and server entry points.
+- Corrected the ISPanel require path.
+- Corrected the Build 42 paths for ISCharacterProtection, ISCharacterInfoWindow, and ISHealthPanel.
+
+Workshop Mod ID: AntibodiesB4220ServerFix
+
+The code and sandbox option namespaces remain compatible with the original mod,
+but this package has a unique loader ID to avoid ambiguous duplicate-ID selection.
+Disable the original Workshop package before enabling this fix.
+
+Original project: https://github.com/lonegamedev/pz_mod_antibodies
+Original author: lonegamedev
+License: MIT (see LICENSE.txt)

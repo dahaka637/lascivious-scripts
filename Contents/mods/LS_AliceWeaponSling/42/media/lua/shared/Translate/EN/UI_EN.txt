@@ -1,0 +1,6 @@
+UI_EN = {
+    IGUI_HotbarAttachment_AliceSling = "Sling - \\",
+    IGUI_HotbarAttachment_AliceSlingAlt = "Sling - /",
+    IGUI_HotbarAttachment_AliceSlingAlt2 = "Sling --",
+    IGUI_HotbarAttachment_AliceSlingBack = "Sling (Back)",
+}

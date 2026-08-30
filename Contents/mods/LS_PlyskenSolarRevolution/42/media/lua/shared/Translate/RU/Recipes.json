@@ -1,0 +1,19 @@
+{
+    "Make_DIY_Battery": "Сделайте DIY батарею",
+    "WireCarBattery": "Подсоединить провода к автомобильному аккумулятору",
+    "UnWireCarBattery": "Отсоединить провода от автомобильного аккумулятора",
+    "Make_Solar_Roof_Tile": "Сделать солнечную панель (крыша)",
+    "Make_Wall-Mounted_Solar_Panel": "Сделать солнечную панель (стена)",
+    "Make_Floor-Mounted_Solar_Panel": "Сделать солнечную панель (пол)",
+    "Reverse_Solar_Panel": "Разделить солнечную панель на части",
+    "Create_Battery_Bank": "Сделать Аккумуляторную Батарею",
+    "Create_Solar_Failsafe": "Создать Отказоустойчивый Механизм",
+    "Make_Solar_Panel": "Сделайте солнечную панель (часть)",
+    "Make_Inverter": "Сделать инвертор",
+    "Make_Improvised_Battery": "Создать самодельную батарею",
+    "Recondition_Battery": "Восстановить батарею",
+    "Dismantle_Solar_Failsafe": "Разобрать солнечную защиту",
+    "Dismantle_Battery_Bank": "Разобрать аккумуляторный банк",
+    "Reverse_Solar_Roof_Tile": "Разобрать плоскую солнечную панель",
+    "Make_Solar_Panel_Realistic": "Make Solar Panel (Realistic)"
+}

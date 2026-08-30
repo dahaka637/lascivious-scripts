@@ -1,0 +1,7 @@
+{
+    "Base.Silencer": "Schalldämpfer",
+    "Base.MetalPipeSilencer": "Metallrohr-Schalldämpfer",
+    "Base.TorchSilencer": "Taschenlampen-Schalldämpfer",
+    "Base.WaterBottleSilencer": "Wasserflaschen-Schalldämpfer",
+    "Base.PotatoSilencer": "Kartoffel-Schalldämpfer"
+}

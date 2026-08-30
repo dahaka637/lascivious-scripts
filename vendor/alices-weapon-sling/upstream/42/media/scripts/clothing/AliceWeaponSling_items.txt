@@ -1,0 +1,188 @@
+module Base
+{
+    item AliceWeaponSling
+    {
+        DisplayName = Weapon Sling - \,
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingfront,
+        ClothingItem = AliceWeaponSling,
+        AttachmentsProvided = AliceSling,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSlingAlt;AliceWeaponSlingAlt2;AliceWeaponSlingBack,
+        ClothingItemExtraOption = AliceSlingStyle2;AliceSlingStyle3;AliceSlingStyle4,
+        ClothingExtraSubmenu = AliceSlingStyle1,
+    }
+
+    item AliceWeaponSlingAlt
+    {
+        DisplayName = Weapon Sling - /,
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingfront,
+        ClothingItem = AliceWeaponSlingAlt,
+        AttachmentsProvided = AliceSlingAlt,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSling;AliceWeaponSlingAlt2;AliceWeaponSlingBack,
+        ClothingItemExtraOption = AliceSlingStyle1;AliceSlingStyle3;AliceSlingStyle4,
+        ClothingExtraSubmenu = AliceSlingStyle2,
+    }
+
+    item AliceWeaponSlingAlt2
+    {
+        DisplayName = Weapon Sling --,
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingfront,
+        ClothingItem = AliceWeaponSlingAlt2,
+        AttachmentsProvided = AliceSlingAlt2,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSling;AliceWeaponSlingAlt;AliceWeaponSlingBack,
+        ClothingItemExtraOption = AliceSlingStyle1;AliceSlingStyle2;AliceSlingStyle4,
+        ClothingExtraSubmenu = AliceSlingStyle3,
+    }
+
+    item AliceWeaponSlingBack
+    {
+        DisplayName = Weapon Sling (Back),
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingback,
+        ClothingItem = AliceWeaponSlingBack,
+        AttachmentsProvided = AliceSlingBack,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSling;AliceWeaponSlingAlt;AliceWeaponSlingAlt2,
+        ClothingItemExtraOption = AliceSlingStyle1;AliceSlingStyle2;AliceSlingStyle3,
+        ClothingExtraSubmenu = AliceSlingStyle4,
+    }
+
+    item AliceWeaponSling_Hidden
+    {
+        DisplayName = Weapon Sling - \,
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingfront,
+        ClothingItem = AliceWeaponSling_Hidden,
+        AttachmentsProvided = AliceSling,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSlingAlt_Hidden;AliceWeaponSlingAlt2_Hidden;AliceWeaponSlingBack_Hidden,
+        ClothingItemExtraOption = AliceSlingStyle2;AliceSlingStyle3;AliceSlingStyle4,
+        ClothingExtraSubmenu = AliceSlingStyle1,
+    }
+
+    item AliceWeaponSlingAlt_Hidden
+    {
+        DisplayName = Weapon Sling - /,
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingfront,
+        ClothingItem = AliceWeaponSlingAlt_Hidden,
+        AttachmentsProvided = AliceSlingAlt,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSling_Hidden;AliceWeaponSlingAlt2_Hidden;AliceWeaponSlingBack_Hidden,
+        ClothingItemExtraOption = AliceSlingStyle1;AliceSlingStyle3;AliceSlingStyle4,
+        ClothingExtraSubmenu = AliceSlingStyle2,
+    }
+
+    item AliceWeaponSlingAlt2_Hidden
+    {
+        DisplayName = Weapon Sling --,
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingfront,
+        ClothingItem = AliceWeaponSlingAlt2_Hidden,
+        AttachmentsProvided = AliceSlingAlt2,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSling_Hidden;AliceWeaponSlingAlt_Hidden;AliceWeaponSlingBack_Hidden,
+        ClothingItemExtraOption = AliceSlingStyle1;AliceSlingStyle2;AliceSlingStyle4,
+        ClothingExtraSubmenu = AliceSlingStyle3,
+    }
+
+    item AliceWeaponSlingBack_Hidden
+    {
+        DisplayName = Weapon Sling (Back),
+        DisplayCategory = Accessory,
+        Weight = 0.01,
+        ItemType = base:clothing,
+        BodyLocation = alicesweaponsling:slingback,
+        ClothingItem = AliceWeaponSlingBack_Hidden,
+        AttachmentsProvided = AliceSlingBack,
+        Icon = slingAky,
+        Cosmetic = TRUE,
+        ChanceToFall = 0,
+        WorldStaticModel = SlingFlat,
+        ClothingItemExtra = AliceWeaponSling_Hidden;AliceWeaponSlingAlt_Hidden;AliceWeaponSlingAlt2_Hidden,
+        ClothingItemExtraOption = AliceSlingStyle1;AliceSlingStyle2;AliceSlingStyle3,
+        ClothingExtraSubmenu = AliceSlingStyle4,
+    }
+
+    item AliceWeaponSlingWeightReductionPart
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        DisplayName = Alice's Weapon Sling,
+        Icon = slingAky,
+        Weight = 0.0,
+        WeightModifier = -0.3,
+        MountOn = Base.HuntingRifle,
+        PartType = Sling,
+        Tooltip = Tooltip_Sling,
+        Tags = base:ignorezombiedensity,
+        CanDetach = AliceWeaponSling_CannotDetachHiddenWeightPart,
+    }
+
+    craftRecipe MakeAliceWeaponSling
+    {
+        time = 80,
+        category = Tailoring,
+        SkillRequired = Tailoring:2,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 [Base.Belt2],
+            item 4 [Base.LeatherStrips],
+            item 1 [Base.Thread],
+            item 1 tags[base:scissors;base:sharpknife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+            item 1 [Base.Needle;Base.SutureNeedle;Base.Needle_Bone;Base.Needle_Forged] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.AliceWeaponSling,
+        }
+    }
+
+    model SlingFlat
+    {
+        mesh = WorldItems/Clothing/Sling_Flat,
+        texture = Clothes/Sling/SlingTexture,
+        scale = 0.4000,
+    }
+}

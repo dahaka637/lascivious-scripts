@@ -1,0 +1,10 @@
+{
+    "PSR.PSRMag1": "新發展: 來自太陽的能源",
+    "PSR.SolarPanel": "太陽能板 (部件)",
+    "PSR.PSRInverter": "逆變器",
+    "PSR.DeepCycleBattery": "200安 深循環電池",
+    "PSR.SuperBattery": "400安 深循環電池",
+    "PSR.WiredCarBattery": "有線車用電池",
+    "PSR.DIYBattery": "自製深循環電池",
+    "PSR.ImprovisedBattery": "臨時電池"
+}

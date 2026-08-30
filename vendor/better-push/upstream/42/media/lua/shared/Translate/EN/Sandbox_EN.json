@@ -1,0 +1,21 @@
+{
+  "EN": {
+    "Sandbox_BetterPush": "Better Push Settings",
+    "Sandbox_BetterPushMinStrengthLevel": "Min Strength Level",
+    "Sandbox_BetterPushMinStrengthLevel_tooltip": "The player Strength level at which the minimum push chance applies.",
+    "Sandbox_BetterPushMaxStrengthLevel": "Max Strength Level",
+    "Sandbox_BetterPushMaxStrengthLevel_tooltip": "The player Strength level at which the maximum push chance applies.",
+    "Sandbox_BetterPushMinChance": "Minimum Push Chance",
+    "Sandbox_BetterPushMinChance_tooltip": "The base chance to trigger the domino push effect when at or below the minimum strength.",
+    "Sandbox_BetterPushMaxChance": "Maximum Push Chance",
+    "Sandbox_BetterPushMaxChance_tooltip": "The maximum chance to trigger the domino push effect when at or above the maximum strength.",
+    "Sandbox_BetterPushMinZombies": "Min Zombies Knocked Down",
+    "Sandbox_BetterPushMinZombies_tooltip": "The base number of zombies in the domino chain knocked down when at minimum strength.",
+    "Sandbox_BetterPushMaxZombies": "Max Zombies Knocked Down",
+    "Sandbox_BetterPushMaxZombies_tooltip": "The maximum number of zombies in the domino chain knocked down when at maximum strength.",
+    "Sandbox_BetterPushLineDistance": "Domino Link Distance",
+    "Sandbox_BetterPushLineDistance_tooltip": "How close zombies must be to each other (front to back) to continue falling in the chain.",
+    "Sandbox_BetterPushLineWidth": "Domino Link Width",
+    "Sandbox_BetterPushLineWidth_tooltip": "How wide the lateral tolerance is when finding the next zombie in the domino chain."
+  }
+}

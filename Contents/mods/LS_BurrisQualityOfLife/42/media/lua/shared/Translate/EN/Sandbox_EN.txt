@@ -1,0 +1,157 @@
+Sandbox_EN = {
+    Sandbox_BurrisQoL = "Burris Quality of Life",
+
+    Sandbox_BurrisQoL_PryEnabled = "Prying",
+    Sandbox_BurrisQoL_PryEnabled_tooltip = "Master switch. Lets you force doors and windows open with a crowbar carried anywhere in your inventory.",
+
+    Sandbox_BurrisQoL_PryBuildingDoors = "Pry building doors",
+    Sandbox_BurrisQoL_PryBuildingDoors_tooltip = "Allow prying locked doors on buildings.",
+
+    Sandbox_BurrisQoL_PryGarageDoors = "Pry garage doors",
+    Sandbox_BurrisQoL_PryGarageDoors_tooltip = "Allow prying garage doors. These are noisier than wooden doors.",
+
+    Sandbox_BurrisQoL_PrySafeDoors = "Pry safehouse doors",
+    Sandbox_BurrisQoL_PrySafeDoors_tooltip = "Allow prying doors belonging to a safehouse. Off by default, since it lets players force their way into each other's bases.",
+
+    Sandbox_BurrisQoL_PryWindows = "Pry windows",
+    Sandbox_BurrisQoL_PryWindows_tooltip = "Allow prying closed windows. A failed attempt may shatter the glass.",
+
+    Sandbox_BurrisQoL_PryVehicleDoors = "Pry vehicle doors",
+    Sandbox_BurrisQoL_PryVehicleDoors_tooltip = "Adds a prying option to the vehicle radial menu for locked doors and trunks.",
+
+    Sandbox_BurrisQoL_PryShatterVehicleWindows = "Shatter vehicle windows",
+    Sandbox_BurrisQoL_PryShatterVehicleWindows_tooltip = "A failed attempt on a vehicle door may break a nearby window instead.",
+
+    Sandbox_BurrisQoL_PryReinforcedDoorLevel = "Reinforced door Strength requirement",
+    Sandbox_BurrisQoL_PryReinforcedDoorLevel_tooltip = "Minimum Strength level needed to attempt reinforced doors, such as those in police stations.",
+
+    Sandbox_BurrisQoL_PryWindowShatterChance = "Window shatter chance (%%)",
+    Sandbox_BurrisQoL_PryWindowShatterChance_tooltip = "Chance that a failed prying attempt shatters the window instead of leaving it intact.",
+
+    Sandbox_BurrisQoL_PryChanceMultiplier = "Difficulty multiplier",
+    Sandbox_BurrisQoL_PryChanceMultiplier_tooltip = "Scales the chance of failing. Above 1 makes prying harder, below 1 makes it easier, 0 always succeeds.",
+
+    Sandbox_BurrisQoL_CollectEnabled = "Ground pickup",
+    Sandbox_BurrisQoL_CollectEnabled_tooltip = "Lets you pick up twigs, stones, branches and litter that you can see on the ground but cannot normally interact with.",
+
+    Sandbox_BurrisQoL_CollectDisableLoot = "Ground pickup yields nothing",
+    Sandbox_BurrisQoL_CollectDisableLoot_tooltip = "Debris can still be cleared away, but gives no items. Useful if you only want the tidying, not the resources.",
+
+    Sandbox_BurrisQoL_CollectLootMultiplier = "Ground pickup yield multiplier",
+    Sandbox_BurrisQoL_CollectLootMultiplier_tooltip = "Scales how many items each piece of debris gives.",
+
+    Sandbox_BurrisQoL_WashEnabled = "Washing filter",
+    Sandbox_BurrisQoL_WashEnabled_tooltip = "Adds equipped-only and unequipped-only filters next to the vanilla Wash menu at sinks and other water sources.",
+
+    Sandbox_BurrisQoL_EquipFromGroundEnabled = "Equip from the ground",
+    Sandbox_BurrisQoL_EquipFromGroundEnabled_tooltip = "Right-clicking near dropped gear lists nearby weapons, clothing and bags so you can walk over and equip one in a single click.",
+
+    Sandbox_BurrisQoL_CanInjuryEnabled = "Cut yourself opening cans",
+    Sandbox_BurrisQoL_CanInjuryEnabled_tooltip = "Opening a tin can without a proper opener risks slicing your hand open.",
+
+    Sandbox_BurrisQoL_CanInjuryChance = "Can injury chance (%%)",
+    Sandbox_BurrisQoL_CanInjuryChance_tooltip = "Chance of cutting yourself each time you open a can without an opener.",
+
+    Sandbox_BurrisQoL_CanInjurySeverity = "Can injury severity",
+    Sandbox_BurrisQoL_CanInjurySeverity_tooltip = "Scales the damage and bleeding from a can injury.",
+
+    Sandbox_BurrisQoL_TourniquetEnabled = "Tourniquets",
+    Sandbox_BurrisQoL_TourniquetEnabled_tooltip = "Lets you tie off a bleeding arm or leg with a belt from the health panel. Cuts bleeding at the cost of extra pain; on a leg it also slows you down until removed. Untying it from the same menu gives the belt back and lets the wound bleed again.",
+
+    Sandbox_BurrisQoL_TourniquetBleedFraction = "Tourniquet bleeding left (%%)",
+    Sandbox_BurrisQoL_TourniquetBleedFraction_tooltip = "Fraction of the current bleeding time left after tying off the wound. Lower is more effective.",
+
+    Sandbox_BurrisQoL_TourniquetPain = "Tourniquet pain",
+    Sandbox_BurrisQoL_TourniquetPain_tooltip = "Extra pain added to the limb when the tourniquet is applied.",
+
+    Sandbox_BurrisQoL_TweakReadWhileWalking = "Read while walking",
+    Sandbox_BurrisQoL_TweakReadWhileWalking_tooltip = "Lets you walk around while reading books. The upper-body reading animation is kept; running still interrupts reading.",
+
+    Sandbox_BurrisQoL_TweakEquipWhileWalking = "Equip clothing while walking",
+    Sandbox_BurrisQoL_TweakEquipWhileWalking_tooltip = "Lets you put on any clothing or bag while walking, not just accessories. Running still interrupts it.",
+
+    Sandbox_BurrisQoL_ReloadAllMagazinesEnabled = "Reload all selected magazines",
+    Sandbox_BurrisQoL_ReloadAllMagazinesEnabled_tooltip = "Adds an option to load every selected magazine in one click, even when the magazines or the ammunition are inside bags.",
+
+    Sandbox_BurrisQoL_ReplaceBandageEnabled = "Replace dirty bandages",
+    Sandbox_BurrisQoL_ReplaceBandageEnabled_tooltip = "Adds a Replace Bandage option to the health panel for dirty bandages, removing the old one and applying a fresh one in a single click.",
+
+    Sandbox_BurrisQoL_InventorySelectionFixEnabled = "Keep inventory selections",
+    Sandbox_BurrisQoL_InventorySelectionFixEnabled_tooltip = "Stops a multi-item selection deselecting itself when the inventory refreshes. Fixes a vanilla bug that loses the selection on the second refresh, not the first, which is what makes it look random.",
+
+    Sandbox_BurrisQoL_NestedContainersEnabled = "Nested container buttons",
+    Sandbox_BurrisQoL_NestedContainersEnabled_tooltip = "Gives a sidebar button to bags inside bags and bags inside crates, so you can open one without drilling through its parent. Vanilla only shows equipped bags, key rings and containers you are standing next to.",
+
+    Sandbox_BurrisQoL_NestedContainersDepth = "Nesting depth",
+    Sandbox_BurrisQoL_NestedContainersDepth_tooltip = "How many levels deep to look. 1 shows bags directly inside a container; 2 also shows bags inside those. High values on a deeply packed container mean a long list of buttons.",
+
+    Sandbox_BurrisQoL_NestedContainersPlayer = "Nest your own inventory",
+    Sandbox_BurrisQoL_NestedContainersPlayer_tooltip = "Adds buttons for bags carried inside your own inventory and inside your worn bags.",
+
+    Sandbox_BurrisQoL_NestedContainersPlayerFilter = "Your inventory: which side",
+    Sandbox_BurrisQoL_NestedContainersPlayerFilter_tooltip = "Which of your containers get looked into. Pockets is your main inventory; Equipped is the bags you are wearing.",
+    Sandbox_BurrisQoL_NestedContainersPlayerFilter_Options_option1 = "Everything",
+    Sandbox_BurrisQoL_NestedContainersPlayerFilter_Options_option2 = "Only pockets",
+    Sandbox_BurrisQoL_NestedContainersPlayerFilter_Options_option3 = "Only equipped",
+
+    Sandbox_BurrisQoL_NestedContainersParentIcon = "Show parent container icon",
+    Sandbox_BurrisQoL_NestedContainersParentIcon_tooltip = "Draws a small icon of the containing bag in the corner of each nested button, so you can tell which parent it came out of.",
+
+    Sandbox_BurrisQoL_NoFloorLimitEnabled = "No ground weight limit",
+    Sandbox_BurrisQoL_NoFloorLimitEnabled_tooltip = "Removes the 50-weight limit for items dropped on the floor and for bags lying on overloaded tiles. Bag capacity, item rules and item size limits still apply. Multiplayer: best effort, the server may still refuse some transfers.",
+
+    Sandbox_BurrisQoL_CorpseTrunkEnabled = "Fix corpse storage in vehicle trunks",
+    Sandbox_BurrisQoL_CorpseTrunkEnabled_tooltip = "Build 42 already lets you drop a dragged corpse into a car trunk, truck bed or trailer, but it never opens the door first, so it only works when the trunk is already open. This fixes that, and fixes taking a corpse back out of a closed one.",
+
+    Sandbox_BurrisQoL_TreeCanopyEnabled = "Tree canopy fix",
+    Sandbox_BurrisQoL_TreeCanopyEnabled_tooltip = "Hides the huge B42.20 tree canopies that sketch over your screen: indoors near buildings, over the road while driving, and around you while walking. Client-side rendering only; nothing is written to the save.",
+
+    Sandbox_BurrisQoL_TreeCanopyHideStyle = "Canopy hiding style",
+    Sandbox_BurrisQoL_TreeCanopyHideStyle_tooltip = "How canopies look while driving or on foot. Fade draws them translucent; Trunk only removes the canopy entirely and leaves the trunk.",
+    Sandbox_BurrisQoL_TreeCanopyHideStyle_Options_option1 = "Fade",
+    Sandbox_BurrisQoL_TreeCanopyHideStyle_Options_option2 = "Trunk only",
+
+    Sandbox_BurrisQoL_TreeCanopyWhileDriving = "Hide canopies while driving",
+    Sandbox_BurrisQoL_TreeCanopyWhileDriving_tooltip = "Affects only the canopies of the largest trees covering the road ahead. Trunks stay visible, so anything you could hit remains in view. Higher speed extends the look-ahead distance.",
+
+    Sandbox_BurrisQoL_TreeCanopyDrivingRange = "Driving look-ahead distance",
+    Sandbox_BurrisQoL_TreeCanopyDrivingRange_tooltip = "How far ahead of the vehicle canopies are affected.",
+    Sandbox_BurrisQoL_TreeCanopyDrivingRange_Options_option1 = "Long",
+    Sandbox_BurrisQoL_TreeCanopyDrivingRange_Options_option2 = "Short",
+
+    Sandbox_BurrisQoL_TreeCanopyOnFoot = "Hide canopies while on foot",
+    Sandbox_BurrisQoL_TreeCanopyOnFoot_tooltip = "Thins the canopies of the largest trees around you while you are moving. They return to normal when you stand still.",
+
+    Sandbox_BurrisQoL_TreeCanopyOnFootRange = "On-foot range",
+    Sandbox_BurrisQoL_TreeCanopyOnFootRange_tooltip = "How far around you canopies are affected while walking.",
+    Sandbox_BurrisQoL_TreeCanopyOnFootRange_Options_option1 = "Standard",
+    Sandbox_BurrisQoL_TreeCanopyOnFootRange_Options_option2 = "Narrow",
+    Sandbox_BurrisQoL_TreeCanopyOnFootRange_Options_option3 = "Minimal",
+
+    Sandbox_BurrisQoL_TreeCanopyIndoorRadius = "Indoor hide radius",
+    Sandbox_BurrisQoL_TreeCanopyIndoorRadius_tooltip = "While you are indoors, jumbo trees within this many tiles are hidden completely, so furniture and windows stay visible. They reappear when you step outside.",
+
+    Sandbox_BurrisQoL_ZombieCollisionEnabled = "Zombie collision",
+    Sandbox_BurrisQoL_ZombieCollisionEnabled_tooltip = "Zombies near you gently push each other apart instead of phasing through one another while chasing you. In multiplayer this setting comes from the server; the tuning below is per-player.",
+
+    Sandbox_BurrisQoL_ZombieCollisionMaxZombies = "Collision zombie cap",
+    Sandbox_BurrisQoL_ZombieCollisionMaxZombies_tooltip = "How many of the nearest zombies are considered. Keeping this small is what makes the performance cost stay flat whether there are 10 or 100 zombies around.",
+
+    Sandbox_BurrisQoL_ZombieCollisionScanRadius = "Collision scan radius",
+    Sandbox_BurrisQoL_ZombieCollisionScanRadius_tooltip = "Only zombies within this many tiles of you are considered for collision.",
+
+    Sandbox_BurrisQoL_ZombieCollisionPushRadius = "Collision push radius",
+    Sandbox_BurrisQoL_ZombieCollisionPushRadius_tooltip = "Personal space around each zombie, in tiles. Two zombies closer than this push each other apart.",
+
+    Sandbox_BurrisQoL_ZombieCollisionPushForce = "Collision push force",
+    Sandbox_BurrisQoL_ZombieCollisionPushForce_tooltip = "How hard zombies push each other apart per tick. Small values look natural; large values make crowds visibly jostle.",
+
+    Sandbox_BurrisQoL_ZombieCollisionScope = "Collision scope",
+    Sandbox_BurrisQoL_ZombieCollisionScope_tooltip = "Which zombies collide. Chasing only affects zombies actively hunting a player; Aggressive includes any zombie with a target; All affects every zombie nearby.",
+    Sandbox_BurrisQoL_ZombieCollisionScope_Options_option1 = "Chasing a player",
+    Sandbox_BurrisQoL_ZombieCollisionScope_Options_option2 = "Aggressive",
+    Sandbox_BurrisQoL_ZombieCollisionScope_Options_option3 = "All zombies",
+
+    Sandbox_BurrisQoL_Debug = "Debug logging",
+    Sandbox_BurrisQoL_Debug_tooltip = "Writes verbose diagnostics to console.txt. Leave off unless you are troubleshooting.",
+}

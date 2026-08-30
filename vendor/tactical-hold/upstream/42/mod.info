@@ -1,0 +1,6 @@
+name=Tactical Hold Complete Fixed
+id=TacHold Complete Fixed
+description=This mod is a fork of the original to fix an issue that fires the animation trigger too fast for servers to keep up with it.
+poster=poster.png
+icon=icon.png
+incompatible=\TacHold AR,\TacHold,\TacHold Pistol,\TacHold Pistol AR,\TacHold Complete

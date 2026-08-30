@@ -1,0 +1,127 @@
+module Base
+{
+
+    item CircularSawblade
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 2.0,
+        Icon = CircularSawBlade,
+        StaticModel = CircularSawblade,
+        WorldStaticModel = CircularSawblade,
+        Tags = base:hasmetal;base:smeltablesteellarge,
+        ConditionMax = 44,
+        Researchablerecipes = MakeSawbladeWeapon;Forge_Saw,
+    }
+
+    item CircularSawblade_Half
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 1.0,
+        Icon = CircularSawBlade_Half,
+        StaticModel = CircularSawblade_Half,
+        WorldStaticModel = CircularSawblade_Half,
+        Tags = base:hasmetal;base:smeltablesteelmedium,
+        ConditionMax = 22,
+        Researchablerecipes = MakeSawbladeWeapon;Forge_Saw,
+    }
+
+    item HacksawBlade
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.5,
+        Icon = Sawblade,
+        StaticModel = HacksawBlade,
+        WorldStaticModel = HacksawBlade,
+        Tags = base:hasmetal;base:sawblade;base:smeltablesteelsmall;base:repairablesawblade,
+        ConditionMax = 44,
+        Researchablerecipes = Forge_Saw;MakeStoneBladeSaw,
+    }
+
+    item SmallFileSet
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 1.0,
+        Icon = Files_Forged,
+        MetalValue = 15.0,
+        StaticModel = MetalworkingFile,
+        WorldStaticModel = SmallMetalworkingFiles,
+        ConditionLowerChanceOneIn = 10,
+        ConditionMax = 35,
+        Tags = base:file;base:smallfiles;base:hasmetal;base:showcondition;base:smeltablesteelmedium,
+        Researchablerecipes = Forge_File;Forge_Small_Files,
+    }
+
+    item SmallPunchSet
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 1.0,
+        Icon = Punches_Forged,
+        MetalValue = 15.0,
+        StaticModel = MetalworkingPunch,
+        WorldStaticModel = SmallMetalworkingPunches,
+        ConditionLowerChanceOneIn = 6,
+        ConditionMax = 35,
+        Tags = base:smallpunch;base:hasmetal;base:showcondition;base:awl;base:smeltablesteelmedium,
+        Tooltip = Tooltip_item_SmallPunchSet,
+        Researchablerecipes = Forge_Metalworking_Chisel;Forge_Metalworking_Punch;Forge_Small_Metalworking_Punch_Set,
+    }
+
+    item SmallSaw
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 0.7,
+        Icon = Saw_Forged,
+        MetalValue = 15.0,
+        StaticModel = SmallMetalworkingSaw,
+        WorldStaticModel = SmallMetalworkingSaw,
+        Tags = base:smallsaw;base:hasmetal;base:showcondition;base:smeltablesteelsmall,
+        ConditionLowerChanceOneIn = 8,
+        ConditionMax = 44,
+        Researchablerecipes = Forge_Saw;MakeStoneBladeSaw,
+    }
+
+    item SmallSawblade
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.5,
+        Icon = SawbladeSmall,
+        StaticModel = HacksawBladeSmall,
+        WorldStaticModel = HacksawBladeSmall,
+        Tags = base:hasmetal;base:sawblade;base:smeltablesteelsmall;base:repairablesawblade,
+        ConditionMax = 35,
+        Researchablerecipes = Forge_Saw;MakeStoneBladeSaw,
+    }
+
+    item Whetstone
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 0.5,
+        Icon = Whetstone2,
+        WorldStaticModel = Whetstone,
+        Tags = base:whetstone;base:showcondition,
+        ConditionMax = 61,
+        ConditionLowerChanceOneIn = 10,
+        Researchablerecipes = MakeCrudeWhetstone,
+    }
+
+    item CrudeWhetstone
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 0.5,
+        Icon = Whetstone1,
+        WorldStaticModel = CrudeWhetstone,
+        Tags = base:whetstone;base:showcondition;base:crude,
+        ConditionMax = 26,
+        ConditionLowerChanceOneIn = 6,
+    }
+
+}

@@ -1,0 +1,11 @@
+name=Lascivious Scripts - Plysken Solar Revolution
+id=LS_PlyskenSolarRevolution
+poster=poster.png
+icon=icon.png
+pack=solarmod_tileset
+tiledef=solarmodtiledefs 575
+versionMin=42.0
+modversion=1.76
+description=Energia solar sustentável para sua base: painéis solares, banco de baterias, inversor e gerador de emergência com failsafe automático. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

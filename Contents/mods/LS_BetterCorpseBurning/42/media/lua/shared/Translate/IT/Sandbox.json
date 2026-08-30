@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Tempo di Combustione per Cadavere",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Tempo in minuti di gioco per bruciare un cadavere. Predefinito: 110 (valore vanilla).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Rimuovi Brucia Cadavere Vanilla",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Rimuove l'opzione vanilla 'Brucia Cadavere' che richiede benzina.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Raggio di Propagazione del Fuoco",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Quando un cadavere brucia, anche i cadaveri vicini entro questo raggio prendono fuoco. 0 = disattivato.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Richiedi Benzina",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Se attivato, bruciare i cadaveri richiede anche una tanica di benzina oltre a una fonte di fuoco.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Benzina per Cadavere",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Quanta benzina (in litri) viene consumata per ogni cadavere bruciato. Predefinito: 0,1L (una tanica da 10L brucia ~100 cadaveri).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Consenti Fuoco al Chiuso",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Se disattivato, i cadaveri all'interno degli edifici non possono essere bruciati con questa mod. Previene incendi accidentali che danneggiano le strutture di legno. Predefinito: attivato.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Usi di Fuoco per Cadavere",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Quante volte viene usata la fonte di fuoco per ogni cadavere bruciato. Valori alti consumano più in fretta accendini e fiammiferi. 0 = illimitato (la fonte di fuoco non si consuma mai). Predefinito: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Spegni il Fuoco alla Fine",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Se attivato, il fuoco si spegne automaticamente poco dopo che tutti i cadaveri della catena hanno preso fuoco. Protegge le strutture di legno dalle fiamme residue. Predefinito: disattivato.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Niente Cenere",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Se attivato, i cadaveri bruciati non lasciano cumuli di cenere. Predefinito: disattivato.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Velocità di propagazione del fuoco",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Quanto rapidamente il fuoco si propaga tra i cadaveri. Più basso = più veloce. Predefinito: 150 fotogrammi (~5s per riquadro). Consigliato: 150 per singolo giocatore, 50-80 per co-op/multigiocatore."
+}

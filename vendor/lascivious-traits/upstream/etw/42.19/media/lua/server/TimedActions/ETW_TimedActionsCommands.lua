@@ -1,0 +1,62 @@
+local ETW_CombinedTraitFunctions = require("ETW_CombinedTraitFunctions")
+local ETW_CommonLogicChecks = require("ETW_CommonLogicChecks")
+local ETW_TimedActionsSharedLogic = require("TimedActions/ETW_TimedActionsSharedLogic")
+local ETW_CommonFunctions = require("ETW_CommonFunctions")
+
+local FILENAME = "ETW_TimedActionsCommands.lua"
+if not ETW_CommonFunctions.gameModeSafeguard(FILENAME, { ETW_CommonFunctions.GameMode.MP_SERVER }) then
+	return
+end
+
+local gameMode = ETW_CommonFunctions.gameMode()
+local Commands = {}
+
+---@type fun(...: string)
+local logETW = ETW_CommonFunctions.log
+
+---@class ISInventoryTransferActionPerformedArgs
+---@field itemsMoved number
+---@field weightMoved number
+
+---Function to check by how much engine was repaired. If SP - updates relative moddata and checks traits. If MP - sends command back to client
+---@param player IsoPlayer
+---@param args ISInventoryTransferActionPerformedArgs
+function Commands.ISInventoryTransferActionPerformed(player, args)
+	---@type EvolvingTraitsWorldModData
+	local modData = ETW_CommonFunctions.getETWModData(player)
+	local transferModData = modData.TransferSystem
+	local initialItemsTransferred = transferModData.ItemsTransferred
+	local initialWeightTransferred = transferModData.WeightTransferred
+	transferModData.ItemsTransferred = transferModData.ItemsTransferred + args.itemsMoved
+	transferModData.WeightTransferred = transferModData.WeightTransferred + args.weightMoved
+	logETW(
+		"ETW Logger | ISInventoryTransferActionPerformed(): received from player "
+			.. player:getUsername()
+			.. ": itemsMoved="
+			.. tostring(args.itemsMoved)
+			.. ", weightMoved="
+			.. tostring(args.weightMoved)
+			.. ", ItemsTransferred="
+			.. tostring(initialItemsTransferred)
+			.. "->"
+			.. tostring(transferModData.ItemsTransferred)
+			.. ", WeightTransferred="
+			.. tostring(initialWeightTransferred)
+			.. "->"
+			.. tostring(transferModData.WeightTransferred)
+	)
+	ETW_TimedActionsSharedLogic.checkInventoryTransferPerks(player, modData)
+end
+
+Commands.OnClientCommand = function(module, command, player, args)
+	if module == "ETW" and Commands[command] then
+		local argStr = ""
+		args = args or {}
+		for k, v in pairs(args) do
+			argStr = argStr .. " " .. k .. "=" .. tostring(v)
+		end
+		Commands[command](player, args)
+	end
+end
+
+Events.OnClientCommand.Add(Commands.OnClientCommand)

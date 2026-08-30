@@ -1,0 +1,9 @@
+name=Lascivious Scripts - Clean HotBar
+id=LS_CleanHotBar
+poster=poster.png
+icon=icon.png
+versionMin=42.15
+modversion=1.12.3
+description=Reformula visualmente o hotbar, com indicadores de condição, munição e líquido, slots de equipamento em mãos melhorados, reordenação embutida, opacidade configurável e destaque de slot compatível ao arrastar. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

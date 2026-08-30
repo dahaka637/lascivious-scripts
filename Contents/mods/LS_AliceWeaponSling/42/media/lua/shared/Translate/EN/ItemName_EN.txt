@@ -1,0 +1,6 @@
+ItemName_EN = {
+    ["Base.AliceWeaponSling"] = "Weapon Sling - \\",
+    ["Base.AliceWeaponSlingAlt"] = "Weapon Sling - /",
+    ["Base.AliceWeaponSlingAlt2"] = "Weapon Sling --",
+    ["Base.AliceWeaponSlingBack"] = "Weapon Sling (Back)",
+}

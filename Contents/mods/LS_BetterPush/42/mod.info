@@ -1,0 +1,10 @@
+name=Lascivious Scripts - Better Push
+id=LS_BetterPush
+poster=poster.png
+icon=icon.png
+tags=Build 42
+versionMin=42.0
+modversion=1.4
+description=Empurrar um zumbi tem chance de derrubar outros em cadeia, escalando com Força. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

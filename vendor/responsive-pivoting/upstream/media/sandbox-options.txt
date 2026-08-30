@@ -1,0 +1,109 @@
+VERSION = 1,
+
+option PivotMod.Enabled
+{
+	type = boolean, default = true,
+	page = PivotMod, translation = PivotMod_Enabled,
+}
+
+option PivotMod.PivotSpeed
+{
+	type = enum, numValues = 5, default = 5,
+	page = PivotMod, translation = PivotMod_PivotSpeed,
+}
+
+option PivotMod.MovementTurnSpeed
+{
+	type = enum, numValues = 5, default = 2,
+	page = PivotMod, translation = PivotMod_MovementTurnSpeed,
+}
+
+option PivotMod.TraitVersion
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_TraitVersion,
+}
+
+option PivotMod.NimbleSystem
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_NimbleSystem,
+}
+
+option PivotMod.NimbleLvlMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 1,
+	page = PivotMod, translation = PivotMod_NimbleLvlMultiplier,
+}
+
+option PivotMod.DefaultMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 1,
+	page = PivotMod, translation = PivotMod_DefaultMultiplier,
+}
+
+option PivotMod.OnYourToesMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 1.3,
+	page = PivotMod, translation = PivotMod_OnYourToesMultiplier,
+}
+
+option PivotMod.PodShofeMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 0.4,
+	page = PivotMod, translation = PivotMod_PodShofeMultiplier,
+}
+
+option PivotMod.OnYourToesInGameMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 0.15,
+	page = PivotMod, translation = PivotMod_OnYourToesInGameMultiplier,
+}
+
+option PivotMod.PodShofeInGameMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 0.2,
+	page = PivotMod, translation = PivotMod_PodShofeInGameMultiplier,
+}
+
+option PivotMod.DynamicModifiers
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynamicModifiers,
+}
+
+option PivotMod.DynEncumbrance
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynEncumbrance,
+}
+
+option PivotMod.DynInjury
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynInjury,
+}
+
+option PivotMod.DynFatigue
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynFatigue,
+}
+
+option PivotMod.DynDrunkenness
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynDrunkenness,
+}
+
+option PivotMod.DynPanic
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynPanic,
+}
+
+option PivotMod.DynSneak
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynSneak,
+}

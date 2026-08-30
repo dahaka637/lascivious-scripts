@@ -1,0 +1,436 @@
+VERSION = 1,
+
+option AntibodiesB4220Community_180_general_baseAntibodyGrowth
+{
+	type = double, min = 0.0, max = 300.0, default = 180.0,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_baseAntibodyGrowth,
+}
+
+option AntibodiesB4220Community_180_general_knoxInfectionsSurvivedEffect
+{
+	type = double, min = -300.0, max = 300.0, default = 0.0,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_knoxInfectionsSurvivedEffect,
+}
+
+option AntibodiesB4220Community_180_general_knoxInfectionsSurvivedThreshold
+{
+	type = double, min = 0.0, max = 300.0, default = 100.0,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_knoxInfectionsSurvivedThreshold,
+}
+
+option AntibodiesB4220Community_180_general_knoxMutationEffect
+{
+	type = double, min = -300.0, max = 300.0, default = 0.0,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_knoxMutationEffect,
+}
+
+option AntibodiesB4220Community_180_general_knoxMutationThreshold
+{
+	type = double, min = 0.0, max = 300.0, default = 100.0,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_knoxMutationThreshold,
+}
+
+option AntibodiesB4220Community_180_general_knoxMutationStart
+{
+	type = enum, numValues = 2, default = 2,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_knoxMutationStart,
+}
+
+option AntibodiesB4220Community_180_general_hygienePanelEnabled
+{
+	type = boolean, default = true,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_hygienePanelEnabled,
+}
+
+option AntibodiesB4220Community_180_general_diagnoseEnabled
+{
+	type = boolean, default = true,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_diagnoseEnabled,
+}
+
+option AntibodiesB4220Community_180_general_diagnoseSkillNeeded
+{
+	type = integer, min = 0, max = 10, default = 2,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_diagnoseSkillNeeded,
+}
+
+option AntibodiesB4220Community_180_general_doctorSkillTreatmentMod
+{
+	type = double, min = 0, max = 10, default = 1,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_doctorSkillTreatmentMod,
+}
+
+option AntibodiesB4220Community_180_general_debug
+{
+	type = boolean, default = false,
+	page = AntibodiesB4220Community_general, translation = AntibodiesB4220Community_general_debug,
+}
+
+
+
+
+
+
+option AntibodiesB4220Community_180_condition_fitness
+{
+	type = double, min = -100.0, max = 100.0, default = 5.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_fitness,
+}
+
+option AntibodiesB4220Community_180_condition_strength
+{
+	type = double, min = -100.0, max = 100.0, default = 5.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_strength,
+}
+
+option AntibodiesB4220Community_180_condition_fatigue
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_fatigue,
+}
+
+option AntibodiesB4220Community_180_condition_endurance
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_endurance,
+}
+
+option AntibodiesB4220Community_180_condition_weight
+{
+	type = double, min = -100.0, max = 100.0, default = -20.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_weight,
+}
+
+option AntibodiesB4220Community_180_condition_thirst
+{
+	type = double, min = -100.0, max = 100.0, default = -20.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_thirst,
+}
+
+option AntibodiesB4220Community_180_condition_sickness
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_sickness,
+}
+
+option AntibodiesB4220Community_180_condition_foodSickness
+{
+	type = double, min = -100.0, max = 100.0, default = -10.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_foodSickness,
+}
+
+option AntibodiesB4220Community_180_condition_temperature
+{
+	type = double, min = -100.0, max = 100.0, default = 20.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_temperature,
+}
+
+option AntibodiesB4220Community_180_condition_drunkness
+{
+	type = double, min = -100.0, max = 100.0, default = 10.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_drunkness,
+}
+
+option AntibodiesB4220Community_180_condition_hunger
+{
+	type = double, min = -100.0, max = 100.0, default = -20.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_hunger,
+}
+
+option AntibodiesB4220Community_180_condition_pain
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_pain,
+}
+
+option AntibodiesB4220Community_180_condition_stress
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_stress,
+}
+
+option AntibodiesB4220Community_180_condition_unhappiness
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_unhappiness,
+}
+
+option AntibodiesB4220Community_180_condition_boredom
+{
+	type = double, min = -100.0, max = 100.0, default = -1.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_boredom,
+}
+
+option AntibodiesB4220Community_180_condition_panic
+{
+	type = double, min = -100.0, max = 100.0, default = -5.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_panic,
+}
+
+option AntibodiesB4220Community_180_condition_sanity
+{
+	type = double, min = -100.0, max = 100.0, default = 0.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_sanity,
+}
+
+option AntibodiesB4220Community_180_condition_anger
+{
+	type = double, min = -100.0, max = 100.0, default = 0.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_anger,
+}
+
+option AntibodiesB4220Community_180_condition_fear
+{
+	type = double, min = -100.0, max = 100.0, default = 0.0,
+	page = AntibodiesB4220Community_condition, translation = AntibodiesB4220Community_condition_fear,
+}
+
+
+
+
+
+
+option AntibodiesB4220Community_180_wounds_bandaged
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_bandaged,
+}
+
+option AntibodiesB4220Community_180_wounds_cleanBandage
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_cleanBandage,
+}
+
+option AntibodiesB4220Community_180_wounds_sterilizedBandage
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_sterilizedBandage,
+}
+
+option AntibodiesB4220Community_180_wounds_sterilizedWound
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_sterilizedWound,
+}
+
+option AntibodiesB4220Community_180_wounds_garlic
+{
+	type = double, min = 0.0, max = 10.0, default = 1.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_garlic,
+}
+
+option AntibodiesB4220Community_180_wounds_plantain
+{
+	type = double, min = 0.0, max = 10.0, default = 0.5,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_plantain,
+}
+
+option AntibodiesB4220Community_180_wounds_comfrey
+{
+	type = double, min = 0.0, max = 10.0, default = 0.25,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_comfrey,
+}
+
+
+
+
+
+
+
+option AntibodiesB4220Community_180_wounds_deepWounded
+{
+	type = double, min = -10.0, max = 0.0, default = -4.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_deepWounded,
+}
+
+option AntibodiesB4220Community_180_wounds_bleeding
+{
+	type = double, min = -10.0, max = 0.0, default = -4.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_bleeding,
+}
+
+option AntibodiesB4220Community_180_wounds_bitten
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_bitten,
+}
+
+option AntibodiesB4220Community_180_wounds_cut
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_cut,
+}
+
+option AntibodiesB4220Community_180_wounds_scratched
+{
+	type = double, min = -10.0, max = 0.0, default = -1.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_scratched,
+}
+
+option AntibodiesB4220Community_180_wounds_burnt
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_burnt,
+}
+
+option AntibodiesB4220Community_180_wounds_needBurnWash
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_needBurnWash,
+}
+
+option AntibodiesB4220Community_180_wounds_stiched
+{
+	type = double, min = -10.0, max = 0.0, default = -1.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_stiched,
+}
+
+option AntibodiesB4220Community_180_wounds_haveBullet
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_haveBullet,
+}
+
+option AntibodiesB4220Community_180_wounds_haveGlass
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = AntibodiesB4220Community_wounds, translation = AntibodiesB4220Community_wounds_haveGlass,
+}
+
+
+
+
+
+
+
+
+
+
+option AntibodiesB4220Community_180_infections_regular
+{
+	type = double, min = -10.0, max = 0.0, default = -1.0,
+	page = AntibodiesB4220Community_infections, translation = AntibodiesB4220Community_infections_regular,
+}
+
+option AntibodiesB4220Community_180_infections_virusScratch
+{
+	type = double, min = -10.0, max = 0.0, default = -2.0,
+	page = AntibodiesB4220Community_infections, translation = AntibodiesB4220Community_infections_virusScratch,
+}
+
+option AntibodiesB4220Community_180_infections_virusCut
+{
+	type = double, min = -10.0, max = 0.0, default = -3.0,
+	page = AntibodiesB4220Community_infections, translation = AntibodiesB4220Community_infections_virusCut,
+}
+
+option AntibodiesB4220Community_180_infections_virusBite
+{
+	type = double, min = -10.0, max = 0.0, default = -4.0,
+	page = AntibodiesB4220Community_infections, translation = AntibodiesB4220Community_infections_virusBite,
+}
+
+
+
+
+
+
+
+
+
+option AntibodiesB4220Community_180_hygiene_bloodEffect
+{
+	type = double, min = -100.0, max = 0.0, default = -20.0,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_bloodEffect,
+}
+
+option AntibodiesB4220Community_180_hygiene_dirtEffect
+{
+	type = double, min = -100.0, max = 0.0, default = -10.0,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_dirtEffect,
+}
+
+option AntibodiesB4220Community_180_hygiene_bandaged
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_bandaged,
+}
+
+option AntibodiesB4220Community_180_hygiene_cleanBandage
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_cleanBandage,
+}
+
+option AntibodiesB4220Community_180_hygiene_sterilizedBandage
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_sterilizedBandage,
+}
+
+option AntibodiesB4220Community_180_hygiene_sterilizedWound
+{
+	type = double, min = 0.0, max = 1.0, default = 0.25,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_sterilizedWound,
+}
+
+option AntibodiesB4220Community_180_hygiene_deepWounded
+{
+	type = double, min = -10.0, max = 0.0, default = -0.80,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_deepWounded,
+}
+
+option AntibodiesB4220Community_180_hygiene_bleeding
+{
+	type = double, min = -10.0, max = 0.0, default = -0.60,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_bleeding,
+}
+
+option AntibodiesB4220Community_180_hygiene_bitten
+{
+	type = double, min = -10.0, max = 0.0, default = -0.40,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_bitten,
+}
+
+option AntibodiesB4220Community_180_hygiene_cut
+{
+	type = double, min = -10.0, max = 0.0, default = -0.20,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_cut,
+}
+
+option AntibodiesB4220Community_180_hygiene_scratched
+{
+	type = double, min = -10.0, max = 0.0, default = -0.10,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_scratched,
+}
+
+option AntibodiesB4220Community_180_hygiene_burnt
+{
+	type = double, min = -10.0, max = 0.0, default = -0.40,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_burnt,
+}
+
+option AntibodiesB4220Community_180_hygiene_needBurnWash
+{
+	type = double, min = -10.0, max = 0.0, default = -0.60,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_needBurnWash,
+}
+
+option AntibodiesB4220Community_180_hygiene_stiched
+{
+	type = double, min = -10.0, max = 0.0, default = -0.10,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_stiched,
+}
+
+option AntibodiesB4220Community_180_hygiene_haveBullet
+{
+	type = double, min = -10.0, max = 0.0, default = -0.60,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_haveBullet,
+}
+
+option AntibodiesB4220Community_180_hygiene_haveGlass
+{
+	type = double, min = -10.0, max = 0.0, default = -0.40,
+	page = AntibodiesB4220Community_hygiene, translation = AntibodiesB4220Community_hygiene_haveGlass,
+}

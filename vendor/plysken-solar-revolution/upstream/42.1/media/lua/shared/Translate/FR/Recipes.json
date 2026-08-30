@@ -1,0 +1,19 @@
+{
+    "Make_DIY_Battery": "Faire une batterie de bricolage",
+    "WireCarBattery": "Batterie de voiture",
+    "UnWireCarBattery": "Batterie de voiture unie",
+    "Make_Solar_Roof_Tile": "Fabriquer un panneau photovoltaïque plat",
+    "Make_Wall-Mounted_Solar_Panel": "Fabriquer un panneau photovoltaïque mural",
+    "Make_Floor-Mounted_Solar_Panel": "Fabriquer un panneau photovoltaïque fixable au sol",
+    "Reverse_Solar_Panel": "Diviser le panneau photovoltaïque en plusieurs parties",
+    "Create_Battery_Bank": "Créer une batterie d'accumulateurs",
+    "Create_Solar_Failsafe": "Créer une sécurité solaire",
+    "Make_Solar_Panel": "Faire un panneau solaire (partie)",
+    "Make_Inverter": "Faire l'onduleur",
+    "Make_Improvised_Battery": "Fabriquer une batterie improvisée",
+    "Recondition_Battery": "Reconditionner une batterie",
+    "Dismantle_Solar_Failsafe": "Démonter le failsafe solaire",
+    "Dismantle_Battery_Bank": "Demanteler le Banc de Batteries",
+    "Reverse_Solar_Roof_Tile": "Demanteler le Panneau Solaire Plat",
+    "Make_Solar_Panel_Realistic": "Faire un panneau solaire réaliste (partie)"
+}

@@ -1,0 +1,508 @@
+VERSION = 1,
+
+
+option LasciviousShop.CreditsPerZombieKill
+{
+    type = double,
+    default = 1.0,
+    min = 0.0,
+    max = 1000.0,
+    page = LasciviousShopEconomy,
+    translation = LSCreditsPerZombieKill,
+}
+
+option LasciviousShop.CreditsPerHourSurvived
+{
+    type = double,
+    default = 1.0,
+    min = 0.0,
+    max = 1000.0,
+    page = LasciviousShopEconomy,
+    translation = LSCreditsPerHourSurvived,
+}
+
+option LasciviousShop.KillCreditStealPercent
+{
+    type = double,
+    default = 0.0,
+    min = 0.0,
+    max = 100.0,
+    page = LasciviousShopEconomy,
+    translation = LSKillCreditStealPercent,
+}
+
+option LasciviousShop.PreserveCreditsOnDeath
+{
+    type = boolean,
+    default = false,
+    page = LasciviousShopEconomy,
+    translation = LSPreserveCreditsOnDeath,
+}
+
+/* 2026-08-21: KillCreditStealWindowSeconds, UseCategoryPriceMultipliers and
+   every per-category price multiplier removed -- explicit request, "não tem
+   necessidade para ser config do sandbox... já acho equilibrado como está".
+   The per-category multiplier MECHANISM still exists in code (see
+   LS.DEFAULTS.categoryPriceMultipliers in LasciviousShop_Shared.lua) for a
+   future code-level tweak if ever wanted, just not sandbox-exposed. Only the
+   general PriceMultiplier below stays configurable. */
+option LasciviousShop.PriceMultiplier
+{
+    type = double,
+    default = 1.0,
+    min = 0.05,
+    max = 100.0,
+    page = LasciviousShopEconomy,
+    translation = LSPriceMultiplier,
+}
+
+option LasciviousShop.DebugAddCredits
+{
+    type = boolean,
+    default = false,
+    page = LasciviousShopEconomy,
+    translation = LSDebugAddCredits,
+}
+
+option LasciviousShop.OffersEnabled
+{
+    type = boolean,
+    default = true,
+    page = LasciviousShopOffers,
+    translation = LSOffersEnabled,
+}
+
+option LasciviousShop.OfferRotationRealMinutes
+{
+    type = integer,
+    default = 60,
+    min = 1,
+    max = 10080,
+    page = LasciviousShopOffers,
+    translation = LSOfferRotationRealMinutes,
+}
+
+option LasciviousShop.OfferProductCountMin
+{
+    type = integer,
+    default = 1,
+    min = 1,
+    max = 50,
+    page = LasciviousShopOffers,
+    translation = LSOfferProductCountMin,
+}
+
+option LasciviousShop.OfferProductCountMax
+{
+    type = integer,
+    default = 3,
+    min = 1,
+    max = 50,
+    page = LasciviousShopOffers,
+    translation = LSOfferProductCountMax,
+}
+
+option LasciviousShop.OfferDiscountMinPercent
+{
+    type = integer,
+    default = 5,
+    min = 1,
+    max = 99,
+    page = LasciviousShopOffers,
+    translation = LSOfferDiscountMinPercent,
+}
+
+option LasciviousShop.OfferDiscountMaxPercent
+{
+    type = integer,
+    default = 80,
+    min = 1,
+    max = 99,
+    page = LasciviousShopOffers,
+    translation = LSOfferDiscountMaxPercent,
+}
+
+/* 2026-08-21: OfferBadgeEnabled, OfferHighlightEnabled and the highlight RGB
+   removed -- explicit request, "isso é algo que eu nunca vou mudar, por
+   default sempre ativo". Both stay hardcoded ON with their old default
+   colour in HardcoreKits_Config.lua / LasciviousShop_Shared.lua. */
+
+
+/* 2026-08-21: the whole LasciviousShopInterface page (WindowDimOnDanger*,
+   CloseOnAttackEnabled) removed -- explicit request, "pois eu sempre uso".
+   All four stay hardcoded ON at their old defaults in
+   LasciviousShop_Shared.lua / HardcoreKits_Config.lua. */
+
+
+option LasciviousFactionsSystem.BaseClaimTiles
+{
+    type = integer,
+    default = 400,
+    min = 0,
+    max = 1000000,
+    page = LasciviousFactionsSystem,
+    translation = BaseClaimTiles,
+}
+
+option LasciviousFactionsSystem.PointsPerZombieKill
+{
+    type = double,
+    default = 1.0,
+    min = 0,
+    max = 1000,
+    page = LasciviousFactionsSystem,
+    translation = PointsPerZombieKill,
+}
+
+option LasciviousFactionsSystem.PointsPerHourSurvived
+{
+    type = double,
+    default = 1.0,
+    min = 0,
+    max = 1000,
+    page = LasciviousFactionsSystem,
+    translation = PointsPerHourSurvived,
+}
+
+option LasciviousFactionsSystem.PreserveMemberPowerOnDeath
+{
+    type = boolean,
+    default = false,
+    page = LasciviousFactionsSystem,
+    translation = PreserveMemberPowerOnDeath,
+}
+
+option LasciviousFactionsSystem.MinPersonalScoreToCreateFaction
+{
+    type = double,
+    default = 0.0,
+    min = 0,
+    max = 1000000,
+    page = LasciviousFactionsSystem,
+    translation = MinPersonalScoreToCreateFaction,
+}
+
+option LasciviousFactionsSystem.TilesPerScorePoint
+{
+    type = integer,
+    default = 5,
+    min = 0,
+    max = 100000,
+    page = LasciviousFactionsSystem,
+    translation = TilesPerScorePoint,
+}
+
+option LasciviousFactionsSystem.MaxClaimTiles
+{
+    type = integer,
+    default = 40000,
+    min = 0,
+    max = 100000000,
+    page = LasciviousFactionsSystem,
+    translation = MaxClaimTiles,
+}
+
+option LasciviousFactionsSystem.MinFactionSizeToClaim
+{
+    type = integer,
+    default = 1,
+    min = 1,
+    max = 100,
+    page = LasciviousFactionsSystem,
+    translation = MinFactionSizeToClaim,
+}
+
+option LasciviousFactionsSystem.PointsPerClaimArea
+{
+    type = integer,
+    default = 2500,
+    min = 1,
+    max = 1000000,
+    page = LasciviousFactionsSystem,
+    translation = PointsPerClaimArea,
+}
+
+/* 2026-08-21: everything below removed from the sandbox on explicit request
+   ("Deixa só: ..." -- an exhaustive keep-list, everything else out) as part
+   of the same sandbox-option-count reduction. Every removed option now has
+   a fixed value in FF.getOptions() (shared/LFS_Shared.lua) instead of a
+   sandbox-configurable one -- same values as the old defaults above, unless
+   noted otherwise:
+   MaxClaimSeparation -- removed AND the underlying limit itself is gone,
+     always unlimited now (hardcoded 0), per explicit request.
+   DisableVanillaSafehouses -- hardcoded to ALWAYS ON (true) now, was
+     default false -- explicit request ("marca como default ativo").
+   Also removed at their old defaults: MaxPublicClaimAreas, ClaimBufferTiles,
+   MaxRolesPerFaction, MaxMembersPerFaction, ClaimDecayWarnDays,
+   TerritorySafeZoneEnabled, SafeZoneCullPerTick, SafeZoneRadius,
+   TerritoryMoodBuffEnabled, TerritoryHealthBuffEnabled,
+   TerritoryFatigueBuffEnabled, TerritoryNeedsBuffEnabled,
+   TerritoryWellbeingPower, FactionRespawnEnabled, ShowClaimsOnMinimap,
+   MemberMarkersEnabled, ShowMembersOnMinimap, FactionChatEnabled,
+   BroadcastFactionEvents, ShowFactionTagsInChat, HudIconPosition,
+   ShowFactionSidebarButton, ShowNameplates, ShowEnemyNameplates,
+   ShowHudTicker, IntrusionAlertsEnabled, ShowClaimBordersInWorld,
+   ClaimBorderRange, LootProtectionEnabled, EnforceClaimPermissions,
+   EnforceFriendlyFire, CaptureAttemptsPerDay, RaidHoldSeconds,
+   RaidMaxDurationSeconds, RaidForcePvp, RaidWindowStartHour,
+   RaidWindowEndHour, LeaderboardEnabled, WarScoreTarget, WarScoreRaidWon,
+   WarScoreKill, WarCeasefireHours, PactTermDays, SeasonsEnabled,
+   SeasonLengthDays. */
+
+option LasciviousFactionsSystem.ClaimDecayDays
+{
+    type = integer,
+    default = 0,
+    min = 0,
+    max = 365,
+    page = LasciviousFactionsSystem,
+    translation = ClaimDecayDays,
+}
+
+option LasciviousFactionsSystem.RaidsEnabled
+{
+    type = boolean,
+    default = false,
+    page = LasciviousFactionsSystem,
+    translation = RaidsEnabled,
+}
+
+/* Default flipped false->true 2026-08-21: explicit request ("já deixe
+   default ativo também"). */
+option LasciviousFactionsSystem.OfflineRaidProtection
+{
+    type = boolean,
+    default = true,
+    page = LasciviousFactionsSystem,
+    translation = OfflineRaidProtection,
+}
+
+/* Default flipped false->true 2026-08-21: explicit request ("e deixe
+   default ativo"). */
+option LasciviousFactionsSystem.WarsEnabled
+{
+    type = boolean,
+    default = true,
+    page = LasciviousFactionsSystem,
+    translation = WarsEnabled,
+}
+
+option LasciviousFactionsSystem.PactsEnabled
+{
+    type = boolean,
+    default = true,
+    page = LasciviousFactionsSystem,
+    translation = PactsEnabled,
+}
+
+option LasciviousFactionsSystem.Debug
+{
+    type = boolean,
+    default = false,
+    page = LasciviousFactionsSystem,
+    translation = Debug,
+}
+
+option LasciviousFactionsSystem.AlwaysLogErrors
+{
+    type = boolean,
+    default = true,
+    page = LasciviousFactionsSystem,
+    translation = AlwaysLogErrors,
+}
+
+/* DebugToolsEnabled removed 2026-08-30, explicit request: the "unlock hidden
+   debug UI" switch (shared with HardcoreKits, see HardcoreKits_SandboxBridge.lua)
+   is now computed instead of a stored option -- true singleplayer plus the
+   Debug flag above, see LFS_Shared.lua's debugToolsEnabled. Never true in a
+   real MP session no matter how Debug is set, so there is no separate
+   always-off-by-default option left to declare. */
+
+/* 2026-08-21: Kit Inicial trimmed to the values actually tuned in practice --
+   explicit request. InitialFirearmChance default raised 50->100 per request.
+   Removed at their old hardcoded defaults (now fixed in
+   HardcoreKits_Config.lua): InitialFoodPrimaryPoolChance,
+   InitialFoodCannedShareOfPrimary, InitialWaterChance,
+   InitialTraumaBagChance, InitialMedicalKitChance,
+   InitialBackpackWeightSchool/Common/Large/Military. The whole melee-category
+   weighting family (InitialMeleeWeightSmallBlunt/Blunt/Blade/Axe/Spear) is
+   removed too -- explicit request, "deixar tudo aleatório mesmo sem isso" --
+   all five stay hardcoded at their old equal weight (20), which already is a
+   uniform/random pick across categories. */
+option HardcoreKits.InitialKitEnabled
+{
+	type = boolean, default = true,
+	page = HardcoreKitsInitial, translation = HKInitialKitEnabled,
+}
+
+option HardcoreKits.InitialKitSingleUseEnabled
+{
+	type = boolean, default = false,
+	page = HardcoreKitsInitial, translation = HKInitialKitSingleUseEnabled,
+}
+
+option HardcoreKits.InitialKitCooldownEnabled
+{
+	type = boolean, default = false,
+	page = HardcoreKitsInitial, translation = HKInitialKitCooldownEnabled,
+}
+
+option HardcoreKits.InitialKitCooldownHours
+{
+	type = integer, min = 0, max = 500, default = 2,
+	page = HardcoreKitsInitial, translation = HKInitialKitCooldownHours,
+}
+
+option HardcoreKits.InitialFoodQuantityMin
+{
+	type = integer, min = 1, max = 20, default = 1,
+	page = HardcoreKitsInitial, translation = HKInitialFoodQuantityMin,
+}
+
+option HardcoreKits.InitialFoodQuantityMax
+{
+	type = integer, min = 1, max = 20, default = 8,
+	page = HardcoreKitsInitial, translation = HKInitialFoodQuantityMax,
+}
+
+option HardcoreKits.InitialDrinkQuantityMin
+{
+	type = integer, min = 1, max = 20, default = 1,
+	page = HardcoreKitsInitial, translation = HKInitialDrinkQuantityMin,
+}
+
+option HardcoreKits.InitialDrinkQuantityMax
+{
+	type = integer, min = 1, max = 20, default = 6,
+	page = HardcoreKitsInitial, translation = HKInitialDrinkQuantityMax,
+}
+
+option HardcoreKits.InitialFirearmChance
+{
+	type = integer, min = 0, max = 100, default = 100,
+	page = HardcoreKitsInitial, translation = HKInitialFirearmChance,
+}
+
+option HardcoreKits.InitialAmmoBoxesMin
+{
+	type = integer, min = 1, max = 10, default = 1,
+	page = HardcoreKitsInitial, translation = HKInitialAmmoBoxesMin,
+}
+
+option HardcoreKits.InitialAmmoBoxesMax
+{
+	type = integer, min = 1, max = 10, default = 4,
+	page = HardcoreKitsInitial, translation = HKInitialAmmoBoxesMax,
+}
+
+option HardcoreKits.InitialMeleeHighDamageOnly
+{
+	type = boolean, default = false,
+	page = HardcoreKitsInitial, translation = HKInitialMeleeHighDamageOnly,
+}
+
+option HardcoreKits.InitialMeleeMinDamage
+{
+	type = double, min = 0.0, max = 10.0, default = 2.0,
+	page = HardcoreKitsInitial, translation = HKInitialMeleeMinDamage,
+}
+
+option HardcoreKits.InitialResourceQuantityMin
+{
+	type = integer, min = 1, max = 20, default = 1,
+	page = HardcoreKitsInitial, translation = HKInitialResourceQuantityMin,
+}
+
+option HardcoreKits.InitialResourceQuantityMax
+{
+	type = integer, min = 1, max = 20, default = 2,
+	page = HardcoreKitsInitial, translation = HKInitialResourceQuantityMax,
+}
+
+/* 2026-08-21: Recompensa de Sobrevivência trimmed -- explicit request.
+   SurvivalCategoriesFullyRandom is hardcoded ON now (was default false,
+   "deixar... totalmente aleatórias como default"), which makes every category
+   weight below it dead weight by design -- all removed at their old hardcoded
+   defaults: SurvivalCountWeight1/2/3, SurvivalCategoryWeightFood/Drink/
+   Resource/Combat/Ammo, SurvivalCombatWeightMelee/Firearm,
+   SurvivalFoodQuantityMin/Max, SurvivalFoodPrimaryPoolChance,
+   SurvivalDrinkQuantityMin/Max, SurvivalWaterChance,
+   SurvivalResourceQuantityMin/Max, SurvivalTraumaBagChance,
+   SurvivalMedicalKitChance, SurvivalAmmoBoxQuantityMin/Max,
+   SurvivalAmmoPreferOwnedEnabled/Weight, SurvivalFirearmWeightCommon/
+   Uncommon/Rare, SurvivalSkillBonusChance, SurvivalSkillBonusGroupChance.
+
+   2026-08-28: SurvivalRewardEnabled removido tambem -- bug conhecido em
+   producao (resgates liberando de novo bem antes do proximo marco de dias
+   esperado, ver HardcoreKits_State.lua). Fixo em false no Config.lua e fora
+   do mapeamento de sandbox ate a causa raiz ser investigada com calma; um
+   checkbox aqui so confundiria o dono do servidor (pareceria religar o
+   recurso, mas nao teria efeito nenhum). Reintroduzir esta option quando o
+   bug for corrigido. */
+option HardcoreKits.SurvivalRewardIntervalDays
+{
+	type = integer, min = 1, max = 30, default = 7,
+	page = HardcoreKitsSurvival, translation = HKSurvivalRewardIntervalDays,
+}
+
+option HardcoreKits.SurvivalMaximumStoredRewards
+{
+	type = integer, min = 0, max = 20, default = 3,
+	page = HardcoreKitsSurvival, translation = HKSurvivalMaximumStoredRewards,
+}
+
+/* 2026-08-21: Bônus de Habilidade trimmed to only the two values actually
+   tuned in practice -- explicit request ("deixa só: Kit inicial min e o
+   máximo"). SkillBoostEnabled itself is hardcoded ON now. Removed at their
+   old hardcoded defaults: SkillBoostTierWeightVeryLow/Low/Medium/High,
+   SkillBoostVeryLow/Low/Medium/HighMinLevels/MaxLevels. */
+option HardcoreKits.InitialSkillGroupCountMin
+{
+	type = integer, min = 1, max = 6, default = 6,
+	page = HardcoreKitsSkills, translation = HKInitialSkillGroupCountMin,
+}
+
+option HardcoreKits.InitialSkillGroupCountMax
+{
+	type = integer, min = 1, max = 6, default = 6,
+	page = HardcoreKitsSkills, translation = HKInitialSkillGroupCountMax,
+}
+
+/* 2026-08-21: Geral trimmed to the three values actually tuned in practice --
+   explicit request. FoodDrinkMultiRollMode hardcoded to OFF now (was default
+   ON) -- "para que default ele venha desativado". FastRouletteMode hardcoded
+   to ON now (was default off) -- "deixa default ativo" -- and the rest of the
+   roulette timing family (RouletteSpeedMultiplier/StepDurationMs/
+   PauseBetweenMs, FastRouletteBatchSize/StepDurationMs/StaggerMs) stays at
+   its old hardcoded default alongside it. EnableAuditLog hardcoded to OFF now
+   (was default ON) -- "default deixa desativado". MedicalKitRandomItemCountMax
+   hardcoded to 5 now (was 3) -- explicit request; Min stays at its old default.
+   ModdedContentEnabled/IncludeFirearms removed entirely (user is building a
+   dedicated feature for this later) -- stay hardcoded OFF, their old default.
+   Also removed at their old hardcoded defaults: ResourceReducedWeightPercent,
+   MeleeHeavyReducedWeightPercent, AutoOpenZombieCheckEnabled/Radius,
+   WelcomeMessageEnabled, RouletteOverlayEnabled. */
+option HardcoreKits.MeleeHeavyWeightThreshold
+{
+	type = double, min = 0.0, max = 50.0, default = 3.0,
+	page = HardcoreKitsGeneral, translation = HKMeleeHeavyWeightThreshold,
+}
+
+option HardcoreKits.AutoOpenOnSpawnEnabled
+{
+	type = boolean, default = true,
+	page = HardcoreKitsGeneral, translation = HKAutoOpenOnSpawnEnabled,
+}
+
+option HardcoreKits.SidebarButtonEnabled
+{
+	type = boolean, default = true,
+	page = HardcoreKitsGeneral, translation = HKSidebarButtonEnabled,
+}
+
+
+
+/* 2026-08-21: the whole PhunZones page removed -- explicit request, "só
+   usamos ele de base mesmo, não há necessidade de ter config no sandbox".
+   Widget/Debug/EditorRole all stay hardcoded at their old defaults in
+   shared/PhunZones/core.lua (Core.settings). */

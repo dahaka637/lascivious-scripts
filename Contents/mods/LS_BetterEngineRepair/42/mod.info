@@ -1,0 +1,10 @@
+name=Lascivious Scripts - Better Engine Repair
+id=LS_BetterEngineRepair
+poster=poster.png
+icon=icon.png
+versionMin=42.20
+modversion=1.0.0
+description=Reparo de motor configurável por peça sobressalente, para cada nível de Mecânica. <LINE>
+description=Preserva o fluxo de reparo e reparos com múltiplas peças do vanilla. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

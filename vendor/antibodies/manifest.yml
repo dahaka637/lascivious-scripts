@@ -1,0 +1,38 @@
+schema: 1
+module_key: antibodies
+name: Antibodies
+bundled_mod_id: LS_Antibodies
+status: enabled
+
+upstream:
+  workshop_id: "3786732297"
+  original_mod_id: "AntibodiesB4220ServerFix"
+  version: "1.97 + community fix 0.2.3"
+  imported_at: "2026-08-26"
+  source_path: "vendor/antibodies/upstream"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: true
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/antibodies/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: true

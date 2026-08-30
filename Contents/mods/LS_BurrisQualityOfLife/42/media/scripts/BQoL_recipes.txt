@@ -1,0 +1,128 @@
+/*
+ * Burris Quality of Life - craft recipes.
+ *
+ * Each of these fills a real gap in 42.20:
+ *
+ *   CleanBandageWithAlcohol
+ *     Vanilla `CleanBandage` only accepts water, and `DisinfectRag` only turns
+ *     an already-clean rag into an alcohol-soaked one. Neither lets you clean a
+ *     *dirty* rag when you have booze but no water.
+ *
+ *   BQoL_DisinfectRagWithCologne
+ *     Cologne (alcohol 0.7) and Perfume (alcohol 0.8) have no crafting use
+ *     anywhere in 42.20 -- they are pure junk loot. This makes them an
+ *     improvised substitute for rubbing alcohol.
+ *
+ *   CutSheetWithClothes
+ *     Vanilla `CutSheet` only accepts Base.FabricRoll_Cotton, so there is no
+ *     way to turn old clothing into a sheet.
+ *
+ * B42 format notes:
+ *   - `time` is lowercase; `Time` is silently ignored
+ *   - item tags are namespaced and lowercase: tags[base:scissors]
+ *   - there is no `Alcohol` fluid. Fluids are declared across three files:
+ *     fluids.txt (Water, RubbingAlcohol, Cologne, Perfume, ...),
+ *     fluids_Alcoholic.txt (Vodka, Whiskey, Rum, ...) and
+ *     fluids_Beverages.txt. Vodka and Whiskey are real -- do not assume a
+ *     fluid is missing just because it is absent from fluids.txt.
+ */
+
+module Base
+{
+    craftRecipe CleanBandageWithAlcohol
+    {
+        timedAction = ScrubClothWithSoap,
+        time = 40,
+        Tags = InHandCraft;Health,
+        category = Medical,
+        MetaRecipe = CleanBandage,
+        inputs
+        {
+            item 1 [Base.BandageDirty;Base.DenimStripsDirty;Base.LeatherStripsDirty;Base.RippedSheetsDirty] mode:destroy flags[AllowFavorite;InheritFavorite] mappers[ragType],
+            item 1 [*],
+            /* Same fluid list vanilla's own medical recipes use
+               (recipes_medical.txt:70). */
+            -fluid 0.1 [RubbingAlcohol;Vodka;Whiskey],
+        }
+        outputs
+        {
+            item 1 mapper:ragType,
+        }
+        itemMapper ragType
+        {
+            Base.Bandage = Base.BandageDirty,
+            Base.DenimStrips = Base.DenimStripsDirty,
+            Base.LeatherStrips = Base.LeatherStripsDirty,
+            Base.RippedSheets = Base.RippedSheetsDirty,
+        }
+    }
+
+    /*
+     * Sterilise a clean rag with cologne or perfume.
+     *
+     * Shaped after vanilla `DisinfectRag` (recipes_medical.txt:60), with three
+     * deliberate differences:
+     *
+     *   - Named with a prefix. The unused ids DisinfectRag2/3/4 still carry
+     *     live translation keys in several languages' Recipes.json, so reusing
+     *     one would silently inherit foreign localisation.
+     *
+     *   - Fluids are named explicitly rather than matched by category. Cologne
+     *     and Perfume belong only to `Poisons` and `Industrial`, so
+     *     categories[...] would also match Bleach, Acid, Petrol and
+     *     PoisonPotent. No mode:mixture either -- both declare an empty
+     *     BlendWhiteList, so they never exist as blends.
+     *
+     *   - 0.05 rather than vanilla's 0.1. Cologne and Perfume bottles have
+     *     Capacity = 0.1, so 0.1 would drain a whole bottle per rag and fail
+     *     outright on any partly-filled one. At 0.05 a full bottle does two
+     *     rags; bottles under half full still will not work, which is the
+     *     intended scarcity.
+     *
+     * Only cotton has sterile variants -- there are no AlcoholDenimStrips or
+     * AlcoholLeatherStrips items in 42.20, so denim and leather cannot be
+     * covered without inventing new items.
+     */
+    craftRecipe BQoL_DisinfectRagWithCologne
+    {
+        timedAction = ApplyAlcohol,
+        time = 60,
+        Tags = InHandCraft;Health,
+        category = Medical,
+        inputs
+        {
+            item 1 [Base.RippedSheets;Base.Bandage] mode:destroy flags[AllowFavorite;InheritFavorite] mappers[ragType],
+            item 1 [*],
+            -fluid 0.05 [Cologne;Perfume],
+        }
+        outputs
+        {
+            item 1 mapper:ragType,
+        }
+        itemMapper ragType
+        {
+            Base.AlcoholRippedSheets = Base.RippedSheets,
+            Base.AlcoholBandage = Base.Bandage,
+        }
+    }
+
+    craftRecipe CutSheetWithClothes
+    {
+        timedAction = SewingCloth,
+        time = 60,
+        Tags = AnySurfaceCraft,
+        category = Tailoring,
+        MetaRecipe = CutSheet,
+        inputs
+        {
+            /* `base:ripclothingcoton` is a vanilla typo that exists alongside the
+               correctly spelled tag; both are listed so neither set is missed. */
+            item 1 tags[base:scissors] mode:keep flags[SharpnessCheck;IsNotDull],
+            item 1 tags[base:ripclothingcotton;base:ripclothingcoton],
+        }
+        outputs
+        {
+            item 1 Base.Sheet,
+        }
+    }
+}

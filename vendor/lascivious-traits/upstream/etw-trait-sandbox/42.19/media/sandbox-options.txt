@@ -1,0 +1,1063 @@
+VERSION = 1,
+
+option ETWTraitSandbox.DisableAllCustomTraits
+{
+	type = boolean,
+	default = false,
+	page = ETWTraitSandbox,
+	translation = ETWTS_DisableAllCustomTraits,
+}
+
+option ETWTraitSandbox.DisabledTraitsAcquirableViaGameplay
+{
+	type = boolean,
+	default = false,
+	page = ETWTraitSandbox,
+	translation = ETWTS_DisabledTraitsAcquirableViaGameplay,
+}
+
+option ETWTraitSandbox.AVClubEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AVClubEnabled,
+}
+option ETWTraitSandbox.AVClubPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AVClubPointValue,
+}
+
+option ETWTraitSandbox.AxeThrowerEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AxeThrowerEnabled,
+}
+option ETWTraitSandbox.AxeThrowerPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AxeThrowerPointValue,
+}
+
+option ETWTraitSandbox.BloodlustEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BloodlustEnabled,
+}
+option ETWTraitSandbox.BloodlustPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BloodlustPointValue,
+}
+
+option ETWTraitSandbox.BodyWorkEnthusiastEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BodyWorkEnthusiastEnabled,
+}
+option ETWTraitSandbox.BodyWorkEnthusiastPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BodyWorkEnthusiastPointValue,
+}
+
+option ETWTraitSandbox.EatingSpeedTraitsEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_EatingSpeedTraitsEnabled,
+}
+option ETWTraitSandbox.FastEaterPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -1,
+	page = ETWTraitSandbox,
+	translation = ETWTS_FastEaterPointValue,
+}
+
+option ETWTraitSandbox.FurnitureAssemblerEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_FurnitureAssemblerEnabled,
+}
+option ETWTraitSandbox.FurnitureAssemblerPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_FurnitureAssemblerPointValue,
+}
+
+option ETWTraitSandbox.GunEnthusiastEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GunEnthusiastEnabled,
+}
+option ETWTraitSandbox.GunEnthusiastPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GunEnthusiastPointValue,
+}
+
+option ETWTraitSandbox.GymRatEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GymRatEnabled,
+}
+option ETWTraitSandbox.GymRatPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GymRatPointValue,
+}
+
+option ETWTraitSandbox.HoarderEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HoarderEnabled,
+}
+option ETWTraitSandbox.HoarderPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HoarderPointValue,
+}
+
+option ETWTraitSandbox.HomeCookEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HomeCookEnabled,
+}
+option ETWTraitSandbox.HomeCookPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -2,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HomeCookPointValue,
+}
+
+option ETWTraitSandbox.FogTraitsEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_FogTraitsEnabled,
+}
+option ETWTraitSandbox.HomichlophobiaPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 1,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HomichlophobiaPointValue,
+}
+
+option ETWTraitSandbox.HomichlophilePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -1,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HomichlophilePointValue,
+}
+
+option ETWTraitSandbox.BladeEnthusiastEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BladeEnthusiastEnabled,
+}
+option ETWTraitSandbox.BladeEnthusiastPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BladeEnthusiastPointValue,
+}
+
+option ETWTraitSandbox.KnifeFighterEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_KnifeFighterEnabled,
+}
+option ETWTraitSandbox.KnifeFighterPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_KnifeFighterPointValue,
+}
+
+option ETWTraitSandbox.LightStepEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_LightStepEnabled,
+}
+option ETWTraitSandbox.LightStepPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_LightStepPointValue,
+}
+
+option ETWTraitSandbox.LowProfileEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_LowProfileEnabled,
+}
+option ETWTraitSandbox.LowProfilePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_LowProfilePointValue,
+}
+
+option ETWTraitSandbox.RainTraitsEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_RainTraitsEnabled,
+}
+option ETWTraitSandbox.PluviophilePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -2,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PluviophilePointValue,
+}
+
+option ETWTraitSandbox.PluviophobiaPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 2,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PluviophobiaPointValue,
+}
+
+option ETWTraitSandbox.PainToleranceEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PainToleranceEnabled,
+}
+option ETWTraitSandbox.PainTolerancePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -2,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PainTolerancePointValue,
+}
+
+option ETWTraitSandbox.PetTherapyEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PetTherapyEnabled,
+}
+option ETWTraitSandbox.PetTherapyPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PetTherapyPointValue,
+}
+
+option ETWTraitSandbox.PolearmFighterEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PolearmFighterEnabled,
+}
+option ETWTraitSandbox.PolearmFighterPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PolearmFighterPointValue,
+}
+
+option ETWTraitSandbox.RestorationExpertEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_RestorationExpertEnabled,
+}
+option ETWTraitSandbox.RestorationExpertPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -8,
+	page = ETWTraitSandbox,
+	translation = ETWTS_RestorationExpertPointValue,
+}
+
+option ETWTraitSandbox.SlowEaterPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 1,
+	page = ETWTraitSandbox,
+	translation = ETWTS_SlowEaterPointValue,
+}
+
+option ETWTraitSandbox.StickFighterEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_StickFighterEnabled,
+}
+option ETWTraitSandbox.StickFighterPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_StickFighterPointValue,
+}
+
+option ETWTraitSandbox.AnemicEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AnemicEnabled,
+}
+option ETWTraitSandbox.AnemicPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AnemicPointValue,
+}
+option ETWTraitSandbox.BadTeethEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BadTeethEnabled,
+}
+option ETWTraitSandbox.BadTeethPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BadTeethPointValue,
+}
+option ETWTraitSandbox.BlissfulEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BlissfulEnabled,
+}
+option ETWTraitSandbox.BlissfulPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BlissfulPointValue,
+}
+option ETWTraitSandbox.ButterfingersEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ButterfingersEnabled,
+}
+option ETWTraitSandbox.ButterfingersPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 12,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ButterfingersPointValue,
+}
+option ETWTraitSandbox.HardyEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HardyEnabled,
+}
+option ETWTraitSandbox.HardyPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_HardyPointValue,
+}
+option ETWTraitSandbox.IdealWeightEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_IdealWeightEnabled,
+}
+option ETWTraitSandbox.IdealWeightPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_IdealWeightPointValue,
+}
+option ETWTraitSandbox.PackMouseEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PackMouseEnabled,
+}
+option ETWTraitSandbox.PackMousePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 7,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PackMousePointValue,
+}
+option ETWTraitSandbox.QuickRestEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_QuickRestEnabled,
+}
+option ETWTraitSandbox.QuickRestPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_QuickRestPointValue,
+}
+option ETWTraitSandbox.WellFittedEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_WellFittedEnabled,
+}
+option ETWTraitSandbox.WellFittedPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_WellFittedPointValue,
+}
+option ETWTraitSandbox.DepressiveEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_DepressiveEnabled,
+}
+option ETWTraitSandbox.DepressivePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_DepressivePointValue,
+}
+option ETWTraitSandbox.LeadFootEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_LeadFootEnabled,
+}
+option ETWTraitSandbox.LeadFootPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -2,
+	page = ETWTraitSandbox,
+	translation = ETWTS_LeadFootPointValue,
+}
+option ETWTraitSandbox.MundaneEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_MundaneEnabled,
+}
+option ETWTraitSandbox.MundanePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 9,
+	page = ETWTraitSandbox,
+	translation = ETWTS_MundanePointValue,
+}
+option ETWTraitSandbox.ThickBloodedEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ThickBloodedEnabled,
+}
+option ETWTraitSandbox.ThickBloodedPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ThickBloodedPointValue,
+}
+
+option ETWTraitSandbox.AntiGunActivistEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AntiGunActivistEnabled,
+}
+option ETWTraitSandbox.AntiGunActivistPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AntiGunActivistPointValue,
+}
+option ETWTraitSandbox.AsceticEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AsceticEnabled,
+}
+option ETWTraitSandbox.AsceticPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_AsceticPointValue,
+}
+option ETWTraitSandbox.ActionHeroEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ActionHeroEnabled,
+}
+option ETWTraitSandbox.ActionHeroPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -8,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ActionHeroPointValue,
+}
+option ETWTraitSandbox.BouncerEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BouncerEnabled,
+}
+option ETWTraitSandbox.BouncerPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -5,
+	page = ETWTraitSandbox,
+	translation = ETWTS_BouncerPointValue,
+}
+option ETWTraitSandbox.IndefatigableEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_IndefatigableEnabled,
+}
+option ETWTraitSandbox.IndefatigablePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -10,
+	page = ETWTraitSandbox,
+	translation = ETWTS_IndefatigablePointValue,
+}
+option ETWTraitSandbox.SuperImmuneEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_SuperImmuneEnabled,
+}
+option ETWTraitSandbox.SuperImmunePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -10,
+	page = ETWTraitSandbox,
+	translation = ETWTS_SuperImmunePointValue,
+}
+option ETWTraitSandbox.TerminatorEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_TerminatorEnabled,
+}
+option ETWTraitSandbox.TerminatorPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -14,
+	page = ETWTraitSandbox,
+	translation = ETWTS_TerminatorPointValue,
+}
+option ETWTraitSandbox.GordoniteEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GordoniteEnabled,
+}
+option ETWTraitSandbox.GordonitePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GordonitePointValue,
+}
+option ETWTraitSandbox.GourmandEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GourmandEnabled,
+}
+option ETWTraitSandbox.GourmandPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_GourmandPointValue,
+}
+option ETWTraitSandbox.NaturalEaterEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_NaturalEaterEnabled,
+}
+option ETWTraitSandbox.NaturalEaterPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_NaturalEaterPointValue,
+}
+option ETWTraitSandbox.NoodleLegsEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_NoodleLegsEnabled,
+}
+option ETWTraitSandbox.NoodleLegsPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_NoodleLegsPointValue,
+}
+option ETWTraitSandbox.OlympianEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_OlympianEnabled,
+}
+option ETWTraitSandbox.OlympianPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -5,
+	page = ETWTraitSandbox,
+	translation = ETWTS_OlympianPointValue,
+}
+option ETWTraitSandbox.PackMuleEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PackMuleEnabled,
+}
+option ETWTraitSandbox.PackMulePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -7,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PackMulePointValue,
+}
+option ETWTraitSandbox.ProwessBladeEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessBladeEnabled,
+}
+option ETWTraitSandbox.ProwessBladePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -7,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessBladePointValue,
+}
+option ETWTraitSandbox.ProwessBluntEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessBluntEnabled,
+}
+option ETWTraitSandbox.ProwessBluntPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -7,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessBluntPointValue,
+}
+option ETWTraitSandbox.ProwessGunsEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessGunsEnabled,
+}
+option ETWTraitSandbox.ProwessGunsPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -7,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessGunsPointValue,
+}
+option ETWTraitSandbox.ProwessSpearEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessSpearEnabled,
+}
+option ETWTraitSandbox.ProwessSpearPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -7,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ProwessSpearPointValue,
+}
+option ETWTraitSandbox.PracticedSwordsmanEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PracticedSwordsmanEnabled,
+}
+option ETWTraitSandbox.PracticedSwordsmanPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_PracticedSwordsmanPointValue,
+}
+option ETWTraitSandbox.ThuggishEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ThuggishEnabled,
+}
+option ETWTraitSandbox.ThuggishPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -5,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ThuggishPointValue,
+}
+option ETWTraitSandbox.UnwaveringEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_UnwaveringEnabled,
+}
+option ETWTraitSandbox.UnwaveringPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -6,
+	page = ETWTraitSandbox,
+	translation = ETWTS_UnwaveringPointValue,
+}
+option ETWTraitSandbox.QuietEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_QuietEnabled,
+}
+option ETWTraitSandbox.QuietPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -2,
+	page = ETWTraitSandbox,
+	translation = ETWTS_QuietPointValue,
+}
+option ETWTraitSandbox.ScrapperEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ScrapperEnabled,
+}
+option ETWTraitSandbox.ScrapperPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ScrapperPointValue,
+}
+option ETWTraitSandbox.SunSensitivityEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_SunSensitivityEnabled,
+}
+option ETWTraitSandbox.SunSensitivityPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 5,
+	page = ETWTraitSandbox,
+	translation = ETWTS_SunSensitivityPointValue,
+}
+option ETWTraitSandbox.TavernBrawlerEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_TavernBrawlerEnabled,
+}
+option ETWTraitSandbox.TavernBrawlerPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = -3,
+	page = ETWTraitSandbox,
+	translation = ETWTS_TavernBrawlerPointValue,
+}
+option ETWTraitSandbox.ParanoiaEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ParanoiaEnabled,
+}
+option ETWTraitSandbox.ParanoiaPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 5,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ParanoiaPointValue,
+}
+option ETWTraitSandbox.SelfDestructiveEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_SelfDestructiveEnabled,
+}
+option ETWTraitSandbox.SelfDestructivePointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 4,
+	page = ETWTraitSandbox,
+	translation = ETWTS_SelfDestructivePointValue,
+}
+option ETWTraitSandbox.ImmunocompromisedEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ImmunocompromisedEnabled,
+}
+option ETWTraitSandbox.ImmunocompromisedPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 10,
+	page = ETWTraitSandbox,
+	translation = ETWTS_ImmunocompromisedPointValue,
+}
+option ETWTraitSandbox.MadeOfGlassEnabled
+{
+	type = boolean,
+	default = true,
+	page = ETWTraitSandbox,
+	translation = ETWTS_MadeOfGlassEnabled,
+}
+option ETWTraitSandbox.MadeOfGlassPointValue
+{
+	type = integer,
+	min = -100,
+	max = 100,
+	default = 10,
+	page = ETWTraitSandbox,
+	translation = ETWTS_MadeOfGlassPointValue,
+}
+

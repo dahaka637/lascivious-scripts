@@ -1,0 +1,9 @@
+name=[B42.20] Simple Belt Flashlight+ (Better Flashlights Compatible)
+id=FixedLightOnBeltAF
+poster=poster.png
+icon=icon.png
+modVersion=1.0.4
+versionMin=42.20
+authors=ACE
+description=Drop-in replacement for FixedLightOnBeltAF. Works on existing saves; Better Flashlights and Plysken Attachments Reborn support are optional.
+

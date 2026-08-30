@@ -1,0 +1,10 @@
+{
+    "Tooltip_Silencer": "Reduce el radio de ruido del arma de fuego en un 80%%, pero disminuye ligeramente el alcance.",
+    "Tooltip_MetalPipeSilencer": "Reduce el radio de ruido del arma de fuego en un 60%%, pero disminuye ligeramente el alcance.",
+    "Tooltip_TorchSilencer": "Reduce el radio de ruido del arma de fuego en un 40%%, pero disminuye el alcance.",
+    "Tooltip_WaterBottleSilencer": "Reduce el radio de ruido del arma de fuego en un 20%%, pero disminuye el alcance.",
+    "Tooltip_PotatoSilencer": "Reduce el radio de ruido del arma de fuego en un 10%%, pero disminuye el alcance. Se destruye después de un disparo.",
+    "Tooltip_SuppressorCondition": "Estado del silenciador:",
+    "Tooltip_ISIL_NoiseReduction": "Reducción de ruido:",
+    "Tooltip_ISIL_DynamicSuppressor": "Reduce el radio y el volumen del ruido del arma de fuego, pero reduce el alcance del arma."
+}

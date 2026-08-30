@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animNode>
+	<m_Name>KnifeDefault</m_Name>
+	<m_Priority>4</m_Priority>
+	<m_AnimName>Bob_AttackKnife01_Hit</m_AnimName>
+	<m_Looped>false</m_Looped>
+	<m_BlendTime>0.23</m_BlendTime>
+	<m_BlendOutTime>0.33</m_BlendOutTime>
+	<m_EarlyTransitionOut>true</m_EarlyTransitionOut>
+	<m_SpeedScale>CombatSpeed</m_SpeedScale>
+	<m_Conditions x_name="326e288a-f842-4024-9dbb-33d232cb33fb">
+		<m_Name>Weapon</m_Name>
+		<m_Type>STRING</m_Type>
+		<m_Value>knife</m_Value>
+	</m_Conditions>
+	<m_Conditions x_name="4319b04a-489e-46f7-9605-2f1f39ef0f11">
+		<m_Name>AimFloorAnim</m_Name>
+		<m_Type>BOOL</m_Type>
+		<m_Value>false</m_Value>
+	</m_Conditions>
+	<m_Events x_name="d32350a4-72c0-45ba-9ac2-e2dcb0239906">
+		<m_EventName>SetVariable</m_EventName>
+		<m_TimePc>0.1</m_TimePc>
+		<m_ParameterValue>ZombieHitReaction=Uppercut</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="cff4957d-1473-46b3-ba78-12b8c3f4d5ff">
+		<m_EventName>AttackCollisionCheck</m_EventName>
+		<m_TimePc>0.25</m_TimePc>
+		<m_ParameterValue>MeleeStab</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="f7cbf274-9778-45fb-8df1-d41edf894026">
+		<m_EventName>AttackAnim</m_EventName>
+		<m_Time>Start</m_Time>
+		<m_ParameterValue>TRUE</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="921bf472-5ea0-4fe0-9e65-b60fcfc6a1f2">
+		<m_EventName>AttackAnim</m_EventName>
+		<m_Time>End</m_Time>
+		<m_ParameterValue>FALSE</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="1360363f-4967-416b-9d96-d6ff4c1fa77f">
+		<m_EventName>BlockMovement</m_EventName>
+		<m_Time>End</m_Time>
+		<m_ParameterValue>FALSE</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="5ef51ec5-9dc1-49a0-bab8-01b61bfaf542">
+		<m_EventName>BlockMovement</m_EventName>
+		<m_TimePc>0.5</m_TimePc>
+		<m_ParameterValue>TRUE</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="97219c9d-1991-4c67-bcca-a2384bfd1684">
+		<m_EventName>SetMeleeDelay</m_EventName>
+		<m_Time>End</m_Time>
+		<m_ParameterValue>1</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="59b4eae4-341b-4752-8084-0ff52d6bf85a">
+		<m_EventName>PlaySwingSound</m_EventName>
+		<m_Time>Start</m_Time>
+		<m_ParameterValue></m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="db4b420e-3c0f-468c-bf71-33c71a10be27">
+		<m_EventName>PlayerVoiceSound</m_EventName>
+		<m_Time>Start</m_Time>
+		<m_ParameterValue>MeleeStab</m_ParameterValue>
+	</m_Events>
+	<m_Transitions>
+		<m_Target>Idle</m_Target>
+		<m_AnimName>Bob_AimToIdle_1Hand</m_AnimName>
+		<m_blendInTime>0.5</m_blendInTime>
+		<m_blendOutTime>0.5</m_blendOutTime>
+		<m_speedScale>1.3</m_speedScale>
+	</m_Transitions>
+	<m_Transitions>
+		<m_Target>sneakidle</m_Target>
+		<m_AnimName>Bob_AimToIdle_1Hand</m_AnimName>
+		<m_blendInTime>0.5</m_blendInTime>
+		<m_blendOutTime>0.5</m_blendOutTime>
+		<m_speedScale>1.3</m_speedScale>
+	</m_Transitions>
+	<m_Transitions>
+		<m_Target>sneakIdleLow</m_Target>
+		<m_AnimName>Bob_AimToIdle_1Hand</m_AnimName>
+		<m_blendInTime>0.5</m_blendInTime>
+		<m_blendOutTime>0.5</m_blendOutTime>
+		<m_speedScale>1.3</m_speedScale>
+	</m_Transitions>
+	<m_SubStateBoneWeights>
+		<boneName>Bip01_Spine1</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Bip01_Neck</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Bip01_BackPack</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Bip01_Prop1</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Bip01_Prop2</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Bip01_Spine</boneName>
+		<includeDescendants>false</includeDescendants>
+	</m_SubStateBoneWeights>
+</animNode>

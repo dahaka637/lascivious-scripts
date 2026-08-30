@@ -1,0 +1,19 @@
+{
+  "Sandbox_BetterPush": "Configurações do Empurrão Aprimorado",
+  "Sandbox_BetterPushMinStrengthLevel": "Nível mínimo de Força",
+  "Sandbox_BetterPushMinStrengthLevel_tooltip": "Nível de Força do jogador no qual se aplica a chance mínima de empurrão.",
+  "Sandbox_BetterPushMaxStrengthLevel": "Nível máximo de Força",
+  "Sandbox_BetterPushMaxStrengthLevel_tooltip": "Nível de Força do jogador no qual se aplica a chance máxima de empurrão.",
+  "Sandbox_BetterPushMinChance": "Chance mínima de empurrão",
+  "Sandbox_BetterPushMinChance_tooltip": "Chance base de ativar o efeito dominó quando a Força está no nível mínimo ou abaixo dele.",
+  "Sandbox_BetterPushMaxChance": "Chance máxima de empurrão",
+  "Sandbox_BetterPushMaxChance_tooltip": "Chance máxima de ativar o efeito dominó quando a Força está no nível máximo ou acima dele.",
+  "Sandbox_BetterPushMinZombies": "Mínimo de zumbis derrubados",
+  "Sandbox_BetterPushMinZombies_tooltip": "Quantidade base de zumbis derrubados na sequência em dominó com Força mínima.",
+  "Sandbox_BetterPushMaxZombies": "Máximo de zumbis derrubados",
+  "Sandbox_BetterPushMaxZombies_tooltip": "Quantidade máxima de zumbis derrubados na sequência em dominó com Força máxima.",
+  "Sandbox_BetterPushLineDistance": "Distância entre elos do dominó",
+  "Sandbox_BetterPushLineDistance_tooltip": "Distância máxima entre zumbis, da frente para trás, para que a queda continue pela sequência.",
+  "Sandbox_BetterPushLineWidth": "Largura dos elos do dominó",
+  "Sandbox_BetterPushLineWidth_tooltip": "Tolerância lateral usada ao procurar o próximo zumbi da sequência em dominó."
+}

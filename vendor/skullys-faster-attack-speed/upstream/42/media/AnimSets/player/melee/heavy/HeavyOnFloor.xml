@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animNode x_extends="HeavyDefault.xml">
+	<m_Name>HeavyOnFloor</m_Name>
+	<m_AnimName>Bob_AttackFloor2H_Heavy</m_AnimName>
+	<m_BlendOutTime>0.4</m_BlendOutTime>
+	<m_BlendTime>0.30</m_BlendTime>
+	<m_Conditions x_name="e5e76a3b-6e09-4a1a-b7e5-49f1e2cbc303">
+		<m_Value>true</m_Value>
+	</m_Conditions>
+	<m_Events x_name="4339a26e-36b3-4d06-a348-7c03b30a7c7f">
+		<m_ParameterValue>ZombieHitReaction=Floor</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="31749e0a-46b3-4add-820d-9c528d674619">
+		<m_ParameterValue>MeleeStabToFloor</m_ParameterValue>
+	</m_Events>
+	<m_SubStateBoneWeights>
+		<boneName>Dummy01</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Translation_Data</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights>
+		<boneName>Bip01</boneName>
+	</m_SubStateBoneWeights>
+</animNode>

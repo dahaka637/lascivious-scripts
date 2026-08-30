@@ -1,0 +1,38 @@
+schema: 1
+module_key: osrs-experience-bar
+name: OSRS Experience Bar
+bundled_mod_id: LS_OSRSExperienceBar
+status: enabled
+
+upstream:
+  workshop_id: "3776534799"
+  original_mod_id: "RUNE-EXP"
+  version: "2.0.3"
+  imported_at: "2026-08-26"
+  source_path: "vendor/osrs-experience-bar/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: not_applicable
+  reviewed: true
+  local_changes: true
+  local_revision: 1
+  notes: "vendor/osrs-experience-bar/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

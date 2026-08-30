@@ -1,0 +1,38 @@
+schema: 1
+module_key: climb-ladders
+name: Climb Ladders
+bundled_mod_id: LS_ClimbLadders
+status: enabled
+
+upstream:
+  workshop_id: "3774776279"
+  original_mod_id: "SubirEscaleras"
+  version: "2.4"
+  imported_at: "2026-08-25"
+  source_path: "vendor/climb-ladders/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 1
+  notes: "vendor/climb-ladders/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: true

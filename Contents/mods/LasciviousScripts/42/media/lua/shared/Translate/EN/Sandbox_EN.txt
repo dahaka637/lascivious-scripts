@@ -1,0 +1,21 @@
+Sandbox_EN
+{
+    Sandbox_LasciviousScriptsZombieDecay = "Lascivious Scripts - Zombie Decay",
+    Sandbox_LasciviousScriptsZombieDecay_Enabled = "Enable progressive decay",
+    Sandbox_LasciviousScriptsZombieDecay_Enabled_tooltip = "Controls the complete world-age-driven zombie decay system.",
+    Sandbox_LasciviousScriptsZombieDecay_TimelineScalePercent = "Timeline scale (%%)",
+    Sandbox_LasciviousScriptsZombieDecay_TimelineScalePercent_tooltip = "100 uses the default milestones: 7, 30, 180, 365 and 730 days. 50 is twice as fast; 200 takes twice as long.",
+    Sandbox_LasciviousScriptsZombieDecay_MinimumRunnerSpeedPercent = "Minimum runner speed (%%)",
+    Sandbox_LasciviousScriptsZombieDecay_MinimumRunnerSpeedPercent_tooltip = "Runner speed reached around the six-month milestone. Default: 50%% of original runner speed.",
+    Sandbox_LasciviousScriptsZombieDecay_FinalShamblerCollapseEnabled = "Decay Fast Shamblers into Shamblers",
+    Sandbox_LasciviousScriptsZombieDecay_FinalShamblerCollapseEnabled_tooltip = "Off: once every runner is gone (day 365) the population stays 100%% Fast Shambler forever. On (default): starting at the day-730 milestone, Fast Shamblers gradually turn into plain Shamblers over another 730 days, reaching 100%% Shamblers by day 1460.",
+    Sandbox_LasciviousScriptsZombieDecay_DebugLogging = "Debug logging",
+    Sandbox_LasciviousScriptsZombieDecay_DebugLogging_tooltip = "Prints phase, percentage and speed calculations to the console. Leave disabled in production.",
+    Sandbox_LasciviousScriptsTimeVote = "Lascivious Scripts - Time Vote",
+    Sandbox_LasciviousScriptsTimeVote_Enabled = "Enable multiplayer time vote",
+    Sandbox_LasciviousScriptsTimeVote_Enabled_tooltip = "Adds unanimous multiplayer voting for 5x/20x/40x. A granted speed is applied once and native/single-player interruption semantics are respected: movement, danger or another reset on any player returns everyone to 1x.",
+    Sandbox_LasciviousScriptsTimeVote_SoloOnly = "Restrict to a lone player",
+    Sandbox_LasciviousScriptsTimeVote_SoloOnly_tooltip = "When on, fast-forward is only ever available while exactly one player is online. Time and the vote UI are forced back to 1x and hidden the moment a second player joins, and reappear once it is back down to one.",
+    Sandbox_LasciviousScriptsTimeVote_DebugLogging = "Debug logging",
+    Sandbox_LasciviousScriptsTimeVote_DebugLogging_tooltip = "Prints NetTimedAction acceleration details to the console. Leave disabled in production.",
+}

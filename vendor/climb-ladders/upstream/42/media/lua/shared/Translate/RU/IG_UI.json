@@ -1,0 +1,7 @@
+{
+    "IGUI_SubirEscaleras_Inseguro": "Там наверху не за что ухватиться.",
+    "IGUI_SubirEscaleras_Pierna": "С такой ногой я не полезу. Нужно наложить шину.",
+    "IGUI_SubirEscaleras_Agotado": "У меня не хватит сил забраться.",
+    "IGUI_SubirEscaleras_SinNivel": "Над лестницей нет загруженного этажа.",
+    "IGUI_SubirEscaleras_SinSalida": "Эта лестница никуда не ведёт. Нужно сделать её выше или построить пол этажом выше — над лестницей или рядом с ней."
+}

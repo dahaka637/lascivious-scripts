@@ -1,0 +1,6 @@
+Sandbox_EN
+{
+    Sandbox_TotalWeightRebalance = "Total Weight Rebalance",
+    Sandbox_TotalWeightRebalance_CustomWeights = "Custom item weights",
+    Sandbox_TotalWeightRebalance_CustomWeights_tooltip = "Format: Base.ItemName:0.25; <LINE>Multiple entries may be separated with semicolons. <LINE>Example: Base.Plank:1.0; Base.Log:3.0",
+}

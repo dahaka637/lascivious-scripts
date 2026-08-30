@@ -1,0 +1,8 @@
+id=LMWildSpawnMaps
+name=[LM] Wilderness Locations - All Maps (B42)
+poster=poster.png
+icon=icon.png
+description=Choose your favoured wilderness spawn location from the lot.
+versionMin=42.0
+author=Jessimouche
+incompatible=\LMWildSpawnRandom

@@ -1,0 +1,10 @@
+Tooltip_EN = {
+    Tooltip_Silencer = "Reduces firearm noise radius by 80%% but slightly lowers range.",
+    Tooltip_MetalPipeSilencer = "Reduces firearm noise radius by 60%% but slightly lowers range.",
+    Tooltip_TorchSilencer = "Reduces firearm noise radius by 40%% but lowers range.",
+    Tooltip_WaterBottleSilencer = "Reduces firearm noise radius by 20%% but lowers range.",
+    Tooltip_PotatoSilencer = "Reduces firearm noise radius by 10%% but lowers range. Destroyed after one shot.",
+    Tooltip_SuppressorCondition = "Suppressor Condition:",
+    Tooltip_ISIL_NoiseReduction = "Noise Reduction:",
+    Tooltip_ISIL_DynamicSuppressor = "Reduces firearm noise radius and volume but lowers weapon range.",
+}

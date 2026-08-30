@@ -1,0 +1,128 @@
+module Base
+{
+
+	item CircularSawblade
+	{
+		DisplayName = Circular Sawblade,
+		DisplayCategory = Material,
+		Type = Normal,
+		Weight = 2,
+		Icon = CircularSawBlade,
+		StaticModel = CircularSawblade,
+		WorldStaticModel = CircularSawblade,
+		Tags = HasMetal;SmeltableIronSmall,
+        ConditionMax	=	44,
+	}
+
+	item CircularSawblade_Half
+	{
+		DisplayName = Circular Sawblade Half,
+		DisplayCategory = Material,
+		Type = Normal,
+		Weight = 1,
+		Icon = CircularSawBlade_Half,
+		StaticModel = CircularSawblade_Half,
+		WorldStaticModel = CircularSawblade_Half,
+		Tags = HasMetal;SmeltableIronSmall,
+        ConditionMax	=	22,
+	}
+
+	item HacksawBlade
+	{
+		DisplayName = Hacksaw Blade,
+		DisplayCategory = Material,
+		Type = Normal,
+		Weight = 0.5,
+		Icon = Sawblade,
+		StaticModel = HacksawBlade,
+		WorldStaticModel = HacksawBlade,
+		Tags = HasMetal;SawBlade;SmeltableIronSmall,
+        ConditionMax	=	44,
+	}
+
+	item SmallFileSet
+	{
+		DisplayName = Small File Set,
+		DisplayCategory = Tool,
+		Type = Normal,
+		Weight = 1,
+		Icon = Files_Forged,
+		MetalValue = 15,
+		StaticModel = MetalworkingFile,
+		WorldStaticModel = SmallMetalworkingFiles,
+		ConditionLowerChanceOneIn = 10,
+		ConditionMax = 35,
+		Tags = File;SmallFiles;HasMetal;ShowCondition;SmeltableIronSmall,
+	}
+
+	item SmallPunchSet
+	{
+		DisplayName = Small Punch and Chisel Set,
+		DisplayCategory = Tool,
+		Type = Normal,
+		Weight = 1,
+		Icon = Punches_Forged,
+		MetalValue = 15,
+		StaticModel = MetalworkingPunch,
+		WorldStaticModel = SmallMetalworkingPunches,
+		ConditionLowerChanceOneIn = 6,
+		ConditionMax = 35,
+		Tags = SmallPunch;HasMetal;ShowCondition;Awl;SmeltableIronSmall,
+		Tooltip = Tooltip_item_SmallPunchSet,
+	}
+
+	item SmallSaw
+	{
+		DisplayName = Small Saw,
+		DisplayCategory = Tool,
+		Type = Normal,
+		Weight = 0.7,
+		Icon = Saw_Forged,
+		MetalValue = 15,
+		StaticModel = SmallMetalworkingSaw,
+		WorldStaticModel = SmallMetalworkingSaw,
+		Tags = SmallSaw;HasMetal;ShowCondition;SmeltableIronSmall,
+        ConditionLowerChanceOneIn = 8,
+        ConditionMax	=	44,
+	}
+
+	item SmallSawblade
+	{
+		DisplayName = Small Sawblade,
+		DisplayCategory = Material,
+		Type = Normal,
+		Weight = 0.5,
+		Icon = SawbladeSmall,
+		StaticModel = HacksawBladeSmall,
+		WorldStaticModel = HacksawBladeSmall,
+		Tags = HasMetal;SawBlade;SmeltableIronSmall,
+        ConditionMax	=	35,
+	}
+
+	item Whetstone
+	{
+		DisplayName = Whetstone,
+		DisplayCategory = Tool,
+		Type = Normal,
+		Weight = 0.5,
+		Icon = Whetstone2,
+		WorldStaticModel = Whetstone,
+		Tags = Whetstone;ShowCondition,
+		ConditionMax = 61,
+        ConditionLowerChanceOneIn = 10,
+	}
+
+	item CrudeWhetstone
+	{
+		DisplayName = Crude Whetstone,
+		DisplayCategory = Tool,
+		Type = Normal,
+		Weight = 0.5,
+		Icon = Whetstone1,
+		WorldStaticModel = CrudeWhetstone,
+		Tags = Whetstone;ShowCondition;Crude,
+		ConditionMax = 26,
+        ConditionLowerChanceOneIn = 6,
+	}
+
+}

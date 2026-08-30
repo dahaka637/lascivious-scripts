@@ -1,0 +1,6 @@
+Sandbox_EN
+{
+    Sandbox_SBFPlus = "Simple Belt Flashlight+",
+    Sandbox_SBFPlus_DebugLogging = "Enable multiplayer diagnostic logging",
+    Sandbox_SBFPlus_DebugLogging_tooltip = "Writes passive flashlight attachment and light-state diagnostics to console.txt. Disabled by default. It does not send extra network packets, change items, or record player names. Enable only while reproducing a multiplayer light-visibility issue.",
+}

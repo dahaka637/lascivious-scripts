@@ -1,0 +1,8 @@
+title=media/lua/shared/Translate/EN/LS_WS_TwoPonds/title.txt
+lots=Muldraugh, KY
+description=media/lua/shared/Translate/EN/LS_WS_TwoPonds/description.txt
+fixed2x=true
+zoomX=7098
+zoomY=14300
+zoomS=16
+only_for_game_mode=Sandbox

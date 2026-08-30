@@ -1,0 +1,8 @@
+name=Lascivious Scripts - Tactical Hold
+id=LS_TacticalHold
+poster=poster.png
+icon=icon.png
+versionMin=42.20
+description=Adiciona poses de prontidão tática (high-ready, low-ready, descanso) para armas de fogo de uma e duas mãos, alternáveis por atalho de teclado. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

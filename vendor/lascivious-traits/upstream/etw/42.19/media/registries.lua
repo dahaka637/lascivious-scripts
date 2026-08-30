@@ -1,0 +1,135 @@
+---@class EvolvingTraitsWorldRegistries
+ETW_Registry = ETW_Registry or {}
+
+---@class EvolvingTraitsWorldTraitsRegistries
+---@field AV_CLUB CharacterTrait
+---@field ACTION_HERO CharacterTrait
+---@field ANEMIC CharacterTrait
+---@field ANTI_GUN_ACTIVIST CharacterTrait
+---@field ASCETIC CharacterTrait
+---@field AXE_THROWER CharacterTrait
+---@field BLOODLUST CharacterTrait
+---@field BLISSFUL CharacterTrait
+---@field BOUNCER CharacterTrait
+---@field BODYWORK_ENTHUSIAST CharacterTrait
+---@field FAST_EATER CharacterTrait
+---@field BAD_TEETH CharacterTrait
+---@field BUTTERFINGERS CharacterTrait
+---@field DEPRESSIVE CharacterTrait
+---@field FURNITURE_ASSEMBLER CharacterTrait
+---@field GUN_ENTHUSIAST CharacterTrait
+---@field GOURMAND CharacterTrait
+---@field GORDONITE CharacterTrait
+---@field GYM_RAT CharacterTrait
+---@field HARDY CharacterTrait
+---@field HOARDER CharacterTrait
+---@field HOME_COOK CharacterTrait
+---@field IDEAL_WEIGHT CharacterTrait
+---@field IMMUNOCOMPROMISED CharacterTrait
+---@field INDEFATIGABLE CharacterTrait
+---@field LEAD_FOOT CharacterTrait
+---@field HOMICHLOPHOBIA CharacterTrait
+---@field HOMICHLOPHILE CharacterTrait
+---@field BLADE_ENTHUSIAST CharacterTrait
+---@field KNIFE_FIGHTER CharacterTrait
+---@field LIGHTSTEP CharacterTrait
+---@field LOW_PROFILE CharacterTrait
+---@field MADE_OF_GLASS CharacterTrait
+---@field MUNDANE CharacterTrait
+---@field NATURAL_EATER CharacterTrait
+---@field NOODLE_LEGS CharacterTrait
+---@field OLYMPIAN CharacterTrait
+---@field PLUVIOPHILE CharacterTrait
+---@field PLUVIOPHOBIA CharacterTrait
+---@field PAIN_TOLERANCE CharacterTrait
+---@field PACK_MOUSE CharacterTrait
+---@field PACK_MULE CharacterTrait
+---@field PARANOIA CharacterTrait
+---@field PET_THERAPY CharacterTrait
+---@field POLEARM_FIGHTER CharacterTrait
+---@field PROWESS_BLADE CharacterTrait
+---@field PROWESS_BLUNT CharacterTrait
+---@field PROWESS_GUNS CharacterTrait
+---@field PROWESS_SPEAR CharacterTrait
+---@field PRACTICED_SWORDSMAN CharacterTrait
+---@field RESTORATION_EXPERT CharacterTrait
+---@field QUICK_REST CharacterTrait
+---@field QUIET CharacterTrait
+---@field SCRAPPER CharacterTrait
+---@field SELF_DESTRUCTIVE CharacterTrait
+---@field SLOW_EATER CharacterTrait
+---@field SUN_SENSITIVITY CharacterTrait
+---@field SUPER_IMMUNE CharacterTrait
+---@field TAVERN_BRAWLER CharacterTrait
+---@field TERMINATOR CharacterTrait
+---@field THICK_BLOODED CharacterTrait
+---@field THUGGISH CharacterTrait
+---@field UNWAVERING CharacterTrait
+---@field WELL_FITTED CharacterTrait
+ETW_Registry.traits = {
+	AV_CLUB = CharacterTrait.register("ETW:AVClub"),
+	ACTION_HERO = CharacterTrait.register("ETW:ActionHero"),
+	ANEMIC = CharacterTrait.register("ETW:Anemic"),
+	ANTI_GUN_ACTIVIST = CharacterTrait.register("ETW:AntiGunActivist"),
+	ASCETIC = CharacterTrait.register("ETW:Ascetic"),
+	AXE_THROWER = CharacterTrait.register("ETW:AxeThrower"),
+	BLOODLUST = CharacterTrait.register("ETW:Bloodlust"),
+	BLISSFUL = CharacterTrait.register("ETW:Blissful"),
+	BOUNCER = CharacterTrait.register("ETW:Bouncer"),
+	BODYWORK_ENTHUSIAST = CharacterTrait.register("ETW:BodyWorkEnthusiast"),
+	FAST_EATER = CharacterTrait.register("ETW:FastEater"),
+	BAD_TEETH = CharacterTrait.register("ETW:BadTeeth"),
+	BUTTERFINGERS = CharacterTrait.register("ETW:Butterfingers"),
+	DEPRESSIVE = CharacterTrait.register("ETW:Depressive"),
+	FURNITURE_ASSEMBLER = CharacterTrait.register("ETW:FurnitureAssembler"),
+	GUN_ENTHUSIAST = CharacterTrait.register("ETW:GunEnthusiast"),
+	GOURMAND = CharacterTrait.register("ETW:Gourmand"),
+	GORDONITE = CharacterTrait.register("ETW:Gordonite"),
+	GYM_RAT = CharacterTrait.register("ETW:GymRat"),
+	HARDY = CharacterTrait.register("ETW:Hardy"),
+	HOARDER = CharacterTrait.register("ETW:Hoarder"),
+	HOME_COOK = CharacterTrait.register("ETW:HomeCook"),
+	IDEAL_WEIGHT = CharacterTrait.register("ETW:IdealWeight"),
+	IMMUNOCOMPROMISED = CharacterTrait.register("ETW:Immunocompromised"),
+	INDEFATIGABLE = CharacterTrait.register("ETW:Indefatigable"),
+	LEAD_FOOT = CharacterTrait.register("ETW:LeadFoot"),
+	HOMICHLOPHOBIA = CharacterTrait.register("ETW:Homichlophobia"),
+	HOMICHLOPHILE = CharacterTrait.register("ETW:Homichlophile"),
+	BLADE_ENTHUSIAST = CharacterTrait.register("ETW:BladeEnthusiast"),
+	KNIFE_FIGHTER = CharacterTrait.register("ETW:KnifeFighter"),
+	LIGHTSTEP = CharacterTrait.register("ETW:LightStep"),
+	LOW_PROFILE = CharacterTrait.register("ETW:LowProfile"),
+	MADE_OF_GLASS = CharacterTrait.register("ETW:MadeOfGlass"),
+	MUNDANE = CharacterTrait.register("ETW:Mundane"),
+	NATURAL_EATER = CharacterTrait.register("ETW:NaturalEater"),
+	NOODLE_LEGS = CharacterTrait.register("ETW:NoodleLegs"),
+	OLYMPIAN = CharacterTrait.register("ETW:Olympian"),
+	PLUVIOPHILE = CharacterTrait.register("ETW:Pluviophile"),
+	PLUVIOPHOBIA = CharacterTrait.register("ETW:Pluviophobia"),
+	PAIN_TOLERANCE = CharacterTrait.register("ETW:PainTolerance"),
+	PACK_MOUSE = CharacterTrait.register("ETW:PackMouse"),
+	PACK_MULE = CharacterTrait.register("ETW:PackMule"),
+	PARANOIA = CharacterTrait.register("ETW:Paranoia"),
+	PET_THERAPY = CharacterTrait.register("ETW:PetTherapy"),
+	POLEARM_FIGHTER = CharacterTrait.register("ETW:PolearmFighter"),
+	PROWESS_BLADE = CharacterTrait.register("ETW:ProwessBlade"),
+	PROWESS_BLUNT = CharacterTrait.register("ETW:ProwessBlunt"),
+	PROWESS_GUNS = CharacterTrait.register("ETW:ProwessGuns"),
+	PROWESS_SPEAR = CharacterTrait.register("ETW:ProwessSpear"),
+	PRACTICED_SWORDSMAN = CharacterTrait.register("ETW:PracticedSwordsman"),
+	RESTORATION_EXPERT = CharacterTrait.register("ETW:RestorationExpert"),
+	QUICK_REST = CharacterTrait.register("ETW:QuickRest"),
+	QUIET = CharacterTrait.register("ETW:Quiet"),
+	SCRAPPER = CharacterTrait.register("ETW:Scrapper"),
+	SELF_DESTRUCTIVE = CharacterTrait.register("ETW:SelfDestructive"),
+	SLOW_EATER = CharacterTrait.register("ETW:SlowEater"),
+	SUN_SENSITIVITY = CharacterTrait.register("ETW:SunSensitivity"),
+	SUPER_IMMUNE = CharacterTrait.register("ETW:SuperImmune"),
+	TAVERN_BRAWLER = CharacterTrait.register("ETW:TavernBrawler"),
+	TERMINATOR = CharacterTrait.register("ETW:Terminator"),
+	THICK_BLOODED = CharacterTrait.register("ETW:ThickBlooded"),
+	THUGGISH = CharacterTrait.register("ETW:Thuggish"),
+	UNWAVERING = CharacterTrait.register("ETW:Unwavering"),
+	WELL_FITTED = CharacterTrait.register("ETW:WellFitted"),
+	STICK_FIGHTER = CharacterTrait.register("ETW:StickFighter"),
+}

@@ -1,0 +1,5 @@
+UI_EN
+{
+    UI_optionscreen_binding_PushVehicle_Hotkey = "Push Vehicle",
+    UI_PushVehicle_Action = "Push Vehicle",
+}

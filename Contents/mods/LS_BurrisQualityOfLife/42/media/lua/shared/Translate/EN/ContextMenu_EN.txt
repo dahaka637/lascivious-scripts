@@ -1,0 +1,14 @@
+ContextMenu_EN = {
+    ContextMenu_BQoL_PryOpen = "Pry Open",
+    ContextMenu_BQoL_PickUp = "Pick Up",
+    ContextMenu_BQoL_Equip = "Equip",
+
+    ContextMenu_BQoL_Wash = "Wash (Equipped/Unequipped)",
+    ContextMenu_BQoL_WashEquipped = "Equipped Only",
+    ContextMenu_BQoL_WashUnequipped = "Unequipped Only",
+
+    ContextMenu_BQoL_ReloadAllMagazines = "Reload All Magazines",
+    ContextMenu_BQoL_ReplaceBandage = "Replace Bandage",
+    ContextMenu_BQoL_ApplyTourniquet = "Apply Tourniquet",
+    ContextMenu_BQoL_RemoveTourniquet = "Remove Tourniquet",
+}

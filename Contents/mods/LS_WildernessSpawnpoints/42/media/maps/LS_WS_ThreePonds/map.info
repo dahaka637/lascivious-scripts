@@ -1,0 +1,8 @@
+title=media/lua/shared/Translate/EN/LS_WS_ThreePonds/title.txt
+lots=Muldraugh, KY
+description=media/lua/shared/Translate/EN/LS_WS_ThreePonds/description.txt
+fixed2x=true
+zoomX=10253
+zoomY=10360
+zoomS=16
+only_for_game_mode=Sandbox

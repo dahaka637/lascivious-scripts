@@ -1,0 +1,38 @@
+schema: 1
+module_key: immersive-suicide
+name: Immersive Suicide
+bundled_mod_id: LS_ImmersiveSuicide
+status: enabled
+
+upstream:
+  workshop_id: "3426448380"
+  original_mod_id: "stanks_suicide"
+  version: "1.2.5"
+  imported_at: "2026-08-25"
+  source_path: "vendor/immersive-suicide/upstream/42.0"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: ["Efficiency Skill (soft-detected via Perks.Efficiency, no hard require)"]
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/immersive-suicide/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: true

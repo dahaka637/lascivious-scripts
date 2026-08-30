@@ -1,0 +1,16 @@
+module Base
+{
+    sound EvilMortyDeathTheme
+    {
+        category = Music,
+        master = Music,
+        loop = false,
+        is3D = true,
+        clip
+        {
+            file = media/sound/EvilMortyDeathScreenTheme/EvilMortyTheme.ogg,
+            distanceMin = 50,
+            distanceMax = 1000,
+        }
+    }
+}

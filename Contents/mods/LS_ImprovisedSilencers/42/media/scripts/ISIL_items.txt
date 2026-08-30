@@ -1,0 +1,93 @@
+module Base
+{
+    item Silencer
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Silencer,
+        ConditionMax = 100,
+        Weight = 1.0,
+        MaxRangeModifier = -0.8,
+        RecoilDelayModifier = -1.0,
+        WeightModifier = 1.2,
+        PartType = Canon,
+        MountOn = Base.AssaultRifle;Base.AssaultRifle2;Base.DoubleBarrelShotgun;Base.DoubleBarrelShotgunSawnoff;Base.HuntingRifle;Base.Pistol;Base.Pistol2;Base.Pistol3;Base.Revolver;Base.Revolver_Long;Base.Revolver_Short;Base.Shotgun;Base.ShotgunSawnoff;Base.VarmintRifle;Base.JS14_Rifle;Base.JS3T_Shotgun;Base.L92_Carbine;Base.L94_Rifle;Base.MSR7T_Rifle;Base.TrapperCarbine,
+        Tooltip = Tooltip_Silencer,
+        WorldStaticModel = Base.Silencer_Ground,
+        CanAttach = ItemCodeOnTest.hasScrewdriver,
+        CanDetach = ItemCodeOnTest.hasScrewdriver,
+        Tags = base:hasmetal,
+    }
+
+    item MetalPipeSilencer
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = MetalPipeSilencer,
+        ConditionMax = 100,
+        Weight = 1.0,
+        MaxRangeModifier = -1.0,
+        RecoilDelayModifier = -1.0,
+        WeightModifier = 1.4,
+        PartType = Canon,
+        MountOn = Base.AssaultRifle;Base.AssaultRifle2;Base.DoubleBarrelShotgun;Base.DoubleBarrelShotgunSawnoff;Base.HuntingRifle;Base.Pistol;Base.Pistol2;Base.Pistol3;Base.Revolver;Base.Revolver_Long;Base.Revolver_Short;Base.Shotgun;Base.ShotgunSawnoff;Base.VarmintRifle;Base.JS14_Rifle;Base.JS3T_Shotgun;Base.L92_Carbine;Base.L94_Rifle;Base.MSR7T_Rifle;Base.TrapperCarbine,
+        Tooltip = Tooltip_MetalPipeSilencer,
+        WorldStaticModel = Base.MetalPipeSilencer_Ground,
+        CanAttach = ItemCodeOnTest.hasScrewdriver,
+        CanDetach = ItemCodeOnTest.hasScrewdriver,
+        Tags = base:hasmetal,
+    }
+
+    item TorchSilencer
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = TorchSilencer,
+        ConditionMax = 100,
+        Weight = 1.0,
+        MaxRangeModifier = -2.0,
+        RecoilDelayModifier = -1.0,
+        WeightModifier = 1.4,
+        PartType = Canon,
+        MountOn = Base.AssaultRifle;Base.AssaultRifle2;Base.HuntingRifle;Base.Pistol;Base.Pistol2;Base.Pistol3;Base.VarmintRifle;Base.JS14_Rifle;Base.L92_Carbine;Base.L94_Rifle;Base.MSR7T_Rifle;Base.TrapperCarbine,
+        Tooltip = Tooltip_TorchSilencer,
+        WorldStaticModel = Base.TorchSilencer_Ground,
+        CanAttach = ItemCodeOnTest.hasScrewdriver,
+        CanDetach = ItemCodeOnTest.hasScrewdriver,
+        Tags = base:hasmetal,
+    }
+
+    item WaterBottleSilencer
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = WaterBottleSilencer,
+        ConditionMax = 100,
+        Weight = 0.8,
+        MaxRangeModifier = -2.0,
+        RecoilDelayModifier = -1.0,
+        WeightModifier = 1.2,
+        PartType = Canon,
+        MountOn = Base.AssaultRifle;Base.AssaultRifle2;Base.HuntingRifle;Base.Pistol;Base.Pistol2;Base.Pistol3;Base.VarmintRifle;Base.JS14_Rifle;Base.L92_Carbine;Base.L94_Rifle;Base.MSR7T_Rifle;Base.TrapperCarbine,
+        Tooltip = Tooltip_WaterBottleSilencer,
+        WorldStaticModel = Base.WaterBottleSilencer_Ground,
+        CanAttach = ItemCodeOnTest.hasScrewdriver,
+        CanDetach = ItemCodeOnTest.hasScrewdriver,
+    }
+
+    item PotatoSilencer
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Potato,
+        ConditionMax = 1,
+        Weight = 0.2,
+        MaxRangeModifier = -2.0,
+        RecoilDelayModifier = -1.0,
+        WeightModifier = 0.2,
+        PartType = Canon,
+        MountOn = Base.AssaultRifle;Base.AssaultRifle2;Base.HuntingRifle;Base.Pistol;Base.Pistol2;Base.Pistol3;Base.VarmintRifle;Base.JS14_Rifle;Base.L92_Carbine;Base.L94_Rifle;Base.MSR7T_Rifle;Base.TrapperCarbine,
+        Tooltip = Tooltip_PotatoSilencer,
+        WorldStaticModel = Base.PotatoSilencer_Ground,
+    }
+}

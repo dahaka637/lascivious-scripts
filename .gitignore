@@ -1,0 +1,20 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor temp files
+*.swp
+*.swo
+*~
+
+# Backup/temp files -- must never ship inside Contents/ (see docs/ARCHITECTURE.md 26.1)
+*.bak
+*.old
+*.tmp
+
+# Python tooling
+__pycache__/
+*.pyc
+
+# Archives accidentally dropped at the repo root while staging an update
+*.zip

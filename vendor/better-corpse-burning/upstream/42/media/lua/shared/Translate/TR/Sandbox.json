@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Ceset Başına Yakma Süresi",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Bir cesedi yakmak için gereken oyun içi dakika. Varsayılan: 110 (vanilla değeri).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Vanilla Ceset Yakmayı Kaldır",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Benzin gerektiren vanilla 'Ceset Yak' seçeneğini kaldırır.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Ateş Sıçrama Yarıçapı",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Bir ceset yandığında, bu yarıçap içindeki yakındaki cesetler de tutuşur. 0 = kapalı.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Benzin Gerekli",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Etkinleştirildiğinde, ceset yakmak için ateş kaynağına ek olarak benzin bidonu da gerekir.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Ceset Başına Benzin",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Yakılan her ceset için ne kadar benzin (litre) harcanır. Varsayılan: 0.1L (10L bidon ~100 ceset yakar).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "İç Mekanda Yakmaya İzin Ver",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Kapalıyken binaların içindeki cesetler bu mod ile yakılamaz. Ahşap yapılara yanlışlıkla ateş çıkmayı önler. Varsayılan: açık.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Ceset Başına Ateş Kaynağı Kullanımı",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Her ceset yakıldığında ateş kaynağının kaç kez kullanılacağı. Yüksek değerler çakmakları ve kibritleri daha hızlı tüketir. 0 = sınırsız (ateş kaynağı hiç tükenmez). Varsayılan: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Bitince Ateşi Söndür",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Etkinleştirildiğinde, zincirdeki tüm cesetler tutuştuktan kısa süre sonra ateş otomatik olarak söner. Ahşap yapıları süren alevlerden korur. Varsayılan: kapalı.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Kül Kalmasın",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Etkinleştirildiğinde, yanmış cesetler arkasında kül yığını bırakmaz. Varsayılan: kapalı.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Ateş Yayılma Hızı",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Ateş cesetler arasında ne kadar hızlı yayılır. Düşük = daha hızlı. Varsayılan: 150 kare (~5s/tile). Önerilen: singleplayer için 150, co-op/multiplayer için 50-80."
+}

@@ -1,0 +1,9 @@
+VERSION = 1,
+
+option PushVehicle.AllowSidePushing
+{
+    type = boolean,
+    default = true,
+    page = PushVehicle,
+    translation = PushVehicle_AllowSidePushing,
+}

@@ -1,0 +1,7 @@
+{
+    "IGUI_SubirEscaleras_Inseguro": "Nao ha onde se segurar la em cima.",
+    "IGUI_SubirEscaleras_Pierna": "Com a perna assim eu nao subo. Precisa de uma tala.",
+    "IGUI_SubirEscaleras_Agotado": "Nao tenho forcas para subir.",
+    "IGUI_SubirEscaleras_SinNivel": "Nao ha nenhum andar carregado acima da escada.",
+    "IGUI_SubirEscaleras_SinSalida": "Esta escada nao chega a lugar nenhum onde eu possa sair. Precisa ser mais alta, ou precisa haver um piso no andar de cima, sobre a escada ou bem ao lado dela."
+}

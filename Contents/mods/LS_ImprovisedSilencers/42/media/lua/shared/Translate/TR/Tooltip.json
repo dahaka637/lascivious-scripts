@@ -1,0 +1,10 @@
+{
+    "Tooltip_Silencer": "Ateşli silahın ses yayılım yarıçapını %%80 oranında azaltır, ancak menzilini biraz düşürür.",
+    "Tooltip_MetalPipeSilencer": "Ateşli silahın ses yayılım yarıçapını %%60 azaltır, ancak menzilini biraz düşürür.",
+    "Tooltip_TorchSilencer": "Ateşli silahın ses yayılım yarıçapını %%40 azaltır, ancak menzilini düşürür.",
+    "Tooltip_WaterBottleSilencer": "Ateşli silahın ses yayılım yarıçapını %%20 azaltır, ancak menzilini düşürür.",
+    "Tooltip_PotatoSilencer": "Ateşli silahın ses yayılım yarıçapını %%10 azaltır, ancak menzilini düşürür. Tek atıştan sonra yok olur.",
+    "Tooltip_SuppressorCondition": "Susturucu Durumu:",
+    "Tooltip_ISIL_NoiseReduction": "Ses Azaltma:",
+    "Tooltip_ISIL_DynamicSuppressor": "Ateşli silahın ses yarıçapını ve seviyesini azaltır, ancak silah menzilini düşürür."
+}

@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "每具屍體燃燒時間",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "燃燒一具屍體所需的遊戲內分鐘數。預設：110（原版數值）。",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "移除原版焚燒屍體",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "移除需要汽油的原版「焚燒屍體」選項。",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "火焰蔓延半徑",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "當一具屍體燃燒時，此半徑內的鄰近屍體也會著火。0 = 停用。",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "需要汽油",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "啟用後，焚燒屍體除了火源外還需要汽油桶。",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "每具屍體汽油用量",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "每焚燒一具屍體消耗的汽油量（公升）。預設：0.1 公升（10 公升汽油桶可焚燒約 100 具屍體）。",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "允許室內焚燒",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "停用時，無法使用此模組焚燒建築物內的屍體。可防止意外火災損壞木造結構。預設：開啟。",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "每具屍體火源使用次數",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "焚燒每具屍體時使用火源的次數。數值越高，打火機和火柴消耗越快。0 = 無限制（火源永遠不會耗盡）。預設：1。",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "完成後熄火",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "啟用後，鏈中所有屍體著火後不久火焰會自動熄滅。保護木造結構免受殘留火焰損壞。預設：停用。",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "不留灰燼",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "啟用後，焚燒後的屍體不會留下灰堆。預設：停用。",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "火焰蔓延速度",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "火焰在尸体之间蔓延的速度。越低 = 越快。默认：150帧（约5秒/格）。推荐：单人150，合作/多人50-80。"
+}

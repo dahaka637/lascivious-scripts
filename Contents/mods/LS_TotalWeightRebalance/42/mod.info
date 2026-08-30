@@ -1,0 +1,13 @@
+name=Lascivious Scripts - Total Weight Rebalance
+id=LS_TotalWeightRebalance
+icon=icon.png
+poster=preview.png
+poster=poster_1.png
+poster=poster_2.png
+poster=poster_3.png
+versionMin=42.0
+modversion=1.2
+description=Reequilibra os pesos de mais de 1600 itens vanilla para se aproximar de quilogramas reais. <LINE>
+description=Permite ajuste fino por item (admin) e pesos customizados via sandbox. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

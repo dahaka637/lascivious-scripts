@@ -1,0 +1,36 @@
+module Base
+{
+
+    item GardenSaw
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 1.0,
+        Icon = Handsaw,
+        MetalValue = 35.0,
+        SurvivalGear = true,
+        StaticModel = GardenSaw,
+        WorldStaticModel = GardenSawGround,
+        Tags = base:saw;base:showcondition;base:hasmetal,
+        ConditionLowerChanceOneIn = 10,
+        ConditionMax = 61,
+        Researchablerecipes = MakeSawPlank;Forge_Saw;MakeStoneBladeSaw,
+    }
+
+    item Saw
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 1.0,
+        Icon = Hacksaw,
+        MetalValue = 35.0,
+        SurvivalGear = true,
+        StaticModel = Hacksaw,
+        WorldStaticModel = HacksawGround,
+        Tags = base:saw;base:metalsaw;base:showcondition,
+        ConditionLowerChanceOneIn = 10,
+        ConditionMax = 61,
+        Researchablerecipes = Forge_Saw;MakeStoneBladeSaw,
+    }
+
+}

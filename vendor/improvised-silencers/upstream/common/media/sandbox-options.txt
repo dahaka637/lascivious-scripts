@@ -1,0 +1,94 @@
+VERSION = 1,
+
+option ISIL.ExtendedMode {
+    type = boolean,
+    default = false,
+    page = ISIL,
+    translation = ISIL_ExtendedMode,
+}
+
+option ISIL.EnableDurability {
+    type = boolean,
+    default = true,
+    page = ISIL,
+    translation = ISIL_EnableDurability,
+}
+
+option ISIL.CaliberBasedWear {
+    type = boolean,
+    default = true,
+    page = ISIL,
+    translation = ISIL_CaliberBasedWear,
+}
+
+option ISIL.ProfessionalNoiseReduction {
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 60,
+    page = ISIL,
+    translation = ISIL_ProfessionalNoiseReduction,
+}
+
+option ISIL.MetalPipeNoiseReduction {
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 40,
+    page = ISIL,
+    translation = ISIL_MetalPipeNoiseReduction,
+}
+
+option ISIL.HandTorchNoiseReduction {
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 30,
+    page = ISIL,
+    translation = ISIL_HandTorchNoiseReduction,
+}
+
+option ISIL.WaterBottleNoiseReduction {
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 20,
+    page = ISIL,
+    translation = ISIL_WaterBottleNoiseReduction,
+}
+
+option ISIL.ProfessionalDurability {
+    type = integer,
+    min = 1,
+    max = 10000,
+    default = 500,
+    page = ISIL,
+    translation = ISIL_ProfessionalDurability,
+}
+
+option ISIL.MetalPipeDurability {
+    type = integer,
+    min = 1,
+    max = 10000,
+    default = 100,
+    page = ISIL,
+    translation = ISIL_MetalPipeDurability,
+}
+
+option ISIL.HandTorchDurability {
+    type = integer,
+    min = 1,
+    max = 10000,
+    default = 20,
+    page = ISIL,
+    translation = ISIL_HandTorchDurability,
+}
+
+option ISIL.WaterBottleDurability {
+    type = integer,
+    min = 1,
+    max = 10000,
+    default = 5,
+    page = ISIL,
+    translation = ISIL_WaterBottleDurability,
+}

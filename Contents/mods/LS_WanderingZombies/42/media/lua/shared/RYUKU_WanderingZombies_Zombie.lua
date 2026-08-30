@@ -1,0 +1,434 @@
+if isServer() then return end
+require("RYUKU_WanderingZombies_Horde")
+
+local inHorde
+local reusedVector = WZVector:blank()
+
+------------------
+-- WZMoveTarget --
+------------------
+
+---@class WZMoveTarget
+---@field private _ref WZZombie
+---@field private _target zombie.characters.IsoGameCharacter
+---@field private _active boolean
+---@field private _interrupt function
+---@field private _distance function
+WZMoveTarget = {}
+
+---@param ref WZZombie
+---@return WZMoveTarget
+function WZMoveTarget:new(ref)
+    local obj = {}
+    setmetatable(obj, self)
+    self.__index = self
+
+    obj._ref = ref
+    return obj
+end
+
+---@param isoGameCharacter zombie.characters.IsoGameCharacter
+---@param moveType string
+function WZMoveTarget:set(isoGameCharacter, moveType)
+    self._target = isoGameCharacter
+    self._active = true
+    if moveType == "Flee" then
+        self._interrupt = self.fleeInterrupt
+        self._distance = self.fleeDistance
+    else
+        self._interrupt = self.homingInterrupt
+        self._distance = self.homingDistance
+    end
+end
+
+---@return boolean
+function WZMoveTarget:isActive()
+    return self._active
+end
+
+function WZMoveTarget:setInactive()
+    self._active = false
+end
+
+---@return boolean
+function WZMoveTarget:shouldInterrupt()
+    return self:_interrupt(inHorde) and self:_distance(inHorde)
+end
+
+---@return boolean
+function WZMoveTarget:fleeInterrupt()
+    return WZSandboxVars:getZ("FleeRadiusInterruptValue", inHorde) == 1
+end
+
+---@return boolean
+function WZMoveTarget:homingInterrupt()
+    return WZSandboxVars:getZ("HomingRadiusInterruptValue", inHorde) == 1
+end
+
+---@return boolean
+function WZMoveTarget:fleeDistance()
+    return self._ref:distanceTo(self._target) > WZSandboxVars:getZ("FleeRadiusValue", inHorde)
+end
+
+---@return boolean
+function WZMoveTarget:homingDistance()
+    return self._ref:distanceTo(self._target) < WZSandboxVars:getZ("HomingRadiusValue", inHorde)
+end
+
+--------------
+-- WZZombie --
+--------------
+
+---@class WZZombie: WZHorde
+---@field private _closestPlayer zombie.characters.IsoPlayer?
+---@field private _closestPlayerIdx integer?
+---@field private _closestAgedPlayer zombie.characters.IsoPlayer?
+---@field private _closestAgedPlayerIdx integer?
+---@field private _nextPlayerIdx integer
+---@field private _moveTarget WZMoveTarget
+---@field private _soundTarget WZVector|nil
+WZZombie = WZHorde:derive()
+
+-----------------
+-- Constructor --
+-----------------
+
+---@param isoZombie zombie.characters.IsoZombie
+---@return WZZombie
+function WZZombie:new(isoZombie)
+    local obj = WZHorde:new(isoZombie)
+    setmetatable(obj, self)
+    self.__index = self
+
+    ---@cast obj WZZombie
+    obj._nextPlayerIdx = 0
+    obj._moveTarget = WZMoveTarget:new(obj)
+    return obj
+end
+
+-----------
+-- Reset --
+-----------
+
+---@return boolean
+function WZZombie:reset()
+    WZHorde.reset(self)
+
+    self._playerCacheTime = nil
+    self._closestPlayer = nil
+    self._closestAgedPlayer = nil
+    self._moveTarget = nil
+    self._soundTarget = nil
+    return false
+end
+
+------------
+-- Update --
+------------
+
+local player
+local movePos = WZVector:blank() -- reused WZVector to combat garbage collection
+local moveType = "Wander"
+local pathTarget
+local wzMoveTarget
+
+---@return boolean?
+function WZZombie:update()
+    local result = WZHorde.update(self)
+    if result ~= true then return result end
+
+    inHorde = self:isInHorde()
+    wzMoveTarget = self._moveTarget
+    self:updatePlayers()
+
+    -- NOTE: zombies and walking around fences... don't like it
+    -- TODO: (maybe, big task) find a way to implement my own pathfinding algorithm (HPA* would be most suitable)
+    if self:isMoving() then
+        -- WZ will not update the move cooldown when:
+        --      the current state is WalkTowardState
+        --      the distance to pathTarget is within the expected distance for vanilla wandering (Rand.Next(8) - 4)
+        -- this is due to the way the game does vanilla wandering, and the way the zombie pathfinding works
+      if self:getState() == "WalkTowardState" and self:distanceTo(self:getPathTarget()) < 6 then
+            return true
+        end
+
+        -- if zombie is homing/fleeing, interrupt movement if necessary
+        if wzMoveTarget:isActive() and wzMoveTarget:shouldInterrupt() then
+            wzMoveTarget:setInactive()
+            self._ref:setVariable("bPathfind", false)
+            self._ref:setVariable("bMoving", false)
+        end
+
+        self:updateMoveCooldown(inHorde)
+        return false
+    elseif self:isAlerted() then
+        -- avoid interrupting pathfinding in progress
+        self:updateMoveCooldown(inHorde)
+        return false
+    end
+
+    -- clear homing/flee targets
+    wzMoveTarget:setInactive()
+
+    -- do not continue if zombie is not ready to be moved
+    if not self:isMoveCooldownExpired() then return true end
+    self:updateMoveCooldown(inHorde)
+
+    if self:getMovePosition() then return not self:pathTo(movePos, moveType, inHorde) end
+    return true
+end
+
+---------------------
+-- Closest Players --
+---------------------
+
+function WZZombie:updatePlayers()
+    if not isClient() and not isCoopHost() then return end
+
+    -- NOTE: this is less accurate then the previous solution, but, should be significantly more performance friendly
+    -- verify current players are still valid
+    local players = IsoPlayer:getPlayers()
+    local playerCount = players:size()
+    local closestPlayer = self._closestPlayerIdx ~= nil
+        and self._closestPlayerIdx < playerCount
+        and players:get(self._closestPlayerIdx) --[[@as false|zombie.characters.IsoPlayer?]]
+
+     local closestAgedPlayer = self._closestAgedPlayerIdx ~= nil
+        and self._closestAgedPlayerIdx < playerCount
+        and players:get(self._closestAgedPlayerIdx) --[[@as false|zombie.characters.IsoPlayer?]]
+
+    if not closestPlayer or closestPlayer ~= self._closestPlayer or closestPlayer:isDead() then
+        self._closestPlayer = nil
+        self._closestPlayerIdx = nil
+        closestPlayer = nil
+    end
+
+    if not closestAgedPlayer or closestAgedPlayer ~= self._closestAgedPlayer or closestAgedPlayer:isDead() then
+        self._closestAgedPlayer = nil
+        self._closestAgedPlayerIdx = nil
+        closestAgedPlayer = nil
+    end
+
+    if playerCount == 0 then return end
+
+    -- check next player
+    local idx = self._nextPlayerIdx
+    if idx >= playerCount then idx = 0 end
+
+    player = players:get(idx) --[[@as zombie.characters.IsoPlayer?]]
+    if player ~= nil and not player:isDead() then
+        local dist = self:distanceTo(player)
+        if dist < 300 then
+            if closestPlayer == nil or self:distanceTo(closestPlayer) > dist then
+                self._closestPlayer = player
+                self._closestPlayerIdx = idx
+            end
+
+            if player:getHoursSurvived() >= WZSandboxVars:get(WZ_SHARED, "HoursSurvived")
+                and (closestAgedPlayer == nil or self:distanceTo(closestAgedPlayer) > dist)
+            then
+                self._closestAgedPlayer = player
+                self._closestAgedPlayerIdx = idx
+            end
+        end
+    end
+
+    self._nextPlayerIdx = idx + 1
+end
+
+---@return zombie.characters.IsoPlayer?
+function WZZombie:getClosestPlayer()
+    if isClient() or isCoopHost() then return self._closestPlayer end
+    return getPlayer()
+end
+
+---@return zombie.characters.IsoPlayer?
+function WZZombie:getClosestAgedPlayer()
+    if isClient() or isCoopHost() then return self._closestAgedPlayer end
+    return (getPlayer():getHoursSurvived() >= WZSandboxVars:get(WZ_SHARED, "HoursSurvived") and getPlayer())
+        or nil
+end
+
+-----------
+-- Sound --
+-----------
+
+local bigSoundIdx ---@type integer|nil
+local bigSoundError = false
+
+---@param isoZombie zombie.characters.IsoZombie
+---@return zombie.WorldSoundManager.WorldSound?
+local function getBigSound(isoZombie)
+    local sound = getWorldSoundManager():getBiggestSoundZomb(
+        isoZombie:getX(), isoZombie:getY(), isoZombie:getZ(), true, isoZombie
+    )
+    if sound == nil then return nil end
+
+    local fieldValue
+    bigSoundIdx, bigSoundError, fieldValue = WZUtility:getClassFieldVal(
+        bigSoundIdx,
+        bigSoundError,
+        "Wandering Zombies: bigSoundIdx == nil",
+        nil,
+        sound,
+        "public zombie.WorldSoundManager$WorldSound zombie.WorldSoundManager$ResultBiggestSound.sound"
+    )
+    return fieldValue
+end
+
+local soundXIdx --@type integer?
+local soundYIdx --@type integer?
+local soundZIdx --@type integer?
+local soundError = false
+
+---@param worldSound zombie.WorldSoundManager.WorldSound?
+---@return WZVector?
+local function getSoundVec(worldSound)
+    if worldSound == nil then return nil end
+    local x, y, z
+    soundXIdx, soundError, x = WZUtility:getClassFieldVal(
+        soundXIdx, soundError, "Wandering Zombies: soundXIdx == nil", nil,
+        worldSound, "public int zombie.WorldSoundManager$WorldSound.x"
+    )
+    soundYIdx, soundError, y = WZUtility:getClassFieldVal(
+        soundYIdx, soundError, "Wandering Zombies: soundYIdx == nil", nil,
+        worldSound, "public int zombie.WorldSoundManager$WorldSound.y"
+    )
+    soundZIdx, soundError, z = WZUtility:getClassFieldVal(
+        soundZIdx, soundError, "Wandering Zombies: soundZIdx == nil", nil,
+        worldSound, "public int zombie.WorldSoundManager$WorldSound.z"
+    )
+    if soundError then return nil end
+
+    return WZVector:new({
+        x = x,
+        y = y,
+        z = z
+    })
+end
+
+---@private
+---@return boolean
+function WZZombie:hasSoundTarget()
+    -- TODO:
+    -- attract?
+    -- randomise the end of the path? would require finding out what the source of sound is
+    local soundPos = getSoundVec(getWorldSoundManager():getSoundZomb(self._ref))
+        or getSoundVec(getBigSound(self._ref))
+        or (self._ref:getLastHeardSound():getX() > -1 and WZVector:new(self._ref:getLastHeardSound()))
+        or self._soundTarget
+
+    if soundPos == nil then return false end
+
+    -- verify zombie path is near soundPos
+    pathTarget = self:getPathTarget()
+    if self:distanceTo(pathTarget) > 1 then
+        if soundPos:dotOrigin(self._position, pathTarget) >= 0.6 then
+            if not pathTarget:equals(self._soundTarget) then self._soundTarget = pathTarget end
+            return true
+        end
+    elseif soundPos:equals(self._soundTarget) then
+        self._soundTarget = nil
+        return false
+    end
+
+    if self._soundTarget == nil then self._ref:setTurnAlertedValues(soundPos.x, soundPos.y) end
+
+    self._soundTarget = soundPos
+    self._ref:setLastHeardSound(soundPos.x, soundPos.y, soundPos.z)
+    self:pathTo(soundPos, "Wander", self:isInHorde())
+    return true
+end
+
+-------------
+-- Pathing --
+-------------
+
+---@param isoPlayer zombie.characters.IsoPlayer
+---@param dist number
+---@return boolean
+function WZZombie:pathToPlayer(isoPlayer, dist)
+    movePos:update(self._position)
+    reusedVector:update(isoPlayer):sub(movePos):normalise()
+    movePos:add(reusedVector:mult(dist))
+    movePos:rotateAt(self._position, RYRNG:range(-15, 15))
+    return self:pathTo(movePos, "Homing", inHorde)
+end
+
+-------------
+-- Chances --
+-------------
+
+---@return number
+function WZZombie:getFleeChance()
+    if not WZSandboxVars:isTimeNow("Flee", inHorde) then
+        self._ref:setVariable("aawzdebug", "not flee time")
+        return 0
+    end
+
+    player = self:getClosestPlayer()
+    if player == nil then return 0 end
+    if self:distanceTo(player) > WZSandboxVars:getZ("FleeRadiusValue", inHorde) then
+        self._ref:setVariable("aawzdebug", "no player / radius")
+        return 0
+    end
+
+    return WZSandboxVars:getZ("FleeChanceValue", inHorde)
+end
+
+---@return number
+function WZZombie:getHomingChance()
+    if not WZSandboxVars:isTimeNow("Homing", inHorde) then return 0 end
+
+    player = self:getClosestAgedPlayer()
+    if player == nil then return 0 end
+    if self:distanceTo(player) < WZSandboxVars:getZ("HomingRadiusValue", inHorde) then
+        return 0
+    end
+
+    return WZSandboxVars:getZ("HomingChanceValue", inHorde)
+end
+
+---@return number
+function WZZombie:getWanderChance()
+    if not WZSandboxVars:isTimeNow("Wander", inHorde) then return 0 end
+    return WZSandboxVars:getZ("WanderChanceValue", inHorde)
+end
+
+
+-------------------
+-- Move Position --
+-------------------
+
+---@return boolean
+function WZZombie:getMovePosition()
+    local maxDist = WZSandboxVars:getZ("MaxTravel", inHorde) + 1
+    local moveDist = RYRNG:range(7, maxDist)
+
+    if RYRNG:mod(100) < self:getFleeChance() then
+        moveType = "Flee"
+        movePos:update(self._position)
+        movePos:moveTo(reusedVector:update(self._position):sub(player):normalise(), moveDist)
+        self._moveTarget:set(player, "Flee")
+        self._ref:setVariable("aawzmove", "flee")
+        return true
+    elseif RYRNG:mod(100) < self:getHomingChance() then
+        moveType = "Homing"
+        moveDist = math.min(moveDist, self:distanceTo(player))
+        self._moveTarget:set(player, "Homing")
+        self:pathToPlayer(player, moveDist)
+        self._ref:setVariable("aawzmove", "home")
+    elseif RYRNG:mod(100) < self:getWanderChance() then
+        moveType = "Wander"
+        local angleRange = 180
+        if WZSandboxVars:get(WZ_SHARED, "WanderForwards") then angleRange = 45 end
+
+        movePos:update(self._position)
+        reusedVector:update(self._ref:getForwardDirection()):normalise()
+        movePos:add(reusedVector:mult(moveDist))
+        movePos:rotateAt(self._position, RYRNG:range(-angleRange, angleRange))
+        return true
+    end
+
+    return false
+end

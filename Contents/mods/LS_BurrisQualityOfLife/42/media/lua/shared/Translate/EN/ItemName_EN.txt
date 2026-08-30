@@ -1,0 +1,4 @@
+ItemName_EN = {
+    ["Base.BQoL_TourniquetLeftLeg"] = "Tourniquet (Left Leg)",
+    ["Base.BQoL_TourniquetRightLeg"] = "Tourniquet (Right Leg)",
+}

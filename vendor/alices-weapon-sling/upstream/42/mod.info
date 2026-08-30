@@ -1,0 +1,10 @@
+name=Alice's Weapon Sling
+icon=Item_slingAky.png
+id=alicesWeaponSling
+description=Adds a craftable/lootable Weapon Sling to the game. 3d Models by Akyet. Code by Noir, Hx, Royadin, and Alice.
+poster=poster.png
+poster=preview.png
+poster=sling_recipe.png
+modversion=1.5
+versionMin=42.20
+author=Akyet, Noir, Hx, Royadin, Alice

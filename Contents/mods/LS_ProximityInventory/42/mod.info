@@ -1,0 +1,8 @@
+name=Lascivious Scripts - Proximity Inventory
+id=LS_ProximityInventory
+poster=poster.png
+icon=icon.png
+versionMin=42.20
+description=Agrupa itens de todos os containers próximos (móveis, corpos, veículos) em um inventário virtual único na janela de loot. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

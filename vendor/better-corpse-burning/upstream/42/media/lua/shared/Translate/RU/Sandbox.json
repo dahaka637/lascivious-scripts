@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Время Сжигания Одного Трупа",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Время в игровых минутах для сжигания одного трупа. По умолчанию: 110 (ванильное значение).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Убрать Ванильное Сжигание Трупа",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Убирает ванильную опцию «Сжечь труп», требующую бензин.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Радиус Распространения Огня",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Когда горит труп, ближайшие трупы в этом радиусе тоже загораются. 0 = отключено.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Требовать Бензин",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Если включено, для сжигания трупов помимо источника огня требуется канистра с бензином.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Бензина на Труп",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Сколько бензина (в литрах) расходуется на один сожжённый труп. По умолчанию: 0,1 л (10-литровой канистры хватит на ~100 трупов).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Разрешить Сжигание в Помещениях",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Если отключено, трупы внутри зданий нельзя сжигать с помощью этого мода. Предотвращает случайные пожары, повреждающие деревянные конструкции. По умолчанию: включено.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Использований Огня на Труп",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Сколько раз используется источник огня при сжигании одного трупа. Высокие значения быстрее расходуют зажигалки и спички. 0 = без ограничений (источник огня никогда не расходуется). По умолчанию: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Тушить Огонь по Завершении",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Если включено, огонь автоматически гаснет вскоре после того, как все трупы в цепи загорелись. Защищает деревянные конструкции от оставшегося пламени. По умолчанию: отключено.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Без Пепла",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Если включено, сожжённые трупы не оставляют после себя кучек пепла. По умолчанию: отключено.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Скорость распространения огня",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Как быстро огонь распространяется между трупами. Чем меньше = тем быстрее. По умолчанию: 150 кадров (~5с на клетку). Рекомендуется: 150 для одиночной игры, 50-80 для совместной/сетевой игры."
+}

@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Tiempo de Quemadura por Cadáver",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Tiempo en minutos del juego para quemar un cadáver. Predeterminado: 110 (valor vanilla).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Eliminar Quemar Cadáver Vanilla",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Elimina la opción vanilla 'Quemar Cadáver' que requiere gasolina.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Radio de Propagación del Fuego",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Cuando un cadáver se quema, los cadáveres cercanos dentro de este radio también se incendian. 0 = desactivado.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Requerir Gasolina",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Cuando está activado, quemar cadáveres también requiere un bidón de gasolina además de una fuente de fuego.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Gasolina por Cadáver",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Cuánta gasolina (en litros) se consume por cadáver quemado. Predeterminado: 0.1L (un bidón de 10L quema ~100 cadáveres).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Permitir Quemar en Interiores",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Cuando está desactivado, los cadáveres dentro de los edificios no pueden ser quemados con este mod. Evita incendios accidentales que dañen estructuras de madera. Predeterminado: activado.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Usos de Fuego por Cadáver",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Cuántas veces se usa la fuente de fuego por cada cadáver quemado. Los valores altos consumen encendedores y cerillas más rápido. 0 = ilimitado (la fuente de fuego nunca se agota). Predeterminado: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Apagar Fuego al Terminar",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Cuando está activado, el fuego se apaga automáticamente poco después de que todos los cadáveres de la cadena se incendien. Protege las estructuras de madera de las llamas residuales. Predeterminado: desactivado.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Sin Cenizas",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Cuando está activado, los cadáveres quemados no dejan pilas de ceniza. Predeterminado: desactivado.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Velocidad de propagación del fuego",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Qué tan rápido se propaga el fuego entre cadáveres. Menor = más rápido. Por defecto: 150 cuadros (~5s por baldosa). Recomendado: 150 para un jugador, 50-80 para cooperativa/multijugador."
+}

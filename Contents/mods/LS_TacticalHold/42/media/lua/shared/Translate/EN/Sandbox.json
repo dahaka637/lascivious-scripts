@@ -1,0 +1,9 @@
+{
+  "Sandbox_TacHold": "Tactical Hold",
+
+  "Sandbox_TacHold_AimingRequirement": "Minimum Aiming Level for Long Guns",
+  "Sandbox_TacHold_AimingRequirement_tooltip": "Required aiming level before Long gun animations activate.",
+
+  "Sandbox_TacHold_PistolAimingRequirement": "Minimum Aiming Level for Pistols",
+  "Sandbox_TacHold_PistolAimingRequirement_tooltip": "Required aiming level before pistol animations activate."
+}

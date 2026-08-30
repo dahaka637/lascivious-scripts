@@ -1,0 +1,5 @@
+Sandbox_PTBR = {
+    Sandbox_ProximityInventory = "Invent\195\161rio por Proximidade",
+    Sandbox_ZombieOnly = "Somente zumbis",
+    Sandbox_ZombieOnly_tooltip = "Ative para que o Invent\195\161rio por Proximidade funcione somente com os invent\195\161rios de zumbis.",
+}

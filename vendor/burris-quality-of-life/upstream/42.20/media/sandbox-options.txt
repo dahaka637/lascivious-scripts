@@ -1,0 +1,526 @@
+VERSION = 1,
+
+/*
+ * Burris Quality of Life - sandbox options.
+ *
+ * Every option declared here MUST also appear in
+ *   media/lua/shared/BQoL/BQoL_Settings.lua
+ * with the same default value. That table is what the mod actually reads, so an
+ * option missing from it resolves to nil at runtime instead of its default.
+ * tools/lint.sh enforces the pairing.
+ *
+ * Labels/tooltips come from Translate/<LANG>/Sandbox.json as:
+ *   page    -> Sandbox_<page>
+ *   label   -> Sandbox_<translation>
+ *   tooltip -> Sandbox_<translation>_tooltip
+ *
+ * The three craft recipes this mod adds (clean a bandage with alcohol,
+ * disinfect a rag with cologne or perfume, cut a sheet from old clothing) are
+ * script-defined and have no toggle -- they are additive recipes that change
+ * nothing unless used.
+ */
+
+/* ------------------------------------------------------------------ prying */
+
+option BurrisQoL.PryEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryEnabled,
+}
+
+option BurrisQoL.PryBuildingDoors
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryBuildingDoors,
+}
+
+option BurrisQoL.PryGarageDoors
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryGarageDoors,
+}
+
+option BurrisQoL.PrySafeDoors
+{
+    type = boolean,
+    default = false,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PrySafeDoors,
+}
+
+option BurrisQoL.PryWindows
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryWindows,
+}
+
+option BurrisQoL.PryVehicleDoors
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryVehicleDoors,
+}
+
+option BurrisQoL.PryShatterVehicleWindows
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryShatterVehicleWindows,
+}
+
+option BurrisQoL.PryReinforcedDoorLevel
+{
+    type = integer,
+    min = 0,
+    max = 10,
+    default = 8,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryReinforcedDoorLevel,
+}
+
+option BurrisQoL.PryWindowShatterChance
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 20,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryWindowShatterChance,
+}
+
+option BurrisQoL.PryChanceMultiplier
+{
+    type = double,
+    min = 0,
+    max = 5,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_PryChanceMultiplier,
+}
+
+/* --------------------------------------------------------- ground pickup */
+
+option BurrisQoL.CollectEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_CollectEnabled,
+}
+
+option BurrisQoL.CollectDisableLoot
+{
+    type = boolean,
+    default = false,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_CollectDisableLoot,
+}
+
+option BurrisQoL.CollectLootMultiplier
+{
+    type = double,
+    min = 0,
+    max = 100,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_CollectLootMultiplier,
+}
+
+/* ------------------------------------------------------------ wash menu */
+
+option BurrisQoL.WashEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_WashEnabled,
+}
+
+/* ------------------------------------------------------ equip from ground */
+
+option BurrisQoL.EquipFromGroundEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_EquipFromGroundEnabled,
+}
+
+/* --------------------------------------------------------------- ammo HUD */
+
+option BurrisQoL.AmmoHudEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_AmmoHudEnabled,
+}
+
+/* ------------------------------------------------------ can-opening injury */
+
+option BurrisQoL.CanInjuryEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_CanInjuryEnabled,
+}
+
+option BurrisQoL.CanInjuryChance
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 25,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_CanInjuryChance,
+}
+
+option BurrisQoL.CanInjurySeverity
+{
+    type = double,
+    min = 0,
+    max = 5,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_CanInjurySeverity,
+}
+
+/* --------------------------------------------------------- tourniquet */
+
+option BurrisQoL.TourniquetEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TourniquetEnabled,
+}
+
+option BurrisQoL.TourniquetBleedFraction
+{
+    type = double,
+    min = 0,
+    max = 1,
+    default = 0.3,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TourniquetBleedFraction,
+}
+
+option BurrisQoL.TourniquetPain
+{
+    type = integer,
+    min = 0,
+    max = 100,
+    default = 20,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TourniquetPain,
+}
+
+/* -------------------------------------------------------- small tweaks */
+
+option BurrisQoL.TweakFlashlightSlot
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TweakFlashlightSlot,
+}
+
+option BurrisQoL.TweakReadWhileWalking
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TweakReadWhileWalking,
+}
+
+option BurrisQoL.TweakEquipWhileWalking
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TweakEquipWhileWalking,
+}
+
+/* --------------------------------------------------------- corpse storage */
+
+option BurrisQoL.CorpseTrunkEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_CorpseTrunkEnabled,
+}
+
+/* ---------------------------------------------------------- inventory QoL */
+
+option BurrisQoL.ReloadAllMagazinesEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ReloadAllMagazinesEnabled,
+}
+
+option BurrisQoL.ReplaceBandageEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ReplaceBandageEnabled,
+}
+
+option BurrisQoL.InventorySelectionFixEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_InventorySelectionFixEnabled,
+}
+
+option BurrisQoL.NestedContainersEnabled
+{
+    type = boolean,
+    default = false,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_NestedContainersEnabled,
+}
+
+option BurrisQoL.NestedContainersDepth
+{
+    type = integer,
+    min = 1,
+    max = 10,
+    default = 2,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_NestedContainersDepth,
+}
+
+option BurrisQoL.NestedContainersPlayer
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_NestedContainersPlayer,
+}
+
+option BurrisQoL.NestedContainersPlayerFilter
+{
+    type = enum,
+    numValues = 3,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_NestedContainersPlayerFilter,
+    valueTranslation = BurrisQoL_NestedContainersPlayerFilter_Options,
+}
+
+option BurrisQoL.NestedContainersParentIcon
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_NestedContainersParentIcon,
+}
+
+option BurrisQoL.NoFloorLimitEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_NoFloorLimitEnabled,
+}
+
+/* --------------------------------------------------------- tree canopy */
+
+option BurrisQoL.TreeCanopyEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TreeCanopyEnabled,
+}
+
+option BurrisQoL.TreeCanopyHideStyle
+{
+    type = enum,
+    numValues = 2,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TreeCanopyHideStyle,
+    valueTranslation = BurrisQoL_TreeCanopyHideStyle_Options,
+}
+
+option BurrisQoL.TreeCanopyWhileDriving
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TreeCanopyWhileDriving,
+}
+
+option BurrisQoL.TreeCanopyDrivingRange
+{
+    type = enum,
+    numValues = 2,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TreeCanopyDrivingRange,
+    valueTranslation = BurrisQoL_TreeCanopyDrivingRange_Options,
+}
+
+option BurrisQoL.TreeCanopyOnFoot
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TreeCanopyOnFoot,
+}
+
+option BurrisQoL.TreeCanopyOnFootRange
+{
+    type = enum,
+    numValues = 3,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TreeCanopyOnFootRange,
+    valueTranslation = BurrisQoL_TreeCanopyOnFootRange_Options,
+}
+
+option BurrisQoL.TreeCanopyIndoorRadius
+{
+    type = integer,
+    min = 0,
+    max = 50,
+    default = 24,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_TreeCanopyIndoorRadius,
+}
+
+/* ------------------------------------------------------ zombie collision */
+
+option BurrisQoL.ZombieCollisionEnabled
+{
+    type = boolean,
+    default = true,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ZombieCollisionEnabled,
+}
+
+option BurrisQoL.ZombieCollisionMaxZombies
+{
+    type = integer,
+    min = 3,
+    max = 15,
+    default = 12,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ZombieCollisionMaxZombies,
+}
+
+option BurrisQoL.ZombieCollisionScanRadius
+{
+    type = integer,
+    min = 3,
+    max = 15,
+    default = 8,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ZombieCollisionScanRadius,
+}
+
+option BurrisQoL.ZombieCollisionPushRadius
+{
+    type = double,
+    min = 0.1,
+    max = 1.5,
+    default = 0.5,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ZombieCollisionPushRadius,
+}
+
+option BurrisQoL.ZombieCollisionPushForce
+{
+    type = double,
+    min = 0.01,
+    max = 0.5,
+    default = 0.05,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ZombieCollisionPushForce,
+}
+
+option BurrisQoL.ZombieCollisionScope
+{
+    type = enum,
+    numValues = 3,
+    default = 1,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_ZombieCollisionScope,
+    valueTranslation = BurrisQoL_ZombieCollisionScope_Options,
+}
+
+/* ------------------------------------------------------------- debug */
+
+option BurrisQoL.Debug
+{
+    type = boolean,
+    default = false,
+
+    page = BurrisQoL,
+    translation = BurrisQoL_Debug,
+}

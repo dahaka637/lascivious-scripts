@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animNode>
+	<m_Name>Movement_RunAttachItem</m_Name>
+	<m_AnimName>Bob_DoingSthWhileRunning_s</m_AnimName>
+
+	<m_SpeedScale>RunAttach_AnimSpeed</m_SpeedScale>
+	<m_Scalar>RunAttach_AnimSpeed</m_Scalar>
+
+	<m_priority>1</m_priority>
+	<m_BlendTime>0.10</m_BlendTime>
+	<m_BlendOutTime>0.3</m_BlendOutTime>
+	<m_Looped>true</m_Looped>
+
+	<m_Conditions>
+		<m_Name>RunAttach_Enable</m_Name>
+		<m_Type>BOOL</m_Type>
+		<m_BoolValue>true</m_BoolValue>
+	</m_Conditions>
+
+	<m_Conditions>
+		<m_Name>sneaking</m_Name>
+		<m_Type>BOOL</m_Type>
+		<m_BoolValue>false</m_BoolValue>
+	</m_Conditions>
+
+	<m_SubStateBoneWeights>
+		<boneName>Bip01_Spine</boneName>
+		<weight>0</weight>
+		<includeDescendants>false</includeDescendants>
+	</m_SubStateBoneWeights>
+</animNode>

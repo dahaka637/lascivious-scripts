@@ -1,0 +1,38 @@
+schema: 1
+module_key: evil-morty-death-screen
+name: Evil Morty Death Screen
+bundled_mod_id: LS_EvilMortyDeathScreen
+status: enabled
+
+upstream:
+  workshop_id: "3773191030"
+  original_mod_id: "EvilMortyDeathScreen"
+  version: "1.0.0"
+  imported_at: "2026-08-30"
+  source_path: "vendor/evil-morty-death-screen/upstream/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 1
+  notes: "vendor/evil-morty-death-screen/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

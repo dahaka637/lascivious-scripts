@@ -1,0 +1,11 @@
+name=Lascivious Scripts - Durable Tools and Weapons (Hardened)
+id=LS_DurableToolsWeapons
+incompatible=\DTWsoft,\DTW
+versionMin=42.0.0
+icon=icon.png
+poster=poster.png
+modversion=1.0.0
+description=Reajusta a durabilidade de ferramentas e armas corpo a corpo. <LINE>
+description=Variante Hardened: +75% de durabilidade em relação ao padrão. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

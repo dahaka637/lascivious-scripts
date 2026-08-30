@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Doba Pálení na Mrtvolu",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Čas ve herních minutách potřebný ke spálení jedné mrtvoly. Výchozí: 110 (hodnota základní hry).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Odstranit Výchozí Pálení Mrtvol",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Odebere výchozí možnost 'Spálit mrtvolu', která vyžaduje benzín.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Poloměr Šíření Ohně",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Když hoří mrtvola, blízké mrtvoly v tomto poloměru se také zapálí. 0 = zakázáno.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Vyžadovat Benzín",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Pokud je povoleno, pálení mrtvol vyžaduje kromě zdroje ohně také kanystr s benzínem.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Benzín na Mrtvolu",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Kolik benzínu (v litrech) se spotřebuje na spálenou mrtvolu. Výchozí: 0,1 l (10litrový kanystr spálí ~100 mrtvol).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Povolit Pálení uvnitř Budov",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Pokud je zakázáno, mrtvoly uvnitř budov nelze pomocí tohoto modu spálit. Zabraňuje náhodným požárům poškozujícím dřevěné konstrukce. Výchozí hodnota: povoleno.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Použití Ohně na Mrtvolu",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Kolikrát je při spálení jedné mrtvoly použit zdroj ohně. Vyšší hodnoty rychleji spotřebovávají zapalovače a zápalky. 0 = neomezeně (zdroj ohně se nikdy nespotřebuje). Výchozí: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Uhasit Oheň po Dokončení",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Pokud je povoleno, oheň automaticky uhasí krátce poté, co všechny mrtvoly v řetězu vzplanou. Chrání dřevěné konstrukce před zbývajícím plamenem. Výchozí hodnota: zakázáno.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Bez Popela",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Pokud je povoleno, spálené mrtvoly nezanechávají za sebou hromádky popela. Výchozí hodnota: zakázáno.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Rychlost šíření ohně",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Jak rychle se oheň šíří mezi mrtvolami. Nižší = rychlejší. Výchozí: 150 snímků (~5s na dlaždici). Doporučeno: 150 pro singleplayer, 50-80 pro koop/multiplayer."
+}

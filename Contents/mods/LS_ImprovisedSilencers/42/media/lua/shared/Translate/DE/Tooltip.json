@@ -1,0 +1,10 @@
+{
+    "Tooltip_Silencer": "Verringert den Geräuschradius der Schusswaffe um 80 %%, reduziert aber leicht die Reichweite.",
+    "Tooltip_MetalPipeSilencer": "Verringert den Geräuschradius der Schusswaffe um 60 %%, reduziert aber leicht die Reichweite.",
+    "Tooltip_TorchSilencer": "Verringert den Geräuschradius der Schusswaffe um 40 %%, reduziert aber die Reichweite.",
+    "Tooltip_WaterBottleSilencer": "Verringert den Geräuschradius der Schusswaffe um 20 %%, reduziert aber die Reichweite.",
+    "Tooltip_PotatoSilencer": "Verringert den Geräuschradius der Schusswaffe um 10 %%, reduziert aber die Reichweite. Wird nach einem Schuss zerstört.",
+    "Tooltip_SuppressorCondition": "Schalldämpfer-Zustand:",
+    "Tooltip_ISIL_NoiseReduction": "Geräuschreduzierung:",
+    "Tooltip_ISIL_DynamicSuppressor": "Verringert Geräuschradius und Lautstärke der Schusswaffe, reduziert aber die Waffenreichweite."
+}

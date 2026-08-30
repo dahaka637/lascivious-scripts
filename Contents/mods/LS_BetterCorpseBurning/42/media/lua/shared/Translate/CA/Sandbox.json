@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Temps de Cremació per Cadàver",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Temps en minuts de joc per cremar un cadàver. Per defecte: 110 (valor vanilla).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Elimina la Cremació Vanilla de Cadàvers",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Elimina l'opció vanilla 'Cremar Cadàver' que requereix benzina.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Radi de Propagació del Foc",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Quan es crema un cadàver, els cadàvers propers dins d'aquest radi també s'encenen. 0 = desactivat.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Requereix Benzina",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Quan està activat, cremar cadàvers també requereix una galleda de benzina a més d'una font de foc.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Benzina per Cadàver",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Quanta benzina (en litres) es consumeix per cadàver cremat. Per defecte: 0,1 L (una galleda de 10 L crema ~100 cadàvers).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Permet la Cremació a l'Interior",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Quan està desactivat, els cadàvers dins dels edificis no es poden cremar amb aquest mod. Evita incendis accidentals que danyin estructures de fusta. Per defecte: activat.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Usos del Foc per Cadàver",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Quantes vegades s'utilitza la font de foc per cada cadàver cremat. Els valors alts consumeixen encenedors i mistos més ràpid. 0 = il·limitat (la font de foc no s'esgota mai). Per defecte: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Apagar el Foc en Acabar",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Quan està activat, el foc s'apaga automàticament poc després que tots els cadàvers de la cadena s'hagin encès. Protegeix les estructures de fusta de les flames residuals. Per defecte: desactivat.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Sense Cendra",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Quan està activat, els cadàvers cremats no deixen piles de cendra. Per defecte: desactivat.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Velocitat d'expansió del foc",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Velocitat a la que el foc s'expandeix entre els cadàvers. Menys = més ràpid. Per defecte: 150 fotogrames (~5s per rajola). Recomanat: 150 per a un sol jugador, 50-80 per a cooperativa/multijugador."
+}

@@ -1,0 +1,10 @@
+{
+    "PSR.PSRMag1": "Nouvelles Avancées : De l'énergie à partir du soleil",
+    "PSR.SolarPanel": "Panneau photovoltaïque (pièce)",
+    "PSR.PSRInverter": "Onduleur",
+    "PSR.DeepCycleBattery": "Batterie - 200Ah",
+    "PSR.SuperBattery": "Batterie - 400Ah",
+    "PSR.WiredCarBattery": "Batterie de voiture filaire",
+    "PSR.DIYBattery": "Batterie artisanale",
+    "PSR.ImprovisedBattery": "Batterie improvisée"
+}

@@ -1,0 +1,7 @@
+{
+    "IGUI_SubirEscaleras_Inseguro": "Ahí arriba no hay dónde agarrarse.",
+    "IGUI_SubirEscaleras_Pierna": "Con la pierna así no subo. Habría que entablillarla.",
+    "IGUI_SubirEscaleras_Agotado": "No me quedan fuerzas para subir.",
+    "IGUI_SubirEscaleras_SinNivel": "No hay ningún nivel cargado encima de la escalera.",
+    "IGUI_SubirEscaleras_SinSalida": "Esta escalera no llega a ningún sitio donde pueda salir. Hay que alargarla, o poner un suelo en el nivel de arriba, sobre la escalera o justo al lado."
+}

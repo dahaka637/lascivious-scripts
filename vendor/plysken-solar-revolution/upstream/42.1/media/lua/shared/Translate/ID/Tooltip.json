@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Menyimpan listrik yang dikumpulkan panel surya dan memasok bangunan.<br>Harus diletakkan di ruangan tertutup dan dihubungkan ke panel.<br>Butuh sedikit pengetahuan kelistrikan. Tidak perlu bahan bakar.",
+    "Tooltip_PSR_NoPanels": "Tidak ada Panel",
+    "Tooltip_PSR_PanelFar": "Panel ini terlalu jauh"
+}

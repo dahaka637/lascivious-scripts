@@ -1,0 +1,12 @@
+name=Total Weight Rebalance
+id=TotalWeightRebalance
+description=Rebalances vanilla encumbrance values to approximate kilograms while preserving gameplay comfort.
+category=Balance
+author=drone
+modversion=1.2
+versionMin=42.0
+icon=icon.png
+poster=preview.png
+poster=poster_1.png
+poster=poster_2.png
+poster=poster_3.png

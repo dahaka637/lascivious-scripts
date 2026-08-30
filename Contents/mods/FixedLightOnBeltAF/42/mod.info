@@ -1,0 +1,11 @@
+name=Lascivious Scripts - Simple Belt Flashlight+
+id=FixedLightOnBeltAF
+poster=poster.png
+icon=icon.png
+modversion=1.0.4
+versionMin=42.20
+authors=ACE
+description=Permite prender lanternas ao cinto/coldre, liberando as mãos. <LINE>
+description=Compatível com Better Flashlights, AuthenticZ e Plysken Attachments Reborn quando ativos. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

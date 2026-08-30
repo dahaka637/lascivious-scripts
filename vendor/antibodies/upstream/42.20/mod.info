@@ -1,0 +1,9 @@
+name=Antibodies B42.20 Community - Compatibility Fix (v0.2.3)
+id=AntibodiesB4220ServerFix
+author=lonegamedev
+modversion=0.2.3
+versionMin=42.20.0
+poster=poster.png
+icon=mini-poster.png
+description=Build 42.20 compatibility fix for Antibodies by lonegamedev. Corrects outdated Lua module paths and restores JSON-based UI and sandbox translations. Disable the original Workshop package before enabling this replacement.
+url=https://github.com/lonegamedev/pz_mod_antibodies

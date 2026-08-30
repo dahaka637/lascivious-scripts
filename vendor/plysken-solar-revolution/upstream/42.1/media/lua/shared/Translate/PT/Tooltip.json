@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Armazena a energia captada pelos painéis solares e alimenta o edifício.<br>Deve ser colocada numa divisão fechada e ligada aos painéis.<br>Requer alguns conhecimentos de eletricidade. Não precisa de combustível.",
+    "Tooltip_PSR_NoPanels": "Sem painel",
+    "Tooltip_PSR_PanelFar": "Este painel está muito longe"
+}

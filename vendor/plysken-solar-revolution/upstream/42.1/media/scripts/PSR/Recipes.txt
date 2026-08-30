@@ -1,0 +1,337 @@
+module PSR {
+    craftRecipe WireCarBattery {
+        timedAction = MakingElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        onCreate = Recipe.OnCreate.PSR_wireCarBattery,
+        xpAward = Electricity:1,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [Base.ElectricWire],
+            item 1 tags[CarBattery] mode:destroy flags[NoBrokenItems;ItemCount],
+        }
+        outputs {
+            item 1 PSR.WiredCarBattery,
+        }
+    }
+    craftRecipe UnWireCarBattery {
+        timedAction = MakingElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        Icon = CarBattery,
+        onCreate = Recipe.OnCreate.PSR_unwireCarBattery,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [PSR.WiredCarBattery] mode:destroy flags[MayDegrade;ItemCount],
+        }
+        outputs {
+            item 1 Base.CarBattery1,
+        }
+    }
+    craftRecipe Make_Improvised_Battery {
+        timedAction = MakingElectrical,
+        time = 120,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        xpAward = Electricity:1,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 4 [Base.ScrapMetal],
+            item 2 [Base.ElectricWire],
+            item 2 [Base.SmallSheetMetal],
+            item 6 [Base.Screws],
+            item 6 [Base.Battery] flags[ItemCount] mode:destroy,
+        }
+        outputs {
+            item 1 PSR.ImprovisedBattery,
+        }
+    }
+    craftRecipe Make_DIY_Battery {
+        timedAction = MakingElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:6,
+        skillRequired = Electricity:5,
+        onCreate = Recipe.OnCreate.PSR_createDiyBattery,
+        xpAward = Electricity:1,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [PSR.WiredCarBattery;PSR.ImprovisedBattery] mode:destroy flags[MayDegrade;ItemCount],
+            item 1 [Base.ElectronicsScrap],
+        }
+        outputs {
+            item 1 PSR.DIYBattery,
+        }
+    }
+
+    craftRecipe Recondition_Battery {
+        timedAction = MakingElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        Icon = CarBattery,
+        onCreate = Recipe.OnCreate.PSR_reconditionBattery,
+        AllowBatchCraft = false,
+        xpAward = Electricity:1,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [PSR.WiredCarBattery;PSR.ImprovisedBattery;PSR.DIYBattery;PSR.DeepCycleBattery;PSR.SuperBattery] mode:keep flags[ItemCount],
+            item 3 [Base.ElectronicsScrap],
+        }
+        outputs {
+        }
+    }
+    craftRecipe Dismantle_Solar_Failsafe {
+        timedAction = DismantleElectrical,
+        time = 60,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        Icon = SolarFailsafe,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [PSR.SolarFailsafe] mode:destroy,
+        }
+        outputs {
+            item 3 PSR.WiredCarBattery,
+            item 2 Base.ElectricWire,
+            item 1 Base.RemoteCraftedV3,
+        }
+    }
+    craftRecipe Make_Solar_Roof_Tile {
+        timedAction = MakingElectrical,
+        time = 120,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 [PSR.SolarPanel],
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 3 [Base.ElectricWire],
+        }
+        outputs {
+            item 1 PSR.SolarPanelFlat,
+        }
+    }
+    craftRecipe Make_Wall-Mounted_Solar_Panel {
+        timedAction = MakingElectrical,
+        time = 120,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 [PSR.SolarPanel],
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 3 [Base.ElectricWire],
+            item 4 [Base.MetalBar],
+            item 4 [Base.Screws],
+        }
+        outputs {
+            item 1 PSR.SolarPanelWall,
+        }
+    }
+    craftRecipe Make_Floor-Mounted_Solar_Panel {
+        timedAction = MakingElectrical,
+        time = 120,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 [PSR.SolarPanel],
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 3 [Base.ElectricWire],
+            item 4 [Base.MetalBar],
+            item 4 [Base.Screws],
+        }
+        outputs {
+            item 1 PSR.SolarPanelMounted,
+        }
+    }
+    /* Reverse_Solar_Roof_Tile — SolarPanelFlat (made with wire only, returns wire) */
+    craftRecipe Reverse_Solar_Roof_Tile {
+        timedAction = DismantleElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 [PSR.SolarPanelFlat],
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+        }
+        outputs {
+            item 1 PSR.SolarPanel,
+            item 2 Base.ElectricWire,
+        }
+    }
+    /* Reverse_Solar_Panel — SolarPanelWall / SolarPanelMounted (made with wire + metal + screws) */
+    craftRecipe Reverse_Solar_Panel {
+        timedAction = DismantleElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 [PSR.SolarPanelWall;PSR.SolarPanelMounted],
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+        }
+        outputs {
+            item 1 PSR.SolarPanel,
+            item 2 Base.ElectricWire,
+            item 3 Base.MetalBar,
+            item 2 Base.Screws,
+        }
+    }
+    craftRecipe Create_Battery_Bank {
+        timedAction = MakingElectrical,
+        time = 400,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:5,
+        skillRequired = Electricity:4;MetalWelding:2,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [PSR.PSRInverter],
+            item 3 [Base.ElectricWire],
+            item 6 [Base.ElectronicsScrap],
+            item 4 [Base.MetalBar],
+            item 4 [Base.Screws],
+            item 5 [Base.SmallSheetMetal],
+        }
+        outputs {
+            item 1 PSR.PowerBank,
+        }
+    }
+    craftRecipe Create_Solar_Failsafe {
+        timedAction = MakingElectrical,
+        time = 120,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 2 [Base.ElectricWire],
+            item 1 [Base.RemoteCraftedV3],
+            item 4 [PSR.WiredCarBattery] mode:destroy flags[ItemCount],
+        }
+        outputs {
+            item 1 PSR.SolarFailsafe,
+        }
+    }
+    craftRecipe Make_Solar_Panel {
+        category = Electrical,
+        needToBeLearn = true,
+        timedAction = MakingElectrical,
+        time = 250,
+        skillRequired = Electricity:5,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 2 [Base.ElectricWire],
+            item 10 [Base.Screws],
+            item 10 [Base.ElectronicsScrap],
+            item 3 [Base.SheetMetal],
+            item 5 [Base.BlowTorch] mode:keep flags[Prop2;NoBrokenItems],
+            item 1 tags[WeldingMask] mode:keep flags[NoBrokenItems],
+        }
+        outputs {
+            item 1 PSR.SolarPanel,
+        }
+    }
+    /* Hardened "realistic" variant — only taught when sandbox PSR.HardenedPanelRecipe is ON.
+       Same output as Make_Solar_Panel; adds tempered glass + aluminium frame, more cells,
+       higher skill/time. The standard Make_Solar_Panel stays unchanged for default games. */
+    craftRecipe Make_Solar_Panel_Realistic {
+        category = Electrical,
+        needToBeLearn = true,
+        timedAction = MakingElectrical,
+        time = 400,
+        skillRequired = Electricity:6,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 tags[WeldingMask] mode:keep flags[NoBrokenItems],
+            item 5 [Base.BlowTorch] mode:keep flags[Prop2;NoBrokenItems],
+            item 2 [Base.GlassPanel],
+            item 2 [Base.Aluminum],
+            item 15 [Base.ElectronicsScrap],
+            item 3 [Base.ElectricWire],
+            item 8 [Base.Screws],
+            item 1 [Base.SmallSheetMetal],
+        }
+        outputs {
+            item 1 PSR.SolarPanel,
+        }
+    }
+    craftRecipe Make_Inverter {
+        category = Electrical,
+        needToBeLearn = true,
+        timedAction = MakingElectrical,
+        time = 250,
+        skillRequired = Electricity:5,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 4 [Base.SmallSheetMetal],
+            item 5 [Base.ScrapMetal],
+            item 25 [Base.ElectronicsScrap],
+            item 5 [Base.ElectricWire],
+            item 10 [Base.Screws],
+        }
+        outputs {
+            item 1 PSR.PSRInverter,
+        }
+    }
+    craftRecipe Dismantle_Battery_Bank {
+        timedAction = DismantleElectrical,
+        time = 200,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:5,
+        skillRequired = Electricity:4,
+        xpAward = Electricity:10,
+        Icon = PowerBank,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [PSR.PowerBank] mode:destroy,
+        }
+        outputs {
+            item 1 PSR.PSRInverter,
+            item 3 Base.ElectricWire,
+            item 6 Base.ElectronicsScrap,
+            item 4 Base.MetalBar,
+            item 5 Base.SmallSheetMetal,
+        }
+    }
+}

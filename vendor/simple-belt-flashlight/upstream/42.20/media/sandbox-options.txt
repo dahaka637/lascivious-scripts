@@ -1,0 +1,7 @@
+VERSION = 1,
+
+option SBFPlus.DebugLogging
+{
+    type = boolean, default = false,
+    page = SBFPlus, translation = SBFPlus_DebugLogging,
+}

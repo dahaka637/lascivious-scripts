@@ -1,0 +1,7 @@
+Sandbox_PTBR = {
+    Sandbox_ImmersiveSuicide = "Immersive Suicide",
+    Sandbox_ImmersiveSuicide_ForceZombification = "For\195\167ar Zombifica\195\167\195\163o?",
+    Sandbox_ImmersiveSuicide_ForceZombification_tooltip = "Quando marcado, o jogador sempre se tornar\195\161 um zumbi ap\195\179s o suic\195\173dio, mesmo que n\195\163o esteja infectado.",
+    Sandbox_ImmersiveSuicide_ShowConfirmationModal = "Exibir confirma\195\167\195\163o?",
+    Sandbox_ImmersiveSuicide_ShowConfirmationModal_tooltip = "Exibe uma janela de confirma\195\167\195\163o antes de realizar o suic\195\173dio.",
+}

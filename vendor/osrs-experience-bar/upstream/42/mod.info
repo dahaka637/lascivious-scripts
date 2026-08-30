@@ -1,0 +1,6 @@
+name=OSRS Experience Bar
+poster=poster.png
+id=RUNE-EXP
+description=Adds an experience bar, with experience drops, in the style of the one found in Oldschool Runescape.
+modversion=2.0.3
+versionMin=42.0

@@ -1,0 +1,9 @@
+name=Better Push
+id=BetterPush
+author=Semzuwu
+modversion=1.4
+description=Adds a better push mechanic to the game. When you push a zombie, it will have a chance to push other zombies, creating a chain reaction. 
+poster=poster.png
+icon=icon.png
+tags=Build 42
+versionMin=42.0

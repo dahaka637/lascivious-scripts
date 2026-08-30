@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fileGuidTable>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSling.xml</path>
+        <guid>8d8070ac-4d0c-4771-9500-40143b9ff3be</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSlingAlt.xml</path>
+        <guid>3dff1715-db06-45cd-8f81-4fb717054c04</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSlingAlt2.xml</path>
+        <guid>5fee8122-db06-45cd-8f81-4fb717054c05</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSlingBack.xml</path>
+        <guid>3b47e9e2-46d9-4c09-9856-85dc053c524c</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSling_Hidden.xml</path>
+        <guid>8d8070ac-4d0c-4771-9500-40143b9ff3bf</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSlingAlt_Hidden.xml</path>
+        <guid>3dff1715-db06-45cd-8f81-4fb717054c05</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSlingAlt2_Hidden.xml</path>
+        <guid>5fee8122-db06-45cd-8f81-4fb717054c06</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/AliceWeaponSlingBack_Hidden.xml</path>
+        <guid>3b47e9e2-46d9-4c09-9856-85dc053c524d</guid>
+    </files>
+</fileGuidTable>

@@ -1,0 +1,40 @@
+/* FOR HAMMERS, SEE ITEMS_WEAPONS_1HANDED */
+
+module Base
+{
+	/******* CARPENTRY - TOOLS *******/
+	
+	item GardenSaw
+	{
+		DisplayName = Wood Saw,
+		DisplayCategory = Tool,
+		Type = Normal,
+		Weight = 1,
+		Icon = Handsaw,
+		MetalValue = 35,
+		SurvivalGear = TRUE,
+		StaticModel = GardenSaw,
+		WorldStaticModel = GardenSawGround,
+		Tags = Saw;ShowCondition,
+        ConditionLowerChanceOneIn = 10,
+        ConditionMax	=	61,
+	}
+
+	item Saw
+	{
+		DisplayName = Hacksaw,
+		DisplayCategory = Tool,
+		Type = Normal,
+		Weight = 1,
+		Icon = Hacksaw,
+		MetalValue = 35,
+		SurvivalGear = TRUE,
+		StaticModel = Hacksaw,
+		WorldStaticModel = HacksawGround,
+		Tags = Saw;MetalSaw;ShowCondition,
+        ConditionLowerChanceOneIn = 10,
+        ConditionMax	=	61,
+	}
+}
+
+/* FOR HAMMERS, SEE ITEMS_WEAPONS_1HANDED */

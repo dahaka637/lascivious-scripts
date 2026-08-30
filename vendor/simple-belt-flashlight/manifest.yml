@@ -1,0 +1,38 @@
+schema: 1
+module_key: simple-belt-flashlight
+name: Simple Belt Flashlight+
+bundled_mod_id: FixedLightOnBeltAF
+status: enabled
+
+upstream:
+  workshop_id: "3778709615"
+  original_mod_id: "FixedLightOnBeltAF"
+  version: "1.0.4"
+  imported_at: "2026-08-25"
+  source_path: "vendor/simple-belt-flashlight/upstream/42.20"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: true
+
+dependencies:
+  required: []
+  optional: ["Better Flashlights", "AuthenticZ", "Plysken Attachments Reborn"]
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/simple-belt-flashlight/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

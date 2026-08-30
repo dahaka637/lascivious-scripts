@@ -1,0 +1,29 @@
+/*
+ * Burris Quality of Life - repair recipes.
+ *
+ * Vanilla's fixing.txt covers firearms only, so a broken Plunger or Nightstick
+ * is simply dead weight. These two entries fill that gap.
+ *
+ * B42 format notes (the B41 syntax silently fails to parse):
+ *   - keys use `=`, not `:`
+ *   - item ids are fully qualified (Base.Foo), not bare
+ *   - `Base.WoodenStick` does not exist in 42.20; it is `Base.WoodenStick2`
+ */
+
+module Base
+{
+    fixing Fix Plunger
+    {
+        Require = Base.Plunger,
+        GlobalItem = Base.WoodenStick2=1,
+        ConditionModifier = 1,
+        Fixer = Base.Woodglue=1,
+    }
+
+    fixing Fix Nightstick
+    {
+        Require = Base.Nightstick,
+        ConditionModifier = 1,
+        Fixer = Base.Woodglue=1,
+    }
+}

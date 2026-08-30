@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Ukládá energii ze solárních panelů a napájí budovu.<br>Musí být umístěna v uzavřené místnosti a připojena k panelům.<br>Vyžaduje základní znalosti elektřiny. Nepotřebuje palivo.",
+    "Tooltip_PSR_NoPanels": "No Panel",
+    "Tooltip_PSR_PanelFar": "This panel is too far"
+}

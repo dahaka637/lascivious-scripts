@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Polttuaika Ruumista Kohden",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Aika peliminuutteina yhden ruumiin polttamiseen. Oletus: 110 (pelin oletusarvo).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Poista Pelin Ruumiiden Poltto",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Poistaa pelin oletuksen 'Polta ruumis' -vaihtoehdon, joka vaatii bensiiniä.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Tulen Leviämissäde",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Kun ruumis palaa, läheiset ruumiit tämän säteen sisällä syttyvät myös tuleen. 0 = pois käytöstä.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Vaadi Bensiiniä",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Kun käytössä, ruumiiden polttaminen vaatii myös bensiinitölkin tulilähteen lisäksi.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Bensiiniä Ruumista Kohden",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Kuinka paljon bensiiniä (litroina) kuluu palavan ruumiin kohdalla. Oletus: 0,1 l (10 litran tölkillä polttaa ~100 ruumista).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Salli Polttaminen Sisätiloissa",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Kun pois käytöstä, rakennusten sisällä olevia ruumiita ei voi polttaa tällä modilla. Estää vahingossa tapahtuvat tulipalot puurakenteissa. Oletus: käytössä.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Tulen Käyttökerrat Ruumista Kohden",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Kuinka monta kertaa tulilähdettä käytetään palavan ruumiin kohdalla. Suuremmat arvot kuluttavat sytyttimiä ja tulitikkuja nopeammin. 0 = rajaton (tulilähde ei koskaan kuludu). Oletus: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Sammuta Tuli Lopuksi",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Kun käytössä, tuli sammuu automaattisesti pian sen jälkeen, kun kaikki ketjun ruumiit ovat syttyneet. Suojaa puurakenteita jäljelle jääviltä liekeiltä. Oletus: pois käytöstä.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Ei Tuhkaa",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Kun käytössä, poltetut ruumiit eivät jätä tuhkakasoja jälkeensä. Oletus: pois käytöstä.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Tulen leviämisen nopeus",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Kuinka nopeasti tuli leviää ruumiiden välillä. Pienempi = nopeampi. Oletus: 150 ruutua (~5s/laatikko). Suositeltu: 150 yksinpeliin, 50-80 yhteispeliin/moninpeliin."
+}

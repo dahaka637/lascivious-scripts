@@ -1,0 +1,8 @@
+name=I Regret Nothing Trait
+poster=poster.png
+id=IRegretNothingTrait
+description=Adds the "I Regret Nothing" trait, inspired by Postal 2 Dude.
+author=El-Soplya
+require=MoodleFramework
+icon=icon.png
+modversion=1.2.0

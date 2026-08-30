@@ -1,0 +1,4 @@
+VERSION = 1,
+
+option TotalWeightRebalance.CustomWeights
+{ type = string, default = , page = TotalWeightRebalance, translation = TotalWeightRebalance_CustomWeights, }

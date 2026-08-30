@@ -1,0 +1,23 @@
+local ETW_Registry = require("ETW_Registry")
+
+---@type EvolvingTraitsWorldTraitsRegistries
+local ETWTraitsRegistry = ETW_Registry.traits
+
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.UNFIT, ETWTraitsRegistry.GYM_RAT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.OUT_OF_SHAPE, ETWTraitsRegistry.GYM_RAT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.WEAK, ETWTraitsRegistry.GYM_RAT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.FEEBLE, ETWTraitsRegistry.GYM_RAT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.OBESE, ETWTraitsRegistry.GYM_RAT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.VERY_UNDERWEIGHT, ETWTraitsRegistry.GYM_RAT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.SMOKER, ETWTraitsRegistry.BLISSFUL)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.CLUMSY, ETWTraitsRegistry.QUIET)
+CharacterTraitDefinition.setMutualExclusive(ETWTraitsRegistry.BLISSFUL, ETWTraitsRegistry.DEPRESSIVE)
+CharacterTraitDefinition.setMutualExclusive(ETWTraitsRegistry.ANEMIC, ETWTraitsRegistry.THICK_BLOODED)
+CharacterTraitDefinition.setMutualExclusive(ETWTraitsRegistry.HOARDER, ETWTraitsRegistry.PACK_MOUSE)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.EMACIATED, ETWTraitsRegistry.IDEAL_WEIGHT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.OBESE, ETWTraitsRegistry.IDEAL_WEIGHT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.OVERWEIGHT, ETWTraitsRegistry.IDEAL_WEIGHT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.UNDERWEIGHT, ETWTraitsRegistry.IDEAL_WEIGHT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.VERY_UNDERWEIGHT, ETWTraitsRegistry.IDEAL_WEIGHT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.WEIGHT_GAIN, ETWTraitsRegistry.IDEAL_WEIGHT)
+CharacterTraitDefinition.setMutualExclusive(CharacterTrait.WEIGHT_LOSS, ETWTraitsRegistry.IDEAL_WEIGHT)

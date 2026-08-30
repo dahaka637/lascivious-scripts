@@ -1,0 +1,7 @@
+name=Climb Ladders
+id=SubirEscaleras
+description=Adds right-click "Climb up / Climb down" options on any ladder in the game, including ones you place yourself. Hold E to climb without the menu. English and Spanish.
+author=Vlan
+versionMin=42.15
+modVersion=2.4
+tags=Building,Misc

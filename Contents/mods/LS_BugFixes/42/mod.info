@@ -1,0 +1,11 @@
+name=Lascivious Scripts - Bug Fixes
+id=LS_BugFixes
+poster=poster.png
+icon=icon.png
+description=Correcoes pontuais para bugs do jogo usadas pelo servidor Lascivious Hardcore. <LINE>
+description=<LINE>
+description=Inclui Map All Known Fix: corrige no multiplayer o sandbox Map.MapAllKnown, que pode nao revelar o mapa conhecido para clientes em algumas builds 42.20.x. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.
+modversion=1.0.0
+versionMin=42.0

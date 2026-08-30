@@ -1,0 +1,13 @@
+name=Lascivious Scripts
+id=LasciviousScripts
+author=Dahaka
+description=Módulo próprio do pacote: sistemas originais, não derivados de nenhum mod de terceiros. <LINE>
+description=<LINE>
+description=Time Vote: votação de aceleração de tempo em multiplayer — o servidor decide o consenso, sem cliente nenhum forçando velocidade sozinho. <LINE>
+description=Zombie Decay: decadência progressiva e determinística dos zumbis conforme a idade do mundo avança (velocidade, força, resistência, percepção), em fases narrativas. <LINE>
+description=<LINE>
+description=Núcleo do pacote Lascivious Scripts.
+icon=icon.png
+poster=poster.png
+modversion=1.0.1
+versionMin=42.20

@@ -1,0 +1,79 @@
+VERSION = 1,
+
+option PivotMod.Enabled
+{
+	type = boolean, default = true,
+	page = PivotMod, translation = PivotMod_Enabled,
+}
+
+option PivotMod.PivotSpeed
+{
+	type = enum, numValues = 5, default = 5,
+	page = PivotMod, translation = PivotMod_PivotSpeed,
+}
+
+option PivotMod.MovementTurnSpeed
+{
+	type = enum, numValues = 5, default = 5,
+	page = PivotMod, translation = PivotMod_MovementTurnSpeed,
+}
+
+option PivotMod.NimbleSystem
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_NimbleSystem,
+}
+
+option PivotMod.NimbleLvlMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 1,
+	page = PivotMod, translation = PivotMod_NimbleLvlMultiplier,
+}
+
+option PivotMod.DefaultMultiplier
+{
+	type = double, min = 0.1, max = 10, default = 1,
+	page = PivotMod, translation = PivotMod_DefaultMultiplier,
+}
+
+option PivotMod.DynamicModifiers
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynamicModifiers,
+}
+
+option PivotMod.DynEncumbrance
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynEncumbrance,
+}
+
+option PivotMod.DynInjury
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynInjury,
+}
+
+option PivotMod.DynFatigue
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynFatigue,
+}
+
+option PivotMod.DynDrunkenness
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynDrunkenness,
+}
+
+option PivotMod.DynPanic
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynPanic,
+}
+
+option PivotMod.DynSneak
+{
+	type = boolean, default = false,
+	page = PivotMod, translation = PivotMod_DynSneak,
+}

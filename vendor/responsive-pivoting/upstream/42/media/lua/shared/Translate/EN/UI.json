@@ -1,0 +1,7 @@
+{
+    "UI_trait_OnYourToes": "On Your Toes",
+    "UI_trait_OnYourToesdesc": "Light on your feet. Boosts your Nimble skill by 1.<br><br>(Only overhauls your pivoting if the trait toggle is enabled in this mod's sandbox settings. If it's disabled, pivoting is global for everyone and this trait is just a +1 Nimble add-on.)",
+
+    "UI_trait_PodShofe": "Under the Influence",
+    "UI_trait_PodShofedesc": "A few drinks deep and never quite sober. Lowers your Nimble skill by 1.<br><br>(Only overhauls your pivoting if the trait toggle is enabled in this mod's sandbox settings. If it's disabled, pivoting is global for everyone and this trait is just a -1 Nimble add-on.)"
+}

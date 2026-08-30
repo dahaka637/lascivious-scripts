@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "Brennetid per Lik",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "Tid i spillminutter for å brenne et lik. Standard: 110 (vanilla-verdi).",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "Fjern Vanilje Brenn Lik",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "Fjerner vaniljealternativet 'Brenn Lik' som krever bensin.",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "Brannspredningsradius",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "Når et lik brenner, tar nabolever innenfor denne radiussen også fyr. 0 = deaktivert.",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "Krev Bensin",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "Når aktivert kreves også en bensinkanne i tillegg til en fyrkilde for å brenne lik.",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "Bensin per Lik",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "Hvor mye bensin (i liter) som forbrukes per brent lik. Standard: 0,1 L (en kanne på 10 liter brenner ca. 100 lik).",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "Tillat Innendørs Brenning",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "Når deaktivert kan ikke lik inne i bygninger brennes med denne modden. Forhindrer utilsiktede branner som skader trekonstruksjoner. Standard: aktivert.",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "Fyrkildebruk per Lik",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "Hvor mange ganger fyrkilden brukes per brent lik. Høyere verdier bruker opp lightere og fyrstikker fortere. 0 = ubegrenset (fyrkilden blir aldri brukt opp). Standard: 1.",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "Slukk Ilden Når Ferdig",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "Når aktivert slukker ilden automatisk kort etter at alle likene i kjeden har tatt fyr. Beskytter trekonstruksjoner mot gjenværende flammer. Standard: deaktivert.",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "Ingen Aske",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "Når aktivert etterlater brente lev ingen askehauger. Standard: deaktivert.",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "Hastighet for spredning av brann",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "Hvor raskt brann sprer seg mellom lik. Lavere = raskere. Standard: 150 bilder (~5s per flis). Anbefalt: 150 for enkelspiller, 50-80 for co-op/flerspiller."
+}

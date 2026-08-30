@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animNode x_extends="1HDefault.xml">
+	<m_Name>1HOnFloor</m_Name>
+	<m_AnimName>Bob_AttackFloor1Hand</m_AnimName>
+	<m_BlendOutTime>0.42</m_BlendOutTime>
+	<m_BlendTime>0.3</m_BlendTime>
+	<m_2DBlends>
+		<m_AnimName>Bob_AttackFloor1Hand</m_AnimName>
+	</m_2DBlends>
+	<m_2DBlends>
+		<m_AnimName>Bob_AttackFloor1Hand</m_AnimName>
+	</m_2DBlends>
+	<m_2DBlends>
+		<m_AnimName>Bob_AttackFloor1Hand</m_AnimName>
+	</m_2DBlends>
+	<m_2DBlends>
+		<m_AnimName>Bob_AttackFloor1Hand</m_AnimName>
+	</m_2DBlends>
+	<m_Conditions x_name="3cb527f0-b66e-4724-b965-ac154427c101">
+		<m_Value>true</m_Value>
+	</m_Conditions>
+	<m_Events x_name="be0fc268-d456-4784-8613-fc3522c4e53a">
+		<m_ParameterValue>ZombieHitReaction=Floor</m_ParameterValue>
+	</m_Events>
+	<m_Events x_name="981e6009-001c-4085-a9c8-dc6a014a1342">
+		<m_TimePc>0.35</m_TimePc>
+		<m_ParameterValue>MeleeToFloor</m_ParameterValue>
+	</m_Events>
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights />
+	<m_SubStateBoneWeights>
+		<boneName>Dummy01</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Bip01</boneName>
+	</m_SubStateBoneWeights>
+	<m_SubStateBoneWeights>
+		<boneName>Translation_Data</boneName>
+	</m_SubStateBoneWeights>
+</animNode>

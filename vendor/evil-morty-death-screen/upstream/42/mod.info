@@ -1,0 +1,8 @@
+name=Evil Morty Death Screen
+id=EvilMortyDeathScreen
+description=Replaces the death screen music with Evil Morty Epic Theme and turns the death screen into a pull-back that fades to black.
+poster=poster.png
+icon=icon.png
+author=Gone2q
+versionMin=42.13
+modversion=1.0.0

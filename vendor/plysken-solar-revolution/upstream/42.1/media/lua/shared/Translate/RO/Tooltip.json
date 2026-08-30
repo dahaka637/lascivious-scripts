@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Stochează energia captată de panourile solare și alimentează clădirea.<br>Trebuie amplasată într-o încăpere închisă și conectată la panouri.<br>Necesită cunoștințe de bază de electricitate. Nu are nevoie de combustibil.",
+    "Tooltip_PSR_NoPanels": "Fara panou",
+    "Tooltip_PSR_PanelFar": "Acest panou este prea departe"
+}

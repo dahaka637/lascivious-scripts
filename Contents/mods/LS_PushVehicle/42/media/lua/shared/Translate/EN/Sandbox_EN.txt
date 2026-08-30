@@ -1,0 +1,6 @@
+Sandbox_EN
+{
+    Sandbox_PushVehicle = "Push Vehicle",
+    Sandbox_PushVehicle_AllowSidePushing = "Allow Side Pushing",
+    Sandbox_PushVehicle_AllowSidePushing_tooltip = "Allow vehicles to be turned by pushing near the front or rear section of either side. Disable this to restrict Push Vehicle to front and rear pushing only.",
+}

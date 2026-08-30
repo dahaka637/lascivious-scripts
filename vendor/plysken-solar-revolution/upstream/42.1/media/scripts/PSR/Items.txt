@@ -1,0 +1,164 @@
+module PSR
+{
+    imports { Base }
+
+    item SolarPanel {
+        Weight	=	5,
+        ItemType = base:normal,
+        UseWhileEquipped	=	false,
+        DisplayName	= Solar Panel,
+        Icon	=	SolarPanel,
+        MetalValue = 1,
+        WorldStaticModel = PSR.SolarPanelModel,
+    }
+    item PSRInverter {
+        Weight	=	5,
+        ItemType = base:normal,
+        UseWhileEquipped	=	false,
+        DisplayName	= Inverter,
+        Icon	=	CarBatteryCharger,
+        MetalValue = 1,
+        WorldStaticModel = CarBatteryCharger,
+    }
+    item DeepCycleBattery {
+        Weight	=	6,
+        ItemType = base:drainable,
+        UseDelta	=	0.00001,
+        UseWhileEquipped	=	false,
+        DisplayName	=	200Ah Battery,
+        Icon	=	CarBattery,
+        Tags = PSRBattery,
+        MetalValue = 1,
+        cantBeConsolided = TRUE,
+        ConditionMax = 100,
+        WorldStaticModel = CarBattery,
+        DisappearOnUse = FALSE,
+        PSR_maxCapacity = 200,
+        PSR_BatteryDegrade = 0.033,
+    }
+    item SuperBattery {
+        Weight	=	8,
+        ItemType = base:drainable,
+        UseDelta	=	0.00001,
+        UseWhileEquipped	=	false,
+        DisplayName	=	400Ah Battery,
+        Icon	=	CarBattery,
+        Tags = PSRBattery,
+        MetalValue = 1,
+        cantBeConsolided = TRUE,
+        ConditionMax = 100,
+        WorldStaticModel = CarBattery,
+        DisappearOnUse = FALSE,
+        PSR_maxCapacity = 400,
+        PSR_BatteryDegrade = 0.033,
+    }
+    item WiredCarBattery {
+        ItemType = base:drainable,
+        DisplayName	=	WiredCarBattery,
+        Icon	=	CarBattery,
+        Tags = PSRBattery,
+        Weight	=	5,
+        UseDelta	=	0.00001,
+        UseWhileEquipped	=	false,
+        MetalValue = 1,
+        cantBeConsolided = TRUE,
+        ConditionMax = 100,
+        WorldStaticModel = CarBattery,
+        DisappearOnUse = FALSE,
+        PSR_maxCapacity = 50,
+        PSR_BatteryDegrade = 8,
+    }
+    item ImprovisedBattery {
+        ItemType = base:drainable,
+        DisplayName = Improvised Battery,
+        Icon = CarBattery,
+        Tags = PSRBattery,
+        Weight = 5,
+        UseDelta = 0.00001,
+        UseWhileEquipped = false,
+        MetalValue = 1,
+        cantBeConsolided = TRUE,
+        ConditionMax = 100,
+        WorldStaticModel = CarBattery,
+        DisappearOnUse = FALSE,
+        PSR_maxCapacity = 100,
+        PSR_BatteryDegrade = 8,
+    }
+    item DIYBattery {
+        ItemType = base:drainable,
+        DisplayName	=	DIY Battery,
+        Icon	=	CarBattery,
+        Tags = PSRBattery,
+        Weight	=	7,
+        UseDelta	=	0.00001,
+        UseWhileEquipped	=	false,
+        MetalValue = 1,
+        cantBeConsolided = TRUE,
+        ConditionMax = 100,
+        WorldStaticModel = CarBattery,
+        DisappearOnUse = FALSE,
+        PSR_maxCapacity = 200,
+        PSR_BatteryDegrade = 0.125,
+    }
+    item PowerBank {
+        ItemType = base:moveable,
+        DisplayName		= PowerBank,
+        DisplayCategory = Electronics,
+        Icon = PowerBank,
+        Weight = 20,
+        Tooltip = Tooltip_PSR_PowerBank,
+        Tags = HeavyItem;Generator;HasMetal;IgnoreZombieDensity;ShowCondition,
+        ConditionLowerChanceOneIn = 999,
+        WorldObjectSprite = solarmod_tileset_01_0,
+    }
+    item SolarPanelFlat {
+        ItemType = base:moveable,
+        DisplayName		= Solar Panel (Flat),
+        DisplayCategory = Electronics,
+        Icon = SolarPanel,
+        Weight = 4,
+        WorldObjectSprite = solarmod_tileset_01_8,
+    }
+    item SolarPanelWall {
+        ItemType = base:moveable,
+        DisplayName		= Solar Panel (Wall),
+        DisplayCategory = Electronics,
+        Icon = SolarPanel,
+        Weight = 5,
+        WorldObjectSprite = solarmod_tileset_01_6,
+    }
+    item SolarPanelMounted {
+        ItemType = base:moveable,
+        DisplayName		= Solar Panel (Mounted),
+        DisplayCategory = Electronics,
+        Icon = SolarPanel,
+        Weight = 5,
+        WorldObjectSprite = solarmod_tileset_01_9,
+    }
+    item SolarFailsafe {
+        ItemType = base:moveable,
+        DisplayName		= Solar Failsafe,
+        DisplayCategory = Electronics,
+        Icon = SolarFailsafe,
+        Weight = 1,
+        WorldObjectSprite = solarmod_tileset_01_15,
+    }
+
+    /**************************** Literature **********************************/
+    item PSRMag1 {
+        DisplayCategory = SkillBook,
+        Weight	=	0.1,
+        ItemType = base:literature,
+        DisplayName	=	New Advancements: Energy From The Sun,
+        Icon	=	PSRMag1,
+        /* Make_Solar_Panel intentionally NOT in this native field: the panel recipe is chosen
+           at learn-time from sandbox PSR.HardenedPanelRecipe (see PSRMagazine.lua). The native
+           field can't read the sandbox, so it would always teach the standard one. */
+        LearnedRecipes = Create_Battery_Bank;WireCarBattery;UnWireCarBattery;Make_Improvised_Battery;Make_DIY_Battery;Recondition_Battery;Make_Solar_Roof_Tile;Make_Wall-Mounted_Solar_Panel;Make_Floor-Mounted_Solar_Panel;Reverse_Solar_Panel;Reverse_Solar_Roof_Tile;Create_Solar_Failsafe;Dismantle_Solar_Failsafe;Make_Inverter;Dismantle_Battery_Bank,
+        Tags = base:magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = PSR.SolarMagModel,
+    }
+
+}
+

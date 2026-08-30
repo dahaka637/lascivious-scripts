@@ -1,0 +1,5 @@
+{
+    "Tooltip_PSR_PowerBank": "Stores the power your solar panels collect and feeds it to the building.<br>Must be placed in an enclosed room, then connected to your panels.<br>Requires some Electrical knowledge. No fuel needed.",
+    "Tooltip_PSR_NoPanels": "No Panel",
+    "Tooltip_PSR_PanelFar": "This panel is too far"
+}

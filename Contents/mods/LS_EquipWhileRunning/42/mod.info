@@ -1,0 +1,9 @@
+name=Lascivious Scripts - Equip Items While Running
+id=LS_EquipWhileRunning
+versionMin=42.20
+icon=icon.png
+poster=poster.png
+modversion=1.0.1
+description=Permite equipar, desequipar, vestir/tirar roupas e transferir itens enquanto corre. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

@@ -1,0 +1,39 @@
+schema: 1
+module_key: wandering-zombies
+name: Wandering Zombies (WIP)
+bundled_mod_id: LS_WanderingZombies
+status: enabled
+
+upstream:
+  workshop_id: "2983905789"
+  original_mod_id: "WanderingZombiesWIP"
+  version: "WIP 42.18"
+  imported_at: "2026-08-26"
+  source_path: "vendor/wandering-zombies/upstream"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: true
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: ["WanderingZombies"]
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 2
+  notes: "vendor/wandering-zombies/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  overrides_vanilla_items: false
+  monkey_patches: true
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: true

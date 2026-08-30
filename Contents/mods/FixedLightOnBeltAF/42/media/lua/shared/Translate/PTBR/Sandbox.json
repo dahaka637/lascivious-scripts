@@ -1,0 +1,5 @@
+{
+  "Sandbox_SBFPlus": "Lanterna Simples no Cinto+",
+  "Sandbox_SBFPlus_DebugLogging": "Ativar registro de diagnóstico no multiplayer",
+  "Sandbox_SBFPlus_DebugLogging_tooltip": "Registra diagnósticos passivos sobre o encaixe da lanterna e seu estado de iluminação no console.txt. Desativado por padrão. Não envia pacotes adicionais pela rede, não altera itens nem registra nomes de jogadores. Ative somente ao reproduzir um problema de visibilidade da luz no multiplayer."
+}

@@ -1,0 +1,5 @@
+Sandbox_PTBR = {
+    Sandbox_PushVehicle = "Empurrar Ve\195\173culos",
+    Sandbox_PushVehicle_AllowSidePushing = "Permitir empurr\195\181es laterais",
+    Sandbox_PushVehicle_AllowSidePushing_tooltip = "Permite virar ve\195\173culos ao empurrar pr\195\179ximo da parte dianteira ou traseira de qualquer lateral. Desative para restringir o mod a empurr\195\181es pela frente e pela traseira.",
+}

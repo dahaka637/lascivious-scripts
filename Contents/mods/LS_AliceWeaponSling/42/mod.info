@@ -1,0 +1,9 @@
+name=Lascivious Scripts - Weapon Sling
+id=LS_AliceWeaponSling
+icon=Item_slingAky.png
+poster=poster.png
+versionMin=42.20
+modversion=1.5
+description=Adiciona um sling de arma craftável/encontrável no looting, para carregar armas grandes nas costas ou na frente. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

@@ -1,0 +1,38 @@
+schema: 1
+module_key: bug-fixes
+name: Bug Fixes
+bundled_mod_id: LS_BugFixes
+status: enabled
+
+upstream:
+  workshop_id: "3785198639"
+  original_mod_id: "MapAllKnownFix"
+  version: "unknown"
+  imported_at: "2026-08-30"
+  source_path: "vendor/bug-fixes/upstream/map-all-known-fix/42"
+
+compatibility:
+  target_build: "42.20.x"
+  multiplayer: true
+  dedicated_server: true
+  save_sensitive: false
+
+dependencies:
+  required: []
+  optional: []
+  incompatible: []
+
+integration:
+  ptbr: partial
+  reviewed: true
+  local_changes: true
+  local_revision: 1
+  notes: "vendor/bug-fixes/LOCAL_CHANGES.md"
+
+risk:
+  overrides_vanilla_files: false
+  monkey_patches: false
+  java: false
+  maps: false
+  tiledefs: false
+  network_protocol: false

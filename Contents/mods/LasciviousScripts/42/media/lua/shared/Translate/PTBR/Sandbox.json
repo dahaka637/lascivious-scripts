@@ -1,0 +1,20 @@
+{
+    "Sandbox_LasciviousScriptsZombieDecay": "Lascivious Scripts - Decomposição Zumbi",
+    "Sandbox_LasciviousScriptsZombieDecay_Enabled": "Ativar decomposição progressiva",
+    "Sandbox_LasciviousScriptsZombieDecay_Enabled_tooltip": "Controla o sistema completo de decomposição temporal dos zumbis.",
+    "Sandbox_LasciviousScriptsZombieDecay_TimelineScalePercent": "Escala da linha do tempo (%%)",
+    "Sandbox_LasciviousScriptsZombieDecay_TimelineScalePercent_tooltip": "100 usa os marcos padrão: 7, 30, 180, 365 e 730 dias. 50 faz tudo ocorrer duas vezes mais rápido; 200 faz tudo levar o dobro do tempo.",
+    "Sandbox_LasciviousScriptsZombieDecay_MinimumRunnerSpeedPercent": "Velocidade mínima do corredor (%%)",
+    "Sandbox_LasciviousScriptsZombieDecay_MinimumRunnerSpeedPercent_tooltip": "Velocidade que os corredores atingem por volta do marco de 6 meses. Padrão: 50%% da velocidade original.",
+    "Sandbox_LasciviousScriptsZombieDecay_FinalShamblerCollapseEnabled": "Decompor Fast Shambler em Shambler",
+    "Sandbox_LasciviousScriptsZombieDecay_FinalShamblerCollapseEnabled_tooltip": "Desligado: assim que os corredores somem (dia 365), a população fica 100%% Fast Shambler para sempre. Ligado (padrão): a partir do marco do dia 730, os Fast Shamblers viram gradualmente Shamblers comuns ao longo de mais 730 dias, chegando a 100%% Shambler no dia 1460.",
+    "Sandbox_LasciviousScriptsZombieDecay_DebugLogging": "Logs de depuração",
+    "Sandbox_LasciviousScriptsZombieDecay_DebugLogging_tooltip": "Mostra no console mudanças de fase, porcentagens e velocidade calculada. Deixe desligado em produção.",
+    "Sandbox_LasciviousScriptsTimeVote": "Lascivious Scripts - Votação de Tempo",
+    "Sandbox_LasciviousScriptsTimeVote_Enabled": "Ativar votação de tempo multiplayer",
+    "Sandbox_LasciviousScriptsTimeVote_Enabled_tooltip": "Adiciona votação unânime multiplayer para 5x/20x/40x. A velocidade aprovada é aplicada uma vez e respeita as interrupções do comportamento vanilla: movimento, perigo ou outro reset em qualquer jogador retorna todos para 1x.",
+    "Sandbox_LasciviousScriptsTimeVote_SoloOnly": "Restringir a um único jogador",
+    "Sandbox_LasciviousScriptsTimeVote_SoloOnly_tooltip": "Quando ativado, o avanço rápido só fica disponível enquanto houver exatamente um jogador online. O tempo e a UI de votação voltam ao 1x e somem assim que um segundo jogador entra, e reaparecem quando voltar a ter só um.",
+    "Sandbox_LasciviousScriptsTimeVote_DebugLogging": "Logs de depuração",
+    "Sandbox_LasciviousScriptsTimeVote_DebugLogging_tooltip": "Mostra no console detalhes da aceleração de NetTimedAction. Deixe desligado em produção."
+}

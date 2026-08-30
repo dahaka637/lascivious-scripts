@@ -1,0 +1,13 @@
+VERSION = 1,
+
+option BetterEngineRepair.Mechanics0 { type = integer, min = 1, max = 100, default = 3, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics0, }
+option BetterEngineRepair.Mechanics1 { type = integer, min = 1, max = 100, default = 3, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics1, }
+option BetterEngineRepair.Mechanics2 { type = integer, min = 1, max = 100, default = 3, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics2, }
+option BetterEngineRepair.Mechanics3 { type = integer, min = 1, max = 100, default = 3, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics3, }
+option BetterEngineRepair.Mechanics4 { type = integer, min = 1, max = 100, default = 5, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics4, }
+option BetterEngineRepair.Mechanics5 { type = integer, min = 1, max = 100, default = 5, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics5, }
+option BetterEngineRepair.Mechanics6 { type = integer, min = 1, max = 100, default = 5, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics6, }
+option BetterEngineRepair.Mechanics7 { type = integer, min = 1, max = 100, default = 10, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics7, }
+option BetterEngineRepair.Mechanics8 { type = integer, min = 1, max = 100, default = 10, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics8, }
+option BetterEngineRepair.Mechanics9 { type = integer, min = 1, max = 100, default = 10, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics9, }
+option BetterEngineRepair.Mechanics10 { type = integer, min = 1, max = 100, default = 20, page = BetterEngineRepair, translation = BetterEngineRepair_Mechanics10, }

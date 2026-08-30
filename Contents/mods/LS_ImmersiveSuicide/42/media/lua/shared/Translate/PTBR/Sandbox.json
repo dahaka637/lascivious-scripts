@@ -1,0 +1,9 @@
+{
+
+  "Sandbox_ImmersiveSuicide": "Immersive Suicide",
+
+  "Sandbox_ImmersiveSuicide_ForceZombification": "Forçar Zombificação?",
+  "Sandbox_ImmersiveSuicide_ForceZombification_tooltip": "Quando marcado, o jogador sempre se tornará um zumbi após o suicídio, mesmo que não esteja infectado.",
+  "Sandbox_ImmersiveSuicide_ShowConfirmationModal": "Exibir confirmação?",
+  "Sandbox_ImmersiveSuicide_ShowConfirmationModal_tooltip": "Exibe uma janela de confirmação antes de realizar o suicídio."
+}

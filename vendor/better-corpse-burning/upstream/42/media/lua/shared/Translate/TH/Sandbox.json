@@ -1,0 +1,23 @@
+{
+  "Sandbox_BetterCorpseBurning": "Better Corpse Burning",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse": "เวลาเผาต่อศพ",
+  "Sandbox_BetterCorpseBurning_TimePerCorpse_tooltip": "เวลาเป็นนาทีในเกมสำหรับการเผาศพหนึ่งศพ ค่าเริ่มต้น: 110 (ค่าดั้งเดิม)",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn": "ลบตัวเลือกเผาศพดั้งเดิม",
+  "Sandbox_BetterCorpseBurning_RemoveVanillaBurn_tooltip": "ลบตัวเลือกดั้งเดิม 'เผาศพ' ที่ต้องใช้น้ำมันเบนซิน",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius": "รัศมีการลามของไฟ",
+  "Sandbox_BetterCorpseBurning_FireSpreadRadius_tooltip": "เมื่อศพถูกเผา ศพใกล้เคียงภายในรัศมีนี้จะลุกไหม้ด้วย 0 = ปิด",
+  "Sandbox_BetterCorpseBurning_NeedPetrol": "ต้องใช้น้ำมันเบนซิน",
+  "Sandbox_BetterCorpseBurning_NeedPetrol_tooltip": "เมื่อเปิดใช้งาน การเผาศพจะต้องมีถังน้ำมันเบนซินนอกเหนือจากแหล่งกำเนิดไฟ",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn": "น้ำมันเบนซินต่อศพ",
+  "Sandbox_BetterCorpseBurning_PetrolPerBurn_tooltip": "ปริมาณน้ำมันเบนซิน (ลิตร) ที่ใช้ต่อการเผาศพหนึ่งศพ ค่าเริ่มต้น: 0.1 ลิตร (ถัง 10 ลิตร เผาได้ประมาณ 100 ศพ)",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn": "อนุญาตการเผาในอาคาร",
+  "Sandbox_BetterCorpseBurning_AllowIndoorBurn_tooltip": "เมื่อปิดใช้งาน จะไม่สามารถเผาศพภายในอาคารได้ด้วยม็อดนี้ ป้องกันไฟลามโดยไม่ตั้งใจไปยังโครงสร้างไม้ ค่าเริ่มต้น: เปิด",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse": "จำนวนครั้งที่ใช้แหล่งกำเนิดไฟต่อศพ",
+  "Sandbox_BetterCorpseBurning_FireUsesPerCorpse_tooltip": "จำนวนครั้งที่ใช้แหล่งกำเนิดไฟต่อการเผาศพหนึ่งศพ ค่าที่สูงจะทำให้ไฟแช็กและไม้ขีดไฟถูกใช้เร็วขึ้น 0 = ไม่จำกัด (แหล่งกำเนิดไฟจะไม่ถูกใช้หมด) ค่าเริ่มต้น: 1",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone": "ดับไฟเมื่อเสร็จ",
+  "Sandbox_BetterCorpseBurning_AutoExtinguishWhenDone_tooltip": "เมื่อเปิดใช้งาน ไฟจะมอดดับอัตโนมัติไม่นานหลังจากที่ศพทั้งหมดในห่วงโซ่ลุกไหม้ ปกป้องโครงสร้างไม้จากเปลวไฟที่ยังลุกอยู่ ค่าเริ่มต้น: ปิด",
+  "Sandbox_BetterCorpseBurning_NoAshRemains": "ไม่ทิ้งขี้เถ้า",
+  "Sandbox_BetterCorpseBurning_NoAshRemains_tooltip": "เมื่อเปิดใช้งาน ศพที่ถูกเผาจะไม่ทิ้งกองขี้เถ้าไว้เบื้องหลัง ค่าเริ่มต้น: ปิด",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed": "ความเร็วของการแพร่ไฟ",
+  "Sandbox_BetterCorpseBurning_FireSpreadSpeed_tooltip": "ความเร็วที่ไฟลุกลามระหว่างศพ ยิ่งน้อย = ยิ่งเร็ว ค่าเริ่มต้น: 150 เฟรม (~5 วินาที/แผ่น) แนะนำ: 150 สำหรับโหมดคนเดียว 50-80 สำหรับโหมดร่วมมือ/หลายผู้เล่น"
+}

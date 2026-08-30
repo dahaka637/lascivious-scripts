@@ -1,0 +1,11 @@
+name=Lascivious Scripts - Climb Ladders
+id=LS_ClimbLadders
+poster=poster.png
+icon=icon.png
+versionMin=42.15
+modversion=2.4
+tags=Building,Misc
+description=Adiciona a opção de subir/descer qualquer escada do jogo pelo menu de contexto. <LINE>
+description=Segure E para subir/descer sem abrir o menu. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.
