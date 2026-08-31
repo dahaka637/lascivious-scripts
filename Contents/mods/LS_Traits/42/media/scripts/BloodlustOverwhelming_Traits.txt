@@ -3,7 +3,7 @@ module BloodlustO
     character_trait_definition bloodlusto:bloodlusto
     {
         CharacterTrait = bloodlusto:bloodlusto,
-        Cost = -8,
+        Cost = -4,
         UIName = UI_trait_BloodlustOverwhelming,
         UIDescription = UI_trait_BloodlustOverwhelmingDesc,
         IsProfessionTrait = false,
