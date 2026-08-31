@@ -4,6 +4,10 @@ require("RYUKU_WanderingZombies_SandboxVars")
 require("RYUKU_WanderingZombies_Utility")
 
 local square
+local TARGET_STUCK_DIAGNOSTIC_MS = 2500
+local TARGET_STUCK_MIN_DISTANCE_SQ = 0.04
+local TARGET_STUCK_LOG_INTERVAL_MS = 10000
+local targetWatch = setmetatable({}, { __mode = "k" })
 
 ---@class WZZombieBase
 ---@field private __wzZombieBase boolean
@@ -85,6 +89,7 @@ end
 function WZZombieBase:reset()
     local modData = self._ref:getModData()
     modData.wzThumpIndoors = nil
+    targetWatch[self._ref] = nil
 
     self._init = nil
     self._ref = nil
@@ -129,6 +134,8 @@ function WZZombieBase:update()
     end
 
     if self:hasTarget() then
+        self._ref:getModData().wzThumpIndoors = nil
+        self:diagnoseTargetedZombie()
         self:updateMoveCooldown(false)
         return false
     end
@@ -162,6 +169,68 @@ function WZZombieBase:update()
     end
 
     return true
+end
+
+function WZZombieBase:diagnoseTargetedZombie()
+    local target = self:getTarget()
+    local okTarget, targetX, targetY, targetZ = pcall(function()
+        return target:getX(), target:getY(), target:getZ()
+    end)
+    if not okTarget or targetX == nil or targetY == nil or targetZ == nil then
+        targetWatch[self._ref] = nil
+        return
+    end
+
+    local now = getTimeInMillis()
+    local x, y, z = self._ref:getX(), self._ref:getY(), self._ref:getZ()
+    local watch = targetWatch[self._ref]
+    if not watch then
+        targetWatch[self._ref] = { at = now, x = x, y = y, z = z, lastLogAt = 0 }
+        return
+    end
+
+    local lastX, lastY, lastZ = watch.x, watch.y, watch.z
+    local movedEnough = true
+    if type(lastX) == "number" and type(lastY) == "number" and type(lastZ) == "number" then
+        local dx, dy, dz = x - lastX, y - lastY, z - lastZ
+        movedEnough = (dx * dx + dy * dy) > TARGET_STUCK_MIN_DISTANCE_SQ or math.abs(dz) > 0.1
+    end
+
+    if movedEnough then
+        watch.at = now
+        watch.x = x
+        watch.y = y
+        watch.z = z
+        return
+    end
+
+    if not watch.at or now - watch.at < TARGET_STUCK_DIAGNOSTIC_MS then
+        return
+    end
+
+    if not watch.lastLogAt or now - watch.lastLogAt >= TARGET_STUCK_LOG_INTERVAL_MS then
+        local zombieOnlineID = "?"
+        local state = "?"
+        local remote = "?"
+        pcall(function() zombieOnlineID = tostring(self._ref:getOnlineID()) end)
+        pcall(function() state = tostring(self._ref:getCurrentStateName()) end)
+        pcall(function() remote = tostring(self._ref:isRemoteZombie()) end)
+        print("[WanderingZombies/Diagnostic] targeted zombie appears stuck; onlineID="
+            .. zombieOnlineID
+            .. "; pos="
+            .. tostring(math.floor(x)) .. "," .. tostring(math.floor(y)) .. "," .. tostring(math.floor(z))
+            .. "; target="
+            .. tostring(math.floor(targetX)) .. "," .. tostring(math.floor(targetY)) .. "," .. tostring(math.floor(targetZ))
+            .. "; state="
+            .. state
+            .. "; remote="
+            .. remote
+            .. "; bMoving="
+            .. tostring(self._ref:getVariableBoolean("bMoving"))
+            .. "; bPathfind="
+            .. tostring(self._ref:getVariableBoolean("bPathfind")))
+        watch.lastLogAt = now
+    end
 end
 
 

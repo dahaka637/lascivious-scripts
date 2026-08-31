@@ -95,6 +95,9 @@ local function dataStore()
     -- Credits API pending-grant queue (see "Public credits API" section
     -- below): { [accountKey] = { {amount=, reason=, queuedAt=}, ... } }.
     data.pendingCredits = type(data.pendingCredits) == "table" and data.pendingCredits or {}
+    -- Persistent receipts for one-shot external rewards, e.g. Discord
+    -- verification. Keyed by rewardType .. ":" .. canonical account key.
+    data.externalRewards = type(data.externalRewards) == "table" and data.externalRewards or {}
     return data
 end
 
@@ -196,9 +199,13 @@ end
 -- any of `extraKeys` -- a grant queued back when only a username was known
 -- (LS.queueCredits resolving a never-seen username to a "name:" key) must
 -- still reach the player once they log in for real and end up keyed by
--- Steam ID instead, which is a DIFFERENT key. Only meant to be called right
--- after a brand-new record is created: an already-existing account was, by
--- construction, already flushed the moment it was created.
+-- Steam ID instead, which is a DIFFERENT key.
+--
+-- Deliberately safe to call repeatedly, not just on first account creation:
+-- the Discord/HTTP bridge can enqueue under steam:<id> while the shop still
+-- has a live name:<username>/legacy account from an older resolution path.
+-- Draining on every ensureAccount() makes that failure mode self-healing
+-- instead of leaving credits stuck in pendingCredits forever.
 local function flushPendingCredits(rec, key, extraKeys)
     local data = dataStore()
     local keys = { key }
@@ -235,11 +242,21 @@ local function usernameOf(player)
     return nil
 end
 
+local function exactSteamKeyFromUsername(username)
+    if type(username) ~= "string" or username == "" or not getSteamIDFromUsername then return nil end
+    local ok, value = pcall(getSteamIDFromUsername, username)
+    if not ok then return nil end
+    local sid = LasciviousSystemsSteamId.isValid(value)
+    return sid and ("steam:" .. sid) or nil
+end
+
 local function accountId(player)
     if not player then return nil end
+    local username = usernameOf(player)
+    local exactKey = exactSteamKeyFromUsername(username)
+    if exactKey then return exactKey end
     local key = LasciviousSystemsSteamId.accountKey(player)
     if key then return key end
-    local username = usernameOf(player)
     return username and ("name:" .. username) or nil
 end
 
@@ -300,9 +317,9 @@ local function ensureAccount(player)
     rec = normalizeAccountRecord(rec)
     data.accounts[key] = rec
     if username then data.usernameIndex[username] = key end
-    if createdOrMigrated then
-        flushPendingCredits(rec, key, #migratedFrom > 0 and migratedFrom or nil)
-    end
+    if legacyKey and legacyKey ~= key then table.insert(migratedFrom, legacyKey) end
+    if fallbackKey and fallbackKey ~= key then table.insert(migratedFrom, fallbackKey) end
+    flushPendingCredits(rec, key, #migratedFrom > 0 and migratedFrom or nil)
     return rec, key
 end
 
@@ -335,6 +352,7 @@ local function ensureAccountByUsername(username)
     end
     rec = normalizeAccountRecord(rec)
     data.accounts[key] = rec
+    flushPendingCredits(rec, key, { "name:" .. username })
     return rec, key
 end
 
@@ -449,8 +467,8 @@ local function resolveIdentityKey(identity)
             return username and resolveIdentityKey(username) or nil
         end
         if identity.steamId ~= nil then
-            local sid = tostring(identity.steamId)
-            if sid ~= "" and sid ~= "0" and #sid <= 32 then return "steam:" .. sid end
+            local sid = LasciviousSystemsSteamId.isValid(identity.steamId)
+            if sid then return "steam:" .. sid end
         end
         if type(identity.username) == "string" and identity.username ~= "" and #identity.username <= 64 then
             return resolveIdentityKey(identity.username)
@@ -460,11 +478,42 @@ local function resolveIdentityKey(identity)
     return ok and result or nil
 end
 
+local function steamKeyFromIdentity(identity)
+    if type(identity) ~= "table" or identity.steamId == nil then return nil end
+    local sid = LasciviousSystemsSteamId.isValid(identity.steamId)
+    return sid and ("steam:" .. sid) or nil
+end
+
+local function isSteamKey(key)
+    return type(key) == "string" and string.sub(key, 1, 6) == "steam:"
+end
+
+local function addUniqueKey(list, seen, key)
+    if type(key) == "string" and key ~= "" and not seen[key] then
+        seen[key] = true
+        list[#list + 1] = key
+    end
+end
+
+local identityUsernameHint
+
+local function identityPendingKeys(identity, primaryKey, username)
+    local keys, seen = {}, {}
+    addUniqueKey(keys, seen, primaryKey)
+    addUniqueKey(keys, seen, steamKeyFromIdentity(identity))
+    if not username then username = identityUsernameHint(identity) end
+    if username then
+        addUniqueKey(keys, seen, dataStore().usernameIndex[username])
+        addUniqueKey(keys, seen, "name:" .. username)
+    end
+    return keys
+end
+
 -- Best-effort USERNAME (not account key) for the sole purpose of pushing an
 -- immediate state refresh to whoever's online right now -- LS.pushStateToUsername
 -- already no-ops harmlessly on nil, so it's fine for this to come back empty
 -- for a pure Steam-ID identity with no known username yet.
-local function identityUsernameHint(identity)
+identityUsernameHint = function(identity)
     if type(identity) == "string" then return identity end
     local ok, result = pcall(function()
         if identity.getUsername then return usernameOf(identity) end
@@ -473,6 +522,148 @@ local function identityUsernameHint(identity)
     end)
     return ok and result or nil
 end
+
+local function findOnlinePlayerForIdentity(identity)
+    local username = identityUsernameHint(identity)
+    local steamKey = steamKeyFromIdentity(identity)
+    local found = nil
+    eachOnlinePlayer(function(player)
+        if found then return end
+        local playerUsername = usernameOf(player)
+        if username and playerUsername == username then
+            local exactKey = exactSteamKeyFromUsername(playerUsername)
+            if steamKey and exactKey and exactKey ~= steamKey then
+                LS.log(string.format(
+                    "WARNING: bridge username '%s' maps to '%s' but command targets '%s'; refusing username-only online match",
+                    tostring(username), exactKey, steamKey))
+                return
+            end
+            found = player
+            return
+        end
+        if steamKey then
+            local key = accountId(player)
+            if key == steamKey then found = player end
+        end
+    end)
+    return found
+end
+
+local function rawSteamIdForDebug(player)
+    if not player or not player.getSteamID then return nil end
+    local ok, value = pcall(function() return player:getSteamID() end)
+    if not ok or value == nil then return nil end
+    return tostring(value)
+end
+
+local function logOnlineIdentitySnapshot(context, expectedSteamKey, expectedUsername)
+    LS.log(string.format(
+        "%s: no exact online player match for expected steamKey='%s' username='%s'; listing all online identities",
+        tostring(context), tostring(expectedSteamKey), tostring(expectedUsername)))
+    local count = 0
+    eachOnlinePlayer(function(player)
+        count = count + 1
+        local username = usernameOf(player)
+        local exactKey = exactSteamKeyFromUsername(username)
+        local resolvedKey = accountId(player)
+        LS.log(string.format(
+            "%s: online[%d] username='%s' exactSteamKey='%s' rawGetSteamID='%s' resolvedAccountKey='%s'",
+            tostring(context), count, tostring(username), tostring(exactKey), tostring(rawSteamIdForDebug(player)),
+            tostring(resolvedKey)))
+    end)
+    if count == 0 then
+        LS.log(tostring(context) .. ": no online players visible to the server")
+    end
+end
+
+-- Bridge/admin identities often arrive as {steamId=..., username=...}.  When a
+-- matching player is online, force account discovery before deciding to queue.
+-- When only an older name:<username> record exists, promote it into the exact
+-- steam:<id> account supplied by the bridge unless the live engine already
+-- resolved a DIFFERENT steam key (then the live engine wins and we log).
+local function ensureAccountForIdentity(identity)
+    local primaryKey = resolveIdentityKey(identity)
+    if not primaryKey then return nil, nil, nil end
+    local username = identityUsernameHint(identity)
+    local steamKey = steamKeyFromIdentity(identity)
+    local player = findOnlinePlayerForIdentity(identity)
+
+    if player then
+        local rec, liveKey = ensureAccount(player)
+        username = username or usernameOf(player)
+        if rec and liveKey then
+            local targetKey = liveKey
+            if steamKey and liveKey ~= steamKey then
+                local exactKey = exactSteamKeyFromUsername(username)
+                if exactKey and exactKey ~= steamKey then
+                    LS.log(string.format(
+                        "WARNING: bridge steam key '%s' disagrees with exact engine key '%s' for '%s'; using exact engine key",
+                        steamKey, exactKey, tostring(username)))
+                    targetKey = exactKey
+                else
+                    targetKey = steamKey
+                end
+            end
+
+            if targetKey ~= liveKey then
+                local data = dataStore()
+                local targetRec = data.accounts[targetKey]
+                if type(targetRec) == "table" and targetRec ~= rec then
+                    rec = mergeFallbackAccount(targetRec, rec)
+                else
+                    rec = normalizeAccountRecord(rec)
+                end
+                data.accounts[targetKey] = rec
+                data.accounts[liveKey] = nil
+                if username then data.usernameIndex[username] = targetKey end
+                LS.log(string.format("promoted live shop account '%s' to bridge identity '%s'", liveKey, targetKey))
+            end
+
+            local pendingKeys = identityPendingKeys(identity, targetKey, username)
+            flushPendingCredits(rec, targetKey, pendingKeys)
+            return rec, targetKey, username
+        end
+    end
+
+    if steamKey and username then
+        local data = dataStore()
+        local fallbackKey = "name:" .. username
+        local indexedKey = data.usernameIndex[username]
+        local sourceKey = nil
+        if type(data.accounts[fallbackKey]) == "table" then
+            sourceKey = fallbackKey
+        elseif type(indexedKey) == "string" and not isSteamKey(indexedKey)
+            and type(data.accounts[indexedKey]) == "table" then
+            sourceKey = indexedKey
+        end
+
+        if sourceKey and sourceKey ~= steamKey then
+            local rec = data.accounts[sourceKey]
+            if type(data.accounts[steamKey]) == "table" and data.accounts[steamKey] ~= rec then
+                rec = mergeFallbackAccount(data.accounts[steamKey], rec)
+            else
+                rec = normalizeAccountRecord(rec)
+            end
+            data.accounts[steamKey] = rec
+            data.accounts[sourceKey] = nil
+            data.usernameIndex[username] = steamKey
+            flushPendingCredits(rec, steamKey, identityPendingKeys(identity, sourceKey, username))
+            LS.log(string.format("promoted fallback shop account '%s' to bridge identity '%s'", sourceKey, steamKey))
+            return rec, steamKey, username
+        end
+
+        if type(data.accounts[steamKey]) == "table" then
+            local rec = normalizeAccountRecord(data.accounts[steamKey])
+            data.accounts[steamKey] = rec
+            data.usernameIndex[username] = steamKey
+            flushPendingCredits(rec, steamKey, identityPendingKeys(identity, primaryKey, username))
+            return rec, steamKey, username
+        end
+    end
+
+    return nil, primaryKey, username
+end
+
 
 -- Peek-only: current balance for `identity`, or 0 if no account exists yet.
 -- Never creates a record -- a mod polling balances must not silently spawn
@@ -553,12 +744,178 @@ function LS.queueCredits(identity, amount, reason)
     if not amount or amount <= 0 or amount > MAX_API_CREDIT_AMOUNT then
         return false, "invalid_amount"
     end
-    local key = resolveIdentityKey(identity)
+    local rec, key, username = ensureAccountForIdentity(identity)
     if not key then return false, "invalid_identity" end
+    local steamKey = steamKeyFromIdentity(identity)
+    if rec then
+        rec = normalizeAccountRecord(rec)
+        dataStore().accounts[key] = rec
+        if rec.balance + amount > LS.MAX_CREDITS then
+            return false, "recipient_balance_limit"
+        end
+        applyCreditsToKey(key, amount, reason or "api_queued_grant")
+        LS.pushStateToUsername(username or identityUsernameHint(identity))
+        LS.log(string.format("grant: +%s credits to '%s' via identity '%s' (%s)",
+            LS.formatCredits(amount), tostring(username or key), tostring(key), tostring(reason or "api_queued_grant")))
+        return true, nil, { queued = false, accountKey = key, username = username, matchedAccount = true }
+    end
+    if steamKey then
+        local data = dataStore()
+        rec = normalizeAccountRecord(data.accounts[steamKey])
+        data.accounts[steamKey] = rec
+        if username then
+            local indexed = data.usernameIndex[username]
+            if not indexed or indexed == steamKey or not isSteamKey(indexed) then
+                data.usernameIndex[username] = steamKey
+            elseif indexed ~= steamKey then
+                LS.log(string.format(
+                    "WARNING: not overwriting usernameIndex for '%s' from '%s' to bridge key '%s'",
+                    tostring(username), tostring(indexed), steamKey))
+            end
+        end
+        flushPendingCredits(rec, steamKey, identityPendingKeys(identity, key, username))
+        rec = normalizeAccountRecord(data.accounts[steamKey])
+        data.accounts[steamKey] = rec
+        if rec.balance + amount > LS.MAX_CREDITS then
+            return false, "recipient_balance_limit"
+        end
+        applyCreditsToKey(steamKey, amount, reason or "api_steam_grant")
+        LS.pushStateToUsername(username)
+        LS.log(string.format("grant: +%s credits to exact SteamID account '%s' (%s; username=%s)",
+            LS.formatCredits(amount), steamKey, tostring(reason or "api_steam_grant"), tostring(username)))
+        return true, nil, { queued = false, accountKey = steamKey, username = username, createdAccount = true }
+    end
     local ok, queued, failure = applyOrQueueGrant(key, amount, reason or "api_queued_grant")
     if not ok then return false, failure or "queue_full" end
     if not queued then LS.pushStateToUsername(identityUsernameHint(identity)) end
-    return true, nil, { queued = queued }
+    return true, nil, { queued = queued, accountKey = key, username = username }
+end
+
+local function externalRewardReceiptKey(rewardType, steamKey)
+    if type(rewardType) ~= "string" or rewardType == "" then return nil end
+    if not isSteamKey(steamKey) then return nil end
+    return rewardType .. ":" .. steamKey
+end
+
+local function removePendingRewardEntries(data, keys, reason)
+    local removed, removedTotal = 0, 0
+    local seen = {}
+    for _, key in ipairs(keys or {}) do
+        if type(key) == "string" and not seen[key] then
+            seen[key] = true
+            local list = data.pendingCredits[key]
+            if type(list) == "table" then
+                local kept = {}
+                for _, entry in ipairs(list) do
+                    if type(entry) == "table" and entry.reason == reason then
+                        removed = removed + 1
+                        removedTotal = removedTotal + math.max(0, finiteNumber(entry.amount, 0))
+                    else
+                        kept[#kept + 1] = entry
+                    end
+                end
+                data.pendingCredits[key] = #kept > 0 and kept or nil
+            end
+        end
+    end
+    return removed, removedTotal
+end
+
+function LS.grantExternalRewardOnce(identity, rewardType, amount, externalId)
+    amount = finiteNumber(amount, nil)
+    if not amount or amount <= 0 or amount > MAX_API_CREDIT_AMOUNT then
+        return false, "invalid_amount"
+    end
+
+    local steamKey = steamKeyFromIdentity(identity)
+    if not steamKey then
+        return false, "invalid_steam_identity"
+    end
+
+    local receiptKey = externalRewardReceiptKey(rewardType, steamKey)
+    if not receiptKey then
+        return false, "invalid_reward_type"
+    end
+
+    local username = identityUsernameHint(identity)
+    local onlinePlayer = findOnlinePlayerForIdentity(identity)
+    if onlinePlayer then
+        username = username or usernameOf(onlinePlayer)
+    else
+        logOnlineIdentitySnapshot("external reward '" .. tostring(rewardType) .. "'", steamKey, username)
+    end
+    local data = dataStore()
+    local existing = data.externalRewards[receiptKey]
+    if type(existing) == "table" and (existing.status == "applied" or existing.status == "processing") then
+        local removedPending, removedPendingTotal = removePendingRewardEntries(data,
+            identityPendingKeys(identity, steamKey, username), rewardType)
+        if removedPending > 0 then
+            LS.log(string.format("external reward '%s' for '%s' already recorded; removed %d duplicate pending grant(s) totalling %s",
+                tostring(rewardType), steamKey, removedPending, LS.formatCredits(removedPendingTotal)))
+        end
+        LS.log(string.format("external reward '%s' for '%s' already recorded as %s; not granting again",
+            tostring(rewardType), steamKey, tostring(existing.status)))
+        return true, nil, {
+            queued = false,
+            alreadyApplied = true,
+            accountKey = steamKey,
+            username = username,
+            receiptKey = receiptKey,
+        }
+    end
+
+    local rec = normalizeAccountRecord(data.accounts[steamKey])
+    data.accounts[steamKey] = rec
+    if username then
+        local indexed = data.usernameIndex[username]
+        if not indexed or indexed == steamKey or not isSteamKey(indexed) then
+            data.usernameIndex[username] = steamKey
+        end
+    end
+
+    if rec.balance + amount > LS.MAX_CREDITS then
+        return false, "recipient_balance_limit"
+    end
+
+    data.externalRewards[receiptKey] = {
+        status = "processing",
+        rewardType = rewardType,
+        accountKey = steamKey,
+        amount = amount,
+        externalId = externalId,
+        startedAt = nowSeconds(),
+    }
+
+    local pendingKeys = identityPendingKeys(identity, steamKey, username)
+    local removedPending, removedPendingTotal = removePendingRewardEntries(data, pendingKeys, rewardType)
+    applyCreditsToKey(steamKey, amount, rewardType)
+
+    data.externalRewards[receiptKey] = {
+        status = "applied",
+        rewardType = rewardType,
+        accountKey = steamKey,
+        amount = amount,
+        externalId = externalId,
+        appliedAt = nowSeconds(),
+        removedDuplicatePending = removedPending,
+        removedDuplicatePendingTotal = removedPendingTotal,
+    }
+
+    LS.pushStateToUsername(username)
+    LS.log(string.format("external reward '%s': +%s credits to '%s'%s%s",
+        tostring(rewardType), LS.formatCredits(amount), steamKey,
+        username and (" (username=" .. tostring(username) .. ")") or "",
+        removedPending > 0 and string.format("; removed %d duplicate pending grant(s) totalling %s",
+            removedPending, LS.formatCredits(removedPendingTotal)) or ""))
+
+    return true, nil, {
+        queued = false,
+        alreadyApplied = false,
+        accountKey = steamKey,
+        username = username,
+        receiptKey = receiptKey,
+        removedDuplicatePending = removedPending,
+    }
 end
 
 -- Generic transfer between two identities -- what Commands[LS.CMD_TRANSFER]
@@ -1030,13 +1387,27 @@ end
 
 -- Optional cross-mod read (same defensive pattern as buildState's own
 -- factionName/tributeRatePercent lookup just below): this player's faction's
--- current Comércio upgrade discount, 0..30 (3% per level, level 0-10). 0 if
+-- current Comércio upgrade discount, 0..50 (custom curve, level 0-10). 0 if
 -- not in a faction, LasciviousFactionsSystem isn't loaded, or the faction has
 -- no active claim -- upgrade effects pause without one, the same rule every
 -- other LFS upgrade effect already follows. Never mutates
 -- LasciviousFactionsSystem's data from here. Declared before buildState (not
 -- just before currentPrice, its other caller) since buildState needs it too
 -- and Lua locals aren't visible to a function defined earlier in the file.
+local COMMERCE_DISCOUNT_BY_LEVEL = {
+    [0] = 0,
+    [1] = 3,
+    [2] = 6,
+    [3] = 10,
+    [4] = 14,
+    [5] = 19,
+    [6] = 24,
+    [7] = 30,
+    [8] = 36,
+    [9] = 43,
+    [10] = 50,
+}
+
 local function commerceDiscountFor(player)
     if not (LasciviousFactionsSystem and LasciviousFactionsSystem.getFactionOfPlayer
         and LasciviousFactionsSystem.upgradeLevel and LasciviousFactionsSystem.upgradesActive) then
@@ -1050,7 +1421,8 @@ local function commerceDiscountFor(player)
     if not (activeOk and active) then return 0 end
     local levelOk, level = pcall(LasciviousFactionsSystem.upgradeLevel, faction, "commerce")
     if not levelOk then return 0 end
-    return math.max(0, math.min(10, finiteNumber(level, 0))) * 3
+    level = math.max(0, math.min(10, math.floor(finiteNumber(level, 0))))
+    return COMMERCE_DISCOUNT_BY_LEVEL[level] or 0
 end
 
 local function buildState(player, suppliedOptions)
@@ -1198,12 +1570,92 @@ local function normalizeCart(rawItems)
     return lines
 end
 
+local function callIfExists(object, methodName, ...)
+    if not object or type(methodName) ~= "string" then return false end
+    local args = { ... }
+    local ok, result = pcall(function()
+        local method = object[methodName]
+        if type(method) ~= "function" then return nil end
+        return method(object, unpack(args))
+    end)
+    return ok, result
+end
+
+local function numericGetter(object, methodName)
+    local ok, value = callIfExists(object, methodName)
+    value = ok and tonumber(value) or nil
+    if value and value == value and value ~= math.huge and value ~= -math.huge then return value end
+    return nil
+end
+
+local function setMaxConditionIfPossible(item)
+    local ok, maxCondition = pcall(function() return item:getConditionMax() end)
+    maxCondition = ok and tonumber(maxCondition) or numericGetter(item, "getConditionMax")
+    if maxCondition and maxCondition > 0 then
+        pcall(function() item:setCondition(math.floor(maxCondition)) end)
+        callIfExists(item, "setCondition", math.floor(maxCondition))
+    end
+end
+
+local function setMaxNumericPart(item, setterName, maxGetterName, fallbackMax)
+    local maximum = numericGetter(item, maxGetterName) or fallbackMax
+    if maximum and maximum > 0 then
+        callIfExists(item, setterName, maximum)
+    end
+end
+
+local function freshenPurchasedWeaponItem(item)
+    if not item then return end
+    setMaxConditionIfPossible(item)
+
+    -- Build 42/modded melee can expose extra durability/sharpness fields for
+    -- weapon heads, blades, handles or attached weapon parts. Method names vary
+    -- between vanilla, experimental branches and mods, so every attempt is
+    -- optional. Missing methods simply no-op; existing ones are forced to max.
+    local maxCondition = numericGetter(item, "getConditionMax")
+    setMaxNumericPart(item, "setConditionLowerChance", "getConditionLowerChanceMax", numericGetter(item, "getConditionLowerChance"))
+    setMaxNumericPart(item, "setHeadCondition", "getHeadConditionMax", maxCondition)
+    setMaxNumericPart(item, "setBladeCondition", "getBladeConditionMax", maxCondition)
+    setMaxNumericPart(item, "setHandleCondition", "getHandleConditionMax", maxCondition)
+    setMaxNumericPart(item, "setSharpness", "getSharpnessMax", 1.0)
+    setMaxNumericPart(item, "setCurrentSharpness", "getSharpnessMax", 1.0)
+    setMaxNumericPart(item, "setSharpnessLevel", "getMaxSharpnessLevel", 1.0)
+
+    callIfExists(item, "setHaveBeenRepaired", 0)
+    callIfExists(item, "setBloodLevel", 0)
+    callIfExists(item, "setDirtyness", 0)
+    callIfExists(item, "setWet", false)
+
+    local okParts, parts = callIfExists(item, "getAllWeaponParts")
+    if okParts and parts then
+        local okSize, size = pcall(function() return parts:size() end)
+        size = okSize and tonumber(size) or 0
+        for i = 0, size - 1 do
+            local okPart, part = pcall(function() return parts:get(i) end)
+            if okPart and part then setMaxConditionIfPossible(part) end
+        end
+    end
+end
+
+local function freshenPurchasedItems(product, items)
+    if not product or (product.category ~= "melee" and product.category ~= "firearm" and product.category ~= "ammo") then
+        return
+    end
+    local okSize, size = pcall(function() return items:size() end)
+    size = okSize and tonumber(size) or 0
+    for i = 0, size - 1 do
+        local okItem, item = pcall(function() return items:get(i) end)
+        if okItem and item then freshenPurchasedWeaponItem(item) end
+    end
+end
+
 local function deliverItem(player, product, cartQty)
     local okInventory, inventory = pcall(function() return player:getInventory() end)
     if not okInventory or not inventory then return false, 0, 0 end
     local amount = math.max(1, math.floor(tonumber(product.quantity) or 1)) * cartQty
     local ok, items = pcall(function() return inventory:AddItems(product.fullType, amount) end)
     if not ok or not items then return false, 0, amount end
+    freshenPurchasedItems(product, items)
     pcall(function() sendAddItemsToContainer(inventory, items) end)
     local okSize, size = pcall(function() return items:size() end)
     size = okSize and tonumber(size) or 0
@@ -2090,6 +2542,55 @@ local function sweepPendingCredits()
     end
 end
 
+local function validSteamAccountKey(key)
+    if type(key) ~= "string" then return nil end
+    local sid = string.match(key, "^steam:(%d+)$")
+    if not sid then return nil end
+    sid = LasciviousSystemsSteamId.isValid(sid)
+    return sid and ("steam:" .. sid) or nil, sid
+end
+
+local function reconcileSteamPendingCredits()
+    local data = dataStore()
+    local keys = {}
+    for key in pairs(data.pendingCredits) do
+        if validSteamAccountKey(key) then keys[#keys + 1] = key end
+    end
+
+    for _, key in ipairs(keys) do
+        local canonicalKey, sid = validSteamAccountKey(key)
+        local list = data.pendingCredits[key]
+        if canonicalKey and type(list) == "table" and #list > 0 then
+            local discordAmount = nil
+            for _, entry in ipairs(list) do
+                if type(entry) == "table" and entry.reason == "discord_verification" then
+                    local amount = finiteNumber(entry.amount, nil)
+                    if amount and amount > 0 and amount <= MAX_API_CREDIT_AMOUNT then
+                        discordAmount = amount
+                        break
+                    end
+                end
+            end
+
+            if discordAmount then
+                LS.grantExternalRewardOnce({ steamId = sid }, "discord_verification", discordAmount, "startup_pending_reconcile")
+                list = data.pendingCredits[key]
+            end
+
+            if type(list) == "table" and #list > 0 then
+                local rec = normalizeAccountRecord(data.accounts[canonicalKey])
+                data.accounts[canonicalKey] = rec
+                flushPendingCredits(rec, canonicalKey)
+                LS.log("reconciled generic pending credits into exact Steam account '" .. canonicalKey .. "' at startup")
+            end
+
+            if key ~= canonicalKey and data.pendingCredits[key] then
+                data.pendingCredits[key] = nil
+            end
+        end
+    end
+end
+
 local TRANSIENT_SWEEP_INTERVAL_SECONDS = 10 * 60
 local TRANSIENT_RETENTION_SECONDS = 60 * 60
 local lastTransientSweepAt = 0
@@ -2198,6 +2699,7 @@ local function initialise()
     validateCatalog()
     local opts = LS.getOptions()
     ensureOffers(opts)
+    reconcileSteamPendingCredits()
     lastRuntimeConfigHash = runtimeConfigHash(opts)
     cachedKillStealPercent = opts.killCreditStealPercent
     cachedKillStealWindowSeconds = opts.killCreditStealWindowSeconds

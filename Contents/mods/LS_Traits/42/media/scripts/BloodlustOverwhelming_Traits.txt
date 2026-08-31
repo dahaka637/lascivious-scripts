@@ -1,0 +1,15 @@
+module BloodlustO
+{
+    character_trait_definition bloodlusto:bloodlusto
+    {
+        CharacterTrait = bloodlusto:bloodlusto,
+        Cost = -8,
+        UIName = UI_trait_BloodlustOverwhelming,
+        UIDescription = UI_trait_BloodlustOverwhelmingDesc,
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        XPBoosts = SmallBlade=1,
+        GrantedTraits = base:desensitized,
+        MutuallyExclusiveTraits = ETW:Bloodlust;RegretNothing:RegretNothing;base:pacifist;base:hemophobic,
+    }
+}

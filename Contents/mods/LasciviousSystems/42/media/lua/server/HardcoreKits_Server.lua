@@ -622,11 +622,13 @@ local function onCharacterDeath(character)
             and pending.status ~= HardcoreKits.STATUS_COMPLETED then
             HardcoreKitsPersistence.clearInitialKitSingleUseClaimed(accountId, pending.claimId)
         end
-        local singleUseActive = HardcoreKitsConfig.InitialKitSingleUseEnabled == true
-        if not (singleUseActive and HardcoreKitsPersistence.isInitialKitSingleUseClaimed(accountId)) then
-            HardcoreKitsPersistence.clearInitialKitClaimed(accountId)
-        end
-    end)
+		-- The per-character claim flag is always cleared on death. The optional
+		-- account-wide "single-use" flag lives separately and is only consulted
+		-- while InitialKitSingleUseEnabled is currently enabled, so admins can
+		-- safely turn single-use on/off without old per-character state trapping
+		-- a new life.
+		HardcoreKitsPersistence.clearInitialKitClaimed(accountId)
+	end)
     if not ok then
         print("[HardcoreKits] Erro em onCharacterDeath: " .. tostring(err))
     end

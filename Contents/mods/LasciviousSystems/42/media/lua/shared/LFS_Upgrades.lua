@@ -117,10 +117,11 @@ FF.UPGRADE_TYPES = {
             { key = "UI_LFS_UpgradeCommerceDescT4", fallback =
                 "O desconto já pesa bastante na hora de comprar -- quase preço de atacado." },
             { key = "UI_LFS_UpgradeCommerceDescT5", fallback =
-                "No nível máximo a facção compra praticamente no atacado -- 30% de desconto em tudo na loja." },
+                "No nível máximo a facção compra praticamente no atacado -- 50% de desconto em tudo na loja." },
         },
         technicalKey = "UI_LFS_UpgradeCommerceTechnical", technicalFallback =
-            "(Desconto de 3% por nível na loja para membros da facção, até 30% no nível máximo.)",
+            "(Desconto por nível na loja: Nv.1 3%, Nv.2 6%, Nv.3 10%, Nv.4 14%, Nv.5 19%, "
+            .. "Nv.6 24%, Nv.7 30%, Nv.8 36%, Nv.9 43%, Nv.10 50%.)",
     },
     {
         -- key intentionally left as "combatBounty" (not renamed alongside

@@ -23,6 +23,8 @@ local random_instance = newrandom()
 local INDEFATIGABLE_PROTECTION_DURATION_MS = 120000
 local INDEFATIGABLE_TRIGGER_RADIUS = 1.5
 local INDEFATIGABLE_KNOCKDOWN_RADIUS = 2.5
+local INDEFATIGABLE_EMERGENCY_DAMAGE_RADIUS = 1.75
+local INDEFATIGABLE_EMERGENCY_DAMAGE = 2.0
 local MADE_OF_GLASS_LOG_INTERVAL_MS = 1000
 
 ---@param player IsoPlayer
@@ -308,6 +310,8 @@ function ETW_HealthTraits.indefatigableProtection(player, bodyDamage, modData)
 	end
 
 	player:getStats():set(CharacterStat.PAIN, 0)
+	player:getStats():set(CharacterStat.PANIC, 0)
+	player:getStats():set(CharacterStat.STRESS, 0)
 	ETW_CommonFunctions.suppressWoundMovementPenalties(bodyDamage)
 end
 
@@ -390,8 +394,16 @@ function ETW_HealthTraits.indefatigableTrait(player, bodyDamage, modData, client
 		return
 	end
 
+	local knockdownConfirmed = 0
 	for _, zombie in ipairs(knockdownTargets) do
-		ETW_CommonFunctions.triggerBouncerStagger(player, zombie, true)
+		local impact = ETW_CommonFunctions.triggerBouncerStagger(player, zombie, true)
+		if impact and impact.confirmed then
+			knockdownConfirmed = knockdownConfirmed + 1
+		end
+		if player:DistTo(zombie) <= INDEFATIGABLE_EMERGENCY_DAMAGE_RADIUS and zombie:getHealth() > 0 then
+			zombie:setHealth(zombie:getHealth() - INDEFATIGABLE_EMERGENCY_DAMAGE)
+			zombie:update()
+		end
 	end
 
 	local parts = bodyDamage:getBodyParts()
@@ -402,6 +414,8 @@ function ETW_HealthTraits.indefatigableTrait(player, bodyDamage, modData, client
 
 	local stats = player:getStats()
 	stats:set(CharacterStat.PAIN, 0)
+	stats:set(CharacterStat.PANIC, 0)
+	stats:set(CharacterStat.STRESS, 0)
 	stats:set(CharacterStat.FATIGUE, 0)
 	stats:set(CharacterStat.ENDURANCE, 1)
 
@@ -441,8 +455,10 @@ function ETW_HealthTraits.indefatigableTrait(player, bodyDamage, modData, client
 			.. (crowdTrigger and "four-zombie crowd" or "low health")
 			.. "; server crowd within 1.5: "
 			.. serverCrowdCount
-			.. "; knocked down: "
+			.. "; knockdown targets: "
 			.. #knockdownTargets
+			.. "; confirmed immediately: "
+			.. knockdownConfirmed
 			.. " within "
 			.. INDEFATIGABLE_KNOCKDOWN_RADIUS
 			.. " tiles"
@@ -632,10 +648,17 @@ end
 ---@param modData EvolvingTraitsWorldModData
 function ETW_HealthTraits.hardyTrait(player, stats,  modData)
 	-- TODO: moodle support as a display of available endurance reserve
+	if not modData then
+		modData = ETW_CommonFunctions.getETWModData(player)
+	end
+	if not modData then
+		logETW("ETW Logger | hardyTrait(): missing ETW modData, skipping")
+		return
+	end
 	local endurance = stats:get(CharacterStat.ENDURANCE)
 	local maximumReserve = PZMath.clamp((SBvars.HardyExtraEndurancePercent or 25) / 100, 0, 1)
 	local transfer = PZMath.clamp(SBvars.HardyTransferPerMinute or 0.05, 0, 1)
-	modData.HardyReserve = PZMath.clamp(modData.HardyReserve, 0, maximumReserve)
+	modData.HardyReserve = PZMath.clamp(modData.HardyReserve or maximumReserve, 0, maximumReserve)
 	if endurance < 0.85 and modData.HardyReserve > 0 then
 		local amount = math.min(transfer, modData.HardyReserve, 1 - endurance)
 		stats:set(CharacterStat.ENDURANCE, endurance + amount)

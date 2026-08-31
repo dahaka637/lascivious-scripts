@@ -174,6 +174,28 @@ local function rollConditionFraction(minFraction, maxFraction)
     return ZombRandFloat(minimum, maximum)
 end
 
+local function rollInitialAmmoBoxQuantity(cfg)
+	local minimum = math.floor(finiteNumber(cfg.InitialAmmoBoxesMin, 1))
+	local maximum = math.floor(finiteNumber(cfg.InitialAmmoBoxesMax, minimum))
+	minimum = math.max(1, minimum)
+	maximum = math.max(1, maximum)
+	if minimum > maximum then
+		minimum, maximum = maximum, minimum
+	end
+
+	-- The weighted default table only describes the original 1..4 distribution.
+	-- If the server owner configures a custom range (ex: 3..8), honor it exactly
+	-- instead of silently drawing from the stale default weights.
+	if minimum == 1 and maximum == 4 then
+		local weighted = HardcoreKitsUtils.weightedKey(cfg.InitialAmmoBoxesWeights)
+		if weighted then
+			return math.max(minimum, math.min(maximum, math.floor(finiteNumber(weighted, minimum))))
+		end
+	end
+
+	return HardcoreKitsUtils.randInt(minimum, maximum)
+end
+
 -- "give rate inverso" do pool de Recurso: itens em
 -- HardcoreKitsConfig.ResourceReducedItems (curados a mao pelo usuario) tem
 -- peso reduzido (ResourceReducedWeightPercent, % relativo a 100 de um item
@@ -423,10 +445,9 @@ function HardcoreKitsRolls.rollInitialKit(player)
     result.meleeConditionFraction = rollConditionFraction(cfg.InitialMeleeConditionMinFraction, cfg.InitialMeleeConditionMaxFraction)
 
     result.hasFirearm = (#HardcoreKitsValidatedPools.Firearms > 0) and HardcoreKitsUtils.rollChance(cfg.InitialFirearmChance)
-    if result.hasFirearm then
-        result.firearm = HardcoreKitsRolls.rollFirearmUniform()
-        result.ammoBoxQty = HardcoreKitsUtils.weightedKey(cfg.InitialAmmoBoxesWeights)
-            or HardcoreKitsUtils.randInt(cfg.InitialAmmoBoxesMin, cfg.InitialAmmoBoxesMax)
+	if result.hasFirearm then
+		result.firearm = HardcoreKitsRolls.rollFirearmUniform()
+		result.ammoBoxQty = rollInitialAmmoBoxQuantity(cfg)
         -- armas com carregador destacavel ganham 1 carregador por caixa de
         -- municao sorteada (so a quantidade -- HardcoreKits_Delivery decide
         -- quantos vem soltos vs ja encaixados na arma). Armas sem carregador

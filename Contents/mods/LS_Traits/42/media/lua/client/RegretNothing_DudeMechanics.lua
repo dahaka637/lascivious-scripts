@@ -62,25 +62,53 @@ local function hasTrait(player)
     return false
 end
 
+local function isLocalPlayer(player)
+    if player == nil then
+        return false
+    end
+
+    local ok, result = pcall(function()
+        return player:isLocalPlayer()
+    end)
+
+    if ok then
+        return result == true
+    end
+
+    return player == getPlayer()
+end
+
 -- ============================================================
 -- 1. On Zombie Kill: reduce Boredom/Unhappiness
 -- ============================================================
 local function RN_OnZombieDead(zombie, attacker)
     local player = attacker
-    if not player then player = getPlayer() end
+    if not player and zombie then
+        local ok, attackedBy = pcall(function()
+            return zombie:getAttackedBy()
+        end)
+        if ok then
+            player = attackedBy
+        end
+    end
     if not player then return end
+    if not isLocalPlayer(player) then return end
     if not hasTrait(player) then return end
 
-    local modData = player:getModData()
-    modData.RN_LastKillTime = getGameTime():getWorldAgeHours()
+	local modData = player:getModData()
+	modData.RN_LastKillTime = getGameTime():getWorldAgeHours()
 
-    local stats = player:getStats()
-    if stats then
+	if isClient and isClient() then
+		return
+	end
+
+	local stats = player:getStats()
+	if stats then
         RN_safe("zombiedead_stats", function()
             local b = stats:get(CharacterStat.BOREDOM)
             local u = stats:get(CharacterStat.UNHAPPINESS)
-            stats:set(CharacterStat.BOREDOM, math.max(0, b - 2.5))
-            stats:set(CharacterStat.UNHAPPINESS, math.max(0, u - 2.5))
+            stats:set(CharacterStat.BOREDOM, math.max(0, b - 25))
+            stats:set(CharacterStat.UNHAPPINESS, math.max(0, u - 25))
         end)
     end
 end
@@ -103,9 +131,13 @@ local function RN_EveryTenMinutes()
 
     local hoursSince = currentTime - modData.RN_LastKillTime
 
-    if hoursSince > 2.0 then
-        local stats = player:getStats()
-        if stats then
+	if hoursSince > 2.0 then
+		if isClient and isClient() then
+			return
+		end
+
+		local stats = player:getStats()
+		if stats then
             RN_safe("everyten_stats", function()
                 local b = stats:get(CharacterStat.BOREDOM)
                 local u = stats:get(CharacterStat.UNHAPPINESS)
@@ -120,6 +152,7 @@ end
 -- 3. Every Player Update
 -- ============================================================
 local function RN_OnPlayerUpdate(player)
+    if not isLocalPlayer(player) then return end
     if not hasTrait(player) then return end
 
     local stats = player:getStats()
@@ -128,11 +161,6 @@ local function RN_OnPlayerUpdate(player)
     if stats then
         RN_safe("foodsickness", function() stats:set(CharacterStat.FOOD_SICKNESS, 0) end)
         RN_safe("poison", function() stats:set(CharacterStat.POISON, 0) end)
-        -- Bugfix: this used to clear STRESS only, with a comment claiming panic immunity.
-        -- PANIC and STRESS are two different CharacterStats, so panic was never suppressed.
-        -- base:desensitized in traits.txt is the primary (engine-level) immunity; this is a backstop.
-        RN_safe("panic", function() stats:set(CharacterStat.PANIC, 0) end)
-        RN_safe("stress", function() stats:set(CharacterStat.STRESS, 0) end)
     end
 
     local modData = player:getModData()
@@ -226,8 +254,10 @@ end
 -- 4. Weapon Hit
 -- ============================================================
 local function RN_OnWeaponHitCharacter(attacker, target, weapon, damageSplit)
-    if not hasTrait(attacker) then return end
-    RN_safe("weaponhit_buff", function()
+	if not isLocalPlayer(attacker) then return end
+	if not hasTrait(attacker) then return end
+	if isClient and isClient() then return end
+	RN_safe("weaponhit_buff", function()
         local modData = attacker:getModData()
         if modData.RN_ConsumableBuffEnd and getGameTime():getWorldAgeHours() < modData.RN_ConsumableBuffEnd then
             if target and target:getHealth() > 0 then
@@ -241,6 +271,7 @@ end
 -- 5. Weapon Equip
 -- ============================================================
 local function RN_OnEquipPrimary(character, item)
+    if not isLocalPlayer(character) then return end
     if not hasTrait(character) then return end
     if not item then return end
     local ok, isWeapon = pcall(function() return item:IsWeapon() end)

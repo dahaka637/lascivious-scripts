@@ -1,0 +1,7 @@
+name=Lascivious Scripts - Spawn Selector
+poster=poster.png
+icon=icon.png
+id=LS_SpawnSelector
+description=Escolha qualquer local mapeado depois de criar um personagem. Integrado ao Lascivious Scripts.
+modversion=1.0.0
+versionMin=42.20.0

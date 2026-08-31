@@ -1,0 +1,8 @@
+name=Bloodlust Overwhelming
+id=BloodlustOverwhelming
+icon=icon.png
+poster=poster.png
+description=Overwhelming desire to kill
+modversion=0.9.7
+require=MoodleFramework
+category=features

@@ -6,9 +6,9 @@ across 31 real third-party integrations that aren't written down anywhere else. 
 agent/session picking this project up cold, read this file fully, then skim
 `docs/MODULE_REGISTRY.md` and `docs/COLLISION_REGISTRY.md` for current state, then start work.
 
-Last updated: 2026-08-30, after Evil Morty Death Screen was integrated (with a local audio fix for a
-buzzing/glitching-music bug reported on the upstream Workshop page — see
-`vendor/evil-morty-death-screen/INTEGRATION.md`).
+Last updated: 2026-08-31, after Spawn Selector was integrated as `LS_SpawnSelector` and the
+Bloodlust/Regret/HardcoreKits/Shop reward fixes were reinforced — see
+`vendor/lascivious-traits/INTEGRATION.md`.
 
 ## Pre-release review: closed, pack is in production (2026-08-27)
 
@@ -27,38 +27,31 @@ checked and patched) rather than restarting the methodology from scratch.
 
 ## Where things stand — the pack is complete
 
-**33 Mod IDs bundled in one Workshop item**, all originally-planned mods, the later Wilderness
-Spawnpoints addition, the generic `LS_BugFixes` container, the first-party `LasciviousSystems`
-ecosystem and Evil Morty Death Screen integrated (one, `LS_AliceWeaponSlingRadialMenu`,
-was bundled and then removed entirely on 2026-08-27 at the project owner's request — see
-`vendor/alices-weapon-sling/LOCAL_CHANGES.md` LS-005). 2 are own-code (Time Vote, Zombie
-Decay, living inside the core `LasciviousScripts` submod), one is the own-code
-`LasciviousSystems` submod (Shop, Factions, Kits, zones, bridge and loading assets), and 31 are
-third-party integrations, each in its own isolated submod or generic fix container (see `docs/MODULE_REGISTRY.md` for the full table,
+**35 active Mod IDs bundled in one Workshop item**, including the originally-planned mods, the later
+Wilderness Spawnpoints addition, the generic `LS_BugFixes` container, the first-party
+`LasciviousSystems` ecosystem, Evil Morty Death Screen and the active `LS_Traits` container (one,
+`LS_AliceWeaponSlingRadialMenu`, was bundled and then removed entirely on 2026-08-27 at the project
+owner's request — see `vendor/alices-weapon-sling/LOCAL_CHANGES.md` LS-005). Own-code lives in the
+core `LasciviousScripts` submod and `LasciviousSystems`; third-party integrations live either in
+isolated `LS_*` submods or in purpose-specific containers such as `LS_BugFixes`/`LS_Traits` (see
+`docs/MODULE_REGISTRY.md` for the full table,
 `docs/COLLISION_REGISTRY.md` for every cross-module interaction found and resolved,
-`docs/SERVER_MOD_ORDER.md` for the canonical `Mods=` string and the one hard load-order constraint
-that currently exists). `tools/validate_structure.py` and `tools/audit_collisions.py` both pass clean
-at 33 submods, **plus one prepared-but-empty 34th: `LS_Traits`** (see below).
+`docs/SERVER_MOD_ORDER.md` for the canonical `Mods=` string and the hard load-order constraints that
+currently exist). `tools/validate_structure.py` and `tools/audit_collisions.py` are the standing
+structure/collision checks after each integration.
 
-## `LS_Traits` — prepared, waiting on content (2026-08-30)
+## `LS_Traits` — active trait container (2026-08-30)
 
-A new own-authored container submod, `LS_Traits` (`docs/modules/lascivious-traits.md`,
-`vendor/lascivious-traits/`), was scaffolded ahead of the project owner naming which trait
-mods/ideas to fold in — same "container that grows over time" shape as `LS_BugFixes`. It is a real,
-valid, registered submod (counted in the 34 above, passes both validators) but ships **zero
-traits**: no `registries.lua`, no `character_trait_definition` script, no icons, no translations.
-**It is deliberately not wired into `docs/SERVER_MOD_ORDER.md`'s `Mods=` string or the production
-`/home/dahaka/Zomboid/Server/LASCIVIOUS.ini`** — that happens once the first real trait lands,
-mirroring the exact sequencing already used for `LS_EvilMortyDeathScreen` and `HWNetBridge`. Read
-`vendor/lascivious-traits/INTEGRATION.md` before adding the first trait — it documents the required
-namespace convention and, most importantly, the save-persistence rule (a trait's resource-location
-string becomes permanent for any character that ever selects it).
+`LS_Traits` (`docs/modules/lascivious-traits.md`, `vendor/lascivious-traits/`) is now the active
+"container that grows over time" for trait frameworks and trait packs. It bundles Moodle Framework,
+KillCount, Unified Carry Weight Framework, I Regret Nothing, Evolving Traits World and Bloodlust
+Overwhelming. The canonical `Mods=` order includes `LS_Traits`, and the live
+`/home/dahaka/Zomboid/Server/LASCIVIOUS.ini` also lists it. Before adding or renaming any trait,
+read `vendor/lascivious-traits/INTEGRATION.md`; the trait resource-location string is save-sensitive
+once a player selects or earns it.
 
-**No further mod is currently planned.** The last three from the original list (Antibodies,
-Wandering Zombies, Aegis Panel), the later explicit Wilderness Spawnpoints addition, the first
-generic bug fix and Evil Morty Death Screen are done. If the user names a new mod in the future, the
-same Fase 1-10 flow below still applies — this document just no longer has a "pending work" queue to
-report.
+**No separate pending queue is tracked here.** If the user names a new mod/trait in the future, the
+same Fase 1-10 flow below still applies.
 
 **What's very likely next, per the user's own earlier (2026-08-25) instruction, only on explicit
 request**: a GitHub remote gets set up "at the very end, after the whole mod pack is finished." That

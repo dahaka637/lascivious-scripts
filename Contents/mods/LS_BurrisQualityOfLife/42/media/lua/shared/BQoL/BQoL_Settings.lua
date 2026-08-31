@@ -88,7 +88,7 @@ local DEFAULTS = {
     TreeCanopyIndoorRadius    = 24,
 
     -- zombie collision
-    ZombieCollisionEnabled    = true,
+    ZombieCollisionEnabled    = false,
     ZombieCollisionMaxZombies = 12,
     ZombieCollisionScanRadius = 8,
     ZombieCollisionPushRadius = 0.5,

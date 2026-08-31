@@ -1666,6 +1666,18 @@ addItems("furniture", "DescFurniture", "Móvel posicionável", {
     {"Mov_SodaVendingMachine",400}, {"Mov_UprightCoffin",250},
 })
 
+-- Alice/Noir-style weapon slings already bundled in Lascivious Scripts as
+-- LS_AliceWeaponSling. Sold as equipment, not hidden crafting support parts;
+-- the hidden/invisible variants remain out of the store intentionally.
+LS.addModdedItems({
+    id = "AliceWeaponSling",
+}, "clothing", "DescClothing", "Vestuário ou equipamento", {
+    {"Base.AliceWeaponSling", 160},
+    {"Base.AliceWeaponSlingAlt", 160},
+    {"Base.AliceWeaponSlingAlt2", 160},
+    {"Base.AliceWeaponSlingBack", 180},
+})
+
 -- ===================================================================
 -- Modded content: Plysken Solar Revolution (id "PSR", Steam Workshop item
 -- 3725311427 -- fork of ImmersiveSolarArrays for Build 42). Off-grid power:

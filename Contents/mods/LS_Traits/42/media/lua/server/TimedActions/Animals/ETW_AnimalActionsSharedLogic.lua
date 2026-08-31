@@ -13,6 +13,7 @@ then
 end
 
 local ETW_CommonLogicChecks = require("ETW_CommonLogicChecks")
+local BloodlustOCompat = require("bloodlusto/Compat")
 
 ---@type EvolvingTraitsWorldSandboxVars
 local SBvars = SandboxVars.EvolvingTraitsWorld
@@ -29,7 +30,11 @@ end
 ---@param player IsoPlayer
 ---@param actionName string
 function AnimalActionsSharedLogic.increaseBloodlustMeter(player, actionName)
-	if SBvars.BloodlustFromAnimalsMultiplier <= 0 or not ETW_CommonLogicChecks.BloodlustShouldExecute(player) then
+	if
+		SBvars.BloodlustFromAnimalsMultiplier <= 0
+		or BloodlustOCompat.hasBloodlustOverwhelming(player)
+		or not ETW_CommonLogicChecks.BloodlustShouldExecute(player)
+	then
 		return
 	end
 

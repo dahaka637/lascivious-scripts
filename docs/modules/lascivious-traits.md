@@ -5,8 +5,8 @@
 - **Module key:** `lascivious-traits`
 - **Project Zomboid Mod ID:** `LS_Traits`
 - **Distribution:** bundled inside Workshop item `3788475731`
-- **Version:** `0.7.0` (three framework dependencies + I Regret Nothing + Evolving Traits World's
-  65 traits bundled; PT-BR translation 100% complete)
+- **Version:** `0.8.0` (three framework dependencies + I Regret Nothing + Evolving Traits World's
+  65 traits + Bloodlust Overwhelming bundled; PT-BR translation 100% complete)
 - **Runtime root:** `Contents/mods/LS_Traits/42/`
 - **Vendor tracking:** `vendor/lascivious-traits/` (see `INTEGRATION.md` there for the structural
   conventions every trait must follow, and the save-persistence warning)
@@ -20,11 +20,11 @@ existing trait mods and implement our own version, so the result is closer to `t
 third-party integration, even though individual traits may still trace back to specific inspirations
 worth recording per trait in `vendor/lascivious-traits/INTEGRATION.md`.
 
-## Status: three framework dependencies in, two trait bundles shipped
+## Status: three framework dependencies in, three trait bundles shipped
 
 - **Moodle Framework** (Workshop 3396446795) is bundled directly inside this submod as of
-  2026-08-30 - a client-only UI dependency future traits can build on to show their status in the
-  moodle bar (`require "MF_ISMoodle"`, `MF.createMoodle`/`MF.getMoodle`). Full detail, including a
+  2026-08-30 - a client-only UI dependency used by current bundled traits to show their status in
+  the moodle bar (`require "MF_ISMoodle"`, `MF.createMoodle`/`MF.getMoodle`). Full detail, including a
   noted-but-low-severity client-local memory-growth quirk in the upstream code, in
   `vendor/lascivious-traits/INTEGRATION.md`.
 - **KillCount** (Workshop 2553809727) is bundled directly inside this submod as of 2026-08-30 -
@@ -36,12 +36,12 @@ worth recording per trait in `vendor/lascivious-traits/INTEGRATION.md`.
   cosmetic display but must not be trusted as a security boundary for a trait that would grant a
   real effect based on kill count.
 - **UCWF (Unified Carry Weight Framework)** (Workshop 3682045254) is bundled directly inside this
-  submod as of 2026-08-30 - a modifier-pipeline library future traits can call
+  submod as of 2026-08-30 - a modifier-pipeline library traits can call
   (`UnifiedCarryWeightFramework.registerBaseModifier`/`registerMaxModifier`) to affect carry weight
   without fighting other mods that do the same. Inherently server/SP-authoritative by design (the
-  logic never runs on an MP client at all). Zero collision with anything bundled today, but has a
-  known future interaction with `LS_AegisPanel`'s carry-weight admin pin once the first
-  weight-affecting trait actually registers a modifier - see
+  logic never runs on an MP client at all). ETW currently registers UCWF max-weight modifiers for
+  Hoarder, Pack Mouse and Pack Mule. There is a known interaction with `LS_AegisPanel`'s
+  carry-weight admin pin if an admin pins a player who has one of those traits - see
   `vendor/lascivious-traits/INTEGRATION.md` and `docs/COLLISION_REGISTRY.md`.
 - **I Regret Nothing** (Workshop 3676431328) is bundled as of 2026-08-30 - the container's first
   real trait, a Postal 2 Dude homage (immune to panic, pushes combat stats hard while "frenzied",
@@ -76,12 +76,20 @@ worth recording per trait in `vendor/lascivious-traits/INTEGRATION.md`.
   permanence lock, and letting the character follow ETW's normal earn/lose rules afterward is more
   harmonious with ETW's own philosophy than fighting it. No code changed in the end. See
   `vendor/lascivious-traits/INTEGRATION.md` "Cross-trait harmony" for the full reasoning.
+- **Bloodlust Overwhelming** (Workshop 3786352314) is bundled as of 2026-08-30 (LS-010) - kept
+  under the upstream trait ID `bloodlusto:bloodlusto` for save compatibility, but translated into
+  the canonical LS_Traits EN/PTBR files and adapted for compatibility. It is mutually exclusive
+  with `ETW:Bloodlust`, `RegretNothing:RegretNothing`, `base:pacifist`, and `base:hemophobic`.
+  Runtime guards also prevent dynamic earning/stacking: Bloodlust Overwhelming will not be earned
+  by a blocked character, and ETW's Bloodlust meter/effect skips players who already have the
+  Overwhelming trait. This keeps the extreme bloodlust fantasy intact without letting it stack into
+  double Bloodlust/RN combat bonuses.
 - `media/registries.lua` now exists (created with I Regret Nothing, ETW's own trait registry table
   appended alongside it) - see the vendor `INTEGRATION.md` for the pattern future traits append to.
-- **Not wired into `docs/SERVER_MOD_ORDER.md`'s canonical `Mods=` string or the production
-  `/home/dahaka/Zomboid/Server/LASCIVIOUS.ini` yet.** Both happen once the first real trait lands
-  and passes validation, same sequencing already used for `LS_EvilMortyDeathScreen` and
-  `HWNetBridge`: local integration first, Workshop publish, only then the live server config.
+- **Server wiring/publish sequencing:** this document tracks the bundled runtime content inside
+  `LS_Traits`. Any live `Mods=`/Workshop publish step is handled separately by the normal server
+  deployment flow after local validation, so this integration does not directly edit the production
+  ini.
 
 ## Namespace
 
@@ -92,8 +100,8 @@ moment any character in any save picks it.
 
 ## Next step
 
-Waiting on the project owner to name any further trait mods/ideas to fold in beyond I Regret
-Nothing. Each one goes through the same shape already proven here: read the source for the
+Waiting on the project owner to name any further trait mods/ideas to fold in beyond Bloodlust
+Overwhelming. Each one goes through the same shape already proven here: read the source for the
 mechanic, decide what to keep/reimplement/bundle-as-is, write it under this submod's
 `42/media/lua/{client,server,shared}/`, register it in `registries.lua`, add its
 `character_trait_definition` block, translate it (EN native + PT-BR native), document it as a

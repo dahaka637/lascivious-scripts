@@ -57,6 +57,12 @@ local function migrateZedField(v)
     return ZED_MIGRATE[tostring(v)] or v
 end
 
+local function isRemoteZombie(zed)
+    if not (isClient() and zed) then return false end
+    local ok, remote = pcall(function() return zed:isRemoteZombie() end)
+    return ok and remote == true
+end
+
 local function zoneHasAction(zone)
     if type(zone) ~= "table" then return false end
     local z = migrateZedField(zone.zeds)
@@ -81,7 +87,7 @@ local function onZombieUpdate(zed)
         return
     end
 
-    if not zed then return end
+    if not zed or isRemoteZombie(zed) then return end
     local id = Core.getZId(zed)
     if not id then
         return
@@ -159,7 +165,7 @@ local function sweepZoneZeds(playerObj, zone)
     local zombies = playerObj:getCell():getZombieList()
     for i = 0, zombies:size() - 1 do
         local zed = zombies:get(i)
-        if instanceof(zed, "IsoZombie") then
+        if instanceof(zed, "IsoZombie") and not isRemoteZombie(zed) then
             local zedZone = Core.getLocation(zed:getX(), zed:getY())
             if zedZone and zedZone.key == zone.key then
                 local isBandit = bandits2Active and zed:getModData().brain ~= nil

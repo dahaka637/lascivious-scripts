@@ -23,6 +23,9 @@
 -- ver CLAUDE_DISCORD_VERIFICATION_SHOP_REWARD.md). So um comando em voo por vez -- o
 -- lado Node so pode escrever um novo comando depois de ler o resultado do anterior.
 
+local okSteamIdModule, SteamIdModule = pcall(require, "LasciviousSystems_SteamId")
+local SteamId = okSteamIdModule and SteamIdModule or LasciviousSystemsSteamId
+
 local tickCounter = 0
 local lastProcessedId = nil
 local previousAlive = {}
@@ -35,6 +38,58 @@ local function jsonEscape(str)
     str = str:gsub('\\', '\\\\')
     str = str:gsub('"', '\\"')
     return str
+end
+
+local function jsonString(content, key)
+    if type(content) ~= "string" or type(key) ~= "string" then return nil end
+    local value = content:match('"' .. key .. '"%s*:%s*"([^"]*)"')
+    if not value then value = content:match('"' .. key .. '"%s*:%s*(%d+)') end
+    if type(value) ~= "string" then return nil end
+    value = value:gsub("^%s+", ""):gsub("%s+$", "")
+    return value ~= "" and value or nil
+end
+
+local function jsonQuotedString(content, key)
+    if type(content) ~= "string" or type(key) ~= "string" then return nil end
+    local value = content:match('"' .. key .. '"%s*:%s*"([^"]*)"')
+    if type(value) ~= "string" then return nil end
+    value = value:gsub("^%s+", ""):gsub("%s+$", "")
+    return value ~= "" and value or nil
+end
+
+local function jsonNumberString(content, key)
+    if type(content) ~= "string" or type(key) ~= "string" then return nil end
+    return content:match('"' .. key .. '"%s*:%s*(%d+)')
+end
+
+local function hasNumericSteamId(content)
+    return jsonNumberString(content, "steamId")
+        or jsonNumberString(content, "steamID64")
+        or jsonNumberString(content, "steamID")
+        or jsonNumberString(content, "steam_id_64")
+        or jsonNumberString(content, "steam_id")
+        or jsonNumberString(content, "steam64")
+        or jsonNumberString(content, "steam")
+        or jsonNumberString(content, "steamid")
+end
+
+local function validSteamId(value)
+    if SteamId and type(SteamId.isValid) == "function" then
+        return SteamId.isValid(value)
+    end
+    if value == nil then return nil end
+    local text = tostring(value):gsub("^%s+", ""):gsub("%s+$", "")
+    local prefixed = text:match("^[sS][tT][eE][aA][mM]:(%d+)$")
+    if prefixed then text = prefixed end
+    if text == "" or text == "0" then return nil end
+    if not text:match("^%d+$") or #text < 15 or #text > 20 then return nil end
+    return text
+end
+
+local function steamIdForUsername(username)
+    if type(username) ~= "string" or username == "" or not getSteamIDFromUsername then return nil end
+    local ok, value = pcall(getSteamIDFromUsername, username)
+    return ok and validSteamId(value) or nil
 end
 
 local function writeFile(filename, content)
@@ -92,21 +147,31 @@ local DISCORD_VERIFICATION_REWARD = 300
 -- online. Idempotencia ("ja recebeu?") NAO e responsabilidade daqui -- isso e controlado
 -- do lado Node (steamverify/lib/rewardStore.js), que so manda esse comando uma vez por
 -- SteamID depois de confirmar sucesso.
-local function grantDiscordVerificationReward(steamId, username)
+local function grantDiscordVerificationReward(steamId, username, commandId)
     if steamId == nil or steamId == "" then
         return false, "missing_steam_id"
     end
+    local normalizedSteamId = validSteamId(steamId)
+    if not normalizedSteamId then
+        return false, "invalid_steam_id"
+    end
 
-    if not LasciviousShop or type(LasciviousShop.queueCredits) ~= "function" then
+    if not LasciviousShop then
         return false, "shop_api_unavailable"
     end
 
-    local identity = { steamId = tostring(steamId) }
+    local identity = { steamId = normalizedSteamId }
     if type(username) == "string" and username ~= "" then
         identity.username = username
     end
 
-    return LasciviousShop.queueCredits(identity, DISCORD_VERIFICATION_REWARD, "discord_verification")
+    if type(LasciviousShop.grantExternalRewardOnce) == "function" then
+        return LasciviousShop.grantExternalRewardOnce(identity, "discord_verification", DISCORD_VERIFICATION_REWARD, commandId)
+    end
+    if type(LasciviousShop.queueCredits) == "function" then
+        return LasciviousShop.queueCredits(identity, DISCORD_VERIFICATION_REWARD, "discord_verification")
+    end
+    return false, "shop_api_unavailable"
 end
 
 local function processInbox()
@@ -124,19 +189,45 @@ local function processInbox()
     local success = "false"
     local message = "tipo de comando desconhecido: " .. tostring(ctype)
     local queued = "false"
+    local accountKey = ""
+    local rewardUsername = ""
 
     if ctype == "ping" then
         success = "true"
         message = "pong"
     elseif ctype == "grant_discord_reward" then
-        local steamId = content:match('"steamId"%s*:%s*"([^"]+)"')
-        local username = content:match('"username"%s*:%s*"([^"]*)"')
+        local steamId = jsonQuotedString(content, "steamId")
+            or jsonQuotedString(content, "steamID64")
+            or jsonQuotedString(content, "steamID")
+            or jsonQuotedString(content, "steam_id_64")
+            or jsonQuotedString(content, "steam_id")
+            or jsonQuotedString(content, "steam64")
+            or jsonQuotedString(content, "steam")
+            or jsonQuotedString(content, "steamid")
+        local username = jsonString(content, "username")
+            or jsonString(content, "pzUsername")
+            or jsonString(content, "player")
+            or jsonString(content, "playerName")
 
-        local ok, err, info = grantDiscordVerificationReward(steamId, username)
+        local ok, err, info
+        if not steamId and hasNumericSteamId(content) then
+            ok, err = false, "invalid_steam_id_type"
+        else
+            ok, err, info = grantDiscordVerificationReward(steamId, username, id)
+        end
         if ok then
             success = "true"
             queued = (info and info.queued) and "true" or "false"
-            message = queued == "true" and "queued" or "applied"
+            if queued == "true" and steamId then
+                success = "false"
+                message = "unexpected_queued_steam_identity"
+            elseif info and info.alreadyApplied then
+                message = "already_applied"
+            else
+                message = queued == "true" and "queued" or "applied"
+            end
+            accountKey = info and info.accountKey or ""
+            rewardUsername = info and info.username or username or ""
         else
             success = "false"
             message = tostring(err)
@@ -144,8 +235,8 @@ local function processInbox()
     end
 
     local resultJson = string.format(
-        '{"type":"command_result","id":"%s","success":%s,"message":"%s","queued":%s}',
-        id, success, jsonEscape(message), queued
+        '{"type":"command_result","id":"%s","success":%s,"message":"%s","queued":%s,"accountKey":"%s","username":"%s"}',
+        id, success, jsonEscape(message), queued, jsonEscape(accountKey), jsonEscape(rewardUsername)
     )
     writeFile("hwbridge_outbox_result.json", resultJson)
     print("[HWNetBridge] Respondido: " .. resultJson)
@@ -210,6 +301,7 @@ local function collectPlayersAndDetectDeaths()
             local playerObj = players:get(i)
             if playerObj then
                 local username = playerObj:getUsername()
+                local steamId = steamIdForUsername(username)
 
                 if playerObj:isDead() then
                     if previousAlive[username] then
@@ -221,8 +313,9 @@ local function collectPlayersAndDetectDeaths()
                 else
                     currentAlive[username] = true
                     table.insert(snapshot, string.format(
-                        '{"username":"%s","hoursSurvived":%.2f,"zombieKills":%d}',
-                        jsonEscape(username), playerObj:getHoursSurvived(), playerObj:getZombieKills()
+                        '{"username":"%s","steamId":"%s","accountKey":"%s","hoursSurvived":%.2f,"zombieKills":%d}',
+                        jsonEscape(username), jsonEscape(steamId or ""), jsonEscape(steamId and ("steam:" .. steamId) or ""),
+                        playerObj:getHoursSurvived(), playerObj:getZombieKills()
                     ))
                 end
             end

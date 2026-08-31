@@ -14,12 +14,12 @@ WorkshopItems=3788475731
 ## Mod order
 
 ```
-Mods=LS_AegisPanel;LS_AliceWeaponSling;LS_Antibodies;LS_BetterCorpseBurning;LS_BetterEngineRepair;LS_BetterPush;LS_BugFixes;LS_BurrisQualityOfLife;LS_CleanHotBar;LS_ClimbLadders;LS_CyesPushDoors;LS_DragBodiesFaster;LS_DurableToolsWeapons;LS_EquipWhileRunning;LS_EvilMortyDeathScreen;LS_FasterHoodOpening;LS_ImmersiveSuicide;LS_ImprovisedSilencers;LasciviousSystems;LS_MiniHealthPanel;LS_OSRSExperienceBar;LS_PlyskenSolarRevolution;LS_ProximityInventory;LS_PushVehicle;LS_ResponsivePivoting;FixedLightOnBeltAF;LS_SkullysFasterAttackSpeed;LS_SkullysFasterSwingSpeed;LS_TacticalHold;LasciviousScripts;LS_TotalWeightRebalance;LS_WanderingZombies;LS_WildernessSpawnpoints
+Mods=LS_AegisPanel;LS_AliceWeaponSling;LS_Antibodies;LS_BetterCorpseBurning;LS_BetterEngineRepair;LS_BetterPush;LS_BugFixes;LS_BurrisQualityOfLife;LS_CleanHotBar;LS_ClimbLadders;LS_CyesPushDoors;LS_DragBodiesFaster;LS_DurableToolsWeapons;LS_EquipWhileRunning;LS_EvilMortyDeathScreen;LS_FasterHoodOpening;LS_ImmersiveSuicide;LS_ImprovisedSilencers;LasciviousSystems;LS_Traits;LS_MiniHealthPanel;LS_OSRSExperienceBar;LS_PlyskenSolarRevolution;LS_ProximityInventory;LS_PushVehicle;LS_ResponsivePivoting;FixedLightOnBeltAF;LS_SkullysFasterAttackSpeed;LS_SkullysFasterSwingSpeed;LS_SpawnSelector;LS_TacticalHold;LasciviousScripts;LS_TotalWeightRebalance;LS_WanderingZombies;LS_WildernessSpawnpoints
 ```
 
-Thirty-two Mod IDs today — the originally scoped list, the later explicit Wilderness Spawnpoints
-addition, the generic `LS_BugFixes` container and the first-party `LasciviousSystems` ecosystem are
-complete. Before Systems was
+Thirty-five Mod IDs today — the originally scoped list, the later explicit Wilderness Spawnpoints
+addition, the generic `LS_BugFixes` container, the first-party `LasciviousSystems` ecosystem and the
+`LS_Traits` container are complete/active. Before Systems was
 consolidated, `LS_AegisPanel` had no real collision against the other bundled modules. The
 consolidated pack now has one intentional overlap: both Aegis and Systems wrap
 `ISChat.onCommandEntered`; both preserve and call through to the previous handler, so no hard order
@@ -68,6 +68,11 @@ supported production operation and should be followed by a full Lua/game restart
   `vendor/alices-weapon-sling/INTEGRATION.md` and `docs/COLLISION_REGISTRY.md`). Currently satisfied
   because `alices-weapon-sling` sorts alphabetically before `equip-while-running` as a `module_key` —
   incidental today, required always.
+- **`LS_BetterEngineRepair` must load before `LS_Traits`.** Better Engine Repair fully reimplements
+  `ISRepairEngine:complete`; ETW inside `LS_Traits` wraps that method to track Bodywork
+  Enthusiast/Mechanics progress. Loading Better Engine Repair first lets ETW wrap the already-fixed
+  repair implementation; loading it after `LS_Traits` would overwrite ETW's tracker silently. The
+  canonical order above satisfies this.
 
 The core `LasciviousScripts` submod hosts both own-code modules (`time-vote` and `zombie-decay`,
 internally). `LS_AliceWeaponSling` (craftable/lootable weapon sling clothing item, monkey-patches

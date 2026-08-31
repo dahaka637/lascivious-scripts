@@ -1,7 +1,7 @@
 # Translation PT-BR - Lascivious Traits
 
-**Status: 100% complete, both languages, all three families (2026-08-30, LS-007).**
-`UI.json` 227/227, `Sandbox.json` 540/540, `Moodles.json` 50/50 - EN and PT-BR both at exact parity,
+**Status: 100% complete, both languages, all three families (2026-08-30, LS-010).**
+`UI.json` 551/551, `Sandbox.json` 806/806, `Moodles.json` 99/99 - EN and PT-BR both at exact parity,
 every family has both a native `.txt` and a JSON reference.
 
 **Root-cause correction (LS-005, 2026-08-30)**: earlier revisions of this document assumed PZ's
@@ -112,3 +112,9 @@ picked and used consistently across every reference:　
   keys left over from an older upstream ETW version (renamed/removed options - e.g.
   `Sandbox_ETW_Axpert` before it became `Sandbox_ETW_Axeman`) no longer matched anything in the
   current English source of truth and were removed rather than kept as dead entries.
+- **Bloodlust Overwhelming**: added in LS-010 with all upstream English `UI`/`Moodles`/`Sandbox`
+  keys merged into the canonical files and full PT-BR written for every new key. Also translated
+  the client-side Mod Options and debug panel that upstream kept hardcoded in Lua. Added coverage:
+  +324 `UI` keys (trait name/description, combat phrases, intrusive thoughts, Mod Options/debug),
+  +49 `Moodles` keys, +266 `Sandbox` keys. Dynamic phrase keys were normalized from upstream's
+  colon form (`UI_BloodlustO:...`) to native-safe `UI_BloodlustO_...` keys.

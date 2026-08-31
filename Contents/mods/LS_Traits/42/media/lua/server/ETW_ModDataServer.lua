@@ -6,8 +6,6 @@ local ETW_ModData = require("ETW_ModData")
 local ETW_EagleEyedTracking = require("TraitSpecific/ETW_EagleEyedTracking")
 local ETW_CommonLogicChecks = require("ETW_CommonLogicChecks")
 
-local ETW_BySkills = require("ETW_BySkills")
-
 local Commands = {}
 
 local gameMode = ETW_CommonFunctions.gameMode()
@@ -16,6 +14,8 @@ local FILENAME = "ETW_ModDataServer.lua"
 if not ETW_CommonFunctions.gameModeSafeguard(FILENAME, { ETW_CommonFunctions.GameMode.MP_SERVER }) then
 	return
 end
+
+local ETW_BySkills = require("DynamicLogic/ETW_BySkills")
 
 local function refreshETWModDataForAllClients()
 	local onlinePlayers = getOnlinePlayers()

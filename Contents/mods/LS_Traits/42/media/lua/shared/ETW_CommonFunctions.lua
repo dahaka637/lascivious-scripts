@@ -1,6 +1,7 @@
 ---@class ETW_CommonFunctions
 local ETW_CommonFunctions = {}
 local ETW_ModData
+local ZombieImpact = require("LS_Traits_ZombieImpact")
 
 ---@type EvolvingTraitsWorldSandboxVars
 local SBvars = SandboxVars.EvolvingTraitsWorld
@@ -736,18 +737,26 @@ end
 ---@param zombie IsoZombie
 ---@param knockDown boolean|nil
 function ETW_CommonFunctions.triggerBouncerStagger(player, zombie, knockDown)
-	zombie:setStaggerBack(true)
-	if knockDown then
-		zombie:setKnockedDown(true)
-	end
+	local impact = ZombieImpact.apply(zombie, {
+		stagger = true,
+		knockDown = knockDown == true,
+		update = true,
+	})
 	if gameMode == ETW_CommonFunctions.GameMode.MP_SERVER then
 		local zombieOnlineID = zombie:getOnlineID()
-		sendServerCommand(player, "ETW", "triggerBouncerStagger", {
-			zombieOnlineID = zombieOnlineID,
-			knockDown = knockDown == true,
-		})
+		local sent = {}
+		local function mirror(targetPlayer)
+			if not targetPlayer or sent[targetPlayer] then return end
+			sent[targetPlayer] = true
+			sendServerCommand(targetPlayer, "ETW", "triggerBouncerStagger", {
+				zombieOnlineID = zombieOnlineID,
+				knockDown = knockDown == true,
+			})
+		end
+		mirror(ZombieImpact.ownerPlayer(zombie))
+		mirror(player)
 		ETW_CommonFunctions.log(
-			"ETW Logger | triggerBouncerStagger(): applied on server and requested client mirror for "
+			"ETW Logger | triggerBouncerStagger(): applied zombie impact on server for "
 				.. tostring(player:getUsername())
 				.. " (OnlineID="
 				.. player:getOnlineID()
@@ -755,15 +764,28 @@ function ETW_CommonFunctions.triggerBouncerStagger(player, zombie, knockDown)
 				.. zombieOnlineID
 				.. "; knockdown: "
 				.. tostring(knockDown == true)
+				.. "; knockDownCalled: "
+				.. tostring(impact.knockDownCalled)
+				.. "; fallback: "
+				.. tostring(impact.knockDownFallback)
+				.. "; confirmed: "
+				.. tostring(impact.confirmed)
 		)
-		return
+		return impact
 	end
 	ETW_CommonFunctions.log(
 		"ETW Logger | triggerBouncerStagger(): executed locally; zombie OnlineID="
 			.. zombie:getOnlineID()
 			.. "; knockdown: "
 			.. tostring(knockDown == true)
+			.. "; knockDownCalled: "
+			.. tostring(impact.knockDownCalled)
+			.. "; fallback: "
+			.. tostring(impact.knockDownFallback)
+			.. "; confirmed: "
+			.. tostring(impact.confirmed)
 	)
+	return impact
 end
 
 ---Captures the wound movement-speed modifiers for every body part.

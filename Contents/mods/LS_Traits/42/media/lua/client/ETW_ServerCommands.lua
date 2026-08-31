@@ -1,5 +1,6 @@
 local ETW_ModDataClient = require("ETW_ModData")
 local ETW_CommonFunctions = require("ETW_CommonFunctions")
+local ZombieImpact = require("LS_Traits_ZombieImpact")
 
 ---@type fun(...: string)
 local logETW = ETW_CommonFunctions.log
@@ -161,15 +162,24 @@ Commands.triggerBouncerStagger = function(player, args)
 	for i = 0, zombies:size() - 1 do
 		local zombie = zombies:get(i)
 		if zombie:getOnlineID() == zombieOnlineID then
-			zombie:setStaggerBack(true)
-			if args.knockDown == true then
-				zombie:setKnockedDown(true)
-			end
+			local impact = ZombieImpact.apply(zombie, {
+				stagger = true,
+				knockDown = args.knockDown == true,
+				update = true,
+			})
 			logETW(
 				"ETW Logger | Commands.triggerBouncerStagger(): mirrored stagger; zombie OnlineID="
 					.. zombieOnlineID
 					.. "; knockdown: "
 					.. tostring(args.knockDown == true)
+					.. "; skippedRemote: "
+					.. tostring(impact.skippedRemote)
+					.. "; knockDownCalled: "
+					.. tostring(impact.knockDownCalled)
+					.. "; fallback: "
+					.. tostring(impact.knockDownFallback)
+					.. "; confirmed: "
+					.. tostring(impact.confirmed)
 			)
 			return
 		end

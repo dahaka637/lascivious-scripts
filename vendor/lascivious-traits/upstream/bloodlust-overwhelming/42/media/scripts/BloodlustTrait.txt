@@ -1,0 +1,18 @@
+module BloodlustO {
+    character_trait_definition bloodlusto:bloodlusto {
+        CharacterTrait = bloodlusto:bloodlusto,
+        Cost = -1,
+
+        UIName = UI_trait_bloodlusto:bloodlusto,
+        UIDescription = UI_trait_bloodlusto:bloodlusto_Desc,
+
+        /* If true, the trait will not be selectable at character creation */
+        IsProfessionTrait = false,
+
+        /* If true, the trait will not be selectable in multiplayer */
+        DisabledInMultiplayer = false,
+
+        /* List of skill levels to grant */
+        XPBoosts = SmallBlade=1,
+    }
+}

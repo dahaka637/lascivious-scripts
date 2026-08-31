@@ -1,6 +1,7 @@
 local ETW_CommonFunctions = require("ETW_CommonFunctions")
 local ETW_Registry = require("ETW_Registry")
 local ETWCombinedTraitChecks = require("ETW_CombinedTraitFunctions")
+local BloodlustOCompat = require("bloodlusto/Compat")
 
 local FILENAME = "ETW_CombatTraits.lua"
 if
@@ -376,7 +377,11 @@ function ETW_CombatTraits.onZombieDead(zombie)
 	for i = 0, playersList:size() - 1 do
 		local player = playersList:get(i)
 		-- TODO: figure if there's better way to do this than checking DistTo for all players
-		if player:hasTrait(ETWTraitsRegistry.BLOODLUST) and player:DistTo(zombie) <= 4 then
+		if
+			player:hasTrait(ETWTraitsRegistry.BLOODLUST)
+			and not BloodlustOCompat.hasBloodlustOverwhelming(player)
+			and player:DistTo(zombie) <= 4
+		then
 			local stats = player:getStats()
 			local nicotineWithdrawal = stats:get(CharacterStat.NICOTINE_WITHDRAWAL)
 			local unhappiness = stats:get(CharacterStat.UNHAPPINESS)

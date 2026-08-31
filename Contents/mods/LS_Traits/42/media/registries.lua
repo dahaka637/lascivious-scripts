@@ -144,6 +144,13 @@ ETW_Registry.traits = {
 	STICK_FIGHTER = CharacterTrait.register("ETW:StickFighter"),
 }
 
+-- Bloodlust Overwhelming (bundled third-party trait, upstream namespace kept as-is
+-- for save/mod compatibility; gameplay compatibility is handled in
+-- bloodlusto/Compat.lua and BloodlustOverwhelming_TraitsExclusivity.lua).
+_BloodlustORegistries = _BloodlustORegistries or {}
+_BloodlustORegistries.traits = _BloodlustORegistries.traits or {}
+_BloodlustORegistries.traits.Bloodlust = _BloodlustORegistries.traits.Bloodlust or CharacterTrait.register("bloodlusto:bloodlusto")
+
 -- Traits authored from scratch for this container register below, under our own namespace:
 -- LasciviousTraits = LasciviousTraits or {}
 -- LasciviousTraits.CharacterTrait = LasciviousTraits.CharacterTrait or {}

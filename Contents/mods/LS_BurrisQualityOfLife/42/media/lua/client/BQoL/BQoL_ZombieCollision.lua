@@ -14,12 +14,11 @@
     pass. With the default cap of 12 the pairwise pass is 66 distance checks
     a tick -- unmeasurable.
 
-    Multiplayer: the master toggle is the server-synced sandbox option, so
-    the server decides whether the feature exists; the radius/force/cap
-    tuning is read from the same synced sandbox values but only ever affects
-    the local render of the world. The nudges are small enough that server
-    reconciliation absorbs them without visible rubber-banding -- the same
-    approach the mod inspiring this one ships with reported MP success.
+    Multiplayer: disabled deliberately. This feature nudges zombies with
+    IsoMovingObject.setX/setY while they are often chasing a player; in B42 MP
+    zombies have network ownership, and writing X/Y for a remote zombie can
+    fight server/client reconciliation and path/anims. Keep the soft spacing
+    behaviour for SP only until a proper owner-aware MP design exists.
 
     Dead and other-floor zombies are skipped. The dead still collide in
     vanilla (they are corpses, not obstacles); pushing them would just drag
@@ -30,6 +29,7 @@ require "BQoL/BQoL_Core"
 require "BQoL/BQoL_ZombieCollisionLogic"
 
 local ZombieCollision = BQoL.ZombieCollision
+local warnedMPDisabled = false
 
 -- ------------------------------------------------------------ candidate set
 
@@ -59,6 +59,14 @@ end
 -- ---------------------------------------------------------------- tick pass
 
 local function onTick()
+    if isClient() then
+        if not warnedMPDisabled then
+            warnedMPDisabled = true
+            BQoL.warn("ZombieCollision disabled in multiplayer: avoiding setX/setY nudges on network-owned zombies")
+        end
+        return
+    end
+
     -- Live master switch: the server can flip this mid-session in MP, and a
     -- sandbox change must not require a reload to take effect.
     if not BQoL.getBool("ZombieCollisionEnabled") then return end

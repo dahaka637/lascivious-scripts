@@ -685,7 +685,7 @@ option WZShared.MoveCooldownInitial
 }
 option WZShared.OutOfCellPaths
 {
-    type = boolean, default = true,
+    type = boolean, default = false,
     page = WZShared, translation = WZShared_OutOfCellPaths,
 }
 option WZShared.OutOfCellThreshold
@@ -720,7 +720,7 @@ option WZShared.ExploreDestructive
 }
 option WZShared.ForcePathfind
 {
-    type = enum, numValues = 3, default = 2,
+    type = enum, numValues = 3, default = 1,
     page = WZShared, translation = WZShared_ForcePathfind,
 }
 option WZShared.ChebyshevDistance

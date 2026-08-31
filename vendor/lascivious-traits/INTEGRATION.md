@@ -9,13 +9,11 @@
 
 ## Status
 
-Three framework dependencies (Moodle Framework, KillCount, UCWF) plus two trait bundles, **I
-Regret Nothing** and **Evolving Traits World (ETW)** (see "Included Traits" below), are bundled and
-validated. ETW's PT-BR translation is deliberately incomplete for now (project owner's explicit
-call - implement first, translate once everything is functionally done). Not yet wired into
-`docs/SERVER_MOD_ORDER.md`'s `Mods=` string or the live production ini - that happens once this
-version is republished to Workshop and re-downloaded server-side, per the pack's standing
-sequencing rule.
+Three framework dependencies (Moodle Framework, KillCount, UCWF) plus three trait bundles, **I
+Regret Nothing**, **Evolving Traits World (ETW)**, and **Bloodlust Overwhelming** (see "Included
+Traits" below), are bundled and validated. EN/PT-BR translation coverage is complete across the
+canonical `UI`, `Moodles`, and `Sandbox` families. `LS_Traits` is present in the canonical `Mods=`
+order and the live production ini; this vendor note tracks the runtime content inside `LS_Traits`.
 
 ## Included dependencies
 
@@ -216,8 +214,9 @@ registerBaseModifier(def)` / `registerMaxModifier(def)` with `{id=..., resolve=f
 every player's `maxWeightBase`/`maxWeightDelta` by folding every registered modifier's `resolve()`
 result through a `(start + sum(add)) * product(mult)` pipeline. **Nothing runs at all until some
 mod actually registers a modifier** (`systemShouldRun` starts `false` and nothing in this framework
-itself ever calls the registration functions) - bundled with zero traits using it yet, this is
-100% inert, exactly like Moodle Framework before `MF.createMoodle` is ever called.
+itself ever calls the registration functions). In this bundle, ETW registers three max-weight
+modifiers in `ETW_UCWF.lua` for Hoarder, Pack Mouse and Pack Mule, so the framework is active when
+those traits are present.
 
 #### Why this is inherently MP-authoritative (better than KillCount's situation)
 
@@ -255,19 +254,17 @@ but this reasoning is worth keeping here rather than re-deriving it from scratch
 - No monkey-patching, no vanilla file override. Everything is done through the public
   `setMaxWeightBase`/`setMaxWeightDelta`/`getMaxWeight` API.
 - Sandbox namespace `UnifiedCarryWeightFramework.*` and every UCWF-prefixed global checked against
-  the other 33 submods - zero collision.
+  the other 33 submods - zero naming collision.
 - **Real interaction to know about, not a bug**: `LS_AegisPanel` has an admin "pin carry weight"
   tool (`Aegis_Server.lua:carryApply`, continuously re-asserted client-side in
   `AegisHud.lua` whenever the observed `getMaxWeight()` drifts from the pinned value) that also
-  calls `setMaxWeightBase`/`setMaxWeight` directly. Today, with zero UCWF modifiers registered,
-  there is nothing to interact with. **Once a future trait registers a UCWF modifier**, an admin
-  using the carry-weight pin on a player will see it briefly overwritten by UCWF's next
-  `EveryHours` recompute, then immediately reasserted by Aegis's own drift-check - a visible flicker
-  rather than a silent loss of the pin (Aegis's client-side check runs far more often than UCWF's
-  hourly one), but worth knowing about before either system is used together with real traits. Not
-  fixed now because it cannot manifest until a modifier actually exists; revisit when the first
-  carry-weight-affecting trait is written (e.g. have that trait's `resolve()` be a no-op while the
-  target player has an active Aegis pin, if that turns out to matter in practice).
+  calls `setMaxWeightBase`/`setMaxWeight` directly. ETW now registers UCWF modifiers for Hoarder,
+  Pack Mouse and Pack Mule. If an admin uses the carry-weight pin on a player with one of those
+  traits, UCWF's next `EveryHours` recompute can briefly move the value, then Aegis's own drift-check
+  reasserts the pin - a visible flicker rather than a silent loss of the pin (Aegis's client-side
+  check runs far more often than UCWF's hourly one). Not fixed now because it is an admin-tool
+  interaction and gameplay remains server-authoritative; revisit only if it becomes annoying in
+  practice.
 
 ## Included Traits
 
@@ -482,10 +479,10 @@ methods across ~14 vanilla classes, each individually checked against every othe
   call-through. If `LS_BetterEngineRepair` loads AFTER `LS_Traits`, its flat reassignment silently
   discards ETW's wrap and the Bodywork Enthusiast/Mechanics trait-progress tracking stops firing -
   no crash, no error, just a quietly dead feature. Fixed by documenting (in
-  `BetterEngineRepairPatch.lua` and `docs/COLLISION_REGISTRY.md`) that `LS_BetterEngineRepair` must
-  load before `LS_Traits` in `Mods=` - not yet enforceable since `LS_Traits` isn't wired into
-  `Mods=` at all yet, but will be applied when that happens. A real call-through fix isn't possible
-  here: `BetterEngineRepair`'s formula replaces vanilla's inline `condPerPart` math, so calling
+  `BetterEngineRepairPatch.lua`, `docs/SERVER_MOD_ORDER.md` and `docs/COLLISION_REGISTRY.md`) that
+  `LS_BetterEngineRepair` must load before `LS_Traits` in `Mods=`; the canonical order satisfies
+  this. A real call-through fix isn't possible here: `BetterEngineRepair`'s formula replaces
+  vanilla's inline `condPerPart` math, so calling
   through to a captured "original" would double-apply the repair.
 - `ISWorldObjectContextMenu.getBedQuality` - narrow method, not touched by any of the ~10 other
   modules that patch other methods on the same class (see the rows above this one in
@@ -521,7 +518,7 @@ trusting the client's claim) if a future trait ever gated something higher-stake
 
 **Complete as of the dedicated translation pass (LS-007, 2026-08-30).** English and Portuguese
 both sit at 100% coverage across all three families for the whole `LS_Traits` submod, not just
-ETW: `UI.json` 227/227, `Sandbox.json` 540/540, `Moodles.json` 50/50, every one with both native
+ETW: `UI.json` 551/551, `Sandbox.json` 806/806, `Moodles.json` 99/99, every one with both native
 `.txt` and JSON reference. The 432 missing `Sandbox_ETW_*` keys and 149 missing `UI_ETW_*`/
 `UI_trait_*` keys (trait names, descriptions, sandbox option labels/tooltips) were translated by
 hand - see `TRANSLATION_PTBR.md` for translation conventions (vanilla trait name glossary, etc.).
@@ -545,6 +542,62 @@ but would have broken icon resolution on our case-sensitive Linux server - renam
 `trait_BodyWorkEnthusiast.png` to match exactly; the other 64 icons already matched. The one
 non-asset local change this integration required was in a DIFFERENT, pre-existing module
 (`LS_BetterEngineRepair`) - see the collision review above and `LOCAL_CHANGES.md` LS-006.
+
+### Bloodlust Overwhelming
+
+- Workshop item `3786352314`, upstream `id=BloodlustOverwhelming`, `modversion=0.9.7`.
+- Bundled directly inside `LS_Traits`, not as a separate Mod ID. Runtime files live under
+  `42/media/lua/client/bloodlusto/`, with the upstream namespace and modData key preserved.
+- Trait resource location kept as `bloodlusto:bloodlusto` for save compatibility. Only text keys
+  were adapted (`UI_trait_BloodlustOverwhelming`, `UI_BloodlustO_*`) so native translation tables
+  do not need colon-containing keys.
+
+#### What it does
+
+Adds a negative trait, **Bloodlust Overwhelming / Sede de Sangue Avassaladora**, that escalates a
+character's need for combat after time without killing and through bloodiness/combat state. The
+system drives several Moodle Framework moodles (`BloodlustO_*`), optional intrusive-thought text,
+red screen overlay, blood freshness tracking, panic/stress/infelicidade changes, exertion
+buffering, frenzy progression, high-bloodlust instant kills, revenge triggers after being hit, and
+an optional "earn it" path based on bloody kills.
+
+#### Compatibility decisions
+
+This is not the same technical trait as ETW's `ETW:Bloodlust`, but the fantasy and mechanical
+reward space overlap heavily. To avoid stacking two bloodlust systems plus I Regret Nothing's
+combat confidence loop, `bloodlusto:bloodlusto` is mutually exclusive with `ETW:Bloodlust`,
+`RegretNothing:RegretNothing`, `base:pacifist`, and `base:hemophobic`. The exclusivity is enforced
+both declaratively in `BloodlustOverwhelming_Traits.txt` and at runtime via
+`bloodlusto/Compat.lua` + `BloodlustOverwhelming_TraitsExclusivity.lua`.
+
+The runtime guards matter because `player:getCharacterTraits():add()` does not check
+`MutuallyExclusiveTraits` outside character creation (same engine behavior documented in LS-008).
+Therefore:
+
+- `bloodlusto/Earning.lua` refuses to grant Bloodlust Overwhelming dynamically if the player
+  already has ETW Bloodlust, I Regret Nothing, Pacifist, or Hemophobic.
+- ETW's Bloodlust meter and animal-action contribution skip players with Bloodlust Overwhelming,
+  without disabling the ETW Bloodlust system for other players.
+- ETW's direct Bloodlust combat effect also skips players with Bloodlust Overwhelming, preventing
+  double mood/panic/stress rewards on any old or manually-edited character that somehow ends up
+  with both traits.
+
+#### Translation
+
+Upstream provided English `UI`/`Moodles`/`Sandbox` JSON. LS-010 merges those into the single
+canonical LS_Traits translation files and adds PT-BR for all new text, including options and debug
+that upstream had hardcoded in Lua. Added counts: +324 `UI`, +49 `Moodles`, +266 `Sandbox`.
+Current submod totals: `UI.json` 551/551, `Moodles.json` 99/99, `Sandbox.json` 806/806 in EN and
+PT-BR, with native `.txt` regenerated for all three families.
+
+#### Local changes from upstream
+
+File placement inside `LS_Traits`; central `media/registries.lua` registration; safe translation
+key rewrite for dynamic phrases; ModOptions/debug switched from hardcoded English to `getText`;
+compatibility guards described above; client event handlers in `Bloodlust.lua`/`Earning.lua` now
+ignore non-local players before applying hit/kill/minute/update/move/earn effects, preventing
+remote-player event multiplication on MP clients. No broad vanilla monkey-patch was introduced by
+this mod; it uses additive events plus Moodle Framework rendering.
 
 ### Cross-trait harmony: I Regret Nothing <-> Evolving Traits World
 
@@ -650,15 +703,14 @@ as each one is added, not just once for the container.
 
 - KillCount's MP-authority gap (self-reported kill counts, see above) - fine today, must be
   independently corroborated server-side if a future trait ever gates a real effect on it.
-- UCWF/`LS_AegisPanel` carry-weight-pin interaction (see above) - inert until the first
-  weight-affecting trait registers a UCWF modifier.
+- UCWF/`LS_AegisPanel` carry-weight-pin interaction (see above) - active only for players with ETW
+  Hoarder/Pack Mouse/Pack Mule when an admin also pins their carry weight.
 - I Regret Nothing's `RN_safe` hardening reduces every currently-known-risky call site to "one log
   line, then silently inert for the session" on failure, but cannot prevent every possible future
   throw (a game update renaming a `CharacterStat`, for instance, would still disable that one
   operation the first time it is hit) - by design, matching the upstream author's own chosen
   mitigation strategy rather than trying to eliminate all possible failure sources.
-- `LS_BetterEngineRepair` must load before `LS_Traits` in `Mods=` once that string is finally
-  written (see the ETW collision review above) - not enforceable yet since `LS_Traits` isn't wired
-  in at all, but must not be forgotten when it is.
+- `LS_BetterEngineRepair` must load before `LS_Traits` in `Mods=` (see the ETW collision review
+  above). The canonical order already satisfies this; keep it true on future registry/order edits.
 - ETW's `checkEngineCondition` MP-authority soft spot (see above) - same bounded/cosmetic-only
   category as KillCount's, not fixed for the same reasons.

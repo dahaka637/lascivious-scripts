@@ -32,6 +32,9 @@ end
 function M.isValid(value)
     if value == nil then return nil end
     local text = tostring(value)
+    text = text:gsub("^%s+", ""):gsub("%s+$", "")
+    local prefixed = text:match("^[sS][tT][eE][aA][mM]:(%d+)$")
+    if prefixed then text = prefixed end
     if text == "" or text == "0" or text == "nil" then return nil end
     if not string.match(text, "^%d+$") or #text < 15 or #text > 20 then return nil end
     if isValidSteamID then
@@ -53,17 +56,11 @@ function M.resolve(player)
             if valid then return valid end
         end
     end
-    -- getSteamIDFromUsername unavailable or failed -- should not normally
-    -- happen on a Steam-mode B42 server, so log it: this fallback silently
-    -- reintroduces the exact precision bug this file exists to avoid.
-    local okId, steamId = pcall(function() return player:getSteamID() end)
-    if okId and steamId ~= nil then
-        local valid = M.isValid(steamId)
-        if valid then
-            log("getSteamIDFromUsername unavailable/failed for a connected player -- using the lossy long as a last resort")
-            return valid
-        end
-    end
+    -- Do NOT fall back to player:getSteamID() for a new canonical identity:
+    -- SteamID64 cannot round-trip through Kahlua's Lua number without losing
+    -- precision.  Callers may temporarily use name:<username> and migrate once
+    -- getSteamIDFromUsername(username) is available.
+    log("getSteamIDFromUsername unavailable/failed for a connected player -- refusing lossy getSteamID() fallback")
     return nil
 end
 

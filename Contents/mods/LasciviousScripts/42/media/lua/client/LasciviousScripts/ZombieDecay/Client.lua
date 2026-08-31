@@ -100,7 +100,15 @@ local function applyRunnerVariables(zombie, state, cache)
     cache.lastRunnerPercent = percent
 end
 
+local function isRemoteMPZombie(zombie)
+    if not (isClient() and zombie) then return false end
+    local ok, remote = pcall(function() return zombie:isRemoteZombie() end)
+    return ok and remote == true
+end
+
 local function updateZombie(zombie)
+    if isRemoteMPZombie(zombie) then return end
+
     local state = Runtime.state
     if not state then
         refreshWorldState()
@@ -145,6 +153,8 @@ local function updateZombie(zombie)
 end
 
 local function onZombieCreate(zombie)
+    if isRemoteMPZombie(zombie) then return end
+
     if not Runtime.state then refreshWorldState() end
     if not Runtime.state or not Runtime.state.enabled or not zombie then return end
 

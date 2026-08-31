@@ -433,7 +433,7 @@ option BurrisQoL.TreeCanopyIndoorRadius
 option BurrisQoL.ZombieCollisionEnabled
 {
     type = boolean,
-    default = true,
+    default = false,
 
     page = BurrisQoL,
     translation = BurrisQoL_ZombieCollisionEnabled,

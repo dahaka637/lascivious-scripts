@@ -132,7 +132,7 @@
     "Sandbox_BurrisQoL_TreeCanopyIndoorRadius_tooltip": "While you are indoors, jumbo trees within this many tiles are hidden completely, so furniture and windows stay visible. They reappear when you step outside.",
 
     "Sandbox_BurrisQoL_ZombieCollisionEnabled": "Zombie collision",
-    "Sandbox_BurrisQoL_ZombieCollisionEnabled_tooltip": "Zombies near you gently push each other apart instead of phasing through one another while chasing you. In multiplayer this setting comes from the server; the tuning below is per-player.",
+    "Sandbox_BurrisQoL_ZombieCollisionEnabled_tooltip": "Zombies near you gently push each other apart instead of phasing through one another while chasing you. For safety, this feature is disabled in multiplayer to avoid zombie ownership/sync conflicts.",
 
     "Sandbox_BurrisQoL_ZombieCollisionMaxZombies": "Collision zombie cap",
     "Sandbox_BurrisQoL_ZombieCollisionMaxZombies_tooltip": "How many of the nearest zombies are considered. Keeping this small is what makes the performance cost stay flat whether there are 10 or 100 zombies around.",

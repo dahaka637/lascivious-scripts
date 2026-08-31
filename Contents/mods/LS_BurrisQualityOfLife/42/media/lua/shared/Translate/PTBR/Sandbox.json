@@ -101,7 +101,7 @@
     "Sandbox_BurrisQoL_TreeCanopyIndoorRadius_tooltip": "Enquanto o personagem está dentro de um edifício, árvores enormes dentro desta quantidade de espaços ficam totalmente ocultas, mantendo móveis e janelas visíveis. Elas reaparecem ao sair.",
 
     "Sandbox_BurrisQoL_ZombieCollisionEnabled": "Colisão entre zumbis",
-    "Sandbox_BurrisQoL_ZombieCollisionEnabled_tooltip": "Zumbis próximos empurram uns aos outros suavemente em vez de atravessarem seus corpos enquanto perseguem você. No multijogador, esta opção vem do servidor; os ajustes abaixo são individuais para cada jogador.",
+    "Sandbox_BurrisQoL_ZombieCollisionEnabled_tooltip": "Zumbis próximos empurram uns aos outros suavemente em vez de atravessarem seus corpos enquanto perseguem você. Por segurança, esta função fica desativada em multijogador para evitar conflito com ownership/sincronização de zumbis.",
     "Sandbox_BurrisQoL_ZombieCollisionMaxZombies": "Limite de zumbis na colisão",
     "Sandbox_BurrisQoL_ZombieCollisionMaxZombies_tooltip": "Quantidade dos zumbis mais próximos que será considerada. Manter um valor baixo estabiliza o custo de desempenho, haja 10 ou 100 zumbis ao redor.",
     "Sandbox_BurrisQoL_ZombieCollisionScanRadius": "Raio de busca da colisão",

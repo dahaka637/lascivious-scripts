@@ -2689,3 +2689,911 @@ option EvolvingTraitsWorld.WhittlerSkill
 	page = ETWSimplePerks,
 	translation = ETW_WhittlerSkill,
 }
+
+option BloodlustO_Control.TrackingOutburst {
+    type = boolean,
+    default = true,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingOutburst,
+}
+option BloodlustO_Control.TrackingMinBloodlust {
+    type = integer,
+    default = 40,
+    min = 0, max = 100,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMinBloodlust,
+}
+option BloodlustO_Control.TrackingMaxBloodlust {
+    type = integer,
+    default = 90,
+    min = 0, max = 100,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMaxBloodlust,
+}
+option BloodlustO_Control.TrackingMaxChance {
+    type = double,
+    default = 10.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMaxChance,
+}
+option BloodlustO_Control.TrackingRequiredIdleTime {
+    type = double,
+    default = 1.0,
+    min = 0.0, max = 3600.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingRequiredIdleTime,
+}
+option BloodlustO_Control.TrackingMinVisibleZombieTiles {
+    type = double,
+    default = 8.0,
+    min = 0.5, max = 1000.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMinVisibleZombieTiles,
+}
+option BloodlustO_Control.TrackingMinHiddenZombieTiles {
+    type = double,
+    default = 4.0,
+    min = 0.5, max = 1000.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMinHiddenZombieTiles,
+}
+option BloodlustO_Control.TrackingMovementLockSeconds {
+    type = double,
+    default = 3.0,
+    min = 0.0, max = 3600.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMovementLockSeconds,
+}
+option BloodlustO_Control.TrackingMovementLockMinTilesFromZombie {
+    type = double,
+    default = 7.0,
+    min = 0.5, max = 1000.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMovementLockMinTilesFromZombie,
+}
+option BloodlustO_Control.TrackingStopIfZombieWithinTiles {
+    type = double,
+    default = 3.0,
+    min = 0.5, max = 1000.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingStopIfZombieWithinTiles,
+}
+option BloodlustO_Control.TrackingMinMinutes {
+    type = integer,
+    default = 5,
+    min = 1, max = 10080,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMinMinutes,
+}
+option BloodlustO_Control.TrackingMaxMinutes {
+    type = integer,
+    default = 60,
+    min = 2, max = 10080,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingMaxMinutes,
+}
+option BloodlustO_Control.FollowingOutburst {
+    type = boolean,
+    default = true,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingOutburst,
+}
+option BloodlustO_Control.FollowingMinBloodlust {
+    type = integer,
+    default = 80,
+    min = 0, max = 100,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingMinBloodlust,
+}
+option BloodlustO_Control.FollowingMaxBloodlust {
+    type = integer,
+    default = 90,
+    min = 0, max = 100,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingMaxBloodlust,
+}
+option BloodlustO_Control.TrackingToFollowingMaxChance {
+    type = double,
+    default = 30.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingToFollowingMaxChance,
+}
+option BloodlustO_Control.TrackingToFollowingMinTilesFromVisibleZombie {
+    type = double,
+    default = 12.0,
+    min = 1.0, max = 1000.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingToFollowingMinTilesFromVisibleZombie,
+}
+option BloodlustO_Control.TrackingToFollowingMinTilesFromHiddenZombie {
+    type = double,
+    default = 4.0,
+    min = 1.0, max = 1000.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_TrackingToFollowingMinTilesFromHiddenZombie,
+}
+option BloodlustO_Control.FollowingActiveMinTilesFromZombie {
+    type = double,
+    default = 8.0,
+    min = 2.0, max = 100.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingActiveMinTilesFromZombie,
+}
+option BloodlustO_Control.FollowingActiveMinRealSeconds {
+    type = double,
+    default = 1.5,
+    min = 0.0, max = 600.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingActiveMinRealSeconds,
+}
+option BloodlustO_Control.FollowingActiveMaxRealSeconds {
+    type = double,
+    default = 4.0,
+    min = 0.0, max = 600.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingActiveMaxRealSeconds,
+}
+option BloodlustO_Control.FollowingMovementAttemptMovesForSeconds {
+    type = double,
+    default = 0.1,
+    min = 0.01, max = 60.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingMovementAttemptMovesForSeconds,
+}
+option BloodlustO_Control.FollowingIdleMinTilesFromZombie {
+    type = double,
+    default = 4.0,
+    min = 2.0, max = 100.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingIdleMinTilesFromZombie,
+}
+option BloodlustO_Control.FollowingAfterInactivityMin {
+    type = double,
+    default = 2.0,
+    min = 0.03, max = 600.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingAfterInactivityMin,
+}
+option BloodlustO_Control.FollowingAfterInactivityMax {
+    type = double,
+    default = 8.0,
+    min = 0.03, max = 600.0,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingAfterInactivityMax,
+}
+option BloodlustO_Control.StartTrackingAfterInactivityWhenFollowing {
+    type = integer,
+    default = 50,
+    min = 0, max = 100,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_StartTrackingAfterInactivityWhenFollowing,
+}
+option BloodlustO_Control.FollowingMinIngameMinutes {
+    type = integer,
+    default = 10,
+    min = 1, max = 10080,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingMinIngameMinutes,
+}
+option BloodlustO_Control.FollowingMaxIngameMinutes {
+    type = integer,
+    default = 30,
+    min = 1, max = 10080,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingMaxIngameMinutes,
+}
+option BloodlustO_Control.FollowingEndToTrackingChance {
+    type = integer,
+    default = 10,
+    min = 0, max = 100,
+    page = BloodlustO_Control,
+    translation = BloodlustO_Control_FollowingEndToTrackingChance,
+}
+
+option BloodlustO.KillCravingMaxHours {
+    type = double,
+    default = 36.0,
+    min = 0.5, max = 8760.0,
+    page = BloodlustO,
+    translation = BloodlustO_KillCravingMaxHours,
+}
+option BloodlustO.KillCravingMaxHoursExponent {
+    type = double,
+    default = 3.0,
+    min = 0.1, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_KillCravingMaxHoursExponent,
+}
+option BloodlustO.KillCravingBloodinessFactor {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_KillCravingBloodinessFactor,
+}
+option BloodlustO.KillCravingStaleBloodinessMultiplier {
+    type = double,
+    default = 1.0,
+    min = 0.0, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_KillCravingStaleBloodinessMultiplier,
+}
+option BloodlustO.KillCravingHealthExponent {
+    type = double,
+    default = 2.0,
+    min = 0.0, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_KillCravingHealthExponent,
+}
+option BloodlustO.FightlessCombatAfterMinutes {
+    type = integer,
+    default = 5,
+    min = 0, max = 60,
+    page = BloodlustO,
+    translation = BloodlustO_FightlessCombatAfterMinutes,
+}
+option BloodlustO.FightlessCombatBloodlustPerMinute {
+    type = double,
+    default = 3.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FightlessCombatBloodlustPerMinute,
+}
+option BloodlustO.ConsiderShovesAndStompsAsHits {
+    type = boolean,
+    default = false,
+    page = BloodlustO,
+    translation = BloodlustO_ConsiderShovesAndStompsAsHits,
+}
+option BloodlustO.ConsiderCarDriveOverAsCombat {
+    type = boolean,
+    default = false,
+    page = BloodlustO,
+    translation = BloodlustO_ConsiderCarDriveOverAsCombat,
+}
+option BloodlustO.FightlessCombatBloodlustWhileDriving {
+    type = boolean,
+    default = true,
+    page = BloodlustO,
+    translation = BloodlustO_FightlessCombatBloodlustWhileDriving,
+}
+option BloodlustO.GettingBloodyBloodlustChange {
+    type = double,
+    default = 0.25,
+    min = -10.0, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_GettingBloodyBloodlustChange,
+}
+option BloodlustO.GettingBloodyStressChange {
+    type = double,
+    default = -0.5,
+    min = -100.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_GettingBloodyStressChange,
+}
+option BloodlustO.GettingBloodyUnhappinessChange {
+    type = double,
+    default = -0.3,
+    min = -100.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_GettingBloodyUnhappinessChange,
+}
+option BloodlustO.BloodlustLevelForMoodDebuffs {
+    type = double,
+    default = 50.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustLevelForMoodDebuffs,
+}
+option BloodlustO.MoodDebuffBloodlustExponent {
+    type = double,
+    default = 2.0,
+    min = 0.0, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_MoodDebuffBloodlustExponent,
+}
+option BloodlustO.BloodinessImpactOnMoodDebuffs {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodinessImpactOnMoodDebuffs,
+}
+option BloodlustO.MaxBloodlustDepressionAfterHours {
+    type = double,
+    default = 24.0,
+    min = 0.5, max = 8760.0,
+    page = BloodlustO,
+    translation = BloodlustO_MaxBloodlustDepressionAfterHours,
+}
+option BloodlustO.MaxBloodlustFullStressAfterHours {
+    type = double,
+    default = 36.0,
+    min = 0.5, max = 8760.0,
+    page = BloodlustO,
+    translation = BloodlustO_MaxBloodlustFullStressAfterHours,
+}
+option BloodlustO.MaxBloodlustFullBoredomAfterHours {
+    type = double,
+    default = 8.0,
+    min = 0.5, max = 8760.0,
+    page = BloodlustO,
+    translation = BloodlustO_MaxBloodlustFullBoredomAfterHours,
+}
+option BloodlustO.KillBloodlustReduction {
+    type = double,
+    default = 10.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_KillBloodlustReduction,
+}
+option BloodlustO.SharpKillBloodlustReduction {
+    type = double,
+    default = 12.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_SharpKillBloodlustReduction,
+}
+option BloodlustO.KnifeKillBloodlustReduction {
+    type = double,
+    default = 15.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_KnifeKillBloodlustReduction,
+}
+option BloodlustO.RangedKillBloodlustReduction {
+    type = double,
+    default = 5.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_RangedKillBloodlustReduction,
+}
+option BloodlustO.HitBloodlustReduction {
+    type = double,
+    default = 0.1,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_HitBloodlustReduction,
+}
+option BloodlustO.SharpHitBloodlustReduction {
+    type = double,
+    default = 0.25,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_SharpHitBloodlustReduction,
+}
+option BloodlustO.KnifeHitBloodlustReduction {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_KnifeHitBloodlustReduction,
+}
+option BloodlustO.RangedHitBloodlustReduction {
+    type = double,
+    default = 0.05,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_RangedHitBloodlustReduction,
+}
+option BloodlustO.HurtBloodlustChange {
+    type = double,
+    default = 100.0,
+    min = -100.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_HurtBloodlustChange,
+}
+option BloodlustO.BloodinessForFrenzy {
+    type = double,
+    default = 100.0,
+    min = 0.0, max = 1000.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodinessForFrenzy,
+}
+option BloodlustO.BloodinessFreshnessMultiplierForFrenzy {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodinessFreshnessMultiplierForFrenzy,
+}
+option BloodlustO.BloodinessFreshnessFrenzyProgressExponent {
+    type = double,
+    default = 4.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodinessFreshnessFrenzyProgressExponent,
+}
+option BloodlustO.BloodlustOverreducedForFrenzy {
+    type = double,
+    default = 50.0,
+    min = 1.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustOverreducedForFrenzy,
+}
+option BloodlustO.FrenzyPerMinuteDecayInCombat {
+    type = double,
+    default = 1.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyPerMinuteDecayInCombat,
+}
+option BloodlustO.FrenzyPerMinuteDecayOutOfCombat {
+    type = double,
+    default = 3.0,
+    min = 0.1, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyPerMinuteDecayOutOfCombat,
+}
+option BloodlustO.FrenzyKillBloodlustIncrease {
+    type = double,
+    default = 10.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyKillBloodlustIncrease,
+}
+option BloodlustO.FrenzySharpKillBloodlustIncrease {
+    type = double,
+    default = 12.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzySharpKillBloodlustIncrease,
+}
+option BloodlustO.FrenzyKnifeKillBloodlustIncrease {
+    type = double,
+    default = 15.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyKnifeKillBloodlustIncrease,
+}
+option BloodlustO.FrenzyRangedKillBloodlustIncrease {
+    type = double,
+    default = 5.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyRangedKillBloodlustIncrease,
+}
+option BloodlustO.FrenzyHitBloodlustIncrease {
+    type = double,
+    default = 0.1,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHitBloodlustIncrease,
+}
+option BloodlustO.FrenzySharpHitBloodlustIncrease {
+    type = double,
+    default = 0.25,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzySharpHitBloodlustIncrease,
+}
+option BloodlustO.FrenzyKnifeHitBloodlustIncrease {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyKnifeHitBloodlustIncrease,
+}
+option BloodlustO.FrenzyRangedHitBloodlustIncrease {
+    type = double,
+    default = 0.05,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyRangedHitBloodlustIncrease,
+}
+option BloodlustO.FrenzyHurtBloodlustChange {
+    type = double,
+    default = -50.0,
+    min = -100.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHurtBloodlustChange,
+}
+option BloodlustO.BloodlustChangeDestress {
+    type = double,
+    default = 5.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustChangeDestress,
+}
+option BloodlustO.BloodlustChangeHappiness {
+    type = double,
+    default = 2.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustChangeHappiness,
+}
+option BloodlustO.BloodlustAdditionalDamage {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 2.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustAdditionalDamage,
+}
+option BloodlustO.BloodlustAdditionalDamageInFrenzy {
+    type = double,
+    default = 0.75,
+    min = 0.0, max = 2.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustAdditionalDamageInFrenzy,
+}
+option BloodlustO.AdditionalDamageWithBareHands {
+    type = boolean,
+    default = false,
+    page = BloodlustO,
+    translation = BloodlustO_AdditionalDamageWithBareHands,
+}
+option BloodlustO.AdditionalDamageWorksForRanged {
+    type = boolean,
+    default = false,
+    page = BloodlustO,
+    translation = BloodlustO_AdditionalDamageWorksForRanged,
+}
+option BloodlustO.InstakillAtBloodlust {
+    type = double,
+    default = 90.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillAtBloodlust,
+}
+option BloodlustO.InstakillWorksForRanged {
+    type = boolean,
+    default = true,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillWorksForRanged,
+}
+option BloodlustO.InstakillDamage {
+    type = double,
+    default = 2.0,
+    min = 0.01, max = 1000.0,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillDamage,
+}
+option BloodlustO.InstakillBloodlustReduction {
+    type = double,
+    default = 20.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillBloodlustReduction,
+}
+option BloodlustO.InstakillBloodlustReductionInFrenzy {
+    type = double,
+    default = 40.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillBloodlustReductionInFrenzy,
+}
+option BloodlustO.InstakillDueToCravingStrain {
+    type = double,
+    default = 30.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillDueToCravingStrain,
+}
+option BloodlustO.FrenzyInstakillBacklashStrain {
+    type = double,
+    default = 20.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyInstakillBacklashStrain,
+}
+option BloodlustO.FrenzyInstakillBacklashFatigue {
+    type = double,
+    default = 2.5,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyInstakillBacklashFatigue,
+}
+option BloodlustO.FrenzyInstakillBacklashHunger {
+    type = double,
+    default = 3.33,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyInstakillBacklashHunger,
+}
+option BloodlustO.FrenzyInstakillBacklashThirst {
+    type = double,
+    default = 5.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyInstakillBacklashThirst,
+}
+option BloodlustO.FrenzyBacklashPerMinute {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyBacklashPerMinute,
+}
+option BloodlustO.FrenzyInstakillAreaDamage {
+    type = double,
+    default = 1.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyInstakillAreaDamage,
+}
+option BloodlustO.FrenzyInstakillAreaRadius {
+    type = double,
+    default = 1.0,
+    min = 0.1, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyInstakillAreaRadius,
+}
+option BloodlustO.FrenzyInstakillZombiesLimit {
+    type = integer,
+    default = 5,
+    min = 1, max = 10000,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyInstakillZombiesLimit,
+}
+option BloodlustO.InstakillSoundRadius {
+    type = double,
+    default = 30.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillSoundRadius,
+}
+option BloodlustO.InstakillSoundRadiusInFrenzy {
+    type = double,
+    default = 40.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_InstakillSoundRadiusInFrenzy,
+}
+option BloodlustO.RevengeInstakillSoundRadius {
+    type = double,
+    default = 50.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_RevengeInstakillSoundRadius,
+}
+option BloodlustO.FrenzyHurtRevengeAtBloodlust {
+    type = double,
+    default = 50.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHurtRevengeAtBloodlust,
+}
+option BloodlustO.FrenzyHurtRevengeDamage {
+    type = double,
+    default = 2.0,
+    min = 0.0, max = 1000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHurtRevengeDamage,
+}
+option BloodlustO.FrenzyHurtRevengePushTiles {
+    type = double,
+    default = 4.0,
+    min = 0.0, max = 1000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHurtRevengePushTiles,
+}
+option BloodlustO.FrenzyHurtRevengeZombiesPushed {
+    type = integer,
+    default = 20,
+    min = 0, max = 1000,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHurtRevengeZombiesPushed,
+}
+option BloodlustO.FrenzyHurtRevengeKnockDownChance {
+    type = double,
+    default = 30.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHurtRevengeKnockDownChance,
+}
+option BloodlustO.FrenzyHurtSoundRadius {
+    type = double,
+    default = 60.0,
+    min = 0.0, max = 1000.0,
+    page = BloodlustO,
+    translation = BloodlustO_FrenzyHurtSoundRadius,
+}
+option BloodlustO.MaxBloodlustFrenzyWeaponSpeedIncrease {
+    type = double,
+    default = 0.25,
+    min = 0.0, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_MaxBloodlustFrenzyWeaponSpeedIncrease,
+}
+option BloodlustO.MaxBloodlustFrenzyMoveSpeedIncrease {
+    type = double,
+    default = 0.25,
+    min = 0.0, max = 1.0,
+    page = BloodlustO,
+    translation = BloodlustO_MaxBloodlustFrenzyMoveSpeedIncrease,
+}
+option BloodlustO.BloodlustForExertionBuffering {
+    type = double,
+    default = 50.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustForExertionBuffering,
+}
+option BloodlustO.BufferExertionAfter {
+    type = double,
+    default = 25.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BufferExertionAfter,
+}
+option BloodlustO.MaxBufferedExertion {
+    type = double,
+    default = 100.0,
+    min = 0.0, max = 10000.0,
+    page = BloodlustO,
+    translation = BloodlustO_MaxBufferedExertion,
+}
+option BloodlustO.ExertionBufferingMultiplier {
+    type = double,
+    default = 1.0,
+    min = 0.1, max = 10.0,
+    page = BloodlustO,
+    translation = BloodlustO_ExertionBufferingMultiplier,
+}
+option BloodlustO.ExertionBufferedPerMinute {
+    type = double,
+    default = 2.0,
+    min = 0.1, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_ExertionBufferedPerMinute,
+}
+option BloodlustO.ExertionUnbufferedPerMinute {
+    type = double,
+    default = 3.0,
+    min = 0.1, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_ExertionUnbufferedPerMinute,
+}
+option BloodlustO.ExertionUnbufferingHunger {
+    type = double,
+    default = 0.3,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_ExertionUnbufferingHunger,
+}
+option BloodlustO.ExertionUnbufferingThirst {
+    type = double,
+    default = 0.4,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_ExertionUnbufferingThirst,
+}
+option BloodlustO.ExertionUnbufferingStrain {
+    type = double,
+    default = 0.8,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_ExertionUnbufferingStrain,
+}
+option BloodlustO.MinutesSinceCombatForUnbuffering {
+    type = integer,
+    default = 30,
+    min = 0, max = 525600,
+    page = BloodlustO,
+    translation = BloodlustO_MinutesSinceCombatForUnbuffering,
+}
+option BloodlustO.BloodlustForPanicImmunity {
+    type = double,
+    default = 80.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodlustForPanicImmunity,
+}
+option BloodlustO.FreshBloodinessDecayMode {
+    type = enum,
+    default = 1,
+    numValues = 2,
+    page = BloodlustO,
+    translation = BloodlustO_FreshBloodinessDecayMode,
+}
+option BloodlustO.FreshBloodinessDecayPerMinute {
+    type = double,
+    default = 0.83,
+    min = 0.01, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_FreshBloodinessDecayPerMinute,
+}
+option BloodlustO.EarnIt {
+    type = boolean,
+    default = true,
+    page = BloodlustO,
+    translation = BloodlustO_EarnIt,
+}
+option BloodlustO.SendIntoFrenzyOnceEarned {
+    type = boolean,
+    default = true,
+    page = BloodlustO,
+    translation = BloodlustO_SendIntoFrenzyOnceEarned,
+}
+option BloodlustO.BloodinessForBloodyKills {
+    type = double,
+    default = 90.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodinessForBloodyKills,
+}
+option BloodlustO.BloodyKillsToEarn {
+    type = integer,
+    default = 300,
+    min = 1, max = 100000,
+    page = BloodlustO,
+    translation = BloodlustO_BloodyKillsToEarn,
+}
+option BloodlustO.BloodyKillsDecayBelowBloodiness {
+    type = double,
+    default = 50.0,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodyKillsDecayBelowBloodiness,
+}
+option BloodlustO.BloodyKillsDecayPerHour {
+    type = double,
+    default = 6.0,
+    min = 0.0, max = 100000.0,
+    page = BloodlustO,
+    translation = BloodlustO_BloodyKillsDecayPerHour,
+}
+option BloodlustO.BloodyKillsDecayInSleep {
+    type = boolean,
+    default = true,
+    page = BloodlustO,
+    translation = BloodlustO_BloodyKillsDecayInSleep,
+}
+option BloodlustO.RearDangerIfNotSeenMinutes {
+    type = integer,
+    default = 2,
+    min = 0, max = 60,
+    page = BloodlustO,
+    translation = BloodlustO_RearDangerIfNotSeenMinutes,
+}
+option BloodlustO.RearDangerIfWithinTiles {
+    type = integer,
+    default = 8,
+    min = 0, max = 1000,
+    page = BloodlustO,
+    translation = BloodlustO_RearDangerIfWithinTiles,
+}
+option BloodlustO.RearDangerMaxTiles {
+    type = integer,
+    default = 16,
+    min = 16, max = 1000,
+    page = BloodlustO,
+    translation = BloodlustO_RearDangerMaxTiles,
+}
+option BloodlustO.PreFrenzyPhraseCooldown {
+    type = integer,
+    default = 60,
+    min = 0, max = 43200,
+    page = BloodlustO,
+    translation = BloodlustO_PreFrenzyPhraseCooldown,
+}
+option BloodlustO.TilesUntilZombieForInCombat {
+    type = double,
+    default = 6.0,
+    min = 0.1, max = 1000.0,
+    page = BloodlustO,
+    translation = BloodlustO_TilesUntilZombieForInCombat,
+}
+option BloodlustO.TilesUntilSeenZombieForInCombat {
+    type = double,
+    default = 9.0,
+    min = 0.1, max = 1000.0,
+    page = BloodlustO,
+    translation = BloodlustO_TilesUntilSeenZombieForInCombat,
+}
+option BloodlustO.IgnoreZombiesWithFloorsDifference {
+    type = double,
+    default = 0.5,
+    min = 0.0, max = 100.0,
+    page = BloodlustO,
+    translation = BloodlustO_IgnoreZombiesWithFloorsDifference,
+}
+option BloodlustO.ZombiesScanEveryTicks {
+    type = integer,
+    default = 30,
+    min = 1, max = 10000,
+    page = BloodlustO,
+    translation = BloodlustO_ZombiesScanEveryTicks,
+}

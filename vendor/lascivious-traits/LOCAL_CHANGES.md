@@ -382,6 +382,152 @@ Validacao: `luac5.1 -p` em todo Lua novo/modificado; JSON validado com `json.loa
 verificado com `lua5.1 -e` de verdade (nao so sintaxe); `tools/validate_structure.py` e
 `tools/audit_collisions.py` re-executados, ambos limpos.
 
+## LS-010
+
+Tipo: nova integracao de trait bundle com traducao completa e camada de compatibilidade de gameplay
+Arquivos: `42/media/lua/client/bloodlusto/*.lua` (novo, a partir do upstream Bloodlust
+Overwhelming 0.9.7), `42/media/lua/shared/bloodlusto/{Registries.lua,Compat.lua}` (novo),
+`42/media/lua/shared/BloodlustOverwhelming_TraitsExclusivity.lua` (novo),
+`42/media/scripts/BloodlustOverwhelming_Traits.txt` (novo), `42/media/registries.lua`
+(registro `bloodlusto:bloodlusto`), `42/media/sandbox-options.txt` (266 novas chaves de sandbox),
+`42/media/lua/shared/Translate/{EN,PTBR}/{UI,Moodles,Sandbox}.json` e `.txt` nativos
+(Bloodlust Overwhelming + ModOptions + debug), `42/media/ui/BloodlustO_*.png`,
+`42/media/ui/Traits/trait_BloodlustO.png`, `42/media/textures/gui/bloodlust-overwhelming-overlay.png`,
+snapshot em `vendor/lascivious-traits/upstream/bloodlust-overwhelming/42/`.
+Motivo: dono do projeto pediu para adicionar Bloodlust Overwhelming (Workshop `3786352314`) ao
+container `LS_Traits`, com traducao 100% e cuidado especial para harmonia com ETW.
+
+Decisao de namespace/save: mantido o resource location upstream `bloodlusto:bloodlusto`, em vez de
+renomear para `lascivioustraits:*`, porque este e um port bundled de um mod especifico e o ID do
+trait vira dado persistente no personagem assim que alguem seleciona/conquista o trait. Para evitar
+chaves problematicas em traducao nativa, somente as chaves de texto foram adaptadas: o trait usa
+`UI_trait_BloodlustOverwhelming`/`UI_trait_BloodlustOverwhelmingDesc`, e as frases dinamicas que
+o upstream nomeava como `UI_BloodlustO:foo:1` agora sao resolvidas por `Utils.getVariants()` como
+`UI_BloodlustO_foo_1` (substitui caracteres nao alfanumericos por `_`). O ID persistente do trait
+nao mudou.
+
+Compatibilidade/harmonia: Bloodlust Overwhelming nao e tecnicamente o mesmo trait que
+`ETW:Bloodlust`, mas as duas mecanicas recompensam/alteram combate por sede de sangue e se
+empilhariam de forma agressiva. Foi adicionada exclusividade de criacao e runtime contra
+`ETW:Bloodlust` e `RegretNothing:RegretNothing`; tambem contra `base:pacifist` e `base:hemophobic`
+por coerencia tematica. `bloodlusto/Earning.lua` nao concede o trait dinamicamente se o personagem
+tem qualquer um desses bloqueadores. Do lado do ETW, `ETW_ByKills.lua`,
+`ETW_AnimalActionsSharedLogic.lua` e `ETW_CombatTraits.lua` pulam especificamente jogadores com
+Bloodlust Overwhelming, sem desligar o sistema Bloodlust do ETW para outros jogadores do servidor.
+Assim o Overwhelming vence como variante mais extrema, mas nao interfere em personagens que usam o
+Bloodlust dinamico normal do ETW.
+
+Guard MP/local-player: `bloodlusto/Bloodlust.lua` e `bloodlusto/Earning.lua` agora ignoram players
+nao locais antes de aplicar eventos de hit/kill/minuto/update/move/earn. O upstream roda client-side
+e, em MP, eventos como `OnWeaponHitCharacter` podem aparecer em clientes que nao sao o atacante;
+esse filtro evita multiplicacao/efeito fantasma em player remoto.
+
+Fix local de asset/case: `RedVision.lua` agora carrega
+`media/textures/gui/bloodlust-overwhelming-overlay.png` com o mesmo casing da pasta real do bundle,
+evitando falha de overlay em filesystem case-sensitive.
+
+Traducao: incorporadas as traducoes EN upstream de `UI`/`Moodles`/`Sandbox` aos arquivos canonicos
+do submod e escrita traducao PT-BR completa para todas as novas chaves: +324 `UI` (incluindo
+frases, Mod Options client-side e debug), +49 `Moodles`, +266 `Sandbox`. Totais atuais:
+`UI.json` 551/551, `Moodles.json` 99/99, `Sandbox.json` 806/806, EN e PT-BR com paridade exata.
+Native `.txt` de EN/PTBR regenerado a partir dos JSON canonicos para as tres familias.
+
+Validacao: `luac5.1 -p` em todos os Lua de `LS_Traits`, `lua5.1 -e` nos `.txt` nativos de traducao,
+JSON/paridade de chaves, chaves dinamicas do BloodlustO, `tools/validate_structure.py`,
+`tools/audit_collisions.py` e `git diff --check` passaram.
+
+## LS-011
+
+Tipo: tres bugs pos-integracao do Bloodlusto (LS-010) encontrados em teste real -- um crash em
+runtime, um erro de boot, e a tela de sandbox do Bloodlusto inteira ausente
+Arquivos: `42/media/lua/client/bloodlusto/{Sandbox.lua,ControlSandbox.lua}` (fallback de defaults),
+`/home/dahaka/Zomboid/Server/LASCIVIOUS_SandboxVars.lua` (fora do repo -- sandbox real do servidor),
+`42/media/lua/server/ETW_ModDataServer.lua` (require corrigido),
+`42/media/sandbox-options.txt` (uma linha removida)
+Motivo: dono do projeto reportou, jogando com o Bloodlusto recem-integrado, um stream de erro Lua
+em jogo (`attempted index: FreshBloodinessDecayMode of non-table: nil`) mais 1 erro ao iniciar o
+jogo; corrigido em duas rodadas (Codex, depois retomado por mim quando os tokens do Codex
+acabaram).
+
+Achado #1 (Codex): `SandboxVars.BloodlustO`/`BloodlustO_Control` vinham `nil` (ou incompletos) em
+runtime mesmo com `sandbox-options.txt` correto -- ordem/sessao de carregamento pode deixar a
+tabela ainda nao populada quando `Bloodlust.lua`/`Earning.lua` a leem pela primeira vez.
+`Sandbox.lua`/`ControlSandbox.lua` agora geram uma tabela `DEFAULTS` (extraida dos proprios
+comentarios `@field ... = valor` no topo de cada arquivo -- 102 e 29 campos, conferido batendo
+1:1 com os `option BloodlustO*.*` do sandbox-options.txt) e a aplicam via metatable
+(`setmetatable(SB, { __index = DEFAULTS })`) sobre `SandboxVars.BloodlustO`/`_Control` -- valor
+real do servidor sempre vence, ausente cai no default do proprio mod, nunca mais indexa nil. As
+duas categorias tambem foram adicionadas ao sandbox real do servidor
+(`/home/dahaka/Zomboid/Server/LASCIVIOUS_SandboxVars.lua`, fora deste repo) para existirem de
+verdade e ficarem editaveis, com os mesmos defaults.
+
+Achado #2 (retomado por mim): o "1 erro ao iniciar o jogo" restante era outro bug, sem relacao com
+o #1 -- `ETW_ModDataServer.lua` fazia `require("ETW_BySkills")` sem caminho, mas o arquivo real
+fica em `server/DynamicLogic/ETW_BySkills.lua` (uma pasta aninhada). O proprio arquivo ja usava o
+padrao certo uma linha acima (`require("TraitSpecific/ETW_EagleEyedTracking")`, que resolve
+corretamente `shared/TraitSpecific/ETW_EagleEyedTracking.lua`) -- so esqueceram de aplicar o mesmo
+pro ETW_BySkills. Sem o caminho, o `require` falhava (`WARN ... require("ETW_BySkills") failed` no
+console, o arquivo real so carregava depois, tarde demais pro `local` ja ter capturado nil), e
+`ETW_BySkills.traitsGainsBySkill(...)` explodia na criacao de personagem. Corrigido pra
+`require("DynamicLogic/ETW_BySkills")`.
+
+Achado #3 (retomado por mim, o mais serio dos tres): o dono do projeto tambem reportou que as
+opcoes de sandbox do Bloodlusto simplesmente nao apareciam na tela do jogo -- nem uma. Causa raiz:
+o console mostrava uma SEGUNDA excecao de boot, separada da #2 --
+`java.lang.RuntimeException: unknown block type "//" at CustomSandboxOptions.parse`. Decompilando
+`CustomSandboxOptions.parse()`: ele chama `ScriptParser.stripComments()` antes de tokenizar, mas
+essa rotina nao reconhece `//` como comentario neste formato -- o parser ve `//` como se fosse um
+token de bloco de primeiro nivel (tipo `option`/`module`) e lanca excecao, o que aborta a leitura
+do arquivo inteiro a partir dali. A causa: uma unica linha `// Bloodlust Overwhelming (Workshop
+3786352314)` foi inserida como cabecalho de secao logo antes do primeiro `option BloodlustO_Control.*`
+-- e e o UNICO comentario nas 3600 linhas do arquivo inteiro; nenhuma outra secao (KillCount, Moodle
+Framework, UCWF, ETW) jamais usou comentario nenhum, so blocos `option` separados por linha em
+branco. Como o arquivo inteiro falhava a partir dali, isso explica ao mesmo tempo o erro de boot
+extra E a tela de sandbox do Bloodlusto inteira ausente (as 131 opcoes -- 102 + 29 -- nunca
+chegavam a ser registradas). Corrigido removendo a linha, sem tentar outra sintaxe de comentario
+nao comprovada neste formato -- mesmo padrao (zero comentarios) que todas as outras secoes ja
+usam com sucesso.
+
+Validacao: `luac5.1 -p` em `ETW_ModDataServer.lua` e no sandbox real do servidor; balanco de chaves
+`{`/`}` do `sandbox-options.txt` (452/452) e contagem de `option BloodlustO*.*` (102 + 29,
+batendo com os `DEFAULTS` de Sandbox.lua/ControlSandbox.lua) conferidos apos a remocao da linha;
+`tools/validate_structure.py` e `tools/audit_collisions.py` re-executados, ambos limpos.
+
 ## Itens sem alteracao
 
 Nenhum item pendente sem alteracao no momento.
+
+## LS-012
+
+Tipo: hotfix pos-teste em servidor dedicado para crashes ETW/Hardy e efeitos de humor dos traits
+Bloodlust Overwhelming / I Regret Nothing
+Arquivos: `42/media/lua/server/TraitsLogic/ETW_EventsOrchestrator.lua`,
+`42/media/lua/server/TraitsLogic/ETW_HealthTraits.lua`,
+`42/media/lua/client/RegretNothing_DudeMechanics.lua`,
+`42/media/lua/server/RegretNothing_ServerEffects.lua`,
+`42/media/lua/server/BloodlustOverwhelming_ServerEffects.lua`
+Motivo: dono do projeto reportou stack trace repetindo `attempted index: HardyReserve of non-table:
+null` em `hardyTrait()` e comportamento ruim dos traits Bloodlust Overwhelming / I Regret Nothing,
+especialmente personagem continuar infeliz mesmo matando zumbis.
+
+Hardy/ETW: `ETW_EventsOrchestrator.oneMinuteUpdate()` agora garante `modData` antes de chamar
+`ETW_HealthTraits.hardyTrait()`. A propria `hardyTrait()` tambem ficou defensiva: se receber
+`modData == nil`, busca via `ETW_CommonFunctions.getETWModData(player)`; se ainda nao existir,
+loga uma linha e retorna sem explodir. `HardyReserve` tambem passa a nascer com o maximo da reserva
+quando ausente, evitando `PZMath.clamp(nil, ...)`.
+
+I Regret Nothing: eventos client-side agora filtram somente o player local, nao assumem mais
+`getPlayer()` como atacante quando o evento nao informa o killer, e em MP dedicado deixam os efeitos
+de humor/dano para o servidor. Novo `RegretNothing_ServerEffects.lua` aplica no servidor dedicado:
+reduz tédio/infelicidade em kills, aumenta ambos se ficar mais de 2h sem matar, mantem pânico/stress
+zerados, e aplica o bonus de dano temporario do consumivel.
+
+Bloodlust Overwhelming: novo `BloodlustOverwhelming_ServerEffects.lua` aplica no servidor dedicado
+o alivio mental essencial ao matar zumbis: remove tédio, reduz infelicidade, stress, abstinência de
+nicotina e pânico usando os multiplicadores de sandbox do proprio Bloodlusto. Isso complementa o
+client-side original, que em dedicado podia nao persistir ou ser sobrescrito pela autoridade do
+servidor.
+
+Validacao: `luac5.1 -p` em todos os Lua de `LS_Traits`, carregamento do sandbox real do servidor
+via `lua5.1`, `tools/validate_structure.py`, `tools/audit_collisions.py` e `git diff --check`
+passaram apos o hotfix.

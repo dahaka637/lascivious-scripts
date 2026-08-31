@@ -2,7 +2,7 @@ schema: 1
 module_key: lascivious-traits
 name: Lascivious Traits
 bundled_mod_id: LS_Traits
-status: enabled   # I Regret Nothing + Evolving Traits World (65 traits) are live; PT-BR 100% complete
+status: enabled   # I Regret Nothing + Evolving Traits World (65 traits) + Bloodlust Overwhelming are live; PT-BR 100% complete
 
 # Not a single-upstream integration: this container holds original trait implementations
 # inspired by ideas/mechanics seen across several third-party trait mods, not a port of any one
@@ -40,9 +40,9 @@ upstream:
     note: "bundled directly inside LS_Traits, not a separate Mod ID; 3 dead author scratch/example
       files (all guarded by `if true then return end`) deliberately excluded from the bundled copy
       but kept in the vendor snapshot as usage reference. Inherently server/SP-authoritative by
-      design (the shared file no-ops entirely on MP clients); zero collision with existing bundled
-      modules today, but registered a real future interaction with LS_AegisPanel's carry-weight
-      admin pin for when the first weight-affecting trait is written - see INTEGRATION.md"
+      design (the shared file no-ops entirely on MP clients); ETW now registers max-weight modifiers
+      through UCWF for Hoarder, Pack Mouse and Pack Mule. Known admin-tool interaction with
+      LS_AegisPanel's carry-weight pin is documented in INTEGRATION.md/COLLISION_REGISTRY.md"
   - key: regret-nothing
     workshop_id: "3676431328"
     original_mod_id: "IRegretNothingTrait"
@@ -89,6 +89,19 @@ upstream:
       fixed along the way: UCWF's own EN Sandbox options (`Sandbox_UCWF_EN.txt`) were sitting in a
       non-canonical filename and had likely never been read by the game since LS-003, in English
       too, not just PT-BR - merged into the canonical Sandbox_EN.txt/Sandbox.json."
+  - key: bloodlust-overwhelming
+    workshop_id: "3786352314"
+    original_mod_id: "BloodlustOverwhelming"
+    version: "0.9.7"
+    imported_at: "2026-08-30"
+    source_path: "vendor/lascivious-traits/upstream/bloodlust-overwhelming/42"
+    note: "bundled directly inside LS_Traits, not as a separate Mod ID; upstream trait resource
+      location kept as `bloodlusto:bloodlusto` for save compatibility. Local LS integration
+      translates UI/Moodles/Sandbox/ModOptions/debug into the canonical EN/PTBR catalogs, rewrites
+      phrase translation keys away from colon-separated names for native .txt safety, and adds
+      compatibility guards so this trait does not stack with ETW:Bloodlust or
+      RegretNothing:RegretNothing. Also blocks dynamic Bloodlust Overwhelming earning while the
+      player has Pacifist/Hemophobic, matching the creation-screen mutual exclusions."
 
 compatibility:
   target_build: "42.20.x"
@@ -103,18 +116,12 @@ dependencies:
   incompatible: []
 
 integration:
-  ptbr: complete   # 100% coverage across UI (227/227), Sandbox (540/540), Moodles (50/50) keys,
-                    # native .txt AND JSON for every family (LS-007, 2026-08-30). English is also
-                    # 100% - a second orphaned-filename bug (UCWF's EN Sandbox options) was found
-                    # and fixed in the same pass.
+  ptbr: complete   # 100% coverage across UI (551/551), Sandbox (806/806), Moodles (99/99) keys,
+                    # native .txt AND JSON for every family. English is also 100%.
   reviewed: true
   local_changes: true
-  local_revision: 7   # LS-008 (2026-08-30) was a cross-trait harmony checkup between I Regret
-                       # Nothing and ETW - investigated whether ETW's own dynamic systems (Smoker
-                       # addiction decay, Bravery/Fear-of-Locations) should be blocked from
-                       # touching traits I Regret Nothing forces/excludes, decided no: letting the
-                       # character follow ETW's normal rules after the initial grant is more
-                       # harmonious than locking those traits against it. No code changed.
+  local_revision: 10  # LS-010 (2026-08-30) adds Bloodlust Overwhelming with full PT-BR and
+                       # explicit gameplay guards against ETW:Bloodlust / I Regret Nothing stacking.
   notes: "vendor/lascivious-traits/LOCAL_CHANGES.md"
 
 risk:

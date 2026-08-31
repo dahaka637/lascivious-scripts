@@ -11,6 +11,12 @@ local function actionValue(value)
     return legacy[tostring(value)] or value
 end
 
+local function isRemoteZombie(zed)
+    if not (isClient() and zed) then return false end
+    local ok, remote = pcall(function() return zed:isRemoteZombie() end)
+    return ok and remote == true
+end
+
 -- Evicts entities for the "move" action (legacy value 2). Removal is handled
 -- client-side in client_events and confirmed authoritatively by the server.
 Core.evictZeds = function(playerObj, zoneKey)
@@ -29,7 +35,7 @@ Core.evictZeds = function(playerObj, zoneKey)
     local zombies = playerObj:getCell():getZombieList()
     for i = 0, zombies:size() - 1 do
         local zed = zombies:get(i)
-        if instanceof(zed, "IsoZombie") then
+        if instanceof(zed, "IsoZombie") and not isRemoteZombie(zed) then
             local zedZone = Core.getLocation(zed:getX(), zed:getY())
             if zedZone and zedZone.key == zoneKey then
                 local isBandit = bandits2Active and zed:getModData().brain ~= nil

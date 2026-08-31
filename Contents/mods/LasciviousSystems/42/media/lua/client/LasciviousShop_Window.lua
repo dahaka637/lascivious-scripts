@@ -685,7 +685,7 @@ function LasciviousShopWindow:offerDiscount(productId)
     return tonumber(state().offers and state().offers[productId]) or 0
 end
 
--- The player's own faction's Comércio upgrade discount (0..30, flat -- not
+-- The player's own faction's Comércio upgrade discount (0..50, flat -- not
 -- per-product), read straight from synced server state -- the SERVER is
 -- authoritative for this (LasciviousShop_Server.lua's commerceDiscountFor),
 -- the client never queries LasciviousFactionsSystem directly, same
