@@ -46,8 +46,20 @@ end
 
 -- The exact SteamID64 for `player`, or nil. The only function anything
 -- outside this file should use to build a NEW account key.
+--
+-- getSteamIDFromUsername() requires GameClient.client==true (confirmed via javap
+-- on LuaManager$GlobalObject.class: it calls GameClient.instance:getPlayerFromUsername
+-- and returns nil unless that guard passes) -- it is a CLIENT-ONLY engine global.
+-- A true dedicated server process has no GameClient instance at all, so this call
+-- is a GUARANTEED, PERMANENT no-op for every server-side caller there -- not a
+-- transient failure worth a warning on every single resolve(). Short-circuit before
+-- even trying, so this stays silent on a real dedicated server. Coop-host is a
+-- single process acting as both client and server, so isClient() is true there and
+-- the call can genuinely succeed; SP is handled by callers via isTrueSoloSP()/
+-- SP_IDENTITY before this function is ever reached.
 function M.resolve(player)
     if not player then return nil end
+    if not isClient() then return nil end
     local okName, username = pcall(function() return player:getUsername() end)
     if okName and type(username) == "string" and username ~= "" and getSteamIDFromUsername then
         local ok, value = pcall(getSteamIDFromUsername, username)
@@ -58,8 +70,9 @@ function M.resolve(player)
     end
     -- Do NOT fall back to player:getSteamID() for a new canonical identity:
     -- SteamID64 cannot round-trip through Kahlua's Lua number without losing
-    -- precision.  Callers may temporarily use name:<username> and migrate once
-    -- getSteamIDFromUsername(username) is available.
+    -- precision. Reached here means isClient() was true but the lookup still
+    -- failed (e.g. Steam mode off, or the username lookup itself came back
+    -- empty) -- that IS worth a warning, unlike the dedicated-server case above.
     log("getSteamIDFromUsername unavailable/failed for a connected player -- refusing lossy getSteamID() fallback")
     return nil
 end

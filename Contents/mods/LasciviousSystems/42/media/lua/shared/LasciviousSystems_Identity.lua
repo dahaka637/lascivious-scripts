@@ -178,8 +178,12 @@ function I.recordSteamKeySeen(steamId, username, source)
     return true, nil, steamKey
 end
 
+-- getSteamIDFromUsername() requires GameClient.client==true (see
+-- LasciviousSystems_SteamId.lua's M.resolve for the decompiled proof) -- a
+-- guaranteed permanent no-op on a real dedicated server, never worth the call.
 local function steamIdFromUsername(username)
     if type(username) ~= "string" or username == "" or not getSteamIDFromUsername then return nil end
+    if not isClient() then return nil end
     local ok, value = pcall(getSteamIDFromUsername, username)
     if not ok then return nil end
     return I.normalizeSteamId(value)
