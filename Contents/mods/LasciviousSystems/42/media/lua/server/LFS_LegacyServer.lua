@@ -5,6 +5,7 @@ end
 require "LFS_Shared"
 require "LFS_Upgrades"
 require "LasciviousSystems_SteamId"
+require "LasciviousSystems_Identity"
 
 local FF = LasciviousFactionsSystem
 
@@ -59,6 +60,10 @@ end
 
 local function accountKey(player)
     if not player then return nil end
+    local okIdentity, identityKey = pcall(function()
+        return LasciviousSystemsIdentity and LasciviousSystemsIdentity.resolvePlayer(player) or nil
+    end)
+    if okIdentity and type(identityKey) == "string" and identityKey ~= "" then return identityKey end
     local ok, key = pcall(function() return LasciviousSystemsSteamId.accountKey(player) end)
     if ok and type(key) == "string" and key ~= "" then return key end
     local username = usernameOf(player)

@@ -4,6 +4,7 @@ require "LasciviousShop_Shared"
 require "LasciviousShop_Catalog"
 require "GoMCompat"
 require "LasciviousSystems_SteamId"
+require "LasciviousSystems_Identity"
 
 local LS = LasciviousShop
 local Commands = {}
@@ -117,6 +118,7 @@ local function newAccountRecord()
         recentOrder = {},
         recentTransfers = {},
         recentTransferOrder = {},
+        externalTransactions = {},
         debugCreditsGranted = false,
     }
 end
@@ -155,6 +157,7 @@ local function normalizeAccountRecord(rec)
     rec.recentOrder = type(rec.recentOrder) == "table" and rec.recentOrder or {}
     rec.recentTransfers = type(rec.recentTransfers) == "table" and rec.recentTransfers or {}
     rec.recentTransferOrder = type(rec.recentTransferOrder) == "table" and rec.recentTransferOrder or {}
+    rec.externalTransactions = type(rec.externalTransactions) == "table" and rec.externalTransactions or {}
     rec.debugCreditsGranted = rec.debugCreditsGranted == true
     trimHistoryPreservingProcessing(rec.recentResults, rec.recentOrder, MAX_RECENT_REQUESTS)
     trimHistoryPreservingProcessing(rec.recentTransfers, rec.recentTransferOrder, MAX_RECENT_TRANSFERS)
@@ -192,6 +195,11 @@ local function mergeFallbackAccount(target, fallback)
     target.updatedAt = math.max(finiteNumber(target.updatedAt, 0), finiteNumber(fallback.updatedAt, 0))
     mergeHistory(target, fallback, "recentResults", "recentOrder", MAX_RECENT_REQUESTS)
     mergeHistory(target, fallback, "recentTransfers", "recentTransferOrder", MAX_RECENT_TRANSFERS)
+    for txKey, tx in pairs(fallback.externalTransactions or {}) do
+        if type(txKey) == "string" and type(tx) == "table" and target.externalTransactions[txKey] == nil then
+            target.externalTransactions[txKey] = tx
+        end
+    end
     return target
 end
 
@@ -242,33 +250,105 @@ local function usernameOf(player)
     return nil
 end
 
+local function steamIdFromKey(key)
+    if type(key) ~= "string" then return nil end
+    local sid = key:match("^steam:(%d+)$")
+    if not sid then return nil end
+    if LasciviousSystemsIdentity and LasciviousSystemsIdentity.normalizeSteamId then
+        local normalized = LasciviousSystemsIdentity.normalizeSteamId(sid)
+        if normalized then return normalized end
+    end
+    return LasciviousSystemsSteamId.isValid(sid)
+end
+
+local function isSteamKeyString(key)
+    return steamIdFromKey(key) ~= nil
+end
+
+local function registerVerifiedIdentity(username, steamIdOrKey, source)
+    if not (LasciviousSystemsIdentity and LasciviousSystemsIdentity.registerVerifiedBinding) then
+        return true
+    end
+    local sid = steamIdFromKey(steamIdOrKey) or steamIdOrKey
+    if not username or not sid then return true end
+    local ok, err, steamKey = LasciviousSystemsIdentity.registerVerifiedBinding(username, sid, source)
+    if not ok and err == "identity_conflict" then
+        LS.log(string.format("WARNING: identity conflict for username '%s' while binding '%s' (%s)",
+            tostring(username), tostring(steamKey), tostring(source)))
+    elseif not ok then
+        LS.log(string.format("WARNING: failed to register identity binding for username '%s': %s",
+            tostring(username), tostring(err)))
+    end
+    return ok, err, steamKey
+end
+
+local function setUsernameIndexSafe(data, username, key, source)
+    if type(username) ~= "string" or username == "" or type(key) ~= "string" or key == "" then return nil end
+    local current = data.usernameIndex[username]
+    if isSteamKeyString(current) and current ~= key then
+        if not isSteamKeyString(key) then
+            LS.log(string.format(
+                "WARNING: refusing to downgrade usernameIndex for '%s' from '%s' to fallback '%s' (%s)",
+                tostring(username), tostring(current), tostring(key), tostring(source)))
+            return current
+        end
+        registerVerifiedIdentity(username, steamIdFromKey(key), source or "shop_username_index_conflict")
+        LS.log(string.format(
+            "WARNING: refusing to overwrite usernameIndex for '%s' from '%s' to '%s' without explicit repair (%s)",
+            tostring(username), tostring(current), tostring(key), tostring(source)))
+        return current
+    end
+    data.usernameIndex[username] = key
+    if isSteamKeyString(key) then
+        registerVerifiedIdentity(username, steamIdFromKey(key), source or "shop_username_index")
+    end
+    return key
+end
+
 local function exactSteamKeyFromUsername(username)
     if type(username) ~= "string" or username == "" or not getSteamIDFromUsername then return nil end
     local ok, value = pcall(getSteamIDFromUsername, username)
     if not ok then return nil end
     local sid = LasciviousSystemsSteamId.isValid(value)
-    return sid and ("steam:" .. sid) or nil
+    if not sid then return nil end
+    registerVerifiedIdentity(username, sid, "pz_getSteamIDFromUsername")
+    return "steam:" .. sid
 end
 
 local function accountId(player)
     if not player then return nil end
     local username = usernameOf(player)
+    if LasciviousSystemsIdentity and LasciviousSystemsIdentity.resolvePlayer then
+        local key, info = LasciviousSystemsIdentity.resolvePlayer(player)
+        if type(key) == "string" and key ~= "" then return key, info end
+    end
+    local data = dataStore()
+    local indexed = username and data.usernameIndex[username] or nil
+    if isSteamKeyString(indexed) then return indexed, { source = "shop_username_index", username = username } end
     local exactKey = exactSteamKeyFromUsername(username)
-    if exactKey then return exactKey end
+    if exactKey then return exactKey, { source = "pz_getSteamIDFromUsername", username = username } end
     local key = LasciviousSystemsSteamId.accountKey(player)
-    if key then return key end
-    return username and ("name:" .. username) or nil
+    if key then return key, { source = "steamid_helper", username = username } end
+    if type(indexed) == "string" and indexed ~= "" then
+        return indexed, { source = "shop_username_index_legacy", username = username }
+    end
+    return username and ("name:" .. username) or nil, { source = "name_fallback", username = username }
 end
 
 local function ensureAccount(player)
     local key = accountId(player)
     local username = usernameOf(player)
-    local legacyKey = player and LasciviousSystemsSteamId.legacyAccountKey(player, key) or nil
     local data = dataStore()
-    if not key and username and type(data.usernameIndex[username]) == "string" then
-        key = data.usernameIndex[username]
+    local indexed = username and data.usernameIndex[username] or nil
+    if isSteamKeyString(indexed) and not isSteamKeyString(key) then
+        LS.log(string.format("using verified shop usernameIndex '%s' for '%s' instead of fallback '%s'",
+            tostring(indexed), tostring(username), tostring(key)))
+        key = indexed
+    elseif not key and type(indexed) == "string" then
+        key = indexed
     end
     if not key then return nil, nil end
+    local legacyKey = (player and isSteamKeyString(key)) and LasciviousSystemsSteamId.legacyAccountKey(player, key) or nil
     local rec = data.accounts[key]
     local createdOrMigrated = false
     local migratedFrom = {}
@@ -316,7 +396,7 @@ local function ensureAccount(player)
     end
     rec = normalizeAccountRecord(rec)
     data.accounts[key] = rec
-    if username then data.usernameIndex[username] = key end
+    if username then setUsernameIndexSafe(data, username, key, "shop_login") end
     if legacyKey and legacyKey ~= key then table.insert(migratedFrom, legacyKey) end
     if fallbackKey and fallbackKey ~= key then table.insert(migratedFrom, fallbackKey) end
     flushPendingCredits(rec, key, #migratedFrom > 0 and migratedFrom or nil)
@@ -333,13 +413,15 @@ end
 local function ensureAccountByUsername(username)
     if type(username) ~= "string" or username == "" or #username > 64 then return nil, nil end
     local data = dataStore()
-    local key = type(data.usernameIndex[username]) == "string" and data.usernameIndex[username] or nil
+    local verifiedKey = LasciviousSystemsIdentity and LasciviousSystemsIdentity.verifiedSteamKeyForUsername
+        and LasciviousSystemsIdentity.verifiedSteamKeyForUsername(username) or nil
+    local key = verifiedKey or (type(data.usernameIndex[username]) == "string" and data.usernameIndex[username] or nil)
     local usingFallback = false
     if not key then
         key = "name:" .. username
         usingFallback = true
     end
-    data.usernameIndex[username] = key
+    setUsernameIndexSafe(data, username, key, usingFallback and "shop_username_fallback" or "shop_username_lookup")
     local rec = data.accounts[key]
     if not rec then
         rec = newAccountRecord()
@@ -456,6 +538,9 @@ local function resolveIdentityKey(identity)
     if identity == nil then return nil end
     if type(identity) == "string" then
         if identity == "" or #identity > 64 then return nil end
+        local verifiedKey = LasciviousSystemsIdentity and LasciviousSystemsIdentity.verifiedSteamKeyForUsername
+            and LasciviousSystemsIdentity.verifiedSteamKeyForUsername(identity) or nil
+        if isSteamKeyString(verifiedKey) then return verifiedKey end
         local indexed = dataStore().usernameIndex[identity]
         return type(indexed) == "string" and indexed or ("name:" .. identity)
     end
@@ -467,6 +552,9 @@ local function resolveIdentityKey(identity)
             return username and resolveIdentityKey(username) or nil
         end
         if identity.steamId ~= nil then
+            local steamKey = LasciviousSystemsIdentity and LasciviousSystemsIdentity.accountKeyFromSteamId
+                and LasciviousSystemsIdentity.accountKeyFromSteamId(identity.steamId) or nil
+            if steamKey then return steamKey end
             local sid = LasciviousSystemsSteamId.isValid(identity.steamId)
             if sid then return "steam:" .. sid end
         end
@@ -480,12 +568,16 @@ end
 
 local function steamKeyFromIdentity(identity)
     if type(identity) ~= "table" or identity.steamId == nil then return nil end
+    if LasciviousSystemsIdentity and LasciviousSystemsIdentity.accountKeyFromSteamId then
+        local steamKey = LasciviousSystemsIdentity.accountKeyFromSteamId(identity.steamId)
+        if steamKey then return steamKey end
+    end
     local sid = LasciviousSystemsSteamId.isValid(identity.steamId)
     return sid and ("steam:" .. sid) or nil
 end
 
 local function isSteamKey(key)
-    return type(key) == "string" and string.sub(key, 1, 6) == "steam:"
+    return isSteamKeyString(key)
 end
 
 local function addUniqueKey(list, seen, key)
@@ -615,7 +707,7 @@ local function ensureAccountForIdentity(identity)
                 end
                 data.accounts[targetKey] = rec
                 data.accounts[liveKey] = nil
-                if username then data.usernameIndex[username] = targetKey end
+                if username then setUsernameIndexSafe(data, username, targetKey, "bridge_live_promote") end
                 LS.log(string.format("promoted live shop account '%s' to bridge identity '%s'", liveKey, targetKey))
             end
 
@@ -646,7 +738,7 @@ local function ensureAccountForIdentity(identity)
             end
             data.accounts[steamKey] = rec
             data.accounts[sourceKey] = nil
-            data.usernameIndex[username] = steamKey
+            setUsernameIndexSafe(data, username, steamKey, "bridge_fallback_promote")
             flushPendingCredits(rec, steamKey, identityPendingKeys(identity, sourceKey, username))
             LS.log(string.format("promoted fallback shop account '%s' to bridge identity '%s'", sourceKey, steamKey))
             return rec, steamKey, username
@@ -655,7 +747,7 @@ local function ensureAccountForIdentity(identity)
         if type(data.accounts[steamKey]) == "table" then
             local rec = normalizeAccountRecord(data.accounts[steamKey])
             data.accounts[steamKey] = rec
-            data.usernameIndex[username] = steamKey
+            setUsernameIndexSafe(data, username, steamKey, "bridge_existing_steam")
             flushPendingCredits(rec, steamKey, identityPendingKeys(identity, primaryKey, username))
             return rec, steamKey, username
         end
@@ -763,16 +855,7 @@ function LS.queueCredits(identity, amount, reason)
         local data = dataStore()
         rec = normalizeAccountRecord(data.accounts[steamKey])
         data.accounts[steamKey] = rec
-        if username then
-            local indexed = data.usernameIndex[username]
-            if not indexed or indexed == steamKey or not isSteamKey(indexed) then
-                data.usernameIndex[username] = steamKey
-            elseif indexed ~= steamKey then
-                LS.log(string.format(
-                    "WARNING: not overwriting usernameIndex for '%s' from '%s' to bridge key '%s'",
-                    tostring(username), tostring(indexed), steamKey))
-            end
-        end
+        if username then setUsernameIndexSafe(data, username, steamKey, "api_steam_grant") end
         flushPendingCredits(rec, steamKey, identityPendingKeys(identity, key, username))
         rec = normalizeAccountRecord(data.accounts[steamKey])
         data.accounts[steamKey] = rec
@@ -796,6 +879,10 @@ local function externalRewardReceiptKey(rewardType, steamKey)
     if not isSteamKey(steamKey) then return nil end
     return rewardType .. ":" .. steamKey
 end
+
+local EXTERNAL_REWARDS = {
+    discord_verification = { amount = 300, once = true },
+}
 
 local function removePendingRewardEntries(data, keys, reason)
     local removed, removedTotal = 0, 0
@@ -821,8 +908,96 @@ local function removePendingRewardEntries(data, keys, reason)
     return removed, removedTotal
 end
 
-function LS.grantExternalRewardOnce(identity, rewardType, amount, externalId)
-    amount = finiteNumber(amount, nil)
+local function shopIdentityDebugEnabled()
+    local raw = SandboxVars and SandboxVars.LasciviousShop or nil
+    return type(raw) == "table" and (raw.DebugIdentity == true or raw.Debug == true)
+end
+
+local function externalRewardResult(status, txKey, steamKey, username, amount, balanceBefore, balanceAfter,
+    ledgerCommitted, receiptCommitted, extra)
+    local result = {
+        queued = false,
+        alreadyApplied = status == "already_committed" or status == "repaired",
+        status = status,
+        accountKey = steamKey,
+        username = username,
+        transactionKey = txKey,
+        receiptKey = txKey,
+        amount = amount,
+        balanceBefore = balanceBefore,
+        balanceAfter = balanceAfter,
+        ledgerCommitted = ledgerCommitted == true,
+        receiptCommitted = receiptCommitted == true,
+    }
+    for key, value in pairs(extra or {}) do result[key] = value end
+    return result
+end
+
+local function commitExternalRewardReceipt(data, txKey, tx, status, repaired)
+    data.externalRewards[txKey] = {
+        status = "committed",
+        rewardType = tx.rewardType,
+        accountKey = tx.accountKey,
+        transactionKey = txKey,
+        amount = tx.amount,
+        externalId = tx.externalId,
+        businessKey = tx.businessKey,
+        balanceBefore = tx.balanceBefore,
+        balanceAfter = tx.balanceAfter,
+        committedAt = tx.committedAt or nowSeconds(),
+        receiptStatus = status,
+        repaired = repaired == true,
+    }
+end
+
+local function bindRewardIdentity(data, username, steamKey, source)
+    if not username then return true end
+    local sid = steamIdFromKey(steamKey)
+    if not sid then return false, "invalid_steam_identity" end
+
+    local ok, err = registerVerifiedIdentity(username, sid, source or "external_reward")
+    if not ok and err == "identity_conflict" then return false, err end
+
+    local indexed = data.usernameIndex[username]
+    if isSteamKeyString(indexed) and indexed ~= steamKey then
+        registerVerifiedIdentity(username, sid, source or "external_reward_conflict")
+        LS.log(string.format(
+            "WARNING: external reward identity conflict for username '%s': usernameIndex='%s', reward='%s'",
+            tostring(username), tostring(indexed), tostring(steamKey)))
+        return false, "identity_conflict"
+    end
+    setUsernameIndexSafe(data, username, steamKey, source or "external_reward")
+    return true
+end
+
+local function finalizeExternalRewardPreparedTx(data, rec, txKey, tx, username, identitySource, uiPush)
+    tx.status = "committed"
+    tx.committedAt = nowSeconds()
+    rec.externalTransactions[txKey] = tx
+    data.accounts[tx.accountKey] = rec
+    commitExternalRewardReceipt(data, txKey, tx, "committed", true)
+    if username then LS.pushStateToUsername(username) end
+    LS.log(string.format(
+        "[ExternalReward] status=repaired tx=%s account=%s amount=%s before=%s after=%s ledger=true receipt=true username=%s source=%s ui=%s",
+        tostring(txKey), tostring(tx.accountKey), LS.formatCredits(tx.amount),
+        LS.formatCredits(tx.balanceBefore), LS.formatCredits(tx.balanceAfter),
+        tostring(username), tostring(identitySource), tostring(uiPush)))
+    return true, nil, externalRewardResult("repaired", txKey, tx.accountKey, username, tx.amount,
+        tx.balanceBefore, tx.balanceAfter, true, true, {
+            identitySource = identitySource,
+            uiPush = uiPush,
+        })
+end
+
+-- Exact, once-only external reward. The reward amount is owned server-side by
+-- EXTERNAL_REWARDS; callers may pass a legacy amount as the third argument but
+-- it is ignored so an external process can never choose the credit delta.
+function LS.grantExternalRewardOnce(identity, rewardType, externalId, legacyExternalId)
+    if type(externalId) == "number" then externalId = legacyExternalId end
+
+    local spec = type(rewardType) == "string" and EXTERNAL_REWARDS[rewardType] or nil
+    if not spec then return false, "invalid_reward_type" end
+    local amount = finiteNumber(spec.amount, nil)
     if not amount or amount <= 0 or amount > MAX_API_CREDIT_AMOUNT then
         return false, "invalid_amount"
     end
@@ -832,90 +1007,173 @@ function LS.grantExternalRewardOnce(identity, rewardType, amount, externalId)
         return false, "invalid_steam_identity"
     end
 
-    local receiptKey = externalRewardReceiptKey(rewardType, steamKey)
-    if not receiptKey then
-        return false, "invalid_reward_type"
-    end
+    local txKey = externalRewardReceiptKey(rewardType, steamKey)
+    if not txKey then return false, "invalid_reward_type" end
 
     local username = identityUsernameHint(identity)
+    local identitySource = type(identity) == "table" and identity.source or nil
+    identitySource = identitySource or (username and "command_username") or "steam_only"
+
     local onlinePlayer = findOnlinePlayerForIdentity(identity)
-    if onlinePlayer then
-        username = username or usernameOf(onlinePlayer)
-    else
+    if onlinePlayer then username = username or usernameOf(onlinePlayer) end
+    if not onlinePlayer and shopIdentityDebugEnabled() then
         logOnlineIdentitySnapshot("external reward '" .. tostring(rewardType) .. "'", steamKey, username)
     end
+    local uiPush = username and (onlinePlayer and "online" or "offline") or "offline"
+
     local data = dataStore()
-    local existing = data.externalRewards[receiptKey]
-    if type(existing) == "table" and (existing.status == "applied" or existing.status == "processing") then
-        local removedPending, removedPendingTotal = removePendingRewardEntries(data,
-            identityPendingKeys(identity, steamKey, username), rewardType)
-        if removedPending > 0 then
-            LS.log(string.format("external reward '%s' for '%s' already recorded; removed %d duplicate pending grant(s) totalling %s",
-                tostring(rewardType), steamKey, removedPending, LS.formatCredits(removedPendingTotal)))
-        end
-        LS.log(string.format("external reward '%s' for '%s' already recorded as %s; not granting again",
-            tostring(rewardType), steamKey, tostring(existing.status)))
-        return true, nil, {
-            queued = false,
-            alreadyApplied = true,
-            accountKey = steamKey,
-            username = username,
-            receiptKey = receiptKey,
-        }
-    end
 
     local rec = normalizeAccountRecord(data.accounts[steamKey])
     data.accounts[steamKey] = rec
-    if username then
-        local indexed = data.usernameIndex[username]
-        if not indexed or indexed == steamKey or not isSteamKey(indexed) then
-            data.usernameIndex[username] = steamKey
+    rec.externalTransactions = type(rec.externalTransactions) == "table" and rec.externalTransactions or {}
+    local tx = rec.externalTransactions[txKey]
+    local receipt = data.externalRewards[txKey]
+
+    if type(tx) == "table" and tx.status == "committed" then
+        if type(receipt) ~= "table" or receipt.status ~= "committed"
+            or receipt.transactionKey ~= txKey or receipt.accountKey ~= steamKey then
+            commitExternalRewardReceipt(data, txKey, tx, "repaired", true)
+            receipt = data.externalRewards[txKey]
+            LS.log(string.format(
+                "[ExternalReward] status=repaired tx=%s account=%s amount=%s before=%s after=%s ledger=true receipt=true username=%s source=%s ui=%s",
+                tostring(txKey), tostring(steamKey), LS.formatCredits(tx.amount),
+                LS.formatCredits(tx.balanceBefore), LS.formatCredits(tx.balanceAfter),
+                tostring(username), tostring(identitySource), tostring(uiPush)))
+            return true, nil, externalRewardResult("repaired", txKey, steamKey, username, tx.amount,
+                tx.balanceBefore, tx.balanceAfter, true, true, {
+                    identitySource = identitySource,
+                    uiPush = uiPush,
+                    repairedReceipt = true,
+                })
         end
+        return true, nil, externalRewardResult("already_committed", txKey, steamKey, username, tx.amount,
+            tx.balanceBefore, tx.balanceAfter, true, true, {
+                identitySource = identitySource,
+                uiPush = uiPush,
+            })
     end
 
-    if rec.balance + amount > LS.MAX_CREDITS then
-        return false, "recipient_balance_limit"
+    if type(tx) == "table" and tx.status == "prepared" then
+        local balanceBefore = LS.roundCredits(tx.balanceBefore)
+        local balanceAfter = LS.roundCredits(tx.balanceAfter)
+        rec.balance = LS.roundCredits(rec.balance)
+        if rec.balance == balanceAfter then
+            return finalizeExternalRewardPreparedTx(data, rec, txKey, tx, username, identitySource, uiPush)
+        end
+        if rec.balance == balanceBefore then
+            if balanceAfter > LS.MAX_CREDITS then
+                return false, "recipient_balance_limit", externalRewardResult("recipient_balance_limit",
+                    txKey, steamKey, username, amount, balanceBefore, balanceAfter, false, false, {
+                        identitySource = identitySource,
+                        uiPush = uiPush,
+                    })
+            end
+            rec.balance = balanceAfter
+            rec.lifetimeEarned = LS.roundCredits(rec.lifetimeEarned + amount)
+            rec.updatedAt = nowSeconds()
+            rec.source = rewardType
+            return finalizeExternalRewardPreparedTx(data, rec, txKey, tx, username, identitySource, uiPush)
+        end
+        return false, "integrity_conflict", externalRewardResult("integrity_conflict",
+            txKey, steamKey, username, amount, balanceBefore, balanceAfter, false, false, {
+                currentBalance = rec.balance,
+                identitySource = identitySource,
+                uiPush = uiPush,
+            })
     end
 
-    data.externalRewards[receiptKey] = {
-        status = "processing",
-        rewardType = rewardType,
-        accountKey = steamKey,
-        amount = amount,
-        externalId = externalId,
-        startedAt = nowSeconds(),
-    }
+    if type(tx) == "table" then
+        return false, "integrity_conflict", externalRewardResult("integrity_conflict",
+            txKey, steamKey, username, amount, tx.balanceBefore, tx.balanceAfter, false, false, {
+                txStatus = tx.status,
+                identitySource = identitySource,
+                uiPush = uiPush,
+            })
+    end
+
+    if type(receipt) == "table" then
+        LS.log(string.format(
+            "WARNING: external reward '%s' for '%s' has legacy/unproven receipt status '%s' without account transaction; refusing false success",
+            tostring(rewardType), tostring(steamKey), tostring(receipt.status)))
+        return false, "legacy_unproven", externalRewardResult("legacy_unproven",
+            txKey, steamKey, username, amount, receipt.balanceBefore, receipt.balanceAfter, false, false, {
+                legacyReceiptStatus = receipt.status,
+                identitySource = identitySource,
+                uiPush = uiPush,
+            })
+    end
+
+    -- Only a genuinely NEW grant needs the username↔steamKey binding gate --
+    -- an idempotent retry of an already-committed/prepared/legacy tx must
+    -- converge from steamKey alone, never fail because a stale/conflicting
+    -- username hint (e.g. an outdated bot whitelist-DB snapshot) came along
+    -- for the ride. steamKey is already the trustworthy identifier here.
+    local bindOk, bindErr = bindRewardIdentity(data, username, steamKey, identitySource)
+    if not bindOk then
+        return false, bindErr or "identity_conflict", externalRewardResult(bindErr or "identity_conflict",
+            txKey, steamKey, username, amount, nil, nil, false, false, {
+                identitySource = identitySource,
+                uiPush = uiPush,
+            })
+    end
+
+    rec.balance = LS.roundCredits(rec.balance)
+    local balanceBefore = rec.balance
+    local balanceAfter = LS.roundCredits(balanceBefore + amount)
+    if balanceAfter > LS.MAX_CREDITS then
+        return false, "recipient_balance_limit", externalRewardResult("recipient_balance_limit",
+            txKey, steamKey, username, amount, balanceBefore, balanceAfter, false, false, {
+                identitySource = identitySource,
+                uiPush = uiPush,
+            })
+    end
 
     local pendingKeys = identityPendingKeys(identity, steamKey, username)
     local removedPending, removedPendingTotal = removePendingRewardEntries(data, pendingKeys, rewardType)
-    applyCreditsToKey(steamKey, amount, rewardType)
 
-    data.externalRewards[receiptKey] = {
-        status = "applied",
+    tx = {
+        status = "prepared",
         rewardType = rewardType,
         accountKey = steamKey,
+        transactionKey = txKey,
         amount = amount,
         externalId = externalId,
-        appliedAt = nowSeconds(),
+        businessKey = externalId,
+        balanceBefore = balanceBefore,
+        balanceAfter = balanceAfter,
+        preparedAt = nowSeconds(),
         removedDuplicatePending = removedPending,
         removedDuplicatePendingTotal = removedPendingTotal,
     }
+    rec.externalTransactions[txKey] = tx
+    data.accounts[steamKey] = rec
 
-    LS.pushStateToUsername(username)
-    LS.log(string.format("external reward '%s': +%s credits to '%s'%s%s",
-        tostring(rewardType), LS.formatCredits(amount), steamKey,
-        username and (" (username=" .. tostring(username) .. ")") or "",
-        removedPending > 0 and string.format("; removed %d duplicate pending grant(s) totalling %s",
+    rec.balance = balanceAfter
+    rec.lifetimeEarned = LS.roundCredits(rec.lifetimeEarned + amount)
+    rec.updatedAt = nowSeconds()
+    rec.source = rewardType
+    tx.status = "committed"
+    tx.committedAt = nowSeconds()
+    rec.externalTransactions[txKey] = tx
+    data.accounts[steamKey] = rec
+    commitExternalRewardReceipt(data, txKey, tx, "committed", false)
+
+    if username then LS.pushStateToUsername(username) end
+    LS.log(string.format(
+        "[ExternalReward] status=applied tx=%s account=%s amount=%s before=%s after=%s ledger=true receipt=true username=%s source=%s ui=%s%s",
+        tostring(txKey), tostring(steamKey), LS.formatCredits(amount),
+        LS.formatCredits(balanceBefore), LS.formatCredits(balanceAfter),
+        tostring(username), tostring(identitySource), tostring(uiPush),
+        removedPending > 0 and string.format(" removedPending=%d removedPendingTotal=%s",
             removedPending, LS.formatCredits(removedPendingTotal)) or ""))
 
-    return true, nil, {
-        queued = false,
-        alreadyApplied = false,
-        accountKey = steamKey,
-        username = username,
-        receiptKey = receiptKey,
-        removedDuplicatePending = removedPending,
-    }
+    return true, nil, externalRewardResult("applied", txKey, steamKey, username, amount,
+        balanceBefore, balanceAfter, true, true, {
+            identitySource = identitySource,
+            uiPush = uiPush,
+            removedDuplicatePending = removedPending,
+            removedDuplicatePendingTotal = removedPendingTotal,
+        })
 end
 
 -- Generic transfer between two identities -- what Commands[LS.CMD_TRANSFER]
@@ -2573,7 +2831,8 @@ local function reconcileSteamPendingCredits()
             end
 
             if discordAmount then
-                LS.grantExternalRewardOnce({ steamId = sid }, "discord_verification", discordAmount, "startup_pending_reconcile")
+                LS.grantExternalRewardOnce({ steamId = sid, source = "startup_pending_reconcile" },
+                    "discord_verification", "startup_pending_reconcile")
                 list = data.pendingCredits[key]
             end
 

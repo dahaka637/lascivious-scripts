@@ -7,6 +7,7 @@ if isClient() then return end
 require "HardcoreKits_Config"
 require "HardcoreKits_Persistence"
 require "LasciviousSystems_SteamId"
+require "LasciviousSystems_Identity"
 
 HardcoreKitsIdentity = HardcoreKitsIdentity or {}
 
@@ -34,9 +35,14 @@ end
 -- daquele jogador ficaria orfao pra sempre debaixo da chave errada.
 function HardcoreKitsIdentity.accountId(player)
     if not player then return nil end
-    local key = LasciviousSystemsSteamId.accountKey(player)
+    local key = nil
+    if LasciviousSystemsIdentity and LasciviousSystemsIdentity.resolvePlayer then
+        key = LasciviousSystemsIdentity.resolvePlayer(player)
+    end
+    if not key then key = LasciviousSystemsSteamId.accountKey(player) end
     if key then
-        local legacyKey = LasciviousSystemsSteamId.legacyAccountKey(player, key)
+        local legacyKey = (type(key) == "string" and string.match(key, "^steam:%d+$"))
+            and LasciviousSystemsSteamId.legacyAccountKey(player, key) or nil
         if legacyKey then
             HardcoreKitsPersistence.migrateAccount(legacyKey, key)
             print("[HardcoreKits] Conta migrada (bug de precisao do SteamID): '" .. tostring(legacyKey) .. "' -> '" .. tostring(key) .. "'")

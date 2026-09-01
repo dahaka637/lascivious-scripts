@@ -9,6 +9,7 @@ if isClient() and not isCoopHost() then return end
 
 require "LFS_Shared"
 require "LFS_Json"
+require "LasciviousSystems_Identity"
 
 local FF = LasciviousFactionsSystem
 local Json = FF.Json
@@ -83,11 +84,16 @@ local function sortedKeys(source)
 end
 
 local function validSteamId(value)
-    if value == nil then return nil end
-    local text = tostring(value)
+    if LasciviousSystemsIdentity and LasciviousSystemsIdentity.normalizeSteamId then
+        local sid = LasciviousSystemsIdentity.normalizeSteamId(value)
+        if sid then return sid end
+    end
+    if type(value) ~= "string" then return nil end
+    local text = value:gsub("^%s+", ""):gsub("%s+$", "")
+    text = text:match("^[sS][tT][eE][aA][mM]:(%d+)$") or text
     if text == "" or text == "0" or text == "nil" then return nil end
-    -- Reject scientific notation or rounded Lua doubles. A missing SteamID is safer
-    -- than exporting a plausible-looking but incorrect account identifier.
+    -- Reject numbers/coerced doubles completely. SteamID64 is an identifier
+    -- string; if the engine cannot provide the exact string, export no SteamID.
     if not string.match(text, "^%d+$") or #text < 15 or #text > 20 then return nil end
     return text
 end
@@ -134,24 +140,33 @@ function API.rememberPlayer(player, silent)
     if username == "" then return nil end
 
     local steamId
-    if getSteamIDFromUsername then
-        local ok, value = pcall(getSteamIDFromUsername, username)
-        if ok then steamId = validSteamId(value) end
+    local steamIdSource
+    if LasciviousSystemsIdentity and LasciviousSystemsIdentity.resolvePlayer then
+        local accountKey, info = LasciviousSystemsIdentity.resolvePlayer(player)
+        steamId = validSteamId(accountKey)
+        if steamId and type(info) == "table" then steamIdSource = info.source end
     end
-    if not steamId then
-        steamId = validSteamId(readPlayerField(player, "getSteamID", nil))
+    if not steamId and getSteamIDFromUsername then
+        local ok, value = pcall(getSteamIDFromUsername, username)
+        if ok then
+            steamId = validSteamId(value)
+            if steamId then steamIdSource = "pz_getSteamIDFromUsername" end
+        end
     end
 
     local store = identityStore()
     local previous = store.players[username] or {}
+    local previousVerifiedSteamId = previous.steamIdVerified == true and validSteamId(previous.steamId) or nil
     local displayName = tostring(readPlayerField(player, "getDisplayName",
         readPlayerField(player, "getFullName", previous.displayName or username)))
     local identityChanged = previous.username == nil
-        or previous.steamId ~= (steamId or previous.steamId)
+        or previous.steamId ~= (steamId or previousVerifiedSteamId)
         or previous.displayName ~= displayName
     local rec = {
         username = username,
-        steamId = steamId or previous.steamId,
+        steamId = steamId or previousVerifiedSteamId,
+        steamIdVerified = steamId ~= nil or previousVerifiedSteamId ~= nil,
+        steamIdSource = steamId and (steamIdSource or "identity_v2") or previous.steamIdSource,
         displayName = displayName,
         lastSeenAt = nowMs(),
     }
@@ -178,7 +193,11 @@ end
 local function identityFor(username, player)
     local rec = player and API.rememberPlayer(player)
         or (identityStore().players or {})[username]
-    local steamId = rec and validSteamId(rec.steamId) or nil
+    local steamId = rec and rec.steamIdVerified == true and validSteamId(rec.steamId) or nil
+    if player and LasciviousSystemsIdentity and LasciviousSystemsIdentity.resolvePlayer then
+        local accountKey = LasciviousSystemsIdentity.resolvePlayer(player)
+        steamId = validSteamId(accountKey) or steamId
+    end
     if not steamId and getSteamIDFromUsername then
         local ok, value = pcall(getSteamIDFromUsername, username)
         if ok then steamId = validSteamId(value) end
@@ -186,6 +205,8 @@ local function identityFor(username, player)
             local store = identityStore()
             rec = rec or { username = username }
             rec.steamId = steamId
+            rec.steamIdVerified = true
+            rec.steamIdSource = "pz_getSteamIDFromUsername"
             store.players[username] = rec
         end
     end

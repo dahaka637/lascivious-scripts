@@ -30,8 +30,8 @@ end
 -- Digit-string + length check lifted from LFS_API.lua's own validSteamId(),
 -- layered with the engine's isValidSteamID global when available.
 function M.isValid(value)
-    if value == nil then return nil end
-    local text = tostring(value)
+    if type(value) ~= "string" then return nil end
+    local text = value
     text = text:gsub("^%s+", ""):gsub("%s+$", "")
     local prefixed = text:match("^[sS][tT][eE][aA][mM]:(%d+)$")
     if prefixed then text = prefixed end

@@ -40,6 +40,16 @@ local function jsonEscape(str)
     return str
 end
 
+local function jsonBool(value)
+    return value == true and "true" or "false"
+end
+
+local function jsonNumber(value)
+    local n = tonumber(value)
+    if n == nil or n ~= n or n == math.huge or n == -math.huge then return "null" end
+    return tostring(n)
+end
+
 local function jsonString(content, key)
     if type(content) ~= "string" or type(key) ~= "string" then return nil end
     local value = content:match('"' .. key .. '"%s*:%s*"([^"]*)"')
@@ -77,8 +87,8 @@ local function validSteamId(value)
     if SteamId and type(SteamId.isValid) == "function" then
         return SteamId.isValid(value)
     end
-    if value == nil then return nil end
-    local text = tostring(value):gsub("^%s+", ""):gsub("%s+$", "")
+    if type(value) ~= "string" then return nil end
+    local text = value:gsub("^%s+", ""):gsub("%s+$", "")
     local prefixed = text:match("^[sS][tT][eE][aA][mM]:(%d+)$")
     if prefixed then text = prefixed end
     if text == "" or text == "0" then return nil end
@@ -139,15 +149,9 @@ local function writeHeartbeat()
     writeFile("hwbridge_heartbeat.json", json)
 end
 
-local DISCORD_VERIFICATION_REWARD = 300
-
--- Credita o bonus de verificacao Discord na Lascivious Shop. SteamID e a identidade
--- canonica (funciona mesmo offline/sem conta ainda, ver LasciviousShop.queueCredits);
--- username e so um extra pra loja tentar atualizar a UI na hora se o jogador estiver
--- online. Idempotencia ("ja recebeu?") NAO e responsabilidade daqui -- isso e controlado
--- do lado Node (steamverify/lib/rewardStore.js), que so manda esse comando uma vez por
--- SteamID depois de confirmar sucesso.
-local function grantDiscordVerificationReward(steamId, username, commandId)
+-- Credita o bonus de verificacao Discord na Lascivious Shop. O Bridge valida apenas
+-- identidade/transporte; valor, idempotencia e prova financeira ficam dentro da Shop.
+local function grantDiscordVerificationReward(steamId, username, commandId, businessKey, usernameSource)
     if steamId == nil or steamId == "" then
         return false, "missing_steam_id"
     end
@@ -161,18 +165,30 @@ local function grantDiscordVerificationReward(steamId, username, commandId)
     end
 
     local identity = { steamId = normalizedSteamId }
+    identity.source = usernameSource or "discord_reward_bridge"
+    identity.businessKey = businessKey or commandId
     if type(username) == "string" and username ~= "" then
         identity.username = username
+        identity.usernameSource = usernameSource or "bridge_command"
     end
 
     if type(LasciviousShop.grantExternalRewardOnce) == "function" then
-        return LasciviousShop.grantExternalRewardOnce(identity, "discord_verification", DISCORD_VERIFICATION_REWARD, commandId)
-    end
-    if type(LasciviousShop.queueCredits) == "function" then
-        return LasciviousShop.queueCredits(identity, DISCORD_VERIFICATION_REWARD, "discord_verification")
+        return LasciviousShop.grantExternalRewardOnce(identity, "discord_verification", businessKey or commandId)
     end
     return false, "shop_api_unavailable"
 end
+
+-- Only these three account-transaction statuses represent a proven, committed
+-- ledger change (see LasciviousShop_Server.lua's grantExternalRewardOnce state
+-- machine). Everything else -- processing (which no longer exists as a
+-- terminal state), legacy_unproven, identity_conflict, integrity_conflict,
+-- recipient_balance_limit, invalid_* -- must read as failure/retry to the bot,
+-- never as "already paid".
+local EXTERNAL_REWARD_SUCCESS_STATUS = {
+    applied = true,
+    already_committed = true,
+    repaired = true,
+}
 
 local function processInbox()
     local content = readFile("hwbridge_inbox.json")
@@ -186,15 +202,18 @@ local function processInbox()
 
     print("[HWNetBridge] Comando recebido: id=" .. tostring(id) .. " type=" .. tostring(ctype))
 
-    local success = "false"
-    local message = "tipo de comando desconhecido: " .. tostring(ctype)
-    local queued = "false"
+    local success = false
+    local status = "unknown_command_type"
     local accountKey = ""
     local rewardUsername = ""
+    local transactionKey = ""
+    local amount, balanceBefore, balanceAfter = nil, nil, nil
+    local ledgerCommitted, receiptCommitted = false, false
+    local identitySource, uiPush = "", ""
 
     if ctype == "ping" then
-        success = "true"
-        message = "pong"
+        success = true
+        status = "pong"
     elseif ctype == "grant_discord_reward" then
         local steamId = jsonQuotedString(content, "steamId")
             or jsonQuotedString(content, "steamID64")
@@ -208,35 +227,40 @@ local function processInbox()
             or jsonString(content, "pzUsername")
             or jsonString(content, "player")
             or jsonString(content, "playerName")
+        local businessKey = jsonQuotedString(content, "businessKey")
+        local usernameSource = jsonQuotedString(content, "usernameSource")
 
         local ok, err, info
         if not steamId and hasNumericSteamId(content) then
             ok, err = false, "invalid_steam_id_type"
         else
-            ok, err, info = grantDiscordVerificationReward(steamId, username, id)
+            ok, err, info = grantDiscordVerificationReward(steamId, username, id, businessKey, usernameSource)
         end
-        if ok then
-            success = "true"
-            queued = (info and info.queued) and "true" or "false"
-            if queued == "true" and steamId then
-                success = "false"
-                message = "unexpected_queued_steam_identity"
-            elseif info and info.alreadyApplied then
-                message = "already_applied"
-            else
-                message = queued == "true" and "queued" or "applied"
-            end
-            accountKey = info and info.accountKey or ""
-            rewardUsername = info and info.username or username or ""
-        else
-            success = "false"
-            message = tostring(err)
-        end
+
+        status = (info and info.status) or (not ok and tostring(err)) or "applied"
+        success = ok == true and EXTERNAL_REWARD_SUCCESS_STATUS[status] == true
+            and info ~= nil and info.ledgerCommitted == true
+        accountKey = (info and info.accountKey) or ""
+        rewardUsername = (info and info.username) or username or ""
+        transactionKey = (info and info.transactionKey) or ""
+        amount = info and info.amount or nil
+        balanceBefore = info and info.balanceBefore or nil
+        balanceAfter = info and info.balanceAfter or nil
+        ledgerCommitted = info ~= nil and info.ledgerCommitted == true
+        receiptCommitted = info ~= nil and info.receiptCommitted == true
+        identitySource = (info and info.identitySource) or ""
+        uiPush = (info and info.uiPush) or ""
     end
 
     local resultJson = string.format(
-        '{"type":"command_result","id":"%s","success":%s,"message":"%s","queued":%s,"accountKey":"%s","username":"%s"}',
-        id, success, jsonEscape(message), queued, jsonEscape(accountKey), jsonEscape(rewardUsername)
+        '{"type":"command_result","id":"%s","success":%s,"status":"%s","message":"%s",' ..
+        '"accountKey":"%s","username":"%s","transactionKey":"%s","amount":%s,' ..
+        '"balanceBefore":%s,"balanceAfter":%s,"ledgerCommitted":%s,"receiptCommitted":%s,' ..
+        '"identitySource":"%s","uiPush":"%s"}',
+        id, jsonBool(success), jsonEscape(status), jsonEscape(status),
+        jsonEscape(accountKey), jsonEscape(rewardUsername), jsonEscape(transactionKey), jsonNumber(amount),
+        jsonNumber(balanceBefore), jsonNumber(balanceAfter), jsonBool(ledgerCommitted), jsonBool(receiptCommitted),
+        jsonEscape(identitySource), jsonEscape(uiPush)
     )
     writeFile("hwbridge_outbox_result.json", resultJson)
     print("[HWNetBridge] Respondido: " .. resultJson)
