@@ -1176,6 +1176,103 @@ function LS.grantExternalRewardOnce(identity, rewardType, externalId, legacyExte
         })
 end
 
+local DISCORD_REWARD_ADMIN_TYPE = "discord_verification"
+local DISCORD_REWARD_ADMIN_PREFIX = DISCORD_REWARD_ADMIN_TYPE .. ":"
+
+local function discordRewardAdminSteamId(value)
+    if type(value) ~= "string" or value == "" or #value > 20 then return nil end
+    if not value:match("^%d+$") then return nil end
+    return value
+end
+
+local function discordRewardAdminEntry(txKey, receipt)
+    return {
+        transactionKey = txKey,
+        accountKey = receipt.accountKey,
+        steamId = tostring(txKey):match("steam:(%d+)$"),
+        status = receipt.status,
+        amount = receipt.amount,
+        rewardType = receipt.rewardType,
+        externalId = receipt.externalId,
+    }
+end
+
+-- Administrative inspect/clear/list/clear_all over data.externalRewards
+-- receipts, scoped to rewardType "discord_verification" only -- see
+-- HWNetBridge_Discord_Reward_Admin.md. Deliberately narrow: this ONLY ever
+-- reads or deletes entries in the externalRewards RECEIPT table. It never
+-- touches an account's own externalTransactions ledger, balance or
+-- lifetimeEarned -- that is the actual financial proof, and clearing a
+-- receipt that has a real committed transaction behind it is harmless: the
+-- next grantExternalRewardOnce call for that account self-heals the receipt
+-- from the transaction (status "repaired") without granting credits again.
+-- Clearing a receipt with NO backing transaction -- the actual stuck state
+-- this exists to fix -- simply lets that account receive a genuine grant on
+-- the next attempt.
+function LS.adminDiscordReward(action, steamId)
+    if type(action) ~= "string" then
+        return { success = false, message = "invalid_action" }
+    end
+
+    local data = dataStore()
+    if type(data) ~= "table" then
+        return { success = false, message = "datastore_error" }
+    end
+    data.externalRewards = type(data.externalRewards) == "table" and data.externalRewards or {}
+    local rewards = data.externalRewards
+
+    if action == "inspect" then
+        local sid = discordRewardAdminSteamId(steamId)
+        if not sid then return { success = false, message = "invalid_steam_id" } end
+        local accountKey = "steam:" .. sid
+        local txKey = DISCORD_REWARD_ADMIN_PREFIX .. accountKey
+        local receipt = rewards[txKey]
+        if type(receipt) ~= "table" then
+            LS.log(string.format("[ShopAdmin] discord_reward_admin inspect steamId=%s exists=false", sid))
+            return { success = true, action = "inspect", steamId = sid, accountKey = accountKey,
+                transactionKey = txKey, exists = false }
+        end
+        LS.log(string.format("[ShopAdmin] discord_reward_admin inspect steamId=%s exists=true status=%s",
+            sid, tostring(receipt.status)))
+        return { success = true, action = "inspect", steamId = sid, accountKey = accountKey,
+            transactionKey = txKey, exists = true, status = receipt.status, amount = receipt.amount,
+            rewardType = receipt.rewardType, externalId = receipt.externalId }
+    elseif action == "clear" then
+        local sid = discordRewardAdminSteamId(steamId)
+        if not sid then return { success = false, message = "invalid_steam_id" } end
+        local txKey = DISCORD_REWARD_ADMIN_PREFIX .. "steam:" .. sid
+        if rewards[txKey] == nil then
+            LS.log(string.format("[ShopAdmin] discord_reward_admin clear steamId=%s removed=0", sid))
+            return { success = true, action = "clear", steamId = sid, removed = 0, message = "not_found" }
+        end
+        rewards[txKey] = nil
+        LS.log(string.format("[ShopAdmin] discord_reward_admin clear steamId=%s removed=1", sid))
+        return { success = true, action = "clear", steamId = sid, removed = 1, transactionKey = txKey }
+    elseif action == "list" then
+        local entries = {}
+        for txKey, receipt in pairs(rewards) do
+            if type(txKey) == "string" and txKey:sub(1, #DISCORD_REWARD_ADMIN_PREFIX) == DISCORD_REWARD_ADMIN_PREFIX
+                and type(receipt) == "table" then
+                entries[#entries + 1] = discordRewardAdminEntry(txKey, receipt)
+            end
+        end
+        LS.log(string.format("[ShopAdmin] discord_reward_admin list count=%d", #entries))
+        return { success = true, action = "list", count = #entries, entries = entries }
+    elseif action == "clear_all" then
+        local toRemove = {}
+        for txKey in pairs(rewards) do
+            if type(txKey) == "string" and txKey:sub(1, #DISCORD_REWARD_ADMIN_PREFIX) == DISCORD_REWARD_ADMIN_PREFIX then
+                toRemove[#toRemove + 1] = txKey
+            end
+        end
+        for _, txKey in ipairs(toRemove) do rewards[txKey] = nil end
+        LS.log(string.format("[ShopAdmin] discord_reward_admin clear_all removed=%d", #toRemove))
+        return { success = true, action = "clear_all", removed = #toRemove }
+    end
+
+    return { success = false, message = "invalid_action" }
+end
+
 -- Generic transfer between two identities -- what Commands[LS.CMD_TRANSFER]
 -- itself calls, after its own player-facing checks (alive, not self,
 -- cooldown, request dedup), none of which belong at this level. The

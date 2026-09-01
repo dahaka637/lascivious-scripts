@@ -20,14 +20,15 @@
 --
 -- Comandos aceitos no inbox (campo "type"): "ping", "grant_discord_reward" (credita
 -- bonus de verificacao Discord na Lascivious Shop, ver LasciviousShop.grantExternalRewardOnce),
--- "bind_pz_identity" (so registra o vinculo verificado username<->steam:<id> na
--- Identity V2 -- NAO credita nada; existe porque getSteamIDFromUsername() exige
--- GameClient.client==true (confirmado via javap em LuaManager$GlobalObject) e por
--- isso NUNCA funciona a partir de Lua server-side num dedicated de verdade -- o bot
--- e a unica fonte de SteamID exato pra esses jogadores), e "admin_lua_exec" (executor
--- Lua administrativo generico, ver HWNetBridge_Admin_Lua_Exec.md). So um comando em
--- voo por vez -- o lado Node so pode escrever um novo comando depois de ler o
--- resultado do anterior.
+-- "bind_pz_identity" (so registra o vinculo verificado username<->steam:<id> na Identity V2
+-- -- NAO credita nada; existe porque getSteamIDFromUsername() exige GameClient.client==true
+-- (confirmado via javap em LuaManager$GlobalObject) e por isso NUNCA funciona a partir de
+-- Lua server-side num dedicated de verdade -- o bot e a unica fonte de SteamID exato pra
+-- esses jogadores), e "discord_reward_admin" (inspecionar/limpar/listar receipts de
+-- discord_verification -- ver LasciviousShop.adminDiscordReward e
+-- HWNetBridge_Discord_Reward_Admin.md; NUNCA mexe no ledger financeiro, so no receipt
+-- administrativo). So um comando em voo por vez -- o lado Node so pode escrever um novo
+-- comando depois de ler o resultado do anterior.
 
 local okSteamIdModule, SteamIdModule = pcall(require, "LasciviousSystems_SteamId")
 local SteamId = okSteamIdModule and SteamIdModule or LasciviousSystemsSteamId
@@ -40,25 +41,6 @@ local previousAlive = {}
 local eventSeq = 0
 local recentEvents = {}
 local MAX_EVENTS = 20
-
--- admin_lua_exec: generic escape-hatch Lua executor for maintenance/diagnosis
--- from outside the server process (Discord bot's internal admin ops, a VPS
--- CLI, Claude/Codex operating the server). See HWNetBridge_Admin_Lua_Exec.md
--- for the full design. Always on -- explicit request, no enable/disable flag.
--- This is equivalent to a remote Lua console inside the running server: the
--- only real security boundary is "who can write to hwbridge_inbox.json on
--- this machine" (this bridge is pure local-file IPC, never a network port --
--- same boundary every other bridge command already relies on). Per the
--- design doc, do NOT try to blacklist keywords/APIs -- that is a false sense
--- of security a real admin console should not pretend to have.
---
--- Emergency kill switch (no code edit/restart needed): write ANY non-empty
--- content to hwbridge_disable_admin_lua in this same directory and every
--- request is refused immediately.
-local ADMIN_LUA_DISABLE_SENTINEL = "hwbridge_disable_admin_lua"
-local MAX_ADMIN_LUA_CODE_BYTES = 16384
-local MAX_ADMIN_LUA_SERIALIZE_DEPTH = 6
-local MAX_ADMIN_LUA_SERIALIZE_ITEMS = 500
 
 local function jsonEscape(str)
     str = tostring(str or "")
@@ -92,52 +74,6 @@ local function jsonQuotedString(content, key)
     if type(value) ~= "string" then return nil end
     value = value:gsub("^%s+", ""):gsub("%s+$", "")
     return value ~= "" and value or nil
-end
-
--- Every other jsonXxx(content, key) helper in this file stops at the first
--- raw '"', which is fine for the simple values (steamId, username, UUIDs)
--- every other command exchanges. admin_lua_exec's "code" field is arbitrary
--- Lua source and will routinely contain embedded quotes/newlines
--- (getPlayerFromUsername("Dahaka")), so it needs a real escape-aware
--- extractor. Handles the standard JSON escapes; \uXXXX is best-effort ASCII
--- only (returns nil / drops the codepoint above U+007F rather than
--- mis-decoding -- this bridge has no UTF-8 encoder and refusing beats
--- silently corrupting the script).
-local function jsonEscapedString(content, key)
-    if type(content) ~= "string" or type(key) ~= "string" then return nil end
-    local _, afterKey = content:find('"' .. key .. '"%s*:%s*"')
-    if not afterKey then return nil end
-    local len = #content
-    local out, i = {}, afterKey + 1
-    while i <= len do
-        local c = content:sub(i, i)
-        if c == '"' then
-            return table.concat(out)
-        elseif c == "\\" then
-            local nextc = content:sub(i + 1, i + 1)
-            if nextc == "n" then out[#out + 1] = "\n"
-            elseif nextc == "t" then out[#out + 1] = "\t"
-            elseif nextc == "r" then out[#out + 1] = "\r"
-            elseif nextc == "b" then out[#out + 1] = "\b"
-            elseif nextc == "f" then out[#out + 1] = "\f"
-            elseif nextc == '"' then out[#out + 1] = '"'
-            elseif nextc == "\\" then out[#out + 1] = "\\"
-            elseif nextc == "/" then out[#out + 1] = "/"
-            elseif nextc == "u" then
-                local hex = content:sub(i + 2, i + 5)
-                local codepoint = tonumber(hex, 16)
-                if codepoint and codepoint < 128 then out[#out + 1] = string.char(codepoint) end
-                i = i + 4
-            else
-                out[#out + 1] = nextc
-            end
-            i = i + 2
-        else
-            out[#out + 1] = c
-            i = i + 1
-        end
-    end
-    return nil -- unterminated string
 end
 
 local function jsonNumberString(content, key)
@@ -277,121 +213,6 @@ local function bindPzIdentity(steamId, username, usernameSource)
     return true, nil, { accountKey = steamKey, username = username }
 end
 
--- True when `t` is empty or has a contiguous 1..n integer key run (i.e. what
--- Lua's own #t / ipairs() convention treats as "an array"). Anything else --
--- a mix of string keys, a sparse integer sequence -- serializes as a JSON
--- object instead. Never trust this on a Java-backed value; every call site
--- wraps it in pcall.
-local function isArrayLikeTable(t)
-    local n = 0
-    for _ in pairs(t) do n = n + 1 end
-    if n == 0 then return true, 0 end
-    for i = 1, n do
-        if t[i] == nil then return false, n end
-    end
-    return true, n
-end
-
--- Converts an admin_lua_exec return value to a JSON fragment. Only nil,
--- boolean, number, string and "plain" tables (recursively) are ever walked --
--- per the design doc, a function/userdata/Java-backed object (IsoPlayer,
--- getOnlinePlayers(), ...) must never be walked recursively, so it becomes a
--- safe `"<type>"` placeholder instead of a crash or an unbounded Java object
--- dump. Kahlua exposes Java objects to Lua as tables with method-call
--- metatables, so `type(value) == "table"` alone can't tell a plain Lua table
--- from one of those -- every table walk below is pcall-wrapped so an
--- unexpected iteration failure degrades to a placeholder instead of taking
--- the whole response down. `budget` is a shared {count=N} across the whole
--- call tree so a pathological/huge table is capped once, not per-branch.
-local function serializeAdminLuaValue(value, depth, budget)
-    depth = depth or 0
-    budget.count = budget.count + 1
-    if budget.count > MAX_ADMIN_LUA_SERIALIZE_ITEMS then return '"<truncated:too_many_items>"' end
-
-    local vtype = type(value)
-    if value == nil then return "null" end
-    if vtype == "boolean" then return jsonBool(value) end
-    if vtype == "number" then return jsonNumber(value) end
-    if vtype == "string" then return '"' .. jsonEscape(value) .. '"' end
-    if vtype ~= "table" then return '"<' .. jsonEscape(vtype) .. '>"' end
-    if depth >= MAX_ADMIN_LUA_SERIALIZE_DEPTH then return '"<truncated:max_depth>"' end
-
-    local okScan, isArray, count = pcall(isArrayLikeTable, value)
-    if not okScan then return '"<unserializable_table>"' end
-
-    local parts = {}
-    if isArray then
-        local okIter = pcall(function()
-            for i = 1, count do
-                parts[#parts + 1] = serializeAdminLuaValue(value[i], depth + 1, budget)
-                if budget.count > MAX_ADMIN_LUA_SERIALIZE_ITEMS then break end
-            end
-        end)
-        if not okIter then return '"<unserializable_table>"' end
-        return "[" .. table.concat(parts, ",") .. "]"
-    end
-    local okIter = pcall(function()
-        for k, v in pairs(value) do
-            if type(k) == "string" or type(k) == "number" then
-                parts[#parts + 1] = '"' .. jsonEscape(tostring(k)) .. '":' .. serializeAdminLuaValue(v, depth + 1, budget)
-            end
-            if budget.count > MAX_ADMIN_LUA_SERIALIZE_ITEMS then break end
-        end
-    end)
-    if not okIter then return '"<unserializable_table>"' end
-    return "{" .. table.concat(parts, ",") .. "}"
-end
-
-local function adminLuaNowMs()
-    if getTimestampMs then return getTimestampMs() end
-    return math.floor((getTimestamp() or 0) * 1000)
-end
-
--- Runs `code` as a full Lua chunk inside the server's own Lua state and
--- returns ok, errorReason, info. info.results holds every value the chunk
--- returned (info.result is just results[1], for callers that only care about
--- one value); on failure info.errorMessage/info.traceback are set (identical
--- strings if this Kahlua build's debug library doesn't expose traceback()).
---
--- NOT SAFE AGAINST NON-TERMINATING CODE: Kahlua's loadstring() has no
--- instruction limit or preemption (confirmed by this exact codebase --
--- PhunZones/client/PhunZones/ui/ui_editor.lua's own comment on this same
--- primitive). `while true do end` WILL hang the server's main Lua thread with
--- no way for this file to interrupt it. There is no safe fix for that from
--- pure Lua; the only mitigation is "don't run code you don't trust" and the
--- hwbridge_disable_admin_lua emergency sentinel checked below.
-local function executeAdminLua(code, requestId, source)
-    if readFile(ADMIN_LUA_DISABLE_SENTINEL) ~= "" then return false, "admin_lua_disabled" end
-    if type(code) ~= "string" or code == "" then return false, "missing_code" end
-    if #code > MAX_ADMIN_LUA_CODE_BYTES then return false, "code_too_large" end
-
-    local startedAt = adminLuaNowMs()
-    local chunk, compileErr = loadstring(code)
-    if not chunk then
-        local elapsed = adminLuaNowMs() - startedAt
-        print(string.format(
-            "[HWNetBridge/AdminLua] requestId=%s source=%s success=false stage=compile size=%d executionTimeMs=%d preview=%s",
-            tostring(requestId), tostring(source), #code, elapsed, code:sub(1, 200)))
-        return false, "compile_error", { errorMessage = tostring(compileErr), executionTimeMs = elapsed }
-    end
-
-    local hasTraceback = type(debug) == "table" and type(debug.traceback) == "function"
-    local xres = { xpcall(chunk, hasTraceback and debug.traceback or tostring) }
-    local ok = xres[1]
-    table.remove(xres, 1)
-    local elapsed = adminLuaNowMs() - startedAt
-
-    print(string.format(
-        "[HWNetBridge/AdminLua] requestId=%s source=%s success=%s size=%d executionTimeMs=%d preview=%s",
-        tostring(requestId), tostring(source), tostring(ok), #code, elapsed, code:sub(1, 200)))
-
-    if not ok then
-        local errText = tostring(xres[1])
-        return false, "lua_error", { errorMessage = errText, traceback = errText, executionTimeMs = elapsed }
-    end
-    return true, nil, { results = xres, result = xres[1], executionTimeMs = elapsed }
-end
-
 -- Only these three account-transaction statuses represent a proven, committed
 -- ledger change (see LasciviousShop_Server.lua's grantExternalRewardOnce state
 -- machine). Everything else -- processing (which no longer exists as a
@@ -403,6 +224,16 @@ local EXTERNAL_REWARD_SUCCESS_STATUS = {
     already_committed = true,
     repaired = true,
 }
+
+-- Known, bounded shape from LasciviousShop.adminDiscordReward's "list" entries
+-- -- not a general serializer, just this one small flat record.
+local function jsonReceiptEntry(e)
+    return string.format(
+        '{"transactionKey":"%s","accountKey":"%s","steamId":"%s","status":"%s","amount":%s,"rewardType":"%s","externalId":"%s"}',
+        jsonEscape(e.transactionKey), jsonEscape(e.accountKey), jsonEscape(e.steamId or ""),
+        jsonEscape(e.status), jsonNumber(e.amount), jsonEscape(e.rewardType), jsonEscape(e.externalId or "")
+    )
+end
 
 local function processInbox()
     local content = readFile("hwbridge_inbox.json")
@@ -416,41 +247,77 @@ local function processInbox()
 
     print("[HWNetBridge] Comando recebido: id=" .. tostring(id) .. " type=" .. tostring(ctype))
 
-    -- admin_lua_exec's response shape (a possibly-nested `result`/`results`
-    -- value, of arbitrary Lua type) doesn't fit the flat reward/bind template
-    -- every other command shares below, so it builds and writes its own
-    -- response and returns here instead of falling through.
-    if ctype == "admin_lua_exec" then
-        local code = jsonEscapedString(content, "code")
-        local source = jsonQuotedString(content, "source") or "unknown"
-        local ok, err, info = executeAdminLua(code, id, source)
+    -- discord_reward_admin's response shape (a flat record for inspect/clear/
+    -- clear_all, an array of flat records for list) doesn't fit the shared
+    -- reward/bind template below, so it builds and writes its own response
+    -- and returns here instead of falling through. Read-only for inspect/
+    -- list; clear/clear_all only ever delete data.externalRewards[...]
+    -- receipt entries via LasciviousShop.adminDiscordReward -- see that
+    -- function's own comment for why that is always safe (never touches the
+    -- account's own transaction ledger/balance).
+    if ctype == "discord_reward_admin" then
+        local action = jsonQuotedString(content, "action") or ""
+        local steamId = jsonQuotedString(content, "steamId")
+            or jsonQuotedString(content, "steamID64")
+            or jsonQuotedString(content, "steamID")
+            or jsonQuotedString(content, "steam_id_64")
+            or jsonQuotedString(content, "steam_id")
+            or jsonQuotedString(content, "steam64")
+            or jsonQuotedString(content, "steam")
+            or jsonQuotedString(content, "steamid")
 
-        local budget = { count = 0 }
-        local resultJson, resultsJson = "null", "[]"
-        local errorMessage, tracebackText = "", ""
-        local executionTimeMs = (info and info.executionTimeMs) or 0
-        if ok then
-            resultJson = serializeAdminLuaValue(info.result, 0, budget)
-            local parts = {}
-            for _, v in ipairs(info.results or {}) do
-                parts[#parts + 1] = serializeAdminLuaValue(v, 0, budget)
-            end
-            resultsJson = "[" .. table.concat(parts, ",") .. "]"
+        local resultJson
+        if not (LasciviousShop and type(LasciviousShop.adminDiscordReward) == "function") then
+            resultJson = string.format('{"type":"command_result","id":"%s","success":false,"message":"shop_unavailable"}', id)
+        elseif action ~= "inspect" and action ~= "clear" and action ~= "list" and action ~= "clear_all" then
+            resultJson = string.format('{"type":"command_result","id":"%s","success":false,"message":"invalid_action"}', id)
+        elseif (action == "inspect" or action == "clear") and not steamId and hasNumericSteamId(content) then
+            resultJson = string.format('{"type":"command_result","id":"%s","success":false,"message":"invalid_steam_id_type"}', id)
         else
-            errorMessage = (info and info.errorMessage) or tostring(err)
-            tracebackText = (info and info.traceback) or errorMessage
+            local okCall, r = pcall(LasciviousShop.adminDiscordReward, action, steamId)
+            if not okCall or type(r) ~= "table" then
+                print("[HWNetBridge] discord_reward_admin erro interno: " .. tostring(r))
+                resultJson = string.format('{"type":"command_result","id":"%s","success":false,"message":"internal_error"}', id)
+            elseif r.success ~= true then
+                resultJson = string.format('{"type":"command_result","id":"%s","success":false,"action":"%s","message":"%s"}',
+                    id, jsonEscape(action), jsonEscape(r.message or "invalid_action"))
+            elseif action == "inspect" and r.exists then
+                resultJson = string.format(
+                    '{"type":"command_result","id":"%s","success":true,"action":"inspect","steamId":"%s",' ..
+                    '"accountKey":"%s","transactionKey":"%s","exists":true,"status":"%s","amount":%s,' ..
+                    '"rewardType":"%s","externalId":"%s"}',
+                    id, jsonEscape(r.steamId), jsonEscape(r.accountKey), jsonEscape(r.transactionKey),
+                    jsonEscape(r.status), jsonNumber(r.amount), jsonEscape(r.rewardType), jsonEscape(r.externalId or ""))
+            elseif action == "inspect" then
+                resultJson = string.format(
+                    '{"type":"command_result","id":"%s","success":true,"action":"inspect","steamId":"%s",' ..
+                    '"accountKey":"%s","transactionKey":"%s","exists":false}',
+                    id, jsonEscape(r.steamId), jsonEscape(r.accountKey), jsonEscape(r.transactionKey))
+            elseif action == "clear" and r.removed == 1 then
+                resultJson = string.format(
+                    '{"type":"command_result","id":"%s","success":true,"action":"clear","steamId":"%s",' ..
+                    '"removed":1,"transactionKey":"%s"}',
+                    id, jsonEscape(r.steamId), jsonEscape(r.transactionKey))
+            elseif action == "clear" then
+                resultJson = string.format(
+                    '{"type":"command_result","id":"%s","success":true,"action":"clear","steamId":"%s",' ..
+                    '"removed":0,"message":"not_found"}',
+                    id, jsonEscape(r.steamId))
+            elseif action == "list" then
+                local parts = {}
+                for _, e in ipairs(r.entries or {}) do parts[#parts + 1] = jsonReceiptEntry(e) end
+                resultJson = string.format(
+                    '{"type":"command_result","id":"%s","success":true,"action":"list","count":%d,"entries":[%s]}',
+                    id, r.count or 0, table.concat(parts, ","))
+            else -- clear_all
+                resultJson = string.format(
+                    '{"type":"command_result","id":"%s","success":true,"action":"clear_all","removed":%d}',
+                    id, r.removed or 0)
+            end
         end
 
-        local adminResultJson = string.format(
-            '{"type":"command_result","id":"%s","success":%s,"status":"%s",' ..
-            '"result":%s,"results":%s,"error":"%s","traceback":"%s","executionTimeMs":%s}',
-            id, jsonBool(ok == true), jsonEscape(ok and "executed" or tostring(err)),
-            resultJson, resultsJson, jsonEscape(errorMessage), jsonEscape(tracebackText),
-            jsonNumber(executionTimeMs)
-        )
-        writeFile("hwbridge_outbox_result.json", adminResultJson)
-        print("[HWNetBridge] Respondido (admin_lua_exec): id=" .. tostring(id)
-            .. " success=" .. tostring(ok == true))
+        writeFile("hwbridge_outbox_result.json", resultJson)
+        print("[HWNetBridge] Respondido (discord_reward_admin): id=" .. tostring(id) .. " action=" .. tostring(action))
         return
     end
 
