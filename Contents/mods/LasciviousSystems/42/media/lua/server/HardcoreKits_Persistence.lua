@@ -218,18 +218,29 @@ function HardcoreKitsPersistence.resetAccount(accountId)
 end
 
 -- Move os dados registrados em `oldKey` para `newKey`, quando `newKey` ainda
--- nao tem nada. Usado uma unica vez por jogador afetado pelo bug de precisao
--- do SteamID64 (ver LasciviousSystems_SteamId.lua) -- oldKey e a chave errada
--- exata que o bug antigo calculava para o MESMO jogador, nunca dado de outra
--- conta. Chamado por HardcoreKitsIdentity.accountId().
+-- nao tem nada. `oldKey` e a chave errada exata que o bug antigo de precisao
+-- do SteamID64 calculava para o MESMO jogador (ver LasciviousSystems_SteamId.lua),
+-- nunca dado de outra conta. Chamado por HardcoreKitsIdentity.accountId() em
+-- TODA chamada (nao so uma vez) porque a checagem que decidiria "ja migrado"
+-- do lado de quem chama nunca fecha: `tostring(player:getSteamID())` de um
+-- SteamID64 real cai em notacao cientifica ("steam:7.65...E16"), que nunca vai
+-- ser igual a chave correta formatada em decimal, entao `legacyAccountKey()`
+-- sempre devolve uma chave "legada" candidata, todo tick. Por isso esta funcao
+-- PRECISA ser segura de chamar infinitas vezes (e' -- so mexe se `oldKey`
+-- realmente ainda tiver algo) e devolve true so quando de fato moveu alguma
+-- coisa, para quem chama decidir se vale a pena logar (ver o bug real: log
+-- incondicional a cada chamada spammava o console do servidor para sempre).
 function HardcoreKitsPersistence.migrateAccount(oldKey, newKey)
-    if not oldKey or not newKey or oldKey == newKey then return end
+    if not oldKey or not newKey or oldKey == newKey then return false end
+
+    local migrated = false
 
     local claimed = claimedAccountsTable()
-    if claimed[oldKey] == true and claimed[newKey] == nil then
-        claimed[newKey] = true
+    if claimed[oldKey] == true then
+        if claimed[newKey] == nil then claimed[newKey] = true end
+        claimed[oldKey] = nil
+        migrated = true
     end
-    claimed[oldKey] = nil
 
     local all = accounts()
     local oldData = all[oldKey]
@@ -238,5 +249,8 @@ function HardcoreKitsPersistence.migrateAccount(oldKey, newKey)
             all[newKey] = oldData
         end
         all[oldKey] = nil
+        migrated = true
     end
+
+    return migrated
 end

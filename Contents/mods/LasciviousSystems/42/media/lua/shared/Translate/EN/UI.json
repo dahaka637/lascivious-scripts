@@ -936,7 +936,7 @@
     "UI_LFS_UpgradeCommerceDescT4": "O desconto já pesa bastante na hora de comprar -- quase preço de atacado.",
     "UI_LFS_UpgradeCommerceDescT5": "No nível máximo a facção compra praticamente no atacado -- 50%% de desconto em tudo na loja.",
     "UI_LFS_UpgradeCommerceName": "Comércio",
-    "UI_LFS_UpgradeCommerceTechnical": "(Desconto por nível na loja: Nv.1 3%%, Nv.2 6%%, Nv.3 10%%, Nv.4 14%%, Nv.5 19%%, Nv.6 24%%, Nv.7 30%%, Nv.8 36%%, Nv.9 43%%, Nv.10 50%%.)",
+    "UI_LFS_UpgradeCommerceTechnical": "(Desconto na loja para membros da facção: começa em 3%% no nível 1 e cresce a cada nível, acelerando até 50%% no nível máximo.)",
     "UI_LFS_UpgradeHunterDescT1": "A facção não enxerga além do próprio território -- quem está lá fora, fica invisível.",
     "UI_LFS_UpgradeHunterDescT2": "Um primeiro alcance de vigia: dá pra notar sombras de gente estranha rondando perto das fronteiras.",
     "UI_LFS_UpgradeHunterDescT3": "Os olheiros já cobrem uma boa distância -- o mapa passa a marcar áreas onde intrusos podem estar escondidos.",

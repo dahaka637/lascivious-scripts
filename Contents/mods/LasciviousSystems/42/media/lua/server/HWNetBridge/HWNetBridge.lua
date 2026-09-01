@@ -158,6 +158,23 @@ local function writeHeartbeat()
     writeFile("hwbridge_heartbeat.json", json)
 end
 
+-- ============================================================================
+-- AVISO PERMANENTE DO DONO DO PROJETO (2026-09-01) -- NAO REMOVER ESTE BLOCO
+-- ============================================================================
+-- Depois de uma saga longa e desgastante em cima da recompensa de verificacao
+-- do Discord -- split-brain de identidade SteamID, depois um bug de credito
+-- duplicado a cada restart do servidor (ver commit ef3c0aa e o mesmo aviso em
+-- LasciviousShop_Server.lua, acima de EXTERNAL_REWARDS) -- o dono do projeto
+-- foi explicito: ele NUNCA MAIS, EM HIPOTESE ALGUMA, vai mexer de novo nisso,
+-- e QUALQUER sessao futura (Claude, Codex, ou qualquer outra ferramenta) esta
+-- PROIBIDA de tocar em grantDiscordVerificationReward, bindPzIdentity, ou nos
+-- comandos grant_discord_reward/bind_pz_identity/discord_reward_admin --
+-- EXCETO se o pedido explicito dele for apagar tudo isso por completo e de
+-- vez. Nao "corrigir mais um detalhezinho". Nao "melhorar". Nada. Se algo
+-- aqui parecer quebrado, pergunte se ele quer isso REMOVIDO POR COMPLETO --
+-- nunca ofereça consertar de novo.
+-- ============================================================================
+
 -- Credita o bonus de verificacao Discord na Lascivious Shop. O Bridge valida apenas
 -- identidade/transporte; valor, idempotencia e prova financeira ficam dentro da Shop.
 local function grantDiscordVerificationReward(steamId, username, commandId, businessKey, usernameSource)
@@ -247,6 +264,9 @@ local function processInbox()
 
     print("[HWNetBridge] Comando recebido: id=" .. tostring(id) .. " type=" .. tostring(ctype))
 
+    -- Covered by the DO NOT TOUCH warning above grantDiscordVerificationReward
+    -- further up this file -- read that before changing anything below.
+    --
     -- discord_reward_admin's response shape (a flat record for inspect/clear/
     -- clear_all, an array of flat records for list) doesn't fit the shared
     -- reward/bind template below, so it builds and writes its own response

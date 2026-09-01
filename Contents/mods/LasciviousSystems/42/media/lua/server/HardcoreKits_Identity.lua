@@ -44,8 +44,16 @@ function HardcoreKitsIdentity.accountId(player)
         local legacyKey = (type(key) == "string" and string.match(key, "^steam:%d+$"))
             and LasciviousSystemsSteamId.legacyAccountKey(player, key) or nil
         if legacyKey then
-            HardcoreKitsPersistence.migrateAccount(legacyKey, key)
-            print("[HardcoreKits] Conta migrada (bug de precisao do SteamID): '" .. tostring(legacyKey) .. "' -> '" .. tostring(key) .. "'")
+            -- legacyKey is a FRESH candidate computed on every single call
+            -- (tostring(player:getSteamID()) never matches the correctly
+            -- formatted decimal `key`, so this branch is entered every time,
+            -- not just once) -- only log when migrateAccount actually moved
+            -- something, or this spams the console forever for a player who
+            -- was already migrated on the very first call. See
+            -- HardcoreKitsPersistence.migrateAccount's own comment.
+            if HardcoreKitsPersistence.migrateAccount(legacyKey, key) then
+                print("[HardcoreKits] Conta migrada (bug de precisao do SteamID): '" .. tostring(legacyKey) .. "' -> '" .. tostring(key) .. "'")
+            end
         end
         return key
     end
