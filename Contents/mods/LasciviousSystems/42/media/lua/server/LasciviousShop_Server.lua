@@ -226,19 +226,47 @@ local function flushPendingCredits(rec, key, extraKeys)
         local list = data.pendingCredits[k]
         if type(list) == "table" and #list > 0 then
             local total = 0
+            local flushed = 0
+            local deferred = {}
             for _, entry in ipairs(list) do
-                local amount = type(entry) == "table" and finiteNumber(entry.amount, 0) or 0
-                if amount > 0 and amount <= MAX_API_CREDIT_AMOUNT then
-                    rec.balance = LS.roundCredits(rec.balance + amount)
-                    rec.lifetimeEarned = LS.roundCredits(rec.lifetimeEarned + amount)
-                    total = total + amount
+                -- discord_verification NEVER gets credited by a direct flush --
+                -- it has its own exact tx/receipt idempotency in
+                -- grantExternalRewardOnce, and crediting it straight to balance
+                -- here bypasses that entirely. Confirmed live double-credit bug
+                -- (2026-09-01): reconcileSteamPendingCredits below already called
+                -- grantExternalRewardOnce correctly, but nothing removed the
+                -- entry from this queue afterward, so it fell through to this
+                -- same function and got credited AGAIN on every single server
+                -- restart. Any such entry is left queued here on purpose --
+                -- reconcileSteamPendingCredits is the only code allowed to
+                -- consume it (route through grantExternalRewardOnce, then
+                -- remove it from the queue itself).
+                if type(entry) == "table" and entry.reason == "discord_verification" then
+                    deferred[#deferred + 1] = entry
+                else
+                    local amount = type(entry) == "table" and finiteNumber(entry.amount, 0) or 0
+                    if amount > 0 and amount <= MAX_API_CREDIT_AMOUNT then
+                        rec.balance = LS.roundCredits(rec.balance + amount)
+                        rec.lifetimeEarned = LS.roundCredits(rec.lifetimeEarned + amount)
+                        total = total + amount
+                        flushed = flushed + 1
+                    end
                 end
             end
-            rec.updatedAt = nowSeconds()
-            rec.source = "api_queued_grant_flush"
-            LS.log(string.format("applied %d queued grant(s) totalling %s credits queued for '%s' (account '%s')",
-                #list, LS.formatCredits(total), k, key))
-            data.pendingCredits[k] = nil
+            if flushed > 0 then
+                rec.updatedAt = nowSeconds()
+                rec.source = "api_queued_grant_flush"
+                LS.log(string.format("applied %d queued grant(s) totalling %s credits queued for '%s' (account '%s')",
+                    flushed, LS.formatCredits(total), k, key))
+            end
+            if #deferred > 0 then
+                data.pendingCredits[k] = deferred
+                LS.log(string.format(
+                    "WARNING: left %d discord_verification entr%s queued for '%s' uncredited -- must be routed through grantExternalRewardOnce (reconcileSteamPendingCredits), never a direct flush",
+                    #deferred, #deferred == 1 and "y" or "ies", k))
+            else
+                data.pendingCredits[k] = nil
+            end
         end
     end
 end
@@ -2916,20 +2944,35 @@ local function reconcileSteamPendingCredits()
         local canonicalKey, sid = validSteamAccountKey(key)
         local list = data.pendingCredits[key]
         if canonicalKey and type(list) == "table" and #list > 0 then
-            local discordAmount = nil
+            local hasDiscordEntry = false
             for _, entry in ipairs(list) do
                 if type(entry) == "table" and entry.reason == "discord_verification" then
-                    local amount = finiteNumber(entry.amount, nil)
-                    if amount and amount > 0 and amount <= MAX_API_CREDIT_AMOUNT then
-                        discordAmount = amount
-                        break
-                    end
+                    hasDiscordEntry = true
+                    break
                 end
             end
 
-            if discordAmount then
+            if hasDiscordEntry then
+                -- One-time migration path: discord_verification entries were
+                -- queued here before grantExternalRewardOnce got its own exact
+                -- tx/receipt ledger (see flushPendingCredits' comment above for
+                -- the double-credit bug this closes). That function is now the
+                -- SOLE authority for whether this credit was ever applied, so
+                -- every discord_verification entry is stripped from the generic
+                -- queue here UNCONDITIONALLY -- regardless of the grant's
+                -- outcome (applied/already_committed/repaired/even a hard
+                -- failure) -- so it can never reach flushPendingCredits below,
+                -- and this migration never has to re-run for the same entry on
+                -- a future restart either.
                 LS.grantExternalRewardOnce({ steamId = sid, source = "startup_pending_reconcile" },
                     "discord_verification", "startup_pending_reconcile")
+                local remaining = {}
+                for _, entry in ipairs(list) do
+                    if not (type(entry) == "table" and entry.reason == "discord_verification") then
+                        remaining[#remaining + 1] = entry
+                    end
+                end
+                data.pendingCredits[key] = #remaining > 0 and remaining or nil
                 list = data.pendingCredits[key]
             end
 
