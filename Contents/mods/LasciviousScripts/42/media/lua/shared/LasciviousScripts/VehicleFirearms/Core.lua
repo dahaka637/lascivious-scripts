@@ -12,7 +12,7 @@ LasciviousScripts.VehicleFirearms = LasciviousScripts.VehicleFirearms or {}
 
 local Core = LasciviousScripts.VehicleFirearms
 
-Core.VERSION = "1.0.6"
+Core.VERSION = "1.0.7"
 Core.OPTION_TABLE = "LasciviousScriptsVehicleFirearms"
 
 Core.DEFAULTS = {
@@ -42,8 +42,6 @@ Core.PATCH_TARGETS = {
     { name = "ISUnloadBulletsFromFirearm", path = "TimedActions/ISUnloadBulletsFromFirearm" },
 }
 
-Core._constructorPatches = Core._constructorPatches or {}
-Core._wrappedConstructors = Core._wrappedConstructors or {}
 Core._methodPatches = Core._methodPatches or {}
 Core._wrappedMethods = Core._wrappedMethods or {}
 Core._patchComplete = Core._patchComplete or false
@@ -273,31 +271,32 @@ function Core.patchActionMethod(globalName, methodName)
     return true
 end
 
-function Core.patchActionConstructor(globalName)
-    local globals = getGlobalTable()
-    local actionClass = globals and globals[globalName] or nil
-    if not actionClass or type(actionClass.new) ~= "function" then
-        return false
-    end
-
-    if Core._wrappedConstructors[globalName] and actionClass.new == Core._wrappedConstructors[globalName] then
-        return true
-    end
-
-    local originalNew = actionClass.new
-    Core._constructorPatches[globalName] = Core._constructorPatches[globalName] or originalNew
-
-    local wrappedNew = function(self, ...)
-        local action = originalNew(self, ...)
-        Core.relaxActionForDriver(action)
-        return action
-    end
-    Core._wrappedConstructors[globalName] = wrappedNew
-    actionClass.new = wrappedNew
-
-    return true
-end
-
+-- BUG (found 2026-09-01, decompiled zombie.core.NetTimedAction to root-cause):
+-- this used to also wrap `<Class>.new` the same way it wraps `start`/`update`
+-- below, calling Core.relaxActionForDriver(action) right after construction.
+-- That broke reload/rack/unload EVEN OUTSIDE VEHICLES, for every player.
+--
+-- NetTimedAction.set(player, action) reads `action:getMetatable():rawget("new")`
+-- -- the CLASS's OWN constructor closure -- casts it to a LuaClosure and reads
+-- its *compiled bytecode prototype* (numParams + the local-variable NAMES the
+-- Lua compiler recorded for each parameter) to decide which named fields of
+-- the instance to copy into actionArgs for network (re)construction. This is
+-- Java reflecting on the constructor's own parameter list, not calling it --
+-- it has no way to know our replacement function is "the same constructor
+-- with extra behaviour tacked on". Our `function(self, ...) ... end` wrapper
+-- has exactly ONE compiled parameter (`self`; `...` is not a named local), so
+-- that loop found zero real parameter names, actionArgs came back with
+-- `character`/`weapon`/etc. entirely missing, and the reconstructed action
+-- had a nil self.character server-side -- exactly the
+-- "getPerkLevel/getSpentRoundCount of non-table: null" crashes in vanilla
+-- ISReloadWeaponAction/ISRackFirearm.
+--
+-- Fixed by never touching `.new` at all. `Core.relaxActionForDriver` already
+-- runs from the `start` method wrap below (both before AND after the real
+-- start()), which fires once the action is fully constructed with a real
+-- self.character/self.gun -- functionally equivalent, and `start`/`update` are
+-- called directly by Lua (self:start()), never introspected by Java for named
+-- parameters, so wrapping them is safe.
 function Core.patchFirearmTimedActions(force)
     if not force and Core._patchComplete then return Core._patchCount end
 
@@ -310,8 +309,7 @@ function Core.patchFirearmTimedActions(force)
     end
 
     for _, target in ipairs(Core.PATCH_TARGETS) do
-        if Core.patchActionConstructor(target.name) then patched = patched + 1 end
-        Core.patchActionMethod(target.name, "start")
+        if Core.patchActionMethod(target.name, "start") then patched = patched + 1 end
         Core.patchActionMethod(target.name, "update")
     end
 
