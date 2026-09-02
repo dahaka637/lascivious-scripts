@@ -56,6 +56,19 @@ function HardcoreKitsRoulette.unregister(instance)
     activeCount = math.max(0, activeCount - 1)
 end
 
+local function failSafeComplete(instance, reason)
+    if not instance or instance.finished == true then return end
+    instance.finished = true
+    instance.state = instance.state or "done"
+    local callback = instance.onAllDone
+    if type(callback) ~= "function" then return end
+    local ok, err = pcall(callback)
+    if not ok then
+        print("[HardcoreKits] roleta: fail-safe nao conseguiu avisar reveal_complete ("
+            .. tostring(reason) .. "): " .. tostring(err))
+    end
+end
+
 -- true so quando a JANELA principal do /kit esta aberta e visivel -- usado
 -- tanto pra decidir se toca som (nao faz sentido tocar tique de roleta com a
 -- janela fechada) quanto pelo overlay (HardcoreKits_RouletteOverlay.lua) pra
@@ -104,6 +117,7 @@ local function globalTick()
             local ok, err = pcall(instance.tick, instance)
             if not ok then
                 print("[HardcoreKits] roleta: erro no tick em segundo plano: " .. tostring(err))
+                failSafeComplete(instance, "tick_error")
                 HardcoreKitsRoulette.unregister(instance)
             end
         end

@@ -1,0 +1,15 @@
+{
+    "Sandbox_SprintDiveWindows": "Pular Através de Janelas Correndo",
+    "Sandbox_SprintDiveWindows_FailChance": "Chance de falhar o pulo (%%)",
+    "Sandbox_SprintDiveWindows_FailChance_tooltip": "Chance de errar o pulo e se estatelar no chão em vez de cair de pé. 0 significa que você nunca se estatela, 100 significa que sempre se estatela.",
+    "Sandbox_SprintDiveWindows_InjuryChance": "Chance de corte no vidro (%%)",
+    "Sandbox_SprintDiveWindows_InjuryChance_tooltip": "Chance de se cortar no vidro ao pular pela janela. A chance de errar o pulo em si é controlada pelas regras do próprio jogo para pular cercas correndo.",
+    "Sandbox_SprintDiveWindows_MinSprintTime": "Tempo mínimo de sprint",
+    "Sandbox_SprintDiveWindows_MinSprintTime_tooltip": "Quanto tempo é preciso correr antes que o pulo seja permitido. Quanto maior, mais impulso é necessário.",
+    "Sandbox_SprintDiveWindows_VanillaAnimation": "Usar animação padrão de pular cerca",
+    "Sandbox_SprintDiveWindows_VanillaAnimation_tooltip": "Usa a animação normal de pular cerca do jogo em vez do pulo customizado que quebra a janela.",
+    "Sandbox_SprintDiveWindows_ShortSprintBreaksGlass": "Impulso curto quebra o vidro",
+    "Sandbox_SprintDiveWindows_ShortSprintBreaksGlass_tooltip": "Ao bater na janela sem impulso suficiente, quebra o vidro e arrisca se cortar. Desligue para apenas ricochetear na janela intacta, sem sofrer dano.",
+    "Sandbox_SprintDiveWindows_Debug": "Log de depuração",
+    "Sandbox_SprintDiveWindows_Debug_tooltip": "Imprime mensagens de depuração no console."
+}

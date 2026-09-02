@@ -14,10 +14,10 @@ WorkshopItems=3788475731
 ## Mod order
 
 ```
-Mods=LS_AegisPanel;LS_AliceWeaponSling;LS_Antibodies;LS_BetterCorpseBurning;LS_BetterEngineRepair;LS_BetterPush;LS_BugFixes;LS_BurrisQualityOfLife;LS_CleanHotBar;LS_ClimbLadders;LS_CyesPushDoors;LS_DragBodiesFaster;LS_DurableToolsWeapons;LS_EquipWhileRunning;LS_EvilMortyDeathScreen;LS_FasterHoodOpening;LS_ImmersiveSuicide;LS_ImprovisedSilencers;LasciviousSystems;LS_Traits;LS_MiniHealthPanel;LS_OSRSExperienceBar;LS_PlyskenSolarRevolution;LS_ProximityInventory;LS_PushVehicle;LS_ResponsivePivoting;FixedLightOnBeltAF;LS_SkullysFasterAttackSpeed;LS_SkullysFasterSwingSpeed;LS_SpawnSelector;LS_TacticalHold;LasciviousScripts;LS_TotalWeightRebalance;LS_WanderingZombies;LS_WildernessSpawnpoints
+Mods=LS_AegisPanel;LS_AliceWeaponSling;LS_Antibodies;LS_BetterCorpseBurning;LS_BetterEngineRepair;LS_BetterPush;LS_BugFixes;LS_BurrisQualityOfLife;LS_CleanHotBar;LS_ClimbLadders;LS_CyesPushDoors;LS_DragBodiesFaster;LS_DurableToolsWeapons;LS_EquipWhileRunning;LS_EvilMortyDeathScreen;LS_FasterHoodOpening;LS_ImmersiveSuicide;LS_ImprovisedSilencers;LasciviousSystems;LS_Traits;LS_MiniHealthPanel;LS_OSRSExperienceBar;LS_PlyskenSolarRevolution;LS_ProximityInventory;LS_PushVehicle;LS_ResponsivePivoting;FixedLightOnBeltAF;LS_SkullysFasterAttackSpeed;LS_SkullysFasterSwingSpeed;LS_SpawnSelector;LS_SprintThroughWindows;LS_TacticalHold;LasciviousScripts;LS_TotalWeightRebalance;LS_WanderingZombies;LS_WildernessSpawnpoints
 ```
 
-Thirty-five Mod IDs today — the originally scoped list, the later explicit Wilderness Spawnpoints
+Thirty-six Mod IDs today — the originally scoped list, the later explicit Wilderness Spawnpoints
 addition, the generic `LS_BugFixes` container, the first-party `LasciviousSystems` ecosystem and the
 `LS_Traits` container are complete/active. Before Systems was
 consolidated, `LS_AegisPanel` had no real collision against the other bundled modules. The
@@ -74,8 +74,8 @@ supported production operation and should be followed by a full Lua/game restart
   repair implementation; loading it after `LS_Traits` would overwrite ETW's tracker silently. The
   canonical order above satisfies this.
 
-The core `LasciviousScripts` submod hosts both own-code modules (`time-vote` and `zombie-decay`,
-internally). `LS_AliceWeaponSling` (craftable/lootable weapon sling clothing item, monkey-patches
+The core `LasciviousScripts` submod hosts own-code modules (`time-vote`, `vehicle-firearms` and
+`zombie-decay`, internally). `LS_AliceWeaponSling` (craftable/lootable weapon sling clothing item, monkey-patches
 `ISAttachItemHotbar`/`ISHotbar`/`ISEquipWeaponAction` — see the ordering constraint above) is bundled
 alone; the upstream Workshop item also offers an optional radial-menu addon
 (`alicesWeaponSlingRadialMenu`), which was bundled as `LS_AliceWeaponSlingRadialMenu` for a while and
@@ -141,6 +141,11 @@ item-weight rebalance, no monkey-patching) — and `LS_WanderingZombies` (WIP 42
 movimentação/hordas sob posse local do cliente e valores aleatórios sincronizados pelo servidor;
 perfil padrão sem Pull, Migrate, Homing ou Flee direcionado ao jogador, ver
 `vendor/wandering-zombies/INTEGRATION.md`).
+
+No hard ordering constraint comes from `LS_SprintThroughWindows` either: it has no monkey-patches
+at all, reacting to `Events.OnObjectCollide`/`OnPlayerUpdate` and calling the public API of vanilla's
+own `ClimbOverFenceState`/`ClimbThroughWindowState` instead of overriding them, so nothing in this
+pack can clobber or be clobbered by it — see `vendor/sprint-through-windows/INTEGRATION.md`.
 
 No hard ordering constraint comes from `LS_WildernessSpawnpoints`: it contains only 29 namespaced,
 static spawn-region definitions. Because the dedicated server uses an explicit spawn-region file,

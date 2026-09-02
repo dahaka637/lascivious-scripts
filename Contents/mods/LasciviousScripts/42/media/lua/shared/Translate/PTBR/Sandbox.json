@@ -16,5 +16,14 @@
     "Sandbox_LasciviousScriptsTimeVote_SoloOnly": "Restringir a um único jogador",
     "Sandbox_LasciviousScriptsTimeVote_SoloOnly_tooltip": "Quando ativado, o avanço rápido só fica disponível enquanto houver exatamente um jogador online. O tempo e a UI de votação voltam ao 1x e somem assim que um segundo jogador entra, e reaparecem quando voltar a ter só um.",
     "Sandbox_LasciviousScriptsTimeVote_DebugLogging": "Logs de depuração",
-    "Sandbox_LasciviousScriptsTimeVote_DebugLogging_tooltip": "Mostra no console detalhes da aceleração de NetTimedAction. Deixe desligado em produção."
+    "Sandbox_LasciviousScriptsTimeVote_DebugLogging_tooltip": "Mostra no console detalhes da aceleração de NetTimedAction. Deixe desligado em produção.",
+    "Sandbox_LasciviousScriptsVehicleFirearms": "Lascivious Scripts - Armas em Veículos",
+    "Sandbox_LasciviousScriptsVehicleFirearms_Enabled": "Ativar melhoria de armas em veículos",
+    "Sandbox_LasciviousScriptsVehicleFirearms_Enabled_tooltip": "Ativa melhorias para o motorista ao manusear armas de fogo: recarga mais segura, preservação do controle do veículo e cancelamento de emergência.",
+    "Sandbox_LasciviousScriptsVehicleFirearms_RelaxDriverFirearmActions": "Relaxar ações de arma para motoristas",
+    "Sandbox_LasciviousScriptsVehicleFirearms_RelaxDriverFirearmActions_tooltip": "Apenas quando sentado como motorista, ações temporizadas de arma deixam de parar/bloquear movimento de forma agressiva. Isso não permite recarregar correndo a pé.",
+    "Sandbox_LasciviousScriptsVehicleFirearms_PreserveDriverControls": "Preservar controle do veículo ao mirar/recarregar",
+    "Sandbox_LasciviousScriptsVehicleFirearms_PreserveDriverControls_tooltip": "Enquanto o jogador estiver no banco do motorista com arma de fogo, remove somente a trava de movimento criada pela mira/recarga e força o veículo a reler aceleração, freio, ré e direção. Freio e ré continuam não cancelando o reload.",
+    "Sandbox_LasciviousScriptsVehicleFirearms_EmergencyCancel": "Cancelar manuseio de arma em emergência",
+    "Sandbox_LasciviousScriptsVehicleFirearms_EmergencyCancel_tooltip": "Permite ao motorista interromper ações de recarregar, municiar, inserir/remover carregador ou manejar a arma com ataque/click, Cancelar ou a ação de Manejar/Desemperrar arma. Freio, Ré e direção normal não cancelam o reload."
 }

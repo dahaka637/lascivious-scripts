@@ -514,7 +514,13 @@ local function guardedDraw(kind, fn, ...)
     end
 end
 
--- Install the class-level prerender hooks once PZ's map classes exist.
+-- Install the class-level prerender hooks once PZ's map classes exist. Returns
+-- whether both are installed -- Events.OnGameStart can fire before ISWorldMap/
+-- ISMiniMapInner are defined globals (observed after a game update; previously this
+-- was a single unconditional call here with no retry, which meant a session that hit
+-- that timing never installed the hooks at all -- no exception, no warning, nothing
+-- in any log, just claims silently never drawing on the map or minimap for the whole
+-- session). Retried below, mirroring LFS_LegacyClient.lua's schedulePatchInstall.
 local function installHooks()
     if _G.ISWorldMap and not ISWorldMap.__ffOrigPrerender then
         ISWorldMap.__ffOrigPrerender = ISWorldMap.prerender
@@ -554,8 +560,34 @@ local function installHooks()
             guardedDraw("hunterRange", drawHunterRange, self)
         end
     end
+    local worldMapDone = _G.ISWorldMap ~= nil and ISWorldMap.__ffOrigPrerender ~= nil
+    local miniMapDone = _G.ISMiniMapInner ~= nil and ISMiniMapInner.__ffOrigPrerender ~= nil
+    return worldMapDone and miniMapDone
+end
+
+local mapOverlayInstallAttempts = 0
+
+local function scheduleInstallHooks()
+    if installHooks() then return end
+    if not Events.OnTick then return end
+    if FF._mapOverlayInstallTick then Events.OnTick.Remove(FF._mapOverlayInstallTick) end
+    mapOverlayInstallAttempts = 0
+    FF._mapOverlayInstallTick = function()
+        mapOverlayInstallAttempts = mapOverlayInstallAttempts + 1
+        local done = installHooks()
+        if not done and mapOverlayInstallAttempts >= 120 then
+            FF.warn("map overlay hooks never installed after 120 attempts -- ISWorldMap present="
+                .. tostring(_G.ISWorldMap ~= nil) .. " ISMiniMapInner present="
+                .. tostring(_G.ISMiniMapInner ~= nil))
+        end
+        if done or mapOverlayInstallAttempts >= 120 then
+            Events.OnTick.Remove(FF._mapOverlayInstallTick)
+            FF._mapOverlayInstallTick = nil
+        end
+    end
+    Events.OnTick.Add(FF._mapOverlayInstallTick)
 end
 
 if FF._mapOverlayInstallHook then Events.OnGameStart.Remove(FF._mapOverlayInstallHook) end
-FF._mapOverlayInstallHook = installHooks
-Events.OnGameStart.Add(installHooks)
+FF._mapOverlayInstallHook = scheduleInstallHooks
+Events.OnGameStart.Add(scheduleInstallHooks)

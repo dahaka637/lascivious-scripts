@@ -17,4 +17,13 @@ Sandbox_PTBR = {
     Sandbox_LasciviousScriptsTimeVote_SoloOnly_tooltip = "Quando ativado, o avan\195\167o r\195\161pido s\195\179 fica dispon\195\173vel enquanto houver exatamente um jogador online. O tempo e a UI de vota\195\167\195\163o voltam ao 1x e somem assim que um segundo jogador entra, e reaparecem quando voltar a ter s\195\179 um.",
     Sandbox_LasciviousScriptsTimeVote_DebugLogging = "Logs de depura\195\167\195\163o",
     Sandbox_LasciviousScriptsTimeVote_DebugLogging_tooltip = "Mostra no console detalhes da acelera\195\167\195\163o de NetTimedAction. Deixe desligado em produ\195\167\195\163o.",
+    Sandbox_LasciviousScriptsVehicleFirearms = "Lascivious Scripts - Armas em Veiculos",
+    Sandbox_LasciviousScriptsVehicleFirearms_Enabled = "Ativar melhoria de armas em veiculos",
+    Sandbox_LasciviousScriptsVehicleFirearms_Enabled_tooltip = "Ativa melhorias para o motorista ao manusear armas de fogo: recarga mais segura, preservacao do controle do veiculo e cancelamento de emergencia.",
+    Sandbox_LasciviousScriptsVehicleFirearms_RelaxDriverFirearmActions = "Relaxar acoes de arma para motoristas",
+    Sandbox_LasciviousScriptsVehicleFirearms_RelaxDriverFirearmActions_tooltip = "Apenas quando sentado como motorista, acoes temporizadas de arma deixam de parar/bloquear movimento de forma agressiva. Isso nao permite recarregar correndo a pe.",
+    Sandbox_LasciviousScriptsVehicleFirearms_PreserveDriverControls = "Preservar controle do veiculo ao mirar/recarregar",
+    Sandbox_LasciviousScriptsVehicleFirearms_PreserveDriverControls_tooltip = "Enquanto o jogador estiver no banco do motorista com arma de fogo, remove somente a trava de movimento criada pela mira/recarga e forca o veiculo a reler aceleracao, freio, re e direcao. Freio e re continuam nao cancelando o reload.",
+    Sandbox_LasciviousScriptsVehicleFirearms_EmergencyCancel = "Cancelar manuseio de arma em emergencia",
+    Sandbox_LasciviousScriptsVehicleFirearms_EmergencyCancel_tooltip = "Permite ao motorista interromper acoes de recarregar, municiar, inserir/remover carregador ou manejar a arma com ataque/click, Cancelar ou a acao de Manejar/Desemperrar arma. Freio, Re e direcao normal nao cancelam o reload.",
 }

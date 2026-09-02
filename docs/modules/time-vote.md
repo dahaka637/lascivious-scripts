@@ -68,9 +68,30 @@ localization entirely for this UI.
 
 ## Timed actions
 
-B42 multiplayer `NetTimedAction` completion is based on server real time. The server therefore
-keeps the existing duration bridge so reading/crafting/washing/eating can follow 5x/20x. Unlike
-the old implementation, duration is also restored/rebased when speed decreases or returns to 1x.
+B42 multiplayer TimedAction completion is based on server real time
+(`zombie.core.Action`: `startTime`/`endTime`, using `GameTime.getServerTimeMills()`, which on the
+server is literally `System.nanoTime()` -- true wall-clock, not affected by `setGameSpeed()` at
+all). Client-visible animation and progress bar are NOT affected by this: they come from the
+vanilla per-character `update()` loop, which already runs `getGameSpeed()` times per rendered frame
+and speeds up correctly on its own regardless of anything this module does.
+
+**Fixed 2026-09-01** (decompiled `zombie.core.Action`/`NetTimedAction` and
+`zombie.characters.CharacterTimedActions.*` to root-cause this): the previous implementation hooked
+`serverStart` on 6 hardcoded vanilla classes and tried to read a `NetTimedAction` reference off
+`action.netAction` to rescale its duration every tick. That field is never assigned anywhere in
+this build -- not by any vanilla Lua file, not by any Java bytecode -- so the lookup always failed,
+the registration always expired after 600 ticks, and the real completion timer was NEVER actually
+rescaled. Reading/crafting/washing/eating always finished at 1x speed regardless of the granted
+fast-forward level, while their animation and progress bar looked correctly accelerated -- the
+exact bug report that led to this fix.
+
+Replaced with a single monkey-patch of `ISBaseTimedAction:adjustMaxTime`, the one Lua hook the
+engine calls for every TimedAction that derives from `ISBaseTimedAction` (`create()` calls
+`self.maxTime = self:adjustMaxTime(self.maxTime)` once, server-side, right before constructing the
+actual action object that drives real completion). The wrap divides `maxTime` by the currently
+granted speed multiplier, gated to `isServer()` only so the client's own already-correct local
+calculation is untouched. Universal (every TimedAction, not 6 hardcoded classes) and needs no
+per-tick driving at all -- the old `Events.OnTick` duration-rebase loop is gone.
 
 The client-side `setJobDelta()` and manual read-page synchronization were removed. B42's
 server-side `ISReadABook` derives page progress from the authoritative timed-action progress.
@@ -92,4 +113,4 @@ server-side `ISReadABook` derives page progress from the authoritative timed-act
 |---|---|---|---|
 | `LasciviousScriptsTimeVote.Enabled` | boolean | `true` | Master on/off switch. |
 | `LasciviousScriptsTimeVote.SoloOnly` | boolean | `false` | Fast-forward only while exactly one player is online. |
-| `LasciviousScriptsTimeVote.DebugLogging` | boolean | `false` | Console logging of `NetTimedAction` acceleration details. |
+| `LasciviousScriptsTimeVote.DebugLogging` | boolean | `false` | Console logging of `adjustMaxTime` scaling details. |

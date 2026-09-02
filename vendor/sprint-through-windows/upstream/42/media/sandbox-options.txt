@@ -1,0 +1,37 @@
+VERSION = 1,
+
+option SprintDiveWindows.FailChance
+{
+	type = integer, min = 0, max = 100, default = 30,
+	page = SprintDiveWindows, translation = SprintDiveWindows_FailChance,
+}
+
+option SprintDiveWindows.InjuryChance
+{
+	type = integer, min = 0, max = 100, default = 60,
+	page = SprintDiveWindows, translation = SprintDiveWindows_InjuryChance,
+}
+
+option SprintDiveWindows.MinSprintTime
+{
+	type = integer, min = 0, max = 120, default = 30,
+	page = SprintDiveWindows, translation = SprintDiveWindows_MinSprintTime,
+}
+
+option SprintDiveWindows.ShortSprintBreaksGlass
+{
+	type = boolean, default = true,
+	page = SprintDiveWindows, translation = SprintDiveWindows_ShortSprintBreaksGlass,
+}
+
+option SprintDiveWindows.VanillaAnimation
+{
+	type = boolean, default = false,
+	page = SprintDiveWindows, translation = SprintDiveWindows_VanillaAnimation,
+}
+
+option SprintDiveWindows.Debug
+{
+	type = boolean, default = false,
+	page = SprintDiveWindows, translation = SprintDiveWindows_Debug,
+}

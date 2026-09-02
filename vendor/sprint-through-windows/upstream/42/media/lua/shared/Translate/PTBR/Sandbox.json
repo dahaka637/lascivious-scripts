@@ -1,0 +1,15 @@
+{
+    "Sandbox_SprintDiveWindows": "Pulo Atraves de Janelas",
+    "Sandbox_SprintDiveWindows_FailChance": "Chance de falhar o pulo (%%)",
+    "Sandbox_SprintDiveWindows_FailChance_tooltip": "Chance de errar o pulo e se espatifar no chao em vez de cair em pe. 0 = nunca se espatifa, 100 = sempre se espatifa.",
+    "Sandbox_SprintDiveWindows_InjuryChance": "Chance de corte no vidro (%%)",
+    "Sandbox_SprintDiveWindows_InjuryChance_tooltip": "Chance de se cortar no vidro ao pular pela janela. A chance de errar o pulo em si e controlada pelas regras do proprio jogo para pular cercas correndo.",
+    "Sandbox_SprintDiveWindows_MinSprintTime": "Tempo minimo de sprint",
+    "Sandbox_SprintDiveWindows_MinSprintTime_tooltip": "Quanto tempo e preciso sprintar antes do pulo ser permitido. Maior significa que precisa de mais impulso.",
+    "Sandbox_SprintDiveWindows_VanillaAnimation": "Usar animacao vanilla de pular cerca",
+    "Sandbox_SprintDiveWindows_VanillaAnimation_tooltip": "Usa a animacao normal de pulo de cerca do jogo no lugar do pulo customizado que espatifa a janela.",
+    "Sandbox_SprintDiveWindows_ShortSprintBreaksGlass": "Impulso curto quebra o vidro",
+    "Sandbox_SprintDiveWindows_ShortSprintBreaksGlass_tooltip": "Ao bater na janela sem impulso suficiente, quebra o vidro e pode se cortar. Desligue para manter a janela intacta, sem tomar dano.",
+    "Sandbox_SprintDiveWindows_Debug": "Log de debug",
+    "Sandbox_SprintDiveWindows_Debug_tooltip": "Mensagens de debug no console."
+}

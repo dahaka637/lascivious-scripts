@@ -111,6 +111,26 @@ local function soloGateActive()
     return Core.getConfig().SoloOnly == true and #keys > 1
 end
 
+local function hardcoreKitsPendingActive()
+    if not (HardcoreKits and HardcoreKitsPersistence and HardcoreKitsPersistence.getPendingTx) then return false end
+    local found = false
+    for _, player in ipairs(onlinePlayers()) do
+        if found then break end
+        local ok, tx = pcall(HardcoreKitsPersistence.getPendingTx, player)
+        local status = ok and type(tx) == "table" and tx.status or nil
+        local terminal = status == HardcoreKits.STATUS_COMPLETED
+            or status == HardcoreKits.STATUS_CANCELLED
+            or status == HardcoreKits.STATUS_ABANDONED_DEAD
+            or status == "completed"
+            or status == "cancelled"
+            or status == "abandoned_dead"
+        if status and not terminal then
+            found = true
+        end
+    end
+    return found
+end
+
 local function sameOnlineSet(a, b)
     for key in pairs(a) do if not b[key] then return false end end
     for key in pairs(b) do if not a[key] then return false end end
@@ -165,6 +185,18 @@ local function onVote(player, args)
 
     if soloGateActive() then
         if applied ~= Core.NORMAL then forceNormal("solo_only", key) end
+        return
+    end
+
+    if level >= Core.FAST_FORWARD_MIN and hardcoreKitsPendingActive() then
+        if applied ~= Core.NORMAL then
+            forceNormal("hardcore_kits_pending", key)
+        else
+            resetVotes()
+            bumpRevision()
+            broadcast("hardcore_kits_pending", key)
+        end
+        Core.log("fast-forward denied: Hardcore Kits claim pending")
         return
     end
 
@@ -227,6 +259,12 @@ local function enforceSoloGate()
     if soloGateActive() and applied ~= Core.NORMAL then forceNormal("solo_only", nil) end
 end
 
+local function enforceHardcoreKitsGate()
+    if applied >= Core.FAST_FORWARD_MIN and hardcoreKitsPendingActive() then
+        forceNormal("hardcore_kits_pending", nil)
+    end
+end
+
 local function onCharacterDeath(character)
     if not Core.getConfig().Enabled or applied < Core.FAST_FORWARD_MIN then return end
     local okPlayer, isPlayer = pcall(instanceof, character, "IsoPlayer")
@@ -235,107 +273,64 @@ local function onCharacterDeath(character)
     forceNormal("player_death", key)
 end
 
--- NetTimedAction acceleration -------------------------------------------------
--- B42 multiplayer TimedActions are server-authoritative. We scale the network
--- duration to the granted speed. Unlike the previous implementation, duration
--- is also restored/rebased when speed drops (20x->5x or any fast speed->1x), so
--- an interrupted action cannot keep finishing at the old accelerated rate.
-
-local liveNetActions = {}
-local injectedActions = {}
-local TICK_MS = 16
-local scaleFailLogged = false
-
-if emulateAnimEvent and not ServerState.emulateHooked then
-    ServerState.emulateHooked = true
-    local originalEmulate = emulateAnimEvent
-    emulateAnimEvent = function(netAction, every, event, parameter)
-        if netAction and not liveNetActions[netAction] then liveNetActions[netAction] = { mult = 1 } end
-        return originalEmulate(netAction, every, event, parameter)
-    end
-end
+-- TimedAction duration acceleration --------------------------------------------
+-- BUG (found 2026-09-01, root-caused by decompiling zombie.core.Action/
+-- NetTimedAction and zombie.characters.CharacterTimedActions.*): the previous
+-- approach (below, removed) hooked 6 hardcoded classes' `serverStart` and tried
+-- to read a NetTimedAction reference off `action.netAction` to rescale its
+-- duration. That field is never assigned anywhere -- not by any vanilla Lua
+-- file, not by any Java bytecode in this build (grepped both exhaustively) --
+-- so `net` was always nil, the 600-tick "noNet" counter always expired the
+-- registration, and setDuration() was NEVER actually called. This was
+-- completely invisible from the client: the progress bar and animation you see
+-- come from the vanilla per-character update() loop, which already runs
+-- getGameSpeed() times per rendered frame and therefore speeds up correctly on
+-- its own, no mod involvement needed or possible to break. What never sped up
+-- is the SEPARATE, real, server-authoritative completion timer
+-- (zombie.core.Action: startTime/endTime, using GameTime.getServerTimeMills(),
+-- which on the server is literally System.nanoTime() -- true wall-clock,
+-- completely unaffected by setGameSpeed()) that actually gates when :perform()
+-- fires and the task's real effect (hunger reduction, item consumed, etc.)
+-- applies.
+--
+-- The correct, universal hook is ISBaseTimedAction:adjustMaxTime (shared by
+-- EVERY TimedAction that derives from it, not just 6 hardcoded classes):
+-- ISBaseTimedAction:create() calls `self.maxTime = self:adjustMaxTime(self.maxTime)`
+-- once, server-side, before constructing the actual LuaTimedActionNew action
+-- object that drives real completion -- this is the one point server and
+-- client both compute maxTime independently but only the server's copy is
+-- authoritative. Scaling it down by our speed multiplier here, gated to
+-- isServer() only, accelerates real completion time to match the granted
+-- speed without touching the client's own already-correct local calculation
+-- (which the sprint/moodle/pain/temperature adjustments inside the original
+-- adjustMaxTime still apply to, unchanged, on both sides).
+require "TimedActions/ISBaseTimedAction"
 
 local function wantedMultiplier()
     return applied >= Core.FAST_FORWARD_MIN and Core.multiplierFor(applied) or 1
 end
 
-local function driveNetRegistry(registry, getNet, label)
-    local mult = wantedMultiplier()
-    for key, state in pairs(registry) do
-        local net = getNet(key)
-        if not net then
-            state.noNet = (state.noNet or 0) + 1
-            if state.noNet > 600 then registry[key] = nil end
-        else
-            state.noNet = 0
-            local okP, progress = pcall(net.getProgress, net)
-            if not okP or type(progress) ~= "number" or progress >= 1 then
-                registry[key] = nil
-            else
-                if not state.duration then
-                    if state.p0 == nil then
-                        state.p0, state.ms = progress, 0
-                    else
-                        state.ms = (state.ms or 0) + TICK_MS
-                        local dp = progress - state.p0
-                        if state.ms >= 1000 and dp > 1e-6 then state.duration = state.ms / dp end
-                    end
-                end
-
-                local previousMult = state.mult or 1
-                if state.duration and mult ~= previousMult then
-                    local targetDuration = state.duration / mult
-                    local ok, err = pcall(net.setDuration, net, targetDuration)
-                    if ok then
-                        state.mult = mult
-                        Core.debugLog(string.format("%s rebased: base=%.0fms target=%.0fms x%s", label, state.duration, targetDuration, tostring(mult)))
-                    elseif not scaleFailLogged then
-                        scaleFailLogged = true
-                        Core.log("NetTimedAction setDuration refused: " .. tostring(err))
-                    end
-                end
+if not ServerState.adjustMaxTimeHooked then
+    ServerState.adjustMaxTimeHooked = true
+    local originalAdjustMaxTime = ISBaseTimedAction.adjustMaxTime
+    function ISBaseTimedAction:adjustMaxTime(maxTime)
+        maxTime = originalAdjustMaxTime(self, maxTime)
+        if isServer() then
+            local mult = wantedMultiplier()
+            if mult ~= 1 then
+                maxTime = maxTime / mult
+                Core.debugLog(string.format("adjustMaxTime scaled: base=%.2f target=%.2f x%s",
+                    maxTime * mult, maxTime, tostring(mult)))
             end
         end
+        return maxTime
     end
-end
-
-local function injectCapture(class, className)
-    if not class then Core.log("capture skipped, class missing: " .. className); return end
-    local original = rawget(class, "serverStart")
-    class.serverStart = function(self)
-        if not injectedActions[self] then injectedActions[self] = { mult = 1 } end
-        if original then return original(self) end
-    end
-end
-
-if not ServerState.injectHooked then
-    ServerState.injectHooked = true
-    require "TimedActions/ISEatFoodAction"
-    require "TimedActions/ISDrinkFromBottle"
-    require "TimedActions/ISWashClothing"
-    require "TimedActions/ISWashYourself"
-    require "TimedActions/ISCraftAction"
-    require "TimedActions/ISAddItemInRecipe"
-    injectCapture(ISEatFoodAction, "ISEatFoodAction")
-    injectCapture(ISDrinkFromBottle, "ISDrinkFromBottle")
-    injectCapture(ISWashClothing, "ISWashClothing")
-    injectCapture(ISWashYourself, "ISWashYourself")
-    injectCapture(ISCraftAction, "ISCraftAction")
-    injectCapture(ISAddItemInRecipe, "ISAddItemInRecipe")
-end
-
-local function driveTimedActions()
-    driveNetRegistry(liveNetActions, function(net) return net end, "net action")
-    driveNetRegistry(injectedActions, function(action) return action.netAction end, "timed action")
 end
 
 local function onTick()
     local cfg = Core.getConfig()
     if not cfg.Enabled then
-        if wasEnabled then
-            forceNormal("disabled", nil)
-            driveTimedActions()
-        end
+        if wasEnabled then forceNormal("disabled", nil) end
         wasEnabled = false
         return
     end
@@ -343,7 +338,7 @@ local function onTick()
 
     refreshElectorate("players_changed", nil)
     enforceSoloGate()
-    driveTimedActions()
+    enforceHardcoreKitsGate()
 
     resyncTicks = resyncTicks + 1
     if resyncTicks >= RESYNC_TICKS then resyncTicks = 0; broadcast(nil, nil) end

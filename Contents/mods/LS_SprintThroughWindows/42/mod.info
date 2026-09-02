@@ -1,0 +1,9 @@
+name=Lascivious Scripts - Sprint Through Windows
+id=LS_SprintThroughWindows
+icon=icon.png
+poster=poster.png
+versionMin=42.20.0
+modversion=2.0
+description=Permite pular através de janelas correndo, em vez de vaultar por cima delas. <LINE>
+description=<LINE>
+description=Componente do pacote Lascivious Scripts.

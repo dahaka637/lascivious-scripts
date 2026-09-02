@@ -46,6 +46,24 @@ local THROTTLE_SECONDS = 1
 local lastCall = {}
 local throttleWrites = 0
 local lastThrottlePruneAtMs = 0
+local lastPendingWatchdogAt = 0
+local PENDING_WATCHDOG_INTERVAL_SECONDS = 1
+
+local function eachOnlinePlayer(fn)
+    if type(fn) ~= "function" then return end
+    if isServer() and getOnlinePlayers then
+        local ok, players = pcall(getOnlinePlayers)
+        if ok and players then
+            for i = 0, players:size() - 1 do
+                local player = players:get(i)
+                if player then fn(player) end
+            end
+        end
+        return
+    end
+    local player = getPlayer and getPlayer() or nil
+    if player then fn(player) end
+end
 
 local function monotonicMs()
     local ok, now = pcall(getTimestampMs)
@@ -140,12 +158,13 @@ local function quarantineAmbiguousPending(player, tx)
 end
 
 -- rede de seguranca: se o cliente nunca mandar CMD_REQUEST_REVEAL_COMPLETE
--- (desconectou, fechou o jogo, crashou no meio da animacao), a entrega fica
+-- (desconectou, fechou o jogo, crashou no meio da animacao, ou acelerou tempo
+-- via Time Vote e quebrou o ticker visual em segundo plano), a entrega fica
 -- "presa" em persisted/delivering. Chamado no inicio de qualquer pedido de
--- estado -- assim que o jogador voltar a interagir com o painel (ou so
--- reabrir), resolve sozinho quando ainda nao houve mutacao fisica. Um estado
--- delivering e ambiguo (o crash pode ter ocorrido apos AddItem) e fica
--- deliberadamente pendente para recuperacao manual, evitando duplicacao.
+-- estado E pelo watchdog server-side abaixo -- assim nao depende do jogador
+-- reabrir o painel para destravar. Um estado delivering e ambiguo (o crash
+-- pode ter ocorrido apos AddItem) e fica deliberadamente pendente para
+-- recuperacao manual, evitando duplicacao.
 local function maybeResolveStaleDelivery(player, accountId)
     local tx = quarantineAmbiguousPending(player, HardcoreKitsTransactions.getPending(player))
     if not tx then return end
@@ -157,10 +176,29 @@ local function maybeResolveStaleDelivery(player, accountId)
     local since = finiteNumber(tx.lastDeliveryAttemptAt) or finiteNumber(tx.createdAt) or now
     if now <= 0 or now - since < timeout then return end
     if tx.claimType == HardcoreKits.CLAIM_TYPE_INITIAL then
+        print("[HardcoreKits] Watchdog retomando entrega pendente do Kit Inicial claimId="
+            .. tostring(tx.claimId) .. " status=" .. tostring(tx.status))
         resumeInitialDelivery(player, accountId, tx)
     elseif tx.claimType == HardcoreKits.CLAIM_TYPE_SURVIVAL then
+        print("[HardcoreKits] Watchdog retomando entrega pendente da Recompensa de Sobrevivencia claimId="
+            .. tostring(tx.claimId) .. " status=" .. tostring(tx.status))
         resumeSurvivalDelivery(player, accountId, tx)
     end
+end
+
+local function pendingDeliveryWatchdog()
+    local now = HardcoreKitsUtils.realTime()
+    if now <= 0 or now - lastPendingWatchdogAt < PENDING_WATCHDOG_INTERVAL_SECONDS then return end
+    lastPendingWatchdogAt = now
+    eachOnlinePlayer(function(player)
+        local ok, err = pcall(function()
+            local accountId = HardcoreKitsIdentity.accountId(player)
+            if accountId then maybeResolveStaleDelivery(player, accountId) end
+        end)
+        if not ok then
+            print("[HardcoreKits] Erro no watchdog de entrega pendente: " .. tostring(err))
+        end
+    end)
 end
 
 local function commitInitialEntitlement(accountId, tx)
@@ -665,5 +703,11 @@ if HardcoreKits._serverCommandHandler and Events.OnClientCommand.Remove then
 end
 HardcoreKits._serverCommandHandler = onClientCommand
 Events.OnClientCommand.Add(onClientCommand)
+
+if HardcoreKits._pendingWatchdogHandler and Events.OnTick.Remove then
+    Events.OnTick.Remove(HardcoreKits._pendingWatchdogHandler)
+end
+HardcoreKits._pendingWatchdogHandler = pendingDeliveryWatchdog
+Events.OnTick.Add(pendingDeliveryWatchdog)
 
 print("[HardcoreKits] Servidor pronto.")

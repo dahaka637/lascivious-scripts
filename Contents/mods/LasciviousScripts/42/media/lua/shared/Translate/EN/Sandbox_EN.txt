@@ -18,4 +18,13 @@ Sandbox_EN
     Sandbox_LasciviousScriptsTimeVote_SoloOnly_tooltip = "When on, fast-forward is only ever available while exactly one player is online. Time and the vote UI are forced back to 1x and hidden the moment a second player joins, and reappear once it is back down to one.",
     Sandbox_LasciviousScriptsTimeVote_DebugLogging = "Debug logging",
     Sandbox_LasciviousScriptsTimeVote_DebugLogging_tooltip = "Prints NetTimedAction acceleration details to the console. Leave disabled in production.",
+    Sandbox_LasciviousScriptsVehicleFirearms = "Lascivious Scripts - Vehicle Firearms",
+    Sandbox_LasciviousScriptsVehicleFirearms_Enabled = "Enable vehicle firearm QoL",
+    Sandbox_LasciviousScriptsVehicleFirearms_Enabled_tooltip = "Enables driver-seat firearm handling improvements: safer reload behavior, preserved vehicle control and emergency cancellation.",
+    Sandbox_LasciviousScriptsVehicleFirearms_RelaxDriverFirearmActions = "Relax firearm actions for drivers",
+    Sandbox_LasciviousScriptsVehicleFirearms_RelaxDriverFirearmActions_tooltip = "Only while seated as the driver, firearm timed actions no longer stop/block movement as aggressively. This does not allow reloading while running on foot.",
+    Sandbox_LasciviousScriptsVehicleFirearms_PreserveDriverControls = "Preserve vehicle control while aiming/reloading",
+    Sandbox_LasciviousScriptsVehicleFirearms_PreserveDriverControls_tooltip = "While the player is in the driver's seat with a firearm, clears only the movement gate created by aiming/reloading and forces the vehicle to read acceleration, brake, reverse and steering again. Brake and Reverse still do not cancel reload.",
+    Sandbox_LasciviousScriptsVehicleFirearms_EmergencyCancel = "Emergency cancel firearm handling",
+    Sandbox_LasciviousScriptsVehicleFirearms_EmergencyCancel_tooltip = "Allows the driver to interrupt reload/rack/magazine actions with attack/click, Cancel, or the Rack Firearm/unjam action. Brake, Reverse and normal steering do not cancel reload.",
 }

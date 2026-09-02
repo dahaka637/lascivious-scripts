@@ -69,3 +69,36 @@ option LasciviousScriptsTimeVote.DebugLogging
     page = LasciviousScriptsTimeVote,
     translation = LasciviousScriptsTimeVote_DebugLogging,
 }
+
+
+option LasciviousScriptsVehicleFirearms.Enabled
+{
+    type = boolean,
+    default = true,
+    page = LasciviousScriptsVehicleFirearms,
+    translation = LasciviousScriptsVehicleFirearms_Enabled,
+}
+
+option LasciviousScriptsVehicleFirearms.RelaxDriverFirearmActions
+{
+    type = boolean,
+    default = true,
+    page = LasciviousScriptsVehicleFirearms,
+    translation = LasciviousScriptsVehicleFirearms_RelaxDriverFirearmActions,
+}
+
+option LasciviousScriptsVehicleFirearms.PreserveDriverControls
+{
+    type = boolean,
+    default = true,
+    page = LasciviousScriptsVehicleFirearms,
+    translation = LasciviousScriptsVehicleFirearms_PreserveDriverControls,
+}
+
+option LasciviousScriptsVehicleFirearms.EmergencyCancel
+{
+    type = boolean,
+    default = true,
+    page = LasciviousScriptsVehicleFirearms,
+    translation = LasciviousScriptsVehicleFirearms_EmergencyCancel,
+}
