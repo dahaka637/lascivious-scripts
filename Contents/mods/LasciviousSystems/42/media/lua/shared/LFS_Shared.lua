@@ -127,7 +127,11 @@ function FF.getOptions()
         maxPublicClaimAreas = o.MaxPublicClaimAreas or 2,     -- 0 = public areas disabled
         claimBufferTiles = o.ClaimBufferTiles or 10,          -- 0 = no buffer required
         maxRolesPerFaction = o.MaxRolesPerFaction or 8,
-        maxMembersPerFaction = o.MaxMembersPerFaction or 0,   -- 0 = unlimited
+        -- No longer a sandbox option (2026-09-05, explicit request: "gostaria de
+        -- deixar sem limite") -- hardcoded so a stale MaxMembersPerFaction left
+        -- over in an existing save's SandboxVars (from before this option was
+        -- pulled from the UI) can never reimpose a cap.
+        maxMembersPerFaction = 0,                             -- 0 = unlimited, always
         claimDecayDays = o.ClaimDecayDays or 0,               -- 0 = off
         claimDecayWarnDays = o.ClaimDecayWarnDays or 3,
         territorySafeZoneEnabled = o.TerritorySafeZoneEnabled == true,
